@@ -1,0 +1,33 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+	<div class="row" style="line-height:1.4;">
+	<h4>Movies</h4>
+	{% for movie in movies %}
+		<p>
+			<div class="row panel">
+
+				<div class="two columns">
+					<img src="{{STATIC_URL}}{{movie.picture}}"/>
+				</div>
+
+				<div class="ten columns">
+					<a href="{{movie.slug}}">
+						<h3>{{movie.title}} ({{movie.year}})</h3>
+					</a>
+					<strong>Nationalité :
+					</strong>{{movie.country.name}}
+					<br/>
+					<strong>Réalisé par :
+					</strong>{{movie.director.forename}} {{movie.director.name}}
+					<br/>
+					<strong>Synopsis :
+					</strong>{{movie.synopsis}}
+				</div>
+
+			</div>
+		</p>
+	{% endfor %}
+	</div>
+
+{% endblock content %}
