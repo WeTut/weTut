@@ -1,0 +1,95 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="fr"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="fr"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="fr"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="fr"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
+	<title></title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="stylesheet" href="/static/css/style.css">
+	
+	<script src="/static/js/libs/modernizr-2.5.3.min.js"></script>
+</head>
+  <body>
+	<div id="container">
+		<div id="banner">
+			<div id="logo">
+				<img src="/static/images/logo.png" alt="Programmation web" />
+			</div>
+		</div>
+		<div id="menu">
+			<ul>
+				<li><a href="#">Intégration HTML</a></li>
+				<li><a href="#">jQuery & AJAX</a></li>
+				<li><a href="#">PHP MVC</a></li>
+				<li><a href="#">Django</a></li>
+			</ul>
+		</div>
+		<div id="carrousel">
+			<div id="images">
+				<img src="/static/images/carrousel/01.png" alt="" />
+			</div>
+			<div id="items">
+				<ul>
+					<li><a href="#">Un peu d'intégration</a></li>
+					<li><a href="#">jQuery, l'effet Waouh !</a></li>
+					<li><a href="#">PHP MVC</a></li>
+					<li><a href="#">Django</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="content">
+			<div id="left">
+				<div class="box-top"></div>
+				<div class="box-content">
+					<div class="item">
+						<div class="pict">
+							<img src="/static/images/picts/02.png" alt="" />
+						</div>
+						<div class="description">
+							<h3>Lorem ispum</h3>
+							<p>
+								Absoluta semper diam, ped eros sed tempus.
+							</p>
+							<a href="#" class="more">En savoir plus</a>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="item">
+						<div class="pict">
+							<img src="/static/images/picts/03.png" alt="" />
+						</div>
+						<div class="description">
+							<h3>Lorem ispum</h3>
+							<p>
+								Absoluta semper diam, ped eros sed tempus.
+							</p>
+							<a href="#" class="more">En savoir plus</a>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="box-bottom"></div>
+			</div>
+			<div id="right">
+				{% block content %}{% endblock content %}
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div id="footer">
+			<ul>
+				<li><a href="#">Intégration HTML</a></li>
+				<li><a href="#">jQuery & AJAX</a></li>
+				<li><a href="#">PHP MVC</a></li>
+				<li><a href="#">Django</a></li>
+			</ul>
+		</div>
+	</div>
+	<script src="/static/js/libs/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/plugins.js"></script>
+	<script src="/static/js/script.js"></script>
+  </body>
+  </html>
