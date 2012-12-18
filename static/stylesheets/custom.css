@@ -6,3 +6,25 @@ CUSTOM STYLESHEET
 body {
 	padding-top: 70px;
 }
+
+#questions{
+	height: 80px;	
+}
+
+#questions table td{
+	text-align:center;
+	vertical-align:middle;
+}
+
+#questions button{
+	margin-top:30px;
+}
+
+.small{
+	font-size:10px;
+}
+
+.big{
+	font-size:26px;
+	font-weight:bold;
+}
