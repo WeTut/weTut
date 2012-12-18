@@ -13,6 +13,8 @@ urlpatterns = patterns('',
     url(r'home', 'weTut.views.home', name='home'),
     url(r'questions', 'weTut.views.questions', name='questions'),
     url(r'question', 'weTut.views.question', name='question'),
+    url(r'login', 'weTut.views.login_view', name='login'),
+    url(r'logout', 'weTut.views.logout_view', name='logout'),
     # url(r'^weTut/', include('weTut.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
