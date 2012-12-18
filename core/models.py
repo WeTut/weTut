@@ -1,9 +1,9 @@
 from django.db import models
-from django.auth.user import User
+from django.contrib.auth.models import User
 
-class Profile (models.Models):
+class Profile (models.Model):
 	email = models.EmailField()
-	pictureProfile = models.ImageField()
+	#pictureProfile = models.ImageField()
 	city = models.CharField(max_length = 200)
 	state = models.CharField(max_length = 200)
 	urlPortfolio = models.CharField (max_length = 200)
@@ -17,7 +17,7 @@ class Profile (models.Models):
 	def __unicode__(self):
 		return u'%s' % (self.email)
 
-class Answer (models.Models):
+class Answer (models.Model):
 	nbLike = models.IntegerField()
 	text = models.TextField()
 	date = models.DateField()
@@ -28,9 +28,9 @@ class Answer (models.Models):
 		return u'%s' % (self.date)
 
 
-class Question (models.Models):
+class Question (models.Model):
 	title = models.CharField(max_length = 200)
-	picture = models.ImageField()
+	#picture = models.ImageField()
 	message = models.CharField(max_length = 400)
 
 
@@ -39,23 +39,23 @@ class Question (models.Models):
 	def __unicode__(self):
 		return u'%s' % (self.title)
 
-class Software(models.Models):
+class Software(models.Model):
 	name = models.CharField(max_length = 200)
 
 	def __unicode__(self):
 		return u'%s' % (self.name)
 
 
-class Tags(models.Models):
+class Tags(models.Model):
 	name = models.CharField(max_length = 200)
 
 	def __unicode__(self):
 		return u'%s' % (self.name)
 
-class Media(models.Models):
+class Media(models.Model):
 	link = models.CharField(max_length = 200)
 
-	question = mmodels.ForeignKey("Question")
+	question = models.ForeignKey("Question")
 
 	def __unicode__(self):
 		return u'%s' % (self.link)
