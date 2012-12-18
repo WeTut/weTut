@@ -1,0 +1,17 @@
+{% if user.is_authenticated %}
+
+Vous êtes connecté en tant que {{ user.username }} - <a href="/logout">Déconnexion</a>
+
+{% else %}
+
+{% if form.errors %}
+<p>Merci de remplir tous les champs</p>
+{% endif %}
+
+<form method="post" action="/login/">
+{% csrf_token %}
+Username : <input type="text" name="username" /> <br />
+Password : <input type="password" name="password" />
+<input type="submit" value="login" />
+</form>
+{% endif %}
