@@ -13,9 +13,27 @@
         <ul class="nav">
           <li class="active"><a href="#">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal">Login</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="loginModalLabel">Se connecter !</h3>
+  </div>
+  <div class="modal-body">
+    <p>HERE LOGIN</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary">Me connecter</button>
+  </div>
+</div>
+
+<script>
+  $('#loginModal').modal('hide');
+</script>
