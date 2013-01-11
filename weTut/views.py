@@ -31,7 +31,7 @@ def login_view(request):
 			if user is not None:
 				if user.is_active:
 					login(request,user)
-					return HttpResponseRedirect('/home/') # Redirect after POST
+			return HttpResponseRedirect('/home/') # Redirect after POST
 
 		else:
 			form = AuthForm() # An unbound form
