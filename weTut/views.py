@@ -1,4 +1,5 @@
 # Create your views here.
+from core.models import *
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
@@ -16,7 +17,8 @@ def home(request):
 	return render_to_response('general/home.html', context_instance=RequestContext(request))
 
 def questions(request):
-	return render_to_response('general/questions.html', context_instance=RequestContext(request))
+	questions = Question.objects.all()
+	return render_to_response('general/questions.html', {'questions': questions }, context_instance=RequestContext(request))
 
 def question(request):
 	return render_to_response('general/question.html', context_instance=RequestContext(request))

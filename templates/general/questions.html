@@ -4,75 +4,17 @@
 
 <div id="questions">
 
-<!-- 
 
 
- {% for question in questions %}	
+{% for question in questions %}	
 
 	<div class='row-fluid'>
 		<div class='span2'>
-				<img class='img-rounded' src='{{ question.image }}' width='80px' height='80px' />
+				<img class='img-rounded' src='{{ question.picture }}' width='80px' height='80px' />
 		</div>
-		<div class='span4'>
+		<div class='span4' >
 			<a href=''><h5>{{ question.title }}</h5></a>
-			<p>{{ question.content }}</p>
-		</div>
-		<div class='span4'>
-			<div class='row-fluid'>
-				<div class='span4'>
-					<table class='table table-bordered'>
-						<tr height='30px'>
-							<td class="small">REPONSES</td>
-						</tr>
-						<tr height='50px'>
-							<td class="big">{{ question.answers.length }}</td>
-						</tr>
-					</table>
-				</div>
-				<div class='span4'>
-					<table class='table table-bordered'>
-						<tr height='30px'>
-							<td class="small">VUES</td>
-						</tr>
-						<tr height='50px'>
-							<td class="big">{{ question.views }}</td>
-						</tr>
-					</table>
-				</div>
-				<div class='span4'>
-					<table class='table table-bordered'>
-						<tr height='30px'>
-							<td class="small">SUIVRE</td>
-						</tr>
-						<tr height='50px'>
-							<td><img onclick='' src='{{STATIC_URL}}images/logo.png' width='30px' height='30px' /></td>
-						</tr>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div class='span2'>
-			<button class='btn btn-primary btn-block vcenter'  onclick=''>REPONDRE</button>
-		</div>
-	</div>
-<hr>
-	
-{% endfor %}
-
-
--->
-
-
-
-	<div class='row-fluid'>
-		<div class='span2'>
-			<a href="" class='thumbnail'>
-				<img src='{{STATIC_URL}}images/logo.png' width='80px' height='80px' />
-			</a>
-		</div>
-		<div class='span4'>
-			<a href=''><h5>Ma question</h5></a>
-			<p>Contenu de ma question sdsdsds  sfssdsd fsdfs qqsfqs dfqfqfq fdqfq sfc fqsfff zqfzqf</p>
+			<p>{{ question.message|truncatechars:80 }}</p>
 		</div>
 		<div class='span4'>
 			<div class='row-fluid'>
@@ -112,9 +54,13 @@
 			<button class='btn btn-primary btn-block vcenter'  onclick=''>REPONDRE</button>
 		</div>
 	</div>
-<hr>
 
+	<hr>
+	
+{% endfor %}
+
+</div>
 
 {% endblock content %}
 
-</div>
+

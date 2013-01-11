@@ -30,7 +30,7 @@ class Answer (models.Model):
 
 class Question (models.Model):
 	title = models.CharField(max_length = 200)
-	picture = models.ImageField(upload_to = "{{ STATIC_URL }}images/testImages")
+	picture = models.ImageField(upload_to = "{{ STATIC_URL }}images/testImages/")
 	message = models.CharField(max_length = 400)
 
 
