@@ -13,7 +13,9 @@
         <ul class="nav">
           <li class="active"><a href="/">Home</a></li>
           <li><a href="questions/ask">Poser une question</a></li>
-          <li><a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal">Login</a></li>
+          {% if user.is_authenticated %}<li><a href="/logout" role="button" data-toggle="modal">Déconnexion</a></li>
+          {% else %}<li><a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal">Connexion</a></li>
+          {% endif %}
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -27,12 +29,22 @@
     <h3 id="loginModalLabel">Se connecter !</h3>
   </div>
   <div class="modal-body">
-    <p>HERE LOGIN</p>
+    {% if form.errors %}
+    <p>Merci de remplir tous les champs</p>
+    {% endif %}
+
+    <form method="post" action="/login">
+    {% csrf_token %}
+    Username : <input type="text" name="username" /> <br />
+    Password : <input type="password" name="password" />
+    
   </div>
   <div class="modal-footer">
-    <button class="btn btn-primary">Me connecter</button>
+    <input type="submit" value="Me connecter" class="btn btn-primary" />
+    </form>
   </div>
 </div>
+
 
 <script>
   $('#loginModal').modal('hide');
