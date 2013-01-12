@@ -8,4 +8,45 @@
 <p>{{question.message}}</p>
 <img src='{{MEDIA_URL}}{{question.picture}}'/>
 
+<hr>
+
+{% for answer in answers %}	
+
+	<div class='row-fluid'>
+		<div class='span1'>
+			<table class='table table-bordered'>
+				<tr height='30px'>
+					<td class="big">{{ answer.nbLike }}</td>
+				</tr>
+				<tr height='50px'>
+					<td >{{ answer.user.username }}</td>
+				</tr>
+			</table>			
+		</div>
+		<div class='span9' >
+			{{ answer.text|truncatechars:200 }}
+			<br /><br />
+			<i>{{ answer.date }}</i>
+		</div>
+		<div class='span2'>
+			<button class='btn btn-primary btn-block vcenter'  onclick=''>Signaler un abus</button>
+		</div>
+	</div>
+
+	<hr>
+	
+{% endfor %}
+
+
+
+<hr>
+
+<form action="" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ form.as_p }}	
+	<input type="submit" value="Submit" />
+</form>
+
+
+
 {% endblock content %}

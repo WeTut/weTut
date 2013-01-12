@@ -5,8 +5,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.shortcuts import render_to_response
+from datetime import datetime 
 
-from tutorials.forms import QuestionForm
+
+from tutorials.forms import QuestionForm, AnswerForm
 from tutorials.models import *
 
 def questions(request):
@@ -15,7 +17,24 @@ def questions(request):
 
 def question(request,slug):
 	question = get_object_or_404(Question, slug=slug)
-	return render_to_response('tutorials/question.html', {'question': question}, context_instance=RequestContext(request))
+	answers = Answer.objects.filter(question=question)
+
+	if request.method == 'POST': # If the form has been submitted...
+		if request.user.is_authenticated():# If there isn't any logged user
+			form = AnswerForm(request.POST, request.FILES) # A form bound to the POST data
+			if form.is_valid(): # All validation rules pass
+				post = form.save(commit=False)
+				post.nbLike = 0
+				post.date = datetime.now()
+				post.user = request.user
+				post.question = question
+				post.save()
+		else:
+			return HttpResponseRedirect('/') # Redirect after POST
+
+	form = AnswerForm() # An unbound form
+	return render_to_response('tutorials/question.html', {'question': question, 'form':form, 'answers':answers}, context_instance=RequestContext(request))
+
 
 def ask(request):
 	if request.method == 'POST': # If the form has been submitted...
@@ -30,3 +49,7 @@ def ask(request):
 		form = QuestionForm() # An unbound form
 
 	return render_to_response('tutorials/ask.html', {'form': form}, context_instance=RequestContext(request))
+
+
+
+	

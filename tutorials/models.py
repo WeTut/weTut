@@ -1,16 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Answer (models.Model):
-	nbLike = models.IntegerField()
-	text = models.TextField()
-	date = models.DateField()
-
-	user = models.ForeignKey(User)
-
-	def __unicode__(self):
-		return u'%s' % (self.date)
-
 class Question (models.Model):
 	title = models.CharField(max_length = 200)
 	picture = models.ImageField(upload_to='questions')
@@ -21,6 +11,19 @@ class Question (models.Model):
 
 	def __unicode__(self):
 		return u'%s' % (self.title)
+
+
+class Answer (models.Model):
+	nbLike = models.IntegerField()
+	text = models.TextField()
+	date = models.DateField()
+
+	user = models.ForeignKey(User)
+	question = models.ForeignKey(Question)
+
+	def __unicode__(self):
+		return u'%s' % (self.date)
+		
 
 class Software(models.Model):
 	name = models.CharField(max_length = 200)

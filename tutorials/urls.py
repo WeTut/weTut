@@ -8,5 +8,6 @@ from tutorials.views import *
 urlpatterns = patterns('tutorials.views',
 	url(r'^$', 'questions', name='questions'), #list of questions
 	url(r'ask', 'ask', name='ask'), #ask a question
+
 	url(r'^(?P<slug>[\w-]+)/?$', 'question', name='question'), #one specific question
 )
