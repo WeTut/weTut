@@ -8,10 +8,12 @@
 
 	<div class='row-fluid'>
 		<div class='span2'>
+			<a href='{{question.slug}}'>
 				<img class='img-rounded' src='{{MEDIA_URL}}{{question.picture}}' width='100px' height='100px' />
+			</a>
 		</div>
 		<div class='span4' >
-			<a href=''><h5>{{ question.title }}</h5></a>
+			<a href='{{question.slug}}'><h5>{{ question.title }}</h5></a>
 			<p>{{ question.message|truncatechars:80 }}</p>
 		</div>
 		<div class='span4'>
@@ -49,7 +51,7 @@
 			</div>
 		</div>
 		<div class='span2'>
-			<button class='btn btn-primary btn-block vcenter'  onclick=''>REPONDRE</button>
+			<button class='btn btn-primary btn-block vcenter'  onclick='location.href="{{question.slug}}"'>REPONDRE</button>
 		</div>
 	</div>
 

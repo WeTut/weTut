@@ -11,12 +11,11 @@ class Answer (models.Model):
 	def __unicode__(self):
 		return u'%s' % (self.date)
 
-
 class Question (models.Model):
 	title = models.CharField(max_length = 200)
 	picture = models.ImageField(upload_to='questions')
-	message = models.CharField(max_length = 400)
-
+	message = models.TextField(max_length = 400)
+	slug = models.SlugField(max_length = 200)
 
 	user = models.ForeignKey(User)
 
@@ -28,7 +27,6 @@ class Software(models.Model):
 
 	def __unicode__(self):
 		return u'%s' % (self.name)
-
 
 class Tags(models.Model):
 	name = models.CharField(max_length = 200)

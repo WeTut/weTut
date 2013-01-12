@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<h1>QUESTION PAGE</h1>
-<p>To do</p>
-<p>Page consultation d'une question + réponses associées</p>
+<h1>{{question.title}}</h1>
+<p>{{question.message}}</p>
+<img src='{{MEDIA_URL}}{{question.picture}}'/>
 
 {% endblock content %}
