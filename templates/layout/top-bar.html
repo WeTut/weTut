@@ -12,6 +12,7 @@
       <div class="nav-collapse collapse">
         <ul class="nav">
           <li class="active"><a href="/">Home</a></li>
+          <li><a href="questions">Questions</a></li>
           <li><a href="questions/ask">Poser une question</a></li>
           {% if user.is_authenticated %}<li><a href="/logout" role="button" data-toggle="modal">Déconnexion</a></li>
           {% else %}<li><a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal">Connexion</a></li>
