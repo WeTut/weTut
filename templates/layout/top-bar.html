@@ -8,14 +8,18 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="/">weTut</a>
+      <a class="brand" href="/"><img src="../../static/images/logo.png" alt="WeTut" /></a>
       <div class="nav-collapse collapse">
         <ul class="nav">
-          <li class="active"><a href="/">Home</a></li>
+          <li><a href="questions">Questions</a></li>
+          <li><a href="tutoriels">Tutoriels</a></li>
+          <li><a href="membres">Membres</a></li>
           <li><a href="questions/ask">Poser une question</a></li>
-          {% if user.is_authenticated %}<li><a href="/logout" role="button" data-toggle="modal">Déconnexion</a></li>
-          {% else %}<li><a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal">Connexion</a></li>
+
+          {% if user.is_authenticated %}<li><a href="/logout" role="button" data-toggle="modal" class="nav-connect">Déconnexion</a></li>
+          {% else %}<li><a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal" class="nav-connect first">Connexion</a></li>
           {% endif %}
+          <li><a href="/" class="nav-connect">Inscription</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
