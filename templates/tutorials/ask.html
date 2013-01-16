@@ -8,6 +8,35 @@
 <form action="" method="post" enctype="multipart/form-data">
 	{% csrf_token %}
 	{{ form.as_p }}
+	
+	<form action="" method="post" enctype="multipart/form-data">
+		<div class="ui-widget">
+			<label>Your preferred programming language: </label>
+			<select class="combobox">
+				<option value="">Select one...</option>
+				<option value="AfterEffect">After Effect</option>
+				<option value="Cinema4D">Cinéma 4D</option>
+				<option value="3DSMAX">3DSMAX</option>
+				<option value="Maya">Maya</option>
+			</select>
+		</div>
+		<button id="toggle">+</button>
+	</form>
+	
+	<form action="" method="post" enctype="multipart/form-data">
+	<div class="ui-widget">
+		<label>Your preferred programming language: </label>
+		<select class="combobox">
+			<option value="">Select one...</option>
+			<option value="AfterEffect">After Effect</option>
+			<option value="Cinema4D">Cinéma 4D</option>
+			<option value="3DSMAX">3DSMAX</option>
+			<option value="Maya">Maya</option>
+		</select>
+	</div>
+	<button id="toggle">+</button>
+	</form>
+	
 	<h2>Ajouter des medias ?</h2>
 	<p>illustrez votre question avec des médias supplémentaires</p>
 	<input type="submit" value="Submit" />
