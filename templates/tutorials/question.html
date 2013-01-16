@@ -13,24 +13,54 @@
 {% for answer in answers %}	
 
 	<div class='row-fluid'>
-		<div class='span1'>
-			<table class='table table-bordered'>
-				<tr height='30px'>
-					<td class="big">{{ answer.nbLike }}</td>
-				</tr>
-				<tr height='50px'>
-					<td >{{ answer.user.username }}</td>
-				</tr>
-			</table>			
-		</div>
-		<div class='span9' >
-			{{ answer.text|truncatechars:200 }}
-			<br /><br />
-			<i>{{ answer.date }}</i>
-		</div>
 		<div class='span2'>
-			<button class='btn btn-primary btn-block vcenter'  onclick=''>Signaler un abus</button>
+			<div class='span11'>
+				<table class='table table-bordered'>
+					<tr height='30px'>
+						<td class="big">{{ answer.nbLike }}</td>
+					</tr>
+					<tr height='50px'>
+						<td >{{ answer.user.username }}</td>
+					</tr>
+				</table>
+			</div>			
 		</div>
+		<div class='span10' >
+			<table class='table table-bordered'>
+				<tr height='80px'>
+					<td colspan='2'>{{ answer.text|truncatechars:200 }}</td>
+				</tr>
+				<tr height='20px'>
+					<td ><i>{{ answer.date }}</i></td>
+					<td ><a href=''>Signaler un abus</a></td>					
+				</tr>
+			</table>
+		</div>
+			
+		{% for comment in answer.getComments %}
+		<div class='span12' >
+			<div class='span1' >
+				{{ comment.user.username }}
+			</div>
+			<div class='span11' >
+				{{ comment.text|truncatechars:200 }}
+			</div>
+		</div>
+		{% endfor %}
+
+		<form action="" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+		    <div class="span12">
+		    	{{ commentform.text.errors }}
+			    {{ commentform.text }}
+				<input type="hidden" name="answerId" value="{{answer.id}}"></input>
+			</div>
+			<div class="span2">
+		    	<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="commentSubmit">Commenter</button>
+			</div>
+		</form>				
+								
+				
 	</div>
 
 	<hr>
@@ -39,12 +69,15 @@
 
 
 
-<hr>
-
 <form action="" method="post" enctype="multipart/form-data">
 	{% csrf_token %}
-	{{ form.as_p }}	
-	<input type="submit" value="Submit" />
+    <div class="span12">
+	    {{ answerform.text.errors }}
+		{{ answerform.text }}
+	</div>
+	<div class="span2">
+    	<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="answerSubmit">Envoyer</button>
+	</div>
 </form>
 
 

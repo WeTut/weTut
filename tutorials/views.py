@@ -8,7 +8,7 @@ from django.shortcuts import render_to_response
 from datetime import datetime 
 
 
-from tutorials.forms import QuestionForm, AnswerForm
+from tutorials.forms import QuestionForm, AnswerForm, CommentAnswerForm
 from tutorials.models import *
 
 def questions(request):
@@ -18,22 +18,35 @@ def questions(request):
 def question(request,slug):
 	question = get_object_or_404(Question, slug=slug)
 	answers = Answer.objects.filter(question=question)
+	
 
 	if request.method == 'POST': # If the form has been submitted...
 		if request.user.is_authenticated():# If there isn't any logged user
-			form = AnswerForm(request.POST, request.FILES) # A form bound to the POST data
-			if form.is_valid(): # All validation rules pass
-				post = form.save(commit=False)
-				post.nbLike = 0
-				post.date = datetime.now()
-				post.user = request.user
-				post.question = question
-				post.save()
-		else:
-			return HttpResponseRedirect('/') # Redirect after POST
+			
+			if request.POST['submit'] == 'answerSubmit':#Si une reponse a ete envoyee 
+				form = AnswerForm(request.POST, request.FILES) # A form bound to the POST data
+				if form.is_valid(): # All validation rules pass
+					post = form.save(commit=False)
+					post.nbLike = 0
+					post.date = datetime.now()
+					post.user = request.user
+					post.question = question
+					post.save()
 
-	form = AnswerForm() # An unbound form
-	return render_to_response('tutorials/question.html', {'question': question, 'form':form, 'answers':answers}, context_instance=RequestContext(request))
+			elif request.POST['submit'] == 'commentSubmit':#Si un commentaire a ete envoye
+				form = CommentAnswerForm(request.POST, request.FILES) # A form bound to the POST data
+				if form.is_valid(): # All validation rules pass
+					post = form.save(commit=False)
+					post.date = datetime.now()
+					post.user = request.user
+					post.answer = get_object_or_404(Answer, id=request.POST['answerId'])
+					post.save()
+
+
+	answerform = AnswerForm() # An unbound form
+	commentform = CommentAnswerForm() # An unbound form
+
+	return render_to_response('tutorials/question.html', {'question': question, 'answerform':answerform, 'commentform':commentform, 'answers':answers}, context_instance=RequestContext(request))
 
 
 def ask(request):

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django import forms
 
 class Question (models.Model):
 	title = models.CharField(max_length = 200)
@@ -15,7 +16,7 @@ class Question (models.Model):
 
 class Answer (models.Model):
 	nbLike = models.IntegerField()
-	text = models.TextField()
+	text = models.TextField(default="Entrez votre reponse ici")
 	date = models.DateField()
 
 	user = models.ForeignKey(User)
@@ -23,6 +24,9 @@ class Answer (models.Model):
 
 	def __unicode__(self):
 		return u'%s' % (self.date)
+
+	def getComments(self):
+		return CommentAnswer.objects.filter(answer=self)
 		
 
 class Software(models.Model):
@@ -44,3 +48,9 @@ class Media(models.Model):
 
 	def __unicode__(self):
 		return u'%s' % (self.link)
+
+class CommentAnswer(models.Model):
+	user = models.ForeignKey(User)
+	text = models.TextField(default="Entrez votre commentaire ici")
+	date = models.DateField()
+	answer = models.ForeignKey(Answer)
