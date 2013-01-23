@@ -18,7 +18,6 @@ def questions(request):
 def question(request,slug):
 	question = get_object_or_404(Question, slug=slug)
 	answers = Answer.objects.filter(question=question)
-	
 
 	if request.method == 'POST': # If the form has been submitted...
 		if request.user.is_authenticated():# If there isn't any logged user
@@ -59,7 +58,7 @@ def ask(request):
 			post.save()
 			return HttpResponseRedirect('/questions') # Redirect after POST
 	else:
-		form = QuestionForm() # An unbound form
+		form = QuestionForm() # An unbound form #initial={'user': request.user}
 
 	return render_to_response('tutorials/ask.html', {'form': form}, context_instance=RequestContext(request))
 
