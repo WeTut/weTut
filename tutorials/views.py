@@ -7,7 +7,6 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response
 from datetime import datetime 
 
-
 from tutorials.forms import QuestionForm, AnswerForm, CommentAnswerForm
 from tutorials.models import *
 
@@ -54,6 +53,7 @@ def ask(request):
 		if form.is_valid(): # All validation rules pass
 			post = form.save(commit=False)
 			title = form.cleaned_data['title']
+			post.user = request.user
 			post.slug = str(slugify(title))
 			post.save()
 			return HttpResponseRedirect('/questions') # Redirect after POST

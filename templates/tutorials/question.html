@@ -28,7 +28,7 @@
 		<div class='span10' >
 			<table class='table table-bordered'>
 				<tr height='80px'>
-					<td colspan='2'>{{ answer.text|truncatechars:200 }}</td>
+					<td colspan='2'>{{ answer.answer|truncatechars:200|safe }}</td>
 				</tr>
 				<tr height='20px'>
 					<td ><i>{{ answer.date }}</i></td>
@@ -43,7 +43,7 @@
 				{{ comment.user.username }}
 			</div>
 			<div class='span11' >
-				{{ comment.text|truncatechars:200 }}
+				{{ comment.comment|truncatechars:200 }}
 			</div>
 		</div>
 		{% endfor %}
@@ -51,35 +51,41 @@
 		<form action="" method="post" enctype="multipart/form-data">
 			{% csrf_token %}
 		    <div class="span12">
-		    	{{ commentform.text.errors }}
-			    {{ commentform.text }}
+		    	{{ commentform.comment.errors }}
+			    {{ commentform.comment }}
 				<input type="hidden" name="answerId" value="{{answer.id}}"></input>
 			</div>
 			<div class="span2">
 		    	<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="commentSubmit">Commenter</button>
 			</div>
-		</form>				
-								
-				
+		</form>							
 	</div>
 
-	<hr>
+	<hr/>
 	
 {% endfor %}
 
 
+<!-- NicEdit -->
+    <script src="{{ STATIC_URL }}javascripts/NicEdit.js"></script>
+
+	<script type="text/javascript">
+		bkLib.onDomLoaded(function() {
+        	new nicEditor({buttonList : ['bold','italic','image','upload','link','youTube']}).panelInstance('id_answer');
+    	});
+	</script>
 
 <form action="" method="post" enctype="multipart/form-data">
 	{% csrf_token %}
-    <div class="span12">
-	    {{ answerform.text.errors }}
-		{{ answerform.text }}
-	</div>
-	<div class="span2">
-    	<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="answerSubmit">Envoyer</button>
+	<div class="row">
+	    <div class="span10">
+		   	{{ answerform.answer.errors }}
+			{{ answerform.answer }}
+		</div>
+		<div class="span2">
+	    	<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="answerSubmit">Envoyer</button>
+		</div>
 	</div>
 </form>
-
-
 
 {% endblock content %}

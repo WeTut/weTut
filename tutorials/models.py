@@ -16,7 +16,7 @@ class Question (models.Model):
 
 class Answer (models.Model):
 	nbLike = models.IntegerField()
-	text = models.TextField(default="Entrez votre reponse ici")
+	answer = models.TextField(default="Entrez votre reponse ici")
 	date = models.DateField()
 
 	user = models.ForeignKey(User)
@@ -51,6 +51,6 @@ class Media(models.Model):
 
 class CommentAnswer(models.Model):
 	user = models.ForeignKey(User)
-	text = models.TextField(default="Entrez votre commentaire ici")
+	comment = models.TextField(default="Entrez votre commentaire ici")
 	date = models.DateField()
 	answer = models.ForeignKey(Answer)
