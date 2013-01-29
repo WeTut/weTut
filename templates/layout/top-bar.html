@@ -17,10 +17,10 @@
           <li><a href="/questions/ask">Poser une question</a></li>
 
           {% if user.is_authenticated %}
-          <li><a href="/logout" role="button" data-toggle="modal" class="nav-connect">Déconnexion</a></li>
+          <li><a href="/logout" role="button" data-toggle="modal" class="nav-connect">{{ user.username }} - Déconnexion</a></li>
           {% else %}<li><a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal" class="nav-connect first">Connexion</a></li>
-          {% endif %}
           <li><a href="/" class="nav-connect">Inscription</a></li>
+          {% endif %}
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -40,7 +40,7 @@
 
     <form method="post" action="/login">
     {% csrf_token %}
-    Username : <input type="text" name="username" /> <br />
+    Username / Email : <input type="text" name="username" /> <br />
     Password : <input type="password" name="password" />
     
   </div>
