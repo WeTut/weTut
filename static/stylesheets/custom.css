@@ -52,12 +52,21 @@ li{list-style: none;}
 	height:68px;
 }
 
-ul.nav {
+ul .nav {
 	top:27px;
-	width:734px;
+	width:692px;
+	float:left;
 	
 }
-.navbar .nav{}
+
+#youyou_connexion {float:right;}
+#youyou_connexion a{color:#FFFFFF;}
+
+#youyou_connexion ul li{float:left; margin-left:10px; font-family: 'Rambla', sans-serif;
+	font-size:1.2em;
+	padding:0;
+	padding-top:2px;
+	margin-top:25px;}
 
 .navbar .nav > li > a {
 	display:block;
@@ -71,9 +80,13 @@ ul.nav {
 	padding-left:6px;
 	padding-right:6px;
 	margin-right:12px;
+	margin-top:23px;
 }
 
 .navbar .brand {
+	float:left;
+	position:relative;
+    z-index:4;
 	padding:0;
 	margin-left:19px;
 	margin-top:10px;
@@ -124,9 +137,13 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {
 
 
 .logo_circle {
+	float:left;
     width: 110px;
     height: 110px;
     margin-top:-7px;
+    margin-left:-145px;
+    position:relative;
+    z-index:2;
     background: #1e2226;
     -webkit-border-radius: 100px / 100px;
     -moz-border-radius:    100px / 100px; 

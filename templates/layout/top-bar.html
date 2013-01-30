@@ -3,29 +3,25 @@
 <div class="navbar navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div id="content">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
+
       <a class="brand" href="/"><img src="../../static/images/logo.png" alt="WeTut" /></a>
-      <div class="nav-collapse collapse">
+      <div class="logo_circle"></div>
         <ul class="nav">
           <li><a href="/questions">Questions</a></li>
           <li><a href="/tutoriels">Tutoriels</a></li>
           <li><a href="/membres">Membres</a></li>
           <li><a class="ask_question" href="/questions/ask">Poser une question</a></li>
-
-          {% if user.is_authenticated %}
-          <li><a href="/logout" role="button" data-toggle="modal" class="nav-connect">{{ user.username }} - Déconnexion</a></li>
-          {% else %}<li><a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal" class="nav-connect first">Connexion</a></li>
-          <li><a href="/" class="nav-connect">Inscription</a></li>
-          {% endif %}
-        </ul>
+		</ul>
+		<div id="youyou_connexion">
+			<ul>
+	          {% if user.is_authenticated %}
+	          <li><a href="/logout" role="button" data-toggle="modal" class="nav-connect">{{ user.username }} - Déconnexion</a></li>
+	          {% else %}<li><a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal" class="nav-connect first">Connexion</a></li>
+	          <li><a href="/" class="nav-connect">Inscription</a></li>
+	          {% endif %}
+	         </ul>
         </div>
-        <div class="logo_circle"></div>
-      </div><!--/.nav-collapse -->
-      
+        </div>
     </div>
   </div>
 </div>
