@@ -3941,7 +3941,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .nav-list > li > a {
-  padding: 3px 15px;
+  //padding: 3px 15px;
 }
 
 .nav-list > .active > a,
@@ -4328,7 +4328,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .navbar .container {
-  width: auto;
+  //width: auto;
 }
 
 .nav-collapse.collapse {
