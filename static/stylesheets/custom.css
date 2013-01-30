@@ -19,10 +19,6 @@ body {padding-top:62px; background-color:#f6f6f1;}
 
 li{list-style: none;}
 
-textarea{
-	margin : 0;
-}
-
 .clear{clear:both;}
 
 #container{
@@ -63,10 +59,10 @@ ul .nav {
 	
 }
 
-#youyou_connexion {float:right;}
-#youyou_connexion a{color:#FFFFFF;}
+#enroll_connexion {float:right;}
+#enroll_connexion a{color:#FFFFFF;}
 
-#youyou_connexion ul li{float:left; margin-left:10px; font-family: 'Rambla', sans-serif;
+#enroll_connexion ul li{float:left; margin-left:10px; font-family: 'Rambla', sans-serif;
 	font-size:1.2em;
 	padding:0;
 	padding-top:2px;
