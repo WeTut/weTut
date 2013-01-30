@@ -1,91 +1,91 @@
 {% extends "layout/base.html" %}
 
 {% block content %}
-
-<h1>{{question.title}}</h1>
-<h5>posté par {{question.user.username}}</h5>
-
-<p>{{question.message}}</p>
-<img src='{{MEDIA_URL}}{{question.picture}}'/>
-
-<hr>
-
-{% for answer in answers %}	
-
-	<div class='row-fluid'>
-		<div class='span2'>
-			<div class='span11'>
+<div id="content">
+	<h1>{{question.title}}</h1>
+	<h5>posté par {{question.user.username}}</h5>
+	
+	<p>{{question.message}}</p>
+	<img src='{{MEDIA_URL}}{{question.picture}}'/>
+	
+	<hr>
+	
+	{% for answer in answers %}	
+	
+		<div class='row-fluid'>
+			<div class='span2'>
+				<div class='span11'>
+					<table class='table table-bordered'>
+						<tr height='30px'>
+							<td class="big">{{ answer.nbLike }}</td>
+						</tr>
+						<tr height='50px'>
+							<td >{{ answer.user.username }}</td>
+						</tr>
+					</table>
+				</div>			
+			</div>
+			<div class='span10' >
 				<table class='table table-bordered'>
-					<tr height='30px'>
-						<td class="big">{{ answer.nbLike }}</td>
+					<tr height='80px'>
+						<td colspan='2'>{{ answer.answer|truncatechars:200|safe }}</td>
 					</tr>
-					<tr height='50px'>
-						<td >{{ answer.user.username }}</td>
+					<tr height='20px'>
+						<td ><i>{{ answer.date }}</i></td>
+						<td ><a href=''>Signaler un abus</a></td>					
 					</tr>
 				</table>
-			</div>			
-		</div>
-		<div class='span10' >
-			<table class='table table-bordered'>
-				<tr height='80px'>
-					<td colspan='2'>{{ answer.answer|truncatechars:200|safe }}</td>
-				</tr>
-				<tr height='20px'>
-					<td ><i>{{ answer.date }}</i></td>
-					<td ><a href=''>Signaler un abus</a></td>					
-				</tr>
-			</table>
-		</div>
-			
-		{% for comment in answer.getComments %}
-		<div class='span12' >
-			<div class='span1' >
-				{{ comment.user.username }}
 			</div>
-			<div class='span11' >
-				{{ comment.comment|truncatechars:200 }}
+				
+			{% for comment in answer.getComments %}
+			<div class='span12' >
+				<div class='span1' >
+					{{ comment.user.username }}
+				</div>
+				<div class='span11' >
+					{{ comment.comment|truncatechars:200 }}
+				</div>
 			</div>
+			{% endfor %}
+	
+			<form action="" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+			    <div class="span12">
+			    	{{ commentform.comment.errors }}
+				    {{ commentform.comment }}
+					<input type="hidden" name="answerId" value="{{answer.id}}"></input>
+				</div>
+				<div class="span2">
+			    	<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="commentSubmit">Commenter</button>
+				</div>
+			</form>							
 		</div>
-		{% endfor %}
-
-		<form action="" method="post" enctype="multipart/form-data">
-			{% csrf_token %}
-		    <div class="span12">
-		    	{{ commentform.comment.errors }}
-			    {{ commentform.comment }}
-				<input type="hidden" name="answerId" value="{{answer.id}}"></input>
+	
+		<hr/>
+		
+	{% endfor %}
+	
+	
+	<!-- NicEdit -->
+	    <script src="{{ STATIC_URL }}javascripts/NicEdit.js"></script>
+	
+		<script type="text/javascript">
+			bkLib.onDomLoaded(function() {
+	        	new nicEditor({buttonList : ['bold','italic','image','upload','link','youTube']}).panelInstance('id_answer');
+	    	});
+		</script>
+	
+	<form action="" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		<div class="row">
+		    <div class="span10">
+			   	{{ answerform.answer.errors }}
+				{{ answerform.answer }}
 			</div>
 			<div class="span2">
-		    	<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="commentSubmit">Commenter</button>
+		    	<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="answerSubmit">Envoyer</button>
 			</div>
-		</form>							
-	</div>
-
-	<hr/>
-	
-{% endfor %}
-
-
-<!-- NicEdit -->
-    <script src="{{ STATIC_URL }}javascripts/NicEdit.js"></script>
-
-	<script type="text/javascript">
-		bkLib.onDomLoaded(function() {
-        	new nicEditor({buttonList : ['bold','italic','image','upload','link','youTube']}).panelInstance('id_answer');
-    	});
-	</script>
-
-<form action="" method="post" enctype="multipart/form-data">
-	{% csrf_token %}
-	<div class="row">
-	    <div class="span10">
-		   	{{ answerform.answer.errors }}
-			{{ answerform.answer }}
 		</div>
-		<div class="span2">
-	    	<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="answerSubmit">Envoyer</button>
-		</div>
-	</div>
-</form>
-
+	</form>
+</div>
 {% endblock content %}

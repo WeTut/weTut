@@ -2,15 +2,33 @@
 
 {% block content %}
 
-<h1>STARTING WETUT !</h1>
-<p>Yay ! Pour le moment, j'ai mis les pages à faire (templates) dans templates/general</p>
-<ul>
-	<li>Page <a href="home">[home]</a></li>
-	<li>Page <a href="questions/ask">[poser une question]</a></li>
-	<li>Page <a href="questions">[voir la liste des questions]</a></li>
-	<li>Page <a href="questions/question">[consulter une question]</a></li>
-</ul>
+<div id="banner">
+	<div id="content_banner">
+		<div id="enroll">
+			<div id="text_enroll">
+			<p>WETUT, VOTRE PLATEFORME <br />PARTICIPATIVE DE CONNAISSANCES</p>
+			<h2>Comment ça marche ?</h2>
+			<p>Motion design, VFX, WEB, webdesign</p>
+			</div>
+			<hr>
+			<div class="enroll_button"><img src="../../static/images/button_enroll.png" alt="Inscription" /></div>
+			<div class="facebook_button"><img src="../../static/images/button_facebook.png" alt="Inscription via facebook" /></div>
+		</div>
+		<div id="video_banner"><iframe src="http://player.vimeo.com/video/56008257" width="440" height="247" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe><a href="http://vimeo.com/56008257"></a></div>
+	</div>
+</div>
+
+<div id="content">
+	<h1>STARTING WETUT !</h1>
+	<p>Yay ! Pour le moment, j'ai mis les pages à faire (templates) dans templates/general</p>
+	<ul>
+		<li>Page <a href="home">[home]</a></li>
+		<li>Page <a href="questions/ask">[poser une question]</a></li>
+		<li>Page <a href="questions">[voir la liste des questions]</a></li>
+		<li>Page <a href="questions/question">[consulter une question]</a></li>
+	</ul>
 
 <i>Aussi, la barre de navigation à retapper se trouve dans layout/top-bar.</i>
+</div>
 
 {% endblock content %}

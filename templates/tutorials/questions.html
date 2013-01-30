@@ -1,66 +1,69 @@
 {% extends "layout/base.html" %}
 
+
 {% block content %}
+<div id="content">
+	<div id="questions">
 
-<div id="questions">
-
-{% for question in questions %}	
-
-	<div class='row-fluid'>
-		<div class='span2'>
-			<a href='{{question.slug}}'>
-				<img class='img-rounded' src='{{MEDIA_URL}}{{question.picture}}' width='100px' height='100px' />
-			</a>
-		</div>
-		<div class='span4' >
-			<a href='{{question.slug}}'><h5>{{ question.title }}</h5></a>
-			<p>{{ question.message|truncatechars:80 }}</p>
-		</div>
-		<div class='span4'>
-			<div class='row-fluid'>
-				<div class='span4'>
-					<table class='table table-bordered'>
-						<tr height='30px'>
-							<td class="small">REPONSES</td>
-						</tr>
-						<tr height='50px'>
-							<td class="big">100</td>
-						</tr>
-					</table>
-				</div>
-				<div class='span4'>
-					<table class='table table-bordered'>
-						<tr height='30px'>
-							<td class="small">VUES</td>
-						</tr>
-						<tr height='50px'>
-							<td class="big">10</td>
-						</tr>
-					</table>
-				</div>
-				<div class='span4'>
-					<table class='table table-bordered'>
-						<tr height='30px'>
-							<td class="small">SUIVRE</td>
-						</tr>
-						<tr height='50px'>
-							<td><img onclick='' src='{{STATIC_URL}}images/logo.png' width='30px' height='30px' /></td>
-						</tr>
-					</table>
+	{% for question in questions %}	
+	
+		<div class='row-fluid'>
+			<div class='span2'>
+				<a href='{{question.slug}}'>
+					<img class='img-rounded' src='{{MEDIA_URL}}{{question.picture}}' width='100px' height='100px' />
+				</a>
+			</div>
+			<div class='span4' >
+				<a href='{{question.slug}}'><h5>{{ question.title }}</h5></a>
+				<p>{{ question.message|truncatechars:80 }}</p>
+			</div>
+			<div class='span4'>
+				<div class='row-fluid'>
+					<div class='span4'>
+						<table class='table table-bordered'>
+							<tr height='30px'>
+								<td class="small">REPONSES</td>
+							</tr>
+							<tr height='50px'>
+								<td class="big">100</td>
+							</tr>
+						</table>
+					</div>
+					<div class='span4'>
+						<table class='table table-bordered'>
+							<tr height='30px'>
+								<td class="small">VUES</td>
+							</tr>
+							<tr height='50px'>
+								<td class="big">10</td>
+							</tr>
+						</table>
+					</div>
+					<div class='span4'>
+						<table class='table table-bordered'>
+							<tr height='30px'>
+								<td class="small">SUIVRE</td>
+							</tr>
+							<tr height='50px'>
+								<td><img onclick='' src='{{STATIC_URL}}images/logo.png' width='30px' height='30px' /></td>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</div>
+			<div class='span2'>
+				<button class='btn btn-primary btn-block vcenter'  onclick='location.href="{{question.slug}}"'>REPONDRE</button>
+			</div>
 		</div>
-		<div class='span2'>
-			<button class='btn btn-primary btn-block vcenter'  onclick='location.href="{{question.slug}}"'>REPONDRE</button>
-		</div>
+
+		
 	</div>
-
 	<hr>
-	
+	<div class ="clear"></div>
 {% endfor %}
-
 </div>
 
 {% endblock content %}
+
 
 
