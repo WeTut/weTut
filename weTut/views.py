@@ -7,6 +7,10 @@ from weTut.forms import AuthForm
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.validators import validate_email
+from django.contrib.auth.models import User
+import re
+
 
 
 def start(request):
@@ -15,12 +19,16 @@ def start(request):
 def home(request):
 	return render_to_response('general/home.html', context_instance=RequestContext(request))
 
+
 def login_view(request):
 	if request.method == 'POST': # If the form has been submitted...
 		form = AuthForm(request.POST) # A form bound to the POST data
 		if form.is_valid(): # All validation rules pass
 			username = request.POST['username']
 			password = request.POST['password']
+			if re.match("[^@]+@[^@]+\.[^@]+", username):
+				username = User.objects.get(email=username)
+
 			user = authenticate(username=username, password=password)
 			if user is not None:
 				if user.is_active:
@@ -30,9 +38,9 @@ def login_view(request):
 		else:
 			form = AuthForm() # An unbound form
 
-			return render(request, 'layout/login.html', {
-		        'form': form,
-		    })
+			#return render(request, 'layout/login.html', {
+		    #    'form': form,
+		    #})
 
 def logout_view(request):
 	logout(request)
