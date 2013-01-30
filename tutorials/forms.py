@@ -22,4 +22,6 @@ class CommentAnswerForm(ModelForm):
 	class Meta:
 		model = CommentAnswer
 		exclude=['answer', 'date', 'user']
-
+		widgets = {
+		          'comment': forms.Textarea(attrs={'style':"width:100%"}),
+        }
