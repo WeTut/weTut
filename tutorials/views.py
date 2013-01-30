@@ -1,7 +1,7 @@
 # Create your views here.
 from django.template.defaultfilters import slugify
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.shortcuts import render_to_response
@@ -39,6 +39,17 @@ def question(request,slug):
 					post.user = request.user
 					post.answer = get_object_or_404(Answer, id=request.POST['answerId'])
 					post.save()
+
+			elif request.POST['submit'] == 'likeSubmit':#Si un like a ete envoye
+				like = Like()
+				like.user = request.user
+				like.answer = get_object_or_404(Answer, id=request.POST['answerId'])
+				valid = like.hasLiked()
+				if not valid:
+					like.save()
+					return HttpResponse('OK')
+				else:
+					return HttpResponse('error')
 
 
 	answerform = AnswerForm() # An unbound form

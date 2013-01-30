@@ -27,7 +27,14 @@ class Answer (models.Model):
 
 	def getComments(self):
 		return CommentAnswer.objects.filter(answer=self)
-		
+
+	def getLikesCount(self):
+		return Like.objects.filter(answer=self).count()
+
+	def getLikes(self):
+		return Like.objects.filter(answer=self)
+
+			
 
 class Software(models.Model):
 	name = models.CharField(max_length = 200)
@@ -54,3 +61,10 @@ class CommentAnswer(models.Model):
 	comment = models.TextField(default="Entrez votre commentaire ici")
 	date = models.DateField()
 	answer = models.ForeignKey(Answer)
+
+class Like(models.Model):
+	user = models.ForeignKey(User)
+	answer = models.ForeignKey(Answer)
+
+	def hasLiked(self):
+		return Like.objects.filter(user=self.user, answer=self.answer)

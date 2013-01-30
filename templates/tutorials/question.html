@@ -12,15 +12,23 @@
 	
 	{% for answer in answers %}	
 	
-		<div class='row-fluid'>
+		<div id='answer{{answer.id}}' class='row-fluid'>
 			<div class='span2'>
 				<div class='span11'>
 					<table class='table table-bordered'>
 						<tr height='30px'>
-							<td class="big">{{ answer.nbLike }}</td>
+							<td class='big'>{{ answer.getLikesCount }}</td>
+								<td class='small'>
+									<form id="likeForm" action="" method="post" enctype="multipart/form-data">
+										{% csrf_token %}
+										<input class="answerId" type="hidden" name="answerId" value="{{answer.id}}"></input>
+										<input class="nbLikes" type="hidden" name="nbLikes" value="{{answer.getLikesCount}}"></input>
+										<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="likeSubmit">Like</button>
+									</form>								
+								</td>
 						</tr>
 						<tr height='50px'>
-							<td >{{ answer.user.username }}</td>
+							<td colspan="2">{{ answer.user }}</td>
 						</tr>
 					</table>
 				</div>			
