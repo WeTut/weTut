@@ -25,10 +25,10 @@ def question(request,slug):
 				form = AnswerForm(request.POST, request.FILES) # A form bound to the POST data
 				if form.is_valid(): # All validation rules pass
 					post = form.save(commit=False)
-					post.nbLike = 0
 					post.date = datetime.now()
 					post.user = request.user
 					post.question = question
+					post.currentUserLiked = False
 					post.save()
 
 			elif request.POST['submit'] == 'commentSubmit':#Si un commentaire a ete envoye
@@ -44,13 +44,18 @@ def question(request,slug):
 				like = Like()
 				like.user = request.user
 				like.answer = get_object_or_404(Answer, id=request.POST['answerId'])
-				valid = like.hasLiked()
-				if not valid:
-					like.save()
+				alreadyLiked = like.hasLiked()
+				if not alreadyLiked:
+					like.save()					
 					return HttpResponse('OK')
 				else:
 					return HttpResponse('error')
 
+
+	for answer in answers:
+		like = Like.objects.filter(answer=answer, user=request.user)
+		if like.exists():
+			answer.currentUserLiked = True
 
 	answerform = AnswerForm() # An unbound form
 	commentform = CommentAnswerForm() # An unbound form

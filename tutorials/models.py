@@ -15,7 +15,7 @@ class Question (models.Model):
 
 
 class Answer (models.Model):
-	nbLike = models.IntegerField()
+	currentUserLiked = models.BooleanField(default=1)
 	answer = models.TextField(default="Entrez votre reponse ici")
 	date = models.DateField()
 
@@ -31,8 +31,7 @@ class Answer (models.Model):
 	def getLikesCount(self):
 		return Like.objects.filter(answer=self).count()
 
-	def getLikes(self):
-		return Like.objects.filter(answer=self)
+	
 
 			
 

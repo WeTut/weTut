@@ -1,6 +1,7 @@
 $(document).ready(function(){
-
-	$('#likeForm').submit(function(){
+	
+	$('.likeForm').submit(function(){
+		alert("hello");
 		
 		var csrf = $(this).find('input[name=csrfmiddlewaretoken]').val();
 		var answerId = $(this).find('input.answerId').val();
