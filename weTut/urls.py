@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'questions/', include ('tutorials.urls')),
     url(r'login', 'weTut.views.login_view', name='login'),
     url(r'logout', 'weTut.views.logout_view', name='logout'),
+    url(r'profile/', include ('members.urls')),
     # url(r'^weTut/', include('weTut.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

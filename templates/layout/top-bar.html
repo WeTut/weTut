@@ -15,6 +15,7 @@
 		<div id="enroll_connexion">
 			<ul>
 	          {% if user.is_authenticated %}
+            <li><a href="/profile">Voir mon profil</a></li>
 	          <li><a href="/logout" role="button" data-toggle="modal" class="nav-connect">{{ user.username }} - Déconnexion</a></li>
 	          {% else %}<li><a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal" class="nav-connect first">Connexion</a></li>
 	          <li><a href="/" class="nav-connect">Inscription</a></li>

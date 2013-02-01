@@ -13,7 +13,6 @@ $(document).ready(function(){
 			if (msg=='OK'){
 				$('#answer'+answerId+' table td.big').text(likes + 1);
 				$('#answer'+answerId+' table td.small').text('Vous aimez');
-				//innerHTML'<p>Vous aimez</p>')
 				return false
 			}
 			
