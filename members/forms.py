@@ -5,4 +5,4 @@ from django.forms import ModelForm
 class ProfileForm(ModelForm):
 	class Meta:
 		model = Profile
-		exclude=['email', 'points', 'status']
+		exclude=['email', 'points', 'status','user']

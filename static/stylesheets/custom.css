@@ -174,3 +174,14 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {
 .facebook_button{margin-top:35px;}
 #banner hr{background-color:#1e2226; color:#1e2226; border: none; height:1px; width:300px; margin:auto;}
 
+#profileForm h1{
+	font-size:1.5em;
+}
+
+#profileForm h2{
+	font-size:1.3em;
+}
+
+#profileForm h3{
+	font-size:1.0em;
+}

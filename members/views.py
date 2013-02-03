@@ -9,6 +9,20 @@ from members.forms import ProfileForm
 from members.models import *
 
 def profile(request):
-	profileform = ProfileForm() # An unbound form
+	profile = Profile.objects.get(user=request.user)
+	if request.method == 'POST': # If the form has been submitted...
+		if request.POST['submit'] == 'profileSubmit':#Si une reponse a ete envoyee			
+			form = ProfileForm(request.POST, request.FILES) # A form bound to the POST data
+			if form.is_valid(): # All validation rules pass
+				post = form.save(commit=False)
+				post.user = request.user
+				post.email = profile.email
+				post.points = 0
+				post.status = profile.status
+				post.save()
+
+
+	profileform = ProfileForm(instance=profile) # An unbound form
+	
 	return render_to_response('members/profile.html', {'profileform': profileform}, context_instance=RequestContext(request))
 	

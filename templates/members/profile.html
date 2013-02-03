@@ -1,12 +1,51 @@
-{% extends "layout/base.html" %}
+{% extends 'layout/base.html' %}
 
 
 {% block content %}
+<div id='content' >
+	<form action='' method='post' enctype='multipart/form-data'>
+		{% csrf_token %}
+		<div id='profileForm' class='span12'>
+			<div class='span6'>
+				<div class='span4'>
+					<img src='{{ profileform.avatar.value }}' >
+					{{ profileform.avatar }}
+				</div>
+				<div class='span8'>
+					<h1>{{user.username}}</h1>
+					<hr />
+					<h3>Métier</h3>
+					{{ profileform.job }}
+					<h3>Employeur</h3>
+					{{ profileform.employer }}
+					<h3>localisation</h3>
+					{{ profileform.city }}
+					{{ profileform.state }}
+					<h3>Portfolio</h3>
+					{{ profileform.urlPortfolio }}
+				</div>
+			</div>
+			<div class='span3'>
+				<h2>Compétences</h2>
+				<h3>Techniques</h3>
+				<h3>Logiciels</h3>			
+			</div>
+			<div class='span3'>
+				<h2>Liens réseaux sociaux</h2>
+				<h3>Viadeo</h3>
+				{{ profileform.urlViadeo }}	
+				<h3>Linkedin</h3>
+				{{ profileform.urlLinkedin }}	
+				<h3>Twitter</h3>
+				{{ profileform.urlTwitter }}	
+				<h3>Facebook</h3>
+				{{ profileform.urlFacebook }}	
+			</div>
+		</div>
+		<button class='btn btn-primary' name='submit' type="submit" value="profileSubmit" >Enregistrer</button>
+	</form>
+</div>
 
-<form action="" method="post" enctype="multipart/form-data">
-	{% csrf_token %}
-	{{ profileform.as_p }}
-</form>
 
 {% endblock content %}
 
