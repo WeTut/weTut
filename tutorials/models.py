@@ -13,6 +13,9 @@ class Question (models.Model):
 	def __unicode__(self):
 		return u'%s' % (self.title)
 
+	def getAnswersCount(self):
+		return Answer.objects.filter(question=self).count()
+
 
 
 

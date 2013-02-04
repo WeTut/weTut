@@ -16,7 +16,8 @@ def questions(request):
 
 def question(request,slug):
 	question = get_object_or_404(Question, slug=slug)
-	#question.update(views=question.views+1)
+	question.views += 1
+	question.save()
 	answers = Answer.objects.filter(question=question)
 
 	if request.method == 'POST': # If the form has been submitted...
