@@ -11,10 +11,12 @@ from members.models import *
 def profile(request):
 	profile = Profile.objects.get(user=request.user)
 	if request.method == 'POST': # If the form has been submitted...
-		if request.POST['submit'] == 'profileSubmit':#Si une reponse a ete envoyee			
+		if request.POST['submit'] == 'profileSubmit':#Si une reponse a ete envoyee
 			form = ProfileForm(request.POST, request.FILES) # A form bound to the POST data
 			if form.is_valid(): # All validation rules pass
 				post = form.save(commit=False)
+				if (post.avatar == ''):
+					post.avatar = profile.avatar
 				post.user = request.user
 				post.email = profile.email
 				post.points = 0
@@ -22,6 +24,8 @@ def profile(request):
 				profile.delete()
 				post.save()
 				profile = Profile.objects.get(user=request.user)
+			else:
+				print (form.errors)
 
 
 
