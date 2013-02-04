@@ -19,7 +19,10 @@ def profile(request):
 				post.email = profile.email
 				post.points = 0
 				post.status = profile.status
+				profile.delete()
 				post.save()
+				profile = Profile.objects.get(user=request.user)
+
 
 
 	profileform = ProfileForm(instance=profile) # An unbound form

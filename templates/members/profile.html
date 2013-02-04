@@ -2,13 +2,13 @@
 
 
 {% block content %}
-<div id='content' >
+<div id='profile' >
 	<form action='' method='post' enctype='multipart/form-data'>
 		{% csrf_token %}
 		<div id='profileForm' class='span12'>
 			<div class='span6'>
 				<div class='span4'>
-					<img src='{{ profileform.avatar.value }}' >
+					<img src='{{MEDIA_URL}}{{ profileform.avatar.value }}' >
 					{{ profileform.avatar }}
 				</div>
 				<div class='span8'>

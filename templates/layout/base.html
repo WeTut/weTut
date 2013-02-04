@@ -11,8 +11,10 @@
 {% include "layout/search-bar.html" %}
 
 <div id="container">
-	{% block content %}
-	{% endblock content %}
+	<div id="content">
+		{% block content %}
+		{% endblock content %}
+	</div>
 </div>
 <div class="clear"></div>
 {% include "layout/footer.html" %}

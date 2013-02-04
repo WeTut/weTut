@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Profile (models.Model):
 	email = models.EmailField()
-	avatar = models.ImageField(upload_to='questions', default='{{ STATIC_URL }}images/avatar.jpg')
+	avatar = models.ImageField(upload_to='members')
 	city = models.CharField(max_length = 200)
 	state = models.CharField(max_length = 200)
 	job = models.CharField(max_length = 200)

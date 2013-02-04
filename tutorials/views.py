@@ -16,6 +16,7 @@ def questions(request):
 
 def question(request,slug):
 	question = get_object_or_404(Question, slug=slug)
+	#question.update(views=question.views+1)
 	answers = Answer.objects.filter(question=question)
 
 	if request.method == 'POST': # If the form has been submitted...
@@ -71,6 +72,7 @@ def ask(request):
 			title = form.cleaned_data['title']
 			post.user = request.user
 			post.slug = str(slugify(title))
+			post.views = 0
 			post.save()
 			return HttpResponseRedirect('/questions') # Redirect after POST
 	else:

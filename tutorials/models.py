@@ -7,11 +7,13 @@ class Question (models.Model):
 	picture = models.ImageField(upload_to='questions')
 	message = models.TextField(max_length = 400)
 	slug = models.SlugField(max_length = 200)
-
+	views = models.IntegerField()
 	user = models.ForeignKey(User)
 
 	def __unicode__(self):
 		return u'%s' % (self.title)
+
+
 
 
 class Answer (models.Model):
