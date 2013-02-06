@@ -21,130 +21,72 @@ li{list-style: none;}
 
 .clear{clear:both;}
 
-#container{
-	position:relative;
-	margin:0 auto;
-}
+#container{position:relative; margin:0 auto;}
+.content{position:relative; width: 940px; margin:0 auto;}
 
-#content{
-	position:relative;
-	width: 940px;
-	margin:0 auto;
-}
-
-#questions, #profile, #ask, #question{margin-top:70px;}
+#questions{height: 80px;margin-top:100px;}
 #questions table td{text-align:center; vertical-align:middle;}
 #questions button{margin-top:30px;}
 
-.small{
-	font-size:10px;
-}
+.small{font-size:10px;}
+.big{font-size:26px;font-weight:bold; text-align:center;}
 
-.big{
-	font-size:26px;
-	font-weight:bold;
-	text-align:center;
-}
+.navbar-inner {background-color:#1e2226;background-image:none;height:68px;}
+ul .nav {top:27px;width:692px;float:left;}
 
-.navbar-inner {
-	background-color:#1e2226;
-	background-image:none;
-	height:68px;
-}
+#enroll_connexion {float:right; padding-top:0px; margin-top:0px;}
+#enroll_connexion a{display:block; height:68px; line-height:68px; color:#FFFFFF; padding-left:15px; padding-right:15px;}
 
-ul .nav {
-	top:27px;
-	width:692px;
-	float:left;
-	
-}
-
-#enroll_connexion {float:right;}
-#enroll_connexion a{color:#FFFFFF;}
+#enroll_connexion a:hover, #enroll_connexion li.user a:hover {background-color:#32363b; text-decoration:none;}
 
 #enroll_connexion ul li{float:left; margin-left:10px; font-family: 'Rambla', sans-serif;
-	font-size:1.2em;
-	padding:0;
-	padding-top:2px;
-	margin-top:25px;}
-
-.navbar .nav > li > a {
-	display:block;
-	text-shadow:none;
-	color:#fffaf7;
-	font-family:'bebas_neue';
-	font-size:1.4em;
-	height:20px;
-	padding:0;
-	padding-top:4px;
-	padding-left:6px;
-	padding-right:6px;
-	margin-right:12px;
-	margin-top:23px;
+    font-size:1.2em;
+    padding:0;
 }
 
-.navbar .brand {
-	float:left;
-	position:relative;
-    z-index:4;
-	padding:0;
-	margin-left:19px;
-	margin-top:10px;
-	margin-right:55px;
-	width:72px; height:72px;
+#user_menu {
+    font-family:'Rambla', sans-serif;
+    display:none;
+    clear:both;
+    position:absolute;
+    top:68px;
+    right:0;
+    background-color:#32363b;
+    box-shadow: 0px 5px 20px #0b0b0b; 
+    -mozoz-box-shadow: 0px 5px 20px #0b0b0b; 
+    -webkit-box-shadow: 0px 5px 20px #0b0b0b;
 }
 
-
-.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus, .navbar .nav > li > a:hover {
-	background-color:#01c6e8;
-	padding:4px;
-	padding-left:6px;
-	padding-right:6px;
-	border-radius:4px;
-	color:#fffaf7;
+#user_menu a {
+    display:block;
+    height:20px;
+    line-height:20px;
+    padding:10px;
+    font-size:1.1em;
+    text-align:right;
 }
 
-.navbar .nav .ask_question{
-	background-color:#f53749;
-	padding:4px;
-	padding-left:6px;
-	padding-right:6px;
-	border-radius:4px;
+#user_menu a:hover {
+    color:#32363b;
+    background-color:#f6f6f1;
 }
 
+.navbar .nav > li > a {display:block; text-shadow:none; color:#fffaf7; font-family:'bebas_neue';font-size:1.4em; height:20px; padding:0;padding-top:4px; padding-left:6px; padding-right:6px;margin-right:12px;margin-top:23px;}
 
-ul.nav > li > a.nav-connect {
-	font-family: 'Rambla', sans-serif;
-	font-size:1.2em;
-	padding:0;
-	padding-top:2px;
-}
+.navbar .brand {float:left;position:relative;z-index:4;padding:0;margin-left:19px;margin-top:10px;margin-right:55px;width:72px; height:72px;}
 
-ul.nav > li > a.nav-connect:hover {
-	background:none;
-	text-decoration:underline;
-	padding:0;
-	padding-top:2px;
-}
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus, .navbar .nav > li > a:hover {background-color:#01c6e8; padding:4px;padding-left:6px;padding-right:6px;border-radius:4px;color:#fffaf7;}
 
-ul.nav > li > a.first {
-	margin-left:110px;
-}
-
-ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {
-	color:#fffaf7;
-}
+.navbar .nav .ask_question{background-color:#f53749; padding:4px; padding-left:6px; padding-right:6px; border-radius:4px;}
 
 
-.logo_circle {
-	float:left;
-    width: 110px;
-    height: 110px;
-    margin-top:-7px;
-    margin-left:-145px;
-    position:relative;
-    z-index:2;
-    background: #1e2226;
+ul.nav > li > a.nav-connect {font-family: 'Rambla', sans-serif;font-size:1.2em;padding:0;padding-top:2px;}
+ul.nav > li > a.nav-connect:hover {background:none;text-decoration:underline;padding:0;padding-top:2px;}
+ul.nav > li > a.first {margin-left:110px;}
+ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#fffaf7;}
+
+
+.logo_circle {float:left; width: 110px; height: 110px; margin-top:-7px; margin-left:-145px; position:relative; z-index:2; background: #1e2226;
     -webkit-border-radius: 100px / 100px;
     -moz-border-radius:    100px / 100px; 
     border-radius:         100px / 100px; 
@@ -163,7 +105,7 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {
 #footer-column1{float:left; width:285px;}
 #footer-column2{float:left; width:285px;}
 #footer-column3{float:left; width:285px;}
-.footer-separator{float:left; width:2px; height:122px; margin-top:36px;;background-color:#FFFFFF; margin-left:20px; margin-right:20px;}
+.footer-separator{float:left; width:2px; height:122px; margin-top:36px;background-color:#FFFFFF; margin-left:20px; margin-right:20px;}
 
 #banner{width:100%; height:413px; background-image:url(../images/background_banner.png); background-repeat:x; position:relative; z-index:1; top:-34px;}
 #content_banner{width: 940px; height:413px; margin:0 auto;}
@@ -174,14 +116,16 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {
 .facebook_button{margin-top:35px;}
 #banner hr{background-color:#1e2226; color:#1e2226; border: none; height:1px; width:300px; margin:auto;}
 
-#profileForm h1{
-	font-size:1.5em;
-}
+#consultation{position:relative; height:300px;}
+.back_box{width:450px; height:70px; background-color:#01c6e8; text-align:center; font-family:'bebas_neue'; color:#FFFFFF; font-size:32px; border-radius: 3px;}
+#pink_box{background-color:#f53749; width:450px; height:70px;}
+.back_box p{display:block; top:20px; line-height: 78px;}
+#tutos_consult{float:left; margin-right:40px; background-color:#FFFFFF; height:300px;}
+#questions_consult{float:left; background-color:#FFFFFF; height:300px;}
 
-#profileForm h2{
-	font-size:1.3em;
-}
+#membres{clear:left; width:940px; height:70px; background-color:#bcbcbc; text-align:center; font-family:'bebas_neue'; color:#FFFFFF; font-size:32px; border-radius: 3px; position:relative; margin-top:100px;}
+#membres p{display:block; top:20px; line-height: 78px;}
 
-#profileForm h3{
-	font-size:1.0em;
-}
+#profileForm h1{font-size:1.5em;}
+#profileForm h2{font-size:1.3em;}
+#profileForm h3{font-size:1.0em;}
