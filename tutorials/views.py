@@ -7,12 +7,20 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response
 from datetime import datetime 
 
-from tutorials.forms import QuestionForm, AnswerForm, CommentAnswerForm
+from tutorials.forms import QuestionForm, AnswerForm, CommentAnswerForm, FilterForm
 from tutorials.models import *
 
 def questions(request):
-	questions = Question.objects.all()
-	return render_to_response('tutorials/questions.html', {'questions': questions}, context_instance=RequestContext(request))
+
+	filterform = FilterForm()
+	if request.is_ajax() and request.method == 'POST':
+		questions = Question.objects.all().order_by(request.POST['filter'])
+		
+	else :
+		questions = Question.objects.all()
+		print('date')
+
+	return render_to_response('tutorials/questions.html', {'questions': questions, 'filterform':filterform}, context_instance=RequestContext(request))
 
 def question(request,slug):
 	question = get_object_or_404(Question, slug=slug)
@@ -74,6 +82,7 @@ def ask(request):
 			post.user = request.user
 			post.slug = str(slugify(title))
 			post.views = 0
+			post.date = datetime.now()
 			post.save()
 			return HttpResponseRedirect('/questions') # Redirect after POST
 	else:

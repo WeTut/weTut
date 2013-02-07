@@ -25,3 +25,11 @@ class CommentAnswerForm(ModelForm):
 		widgets = {
 		          'comment': forms.Textarea(attrs={'style':"width:100%"}),
         }
+
+class FilterForm(forms.Form):
+    FILTER_CHOICES = (
+        ('date', 'Date'),
+        ('-views', 'Nombre de vues'),
+    )    
+    
+    filter = forms.ChoiceField(choices=FILTER_CHOICES, widget=forms.Select())

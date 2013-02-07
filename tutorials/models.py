@@ -9,6 +9,7 @@ class Question (models.Model):
 	slug = models.SlugField(max_length = 200)
 	views = models.IntegerField()
 	user = models.ForeignKey(User)
+	date = models.DateField()
 
 	def __unicode__(self):
 		return u'%s' % (self.title)

@@ -4,6 +4,13 @@
 {% block content %}
 	<div id="questions">
 
+		<form id='filterform' action="" method="POST">
+			{% csrf_token %}
+	        <ul>
+	        {{ filterform.as_ul}}	        
+	        </ul>
+        </form>
+
 	{% for question in questions %}	
 	
 		<div class='row-fluid'>
