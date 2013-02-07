@@ -1,0 +1,18 @@
+{% load humanize %}
+Bienvenue sur We-tut !
+
+---------------------------------------
+---------------------------------------
+
+Pour confirmer ton inscription, c'est simple, clique sur le lien ci-dessous :
+
+http://127.0.0.1:8000/accounts/activate/{{ activation_key }}/
+
+---------------------------------------
+---------------------------------------
+
+Tu as desormais {{ expiration_days|apnumber }} jours avant l'expiration de ce code.
+
+A très bientot pour un prochain tuto :)
+
+L'equipe weTut

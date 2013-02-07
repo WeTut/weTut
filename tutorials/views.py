@@ -80,7 +80,3 @@ def ask(request):
 		form = QuestionForm() # An unbound form #initial={'user': request.user}
 
 	return render_to_response('tutorials/ask.html', {'form': form}, context_instance=RequestContext(request))
-
-
-
-	

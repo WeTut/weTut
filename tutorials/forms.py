@@ -7,7 +7,6 @@ class QuestionForm(ModelForm):
 		model = Question
 		exclude=['slug', 'user', 'views']
 
-
 class AnswerForm(ModelForm):
 	class Meta:
 		model = Answer
@@ -16,7 +15,6 @@ class AnswerForm(ModelForm):
 		widgets = {
 		          'answer': forms.Textarea(attrs={'style':"width:100%"}),
         }
-
 
 class CommentAnswerForm(ModelForm):
 	class Meta:
