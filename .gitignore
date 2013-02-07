@@ -1,3 +1,4 @@
 *.pyc
 *.sqlite
 static/apps/*
+settings.py

@@ -3,6 +3,8 @@ from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 
+from registration.views import register
+
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -11,6 +13,12 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'weTut.views.start', name='start'),
+
+    url(r'subscribe', 'weTut.views.subscribe', name='subscribe'),
+
+    #url(r'^register','weTut.views.register',{'backend': 'registration.backends.default.DefaultBackend'},name='register'),
+    #url(r'register', register,{'backend': 'registration.backends.default.DefaultBackend'},name='register'),
+    url(r'^accounts/', include('registration.urls')),
 
     url(r'home', 'weTut.views.home', name='home'),
     url(r'questions/', include ('tutorials.urls')),

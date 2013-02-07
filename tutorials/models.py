@@ -18,8 +18,6 @@ class Question (models.Model):
 		return Answer.objects.filter(question=self).count()
 
 
-
-
 class Answer (models.Model):
 	currentUserLiked = models.BooleanField(default=1)
 	answer = models.TextField(default="Entrez votre reponse ici")
@@ -37,9 +35,6 @@ class Answer (models.Model):
 	def getLikesCount(self):
 		return Like.objects.filter(answer=self).count()
 
-	
-
-			
 
 class Software(models.Model):
 	name = models.CharField(max_length = 200)
