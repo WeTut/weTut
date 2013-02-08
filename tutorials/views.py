@@ -56,15 +56,11 @@ def question(request,slug):
 				like = Like()
 				like.user = request.user
 				like.answer = get_object_or_404(Answer, id=request.POST['answerId'])
-				alreadyLiked = like.hasLiked()
-				if not alreadyLiked:
-					like.save()					
-					return HttpResponse('OK')
-				else:
-					return HttpResponse('error')
-
+				like.save()					
+				return HttpResponse('OK')
 
 	for answer in answers:
+		answer.currentUserLiked = False
 		like = Like.objects.filter(answer=answer, user=request.user)
 		if like.exists():
 			answer.currentUserLiked = True

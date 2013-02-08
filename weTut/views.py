@@ -13,6 +13,7 @@ from django.contrib.auth.models import User
 import re
 
 from registration.backends import get_backend
+from members.models import Profile
 
 
 def start(request):
