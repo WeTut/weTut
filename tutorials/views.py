@@ -17,8 +17,7 @@ def questions(request):
 		questions = Question.objects.all().order_by(request.POST['filter'])
 		
 	else :
-		questions = Question.objects.all()
-		print('date')
+		questions = Question.objects.all().order_by('-date')
 
 	return render_to_response('tutorials/questions.html', {'questions': questions, 'filterform':filterform}, context_instance=RequestContext(request))
 
@@ -40,6 +39,9 @@ def question(request,slug):
 					post.question = question
 					post.currentUserLiked = False
 					post.save()
+					question.answers += 1
+					question.save()
+
 
 			elif request.POST['submit'] == 'commentSubmit':#Si un commentaire a ete envoye
 				form = CommentAnswerForm(request.POST, request.FILES) # A form bound to the POST data
@@ -82,6 +84,7 @@ def ask(request):
 			post.user = request.user
 			post.slug = str(slugify(title))
 			post.views = 0
+			post.answers = 0
 			post.date = datetime.now()
 			post.save()
 			return HttpResponseRedirect('/questions') # Redirect after POST

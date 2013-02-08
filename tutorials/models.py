@@ -8,8 +8,10 @@ class Question (models.Model):
 	message = models.TextField(max_length = 400)
 	slug = models.SlugField(max_length = 200)
 	views = models.IntegerField()
+	answers = models.IntegerField()
 	user = models.ForeignKey(User)
 	date = models.DateField()
+
 
 	def __unicode__(self):
 		return u'%s' % (self.title)

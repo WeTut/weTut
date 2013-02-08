@@ -26,8 +26,9 @@ class CommentAnswerForm(ModelForm):
 
 class FilterForm(forms.Form):
     FILTER_CHOICES = (
-        ('date', 'Date'),
+        ('-date', 'Date'),
         ('-views', 'Nombre de vues'),
+        ('-answers', 'Nombre de reponses'),
     )    
     
     filter = forms.ChoiceField(choices=FILTER_CHOICES, widget=forms.Select())
