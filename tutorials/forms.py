@@ -5,7 +5,7 @@ from django.forms import ModelForm
 class QuestionForm(ModelForm):
 	class Meta:
 		model = Question
-		exclude=['slug', 'user', 'views']
+		exclude=['slug', 'user', 'views', 'date', 'answers']
 
 class AnswerForm(ModelForm):
 	class Meta:

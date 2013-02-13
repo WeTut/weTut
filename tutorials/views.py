@@ -56,8 +56,8 @@ def question(request,slug):
 				like = Like()
 				like.user = request.user
 				like.answer = get_object_or_404(Answer, id=request.POST['answerId'])
-				like.save()					
-				return HttpResponse('OK')
+				like.save()
+				return HttpResponse( like.answer.getLikesCount() )
 
 	for answer in answers:
 		answer.currentUserLiked = False
