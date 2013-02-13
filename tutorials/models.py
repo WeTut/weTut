@@ -12,7 +12,6 @@ class Question (models.Model):
 	user = models.ForeignKey(User)
 	date = models.DateField()
 
-
 	def __unicode__(self):
 		return u'%s' % (self.title)
 
@@ -27,6 +26,7 @@ class Answer (models.Model):
 
 	user = models.ForeignKey(User)
 	question = models.ForeignKey(Question)
+	nb_likes = models.IntegerField()
 
 	def __unicode__(self):
 		return u'%s' % (self.date)
