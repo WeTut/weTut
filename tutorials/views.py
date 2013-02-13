@@ -25,7 +25,7 @@ def question(request,slug):
 	question = get_object_or_404(Question, slug=slug)
 	question.views += 1
 	question.save()
-	answers = Answer.objects.filter(question=question)
+	answers = Answer.objects.filter(question=question).order_by('-nb_likes')
 
 	if request.method == 'POST': # If the form has been submitted...
 		if request.user.is_authenticated():# If there isn't any logged user
@@ -38,9 +38,12 @@ def question(request,slug):
 					post.user = request.user
 					post.question = question
 					post.currentUserLiked = False
+					post.nb_likes = 0
 					post.save()
 					question.answers += 1
 					question.save()
+				else:
+					print (form.errors)
 
 
 			elif request.POST['submit'] == 'commentSubmit':#Si un commentaire a ete envoye
@@ -57,6 +60,10 @@ def question(request,slug):
 				like.user = request.user
 				like.answer = get_object_or_404(Answer, id=request.POST['answerId'])
 				like.save()
+				
+				answer = get_object_or_404(Answer, id=request.POST['answerId'])
+				answer.nb_likes +=1
+				answer.save()
 				return HttpResponse( like.answer.getLikesCount() )
 
 	for answer in answers:
@@ -64,6 +71,7 @@ def question(request,slug):
 		like = Like.objects.filter(answer=answer, user=request.user)
 		if like.exists():
 			answer.currentUserLiked = True
+
 
 	answerform = AnswerForm() # An unbound form
 	commentform = CommentAnswerForm() # An unbound form

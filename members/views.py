@@ -14,7 +14,6 @@ def profile(request):
 		if request.POST['submit'] == 'profileSubmit':#Si une reponse a ete envoyee
 			form = ProfileForm(request.POST, request.FILES) # A form bound to the POST data
 			if form.is_valid(): # All validation rules pass
-				print ("form valid")
 				post = form.save(commit=False)
 				if (post.avatar == ''):
 					post.avatar = profile.avatar
@@ -25,8 +24,7 @@ def profile(request):
 				profile.delete()
 				post.save()
 				profile = Profile.objects.get(user=request.user)
-			else:
-				print (form.errors)
+
 
 
 
