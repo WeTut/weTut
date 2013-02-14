@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django import forms
+from stdimage import StdImageField
 
 
 class Tag(models.Model):
@@ -13,7 +14,8 @@ class Tag(models.Model):
 
 class Question (models.Model):
 	title = models.CharField(max_length = 200)
-	picture = models.ImageField(upload_to='questions')
+	#picture = models.ImageField(upload_to='questions')
+	picture = StdImageField(upload_to='questions', blank=True, size=(440, 380), thumbnail_size=(160, 120, True))
 	message = models.TextField(max_length = 400)
 	slug = models.SlugField(max_length = 200)
 	views = models.IntegerField()
