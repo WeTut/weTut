@@ -9,53 +9,59 @@
 		<h1>HAVE A QUESTION ?</h1>
 		<p>Here you can ask everything you want</p>
 	
-		<form action="" method="post" enctype="multipart/form-data">
+		<form id="questionForm" action="" method="post" enctype="multipart/form-data">
 			{% csrf_token %}
 			{{ form.as_p }}
 			<h2>Ajouter des tags (1 minimum, 3 maximum)</h2>
 			<div class="row-fluid">
-				<div class="span6">
-					<!--<form action="" method="post" enctype="multipart/form-data">
-						<div class="ui-widget">
-							<label>Logiciels</label>
-							<select class="combobox">
-								<option value="">Select one...</option>
-								<option value="AfterEffect">After Effect</option>
-								<option value="Cinema4D">Cinéma 4D</option>
-								<option value="3DSMAX">3DSMAX</option>
-								<option value="Maya">Maya</option>
-							</select>
-						</div>
-						<button id="toggle">+</button>
-					</form>
-	
-					<hr/>
-	
-					<p>
-						<span class="label label-success">
-							Logiciel1
-							<a href="#" style="font-size:18px; color:#ffffff;">&times;</a>
-						</span>
-					</p>
-	
+				<div id="tag1" class="ui-widget">
+					<label>Tag 1 :</label>
+					<select name="technical1" class="technical">
+						<option value="0">Technique</option>
+						{% for technical in technicaltags %}
+							<option value="{{technical.id}}">{{technical.name}}</option>
+						{% endfor %}
+					</select>
+					<select name="software1" class="software">
+						<option value="0">Logiciel</option>
+						{% for software in softwaretags %}
+							<option value="{{software.id}}">{{software.name}}</option>
+						{% endfor %}
+					</select>
 				</div>
-				
-				<div class="span6">
-					<form action="" method="post" enctype="multipart/form-data">
-						<div class="ui-widget">
-							<label>Catégorie</label>
-							<select class="combobox">
-								<option value="">Select one...</option>
-								<option value="AfterEffect">After Effect</option>
-								<option value="Cinema4D">Cinéma 4D</option>
-								<option value="3DSMAX">3DSMAX</option>
-								<option value="Maya">Maya</option>
-							</select>
-						</div>
-						<button id="toggle">+</button>
-					</form>
+				<div id="tag2" style="display:none;" class="ui-widget">
+					<label>Tag 2 :</label>
+					<select name="technical2" class="technical">
+						<option value="0">Technique</option>
+						{% for technical in technicaltags %}
+							<option value="{{technical.id}}">{{technical.name}}</option>
+						{% endfor %}
+					</select>
+					<select name="software2" class="software">
+						<option value="0">Logiciel</option>
+						{% for software in softwaretags %}
+							<option value="{{software.id}}">{{software.name}}</option>
+						{% endfor %}
+					</select>
 				</div>
-			</div>-->
+				<div id="tag3" style="display:none;" class="ui-widget">
+					<label>Tag 3:</label>
+					<select name="technical3" class="technical">
+						<option value="0">Technique</option>
+						{% for technical in technicaltags %}
+							<option value="{{technical.id}}">{{technical.name}}</option>
+						{% endfor %}
+					</select>
+					<select name="software3" class="software">
+						<option value="0">Logiciel</option>
+						{% for software in softwaretags %}
+							<option value="{{software.id}}">{{software.name}}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+
+
 			
 			<h2>Ajouter des medias ?</h2>
 			<p>illustrez votre question avec des médias supplémentaires</p>

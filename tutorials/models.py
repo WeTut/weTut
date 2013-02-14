@@ -2,6 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 from django import forms
 
+
+class Tag(models.Model):
+	name = models.CharField(max_length = 200)
+	type = models.IntegerField()
+
+	def __unicode__(self):
+		return u'%s' % (self.name)
+
+
 class Question (models.Model):
 	title = models.CharField(max_length = 200)
 	picture = models.ImageField(upload_to='questions')
@@ -10,7 +19,11 @@ class Question (models.Model):
 	views = models.IntegerField()
 	answers = models.IntegerField()
 	user = models.ForeignKey(User)
+	tag1 = models.IntegerField()
+	tag2 = models.IntegerField()
+	tag3 = models.IntegerField()
 	date = models.DateField()
+
 
 	def __unicode__(self):
 		return u'%s' % (self.title)
@@ -39,12 +52,6 @@ class Answer (models.Model):
 
 
 class Software(models.Model):
-	name = models.CharField(max_length = 200)
-
-	def __unicode__(self):
-		return u'%s' % (self.name)
-
-class Tags(models.Model):
 	name = models.CharField(max_length = 200)
 
 	def __unicode__(self):

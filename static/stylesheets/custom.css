@@ -126,6 +126,8 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 #membres{clear:left; width:940px; height:70px; background-color:#bcbcbc; text-align:center; font-family:'bebas_neue'; color:#FFFFFF; font-size:32px; border-radius: 3px; position:relative; margin-top:100px;}
 #membres p{display:block; top:20px; line-height: 78px;}
 
+#questionForm select{width:150px;}
+
 #profileForm h1{font-size:1.5em;}
 #profileForm h2{font-size:1.3em;}
 #profileForm h3{font-size:1.0em;}

@@ -42,8 +42,6 @@ def question(request,slug):
 					post.save()
 					question.answers += 1
 					question.save()
-				else:
-					print (form.errors)
 
 
 			elif request.POST['submit'] == 'commentSubmit':#Si un commentaire a ete envoye
@@ -80,6 +78,9 @@ def question(request,slug):
 
 
 def ask(request):
+	technicaltags = Tag.objects.filter(type=0)
+	softwaretags = Tag.objects.filter(type=1)
+
 	if request.method == 'POST': # If the form has been submitted...
 		form = QuestionForm(request.POST, request.FILES) # A form bound to the POST data
 		if form.is_valid(): # All validation rules pass
@@ -90,9 +91,30 @@ def ask(request):
 			post.views = 0
 			post.answers = 0
 			post.date = datetime.now()
+
+			tech1 = request.POST['technical1']
+			soft1 = request.POST['software1']
+			tech2 = request.POST['technical2']
+			soft2 = request.POST['software2']
+			tech3 = request.POST['technical3']
+			soft3 = request.POST['software3']
+
+			if tech1 != "0" and soft1 != "0":
+				return HttpResponse('erreur1')
+
+			if tech2 != "0" and soft2 != "0":
+				return HttpResponse('erreur2')
+
+			if tech3 != "0" and soft3 != "0":
+				return HttpResponse('erreur3')
+
+			post.tag1 = max(tech1, soft1)
+			post.tag2 = max(tech2, soft2)
+			post.tag3 = max(tech3, soft3)
+
 			post.save()
 			return HttpResponseRedirect('/questions') # Redirect after POST
 	else:
 		form = QuestionForm() # An unbound form #initial={'user': request.user}
 
-	return render_to_response('tutorials/ask.html', {'form': form}, context_instance=RequestContext(request))
+	return render_to_response('tutorials/ask.html', {'form': form, 'technicaltags':technicaltags, 'softwaretags':softwaretags}, context_instance=RequestContext(request))

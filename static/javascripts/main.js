@@ -43,6 +43,40 @@ $(document).ready(function(){
  		return false;
  	});
 
+ 	$('#tag1 select').change(function(){
+		var val = $(this).val();
+		var csrf = $('#questionForm').find('input[name=csrfmiddlewaretoken]').val();
+
+		$.ajax({
+		  	type: "POST",
+			url: "",
+		  	data: { csrfmiddlewaretoken:csrf }
+		}).done(function( data ) {
+            if (val != 0)
+           		document.getElementById('tag2').style.display = 'block';
+			return false;			
+		});
+ 
+ 		return false;
+ 	});
+
+ 	$('#tag2 select').change(function(){
+		var val = $(this).val();
+		var csrf = $('#questionForm').find('input[name=csrfmiddlewaretoken]').val();
+
+		$.ajax({
+		  	type: "POST",
+			url: "",
+		  	data: { csrfmiddlewaretoken:csrf }
+		}).done(function( data ) {
+            if (val != 0)
+           		document.getElementById('tag3').style.display = 'block';
+			return false;			
+		});
+ 
+ 		return false;
+ 	});
+
 
 
 });
