@@ -78,6 +78,32 @@ $(document).ready(function(){
  	});
 
 
+ 	$('#questionForm select').change(function(){
+		var val = $(this).val();
+		var csrf = $('#questionForm').find('input[name=csrfmiddlewaretoken]').val();		
+		var selectClass = $(this).attr('class');
+		var selectClassToUpdate = '.technical';
+		if (selectClass == 'technical'){
+			selectClassToUpdate = '.software';
+		}
+		var parent = '#'+ $(this).closest("div").attr("id");
+
+		$.ajax({
+		  	type: "POST",
+			url: "",
+		  	data: { csrfmiddlewaretoken:csrf }
+		}).done(function( data ) {
+            if (val != 0){
+       			$(parent + ' ' + selectClassToUpdate +' option[value=0]').attr('selected', 'selected');
+           	}
+
+			return false;			
+		});
+ 
+ 		return false;
+ 	});
+
+
 
 });
 
