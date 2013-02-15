@@ -13,6 +13,7 @@ class Tag(models.Model):
 
 
 class Question (models.Model):
+	currentUserFollows = models.BooleanField(default=1)
 	title = models.CharField(max_length = 200)
 	#picture = models.ImageField(upload_to='questions')
 	picture = StdImageField(upload_to='questions', blank=True, size=(440, 380), thumbnail_size=(160, 120, True))
@@ -79,3 +80,11 @@ class Like(models.Model):
 
 	def hasLiked(self):
 		return Like.objects.filter(user=self.user, answer=self.answer)
+
+class FollowQuestion (models.Model):
+	user = models.ForeignKey(User, unique=True)
+	question = models.ForeignKey(Question, unique=True)
+
+class FollowTag (models.Model):
+	user = models.ForeignKey(User, unique=True)
+	tag = models.ForeignKey(Tag, unique=True)

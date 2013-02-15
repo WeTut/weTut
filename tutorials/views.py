@@ -13,11 +13,25 @@ from tutorials.models import *
 def questions(request):
 
 	filterform = FilterForm()
-	if request.is_ajax() and request.method == 'POST':
-		questions = Question.objects.all().order_by(request.POST['filter'])
-		
-	else :
-		questions = Question.objects.all().order_by('-date')
+			
+	questions = Question.objects.all().order_by('-date')
+ 
+	if request.method == 'POST':
+		if request.is_ajax() and request.POST['hidden'] == 'filter': 
+			questions = Question.objects.all().order_by(request.POST['filter'])
+		elif request.user.is_authenticated() and request.POST['hidden'] == 'follow':
+			follow = FollowQuestion()
+			follow.user = request.user
+			follow.question = get_object_or_404(Question, id=request.POST['questionId'])
+			follow.save()		
+
+	for question in questions:
+		question.currentUserFollows = False
+		follow = FollowQuestion.objects.filter(question=question, user=request.user)
+		if follow.exists():
+			question.currentUserFollows = True
+
+		print ("follow ",question.currentUserFollows)
 
 	return render_to_response('tutorials/questions.html', {'questions': questions, 'filterform':filterform}, context_instance=RequestContext(request))
 

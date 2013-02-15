@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 
+
 class Profile (models.Model):
 	email = models.EmailField()
 	avatar = models.ImageField(upload_to='members')
@@ -26,4 +27,5 @@ class Profile (models.Model):
 		if created == True:
 			Profile.objects.create(user=instance, avatar="members/avatar.jpg")
 	post_save.connect(user_post_save, sender=User)
+
 
