@@ -16,14 +16,24 @@ def questions(request):
 			
 	questions = Question.objects.all().order_by('-date')
  
-	if request.method == 'POST':
-		if request.is_ajax() and request.POST['hidden'] == 'filter': 
+	if request.method == 'POST' and request.user.is_authenticated() :
+		if request.POST['submit'] == 'followSubmit':
+			if request.POST['hidden'] == 'follow':
+				follow = FollowQuestion()
+				follow.user = request.user
+				follow.question = get_object_or_404(Question, id=request.POST['questionId'])
+				follow.save()
+				return HttpResponse('saved')
+			elif request.POST['hidden'] == 'unfollow':
+				follow = get_object_or_404(FollowQuestion, question=request.POST['questionId'], user=request.user)
+				follow.delete()
+				return HttpResponse('deleted')			
+		else : 
 			questions = Question.objects.all().order_by(request.POST['filter'])
-		elif request.user.is_authenticated() and request.POST['hidden'] == 'follow':
-			follow = FollowQuestion()
-			follow.user = request.user
-			follow.question = get_object_or_404(Question, id=request.POST['questionId'])
-			follow.save()		
+
+			
+
+
 
 	for question in questions:
 		question.currentUserFollows = False
@@ -31,7 +41,6 @@ def questions(request):
 		if follow.exists():
 			question.currentUserFollows = True
 
-		print ("follow ",question.currentUserFollows)
 
 	return render_to_response('tutorials/questions.html', {'questions': questions, 'filterform':filterform}, context_instance=RequestContext(request))
 
@@ -112,15 +121,6 @@ def ask(request):
 			soft2 = request.POST['software2']
 			tech3 = request.POST['technical3']
 			soft3 = request.POST['software3']
-
-			if tech1 != "0" and soft1 != "0":
-				return HttpResponse('erreur1')
-
-			if tech2 != "0" and soft2 != "0":
-				return HttpResponse('erreur2')
-
-			if tech3 != "0" and soft3 != "0":
-				return HttpResponse('erreur3')
 
 			post.tag1 = max(tech1, soft1)
 			post.tag2 = max(tech2, soft2)

@@ -6,12 +6,11 @@ $(document).ready(function(){
 		
 		var csrf = $(this).find('input[name=csrfmiddlewaretoken]').val();
 		var answerId = $(this).find('input.answerId').val();
-		var hidden = $(this).find('input[name=hidden]').val();
 		
 		$.ajax({
 		  	type: "POST",
 			url: "",
-		  	data: { hidden: hidden, csrfmiddlewaretoken:csrf, answerId:answerId}
+		  	data: { submit:'likeSubmit', csrfmiddlewaretoken:csrf, answerId:answerId}
 		}).done(function( likes ) {
 
 				$('#answer'+answerId+' table td.big').text(likes);
@@ -30,14 +29,18 @@ $(document).ready(function(){
 		var csrf = $(this).find('input[name=csrfmiddlewaretoken]').val();
 		var questionId = $(this).find('input.questionId').val();
 		var hidden = $(this).find('input[name=hidden]').val();
-		
+		var divcontent = "<input name='hidden' type='hidden' value='follow' /><button class='btn btn-primary btn-block vcenter' name='submit' type='submit' value='followSubmit'>Suivre</button>";		
+		if (hidden == 'follow')
+			divcontent = "<input name='hidden' type='hidden' value='unfollow' /><button class='btn btn-danger btn-block vcenter' name='submit' type='submit' value='followSubmit'>Ne plus suivre</button>";	
+
+
 		$.ajax({
 		  	type: "POST",
 			url: "",
-		  	data: { hidden: hidden, csrfmiddlewaretoken:csrf, questionId:questionId}
-		}).done(function( data ) {
-				$('#question'+questionId+' .follow').text('Vous suivez');
-				return false;			
+		  	data: { submit:'followSubmit', hidden: hidden, csrfmiddlewaretoken:csrf, questionId:questionId}
+		}).done(function( msg ) {
+			$('#question'+questionId+' .follow').html(divcontent);
+			return false;			
 		});
 
 		return false;
@@ -51,7 +54,7 @@ $(document).ready(function(){
 		$.ajax({
 		  	type: "POST",
 			url: "",
-		  	data: { filter: filter, csrfmiddlewaretoken:csrf}
+		  	data: { submit:'filterSubmit', filter: filter, csrfmiddlewaretoken:csrf}
 		}).done(function( data ) {
 			//alert(data)
             $('body').html(data);

@@ -82,9 +82,9 @@ class Like(models.Model):
 		return Like.objects.filter(user=self.user, answer=self.answer)
 
 class FollowQuestion (models.Model):
-	user = models.ForeignKey(User, unique=True)
-	question = models.ForeignKey(Question, unique=True)
+	user = models.ForeignKey(User)
+	question = models.ForeignKey(Question)
 
 class FollowTag (models.Model):
-	user = models.ForeignKey(User, unique=True)
-	tag = models.ForeignKey(Tag, unique=True)
+	user = models.ForeignKey(User)
+	tag = models.ForeignKey(Tag)

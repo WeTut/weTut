@@ -9,10 +9,10 @@
 
 		<form id='filterform' action="" method="POST">
 			{% csrf_token %}
-			<input name="hidden" type="hidden" value="filter">
 	        <ul>
 	        {{ filterform.as_ul}}	        
 	        </ul>
+	        <input name="submit" type="hidden" value="filterSubmit" />
         </form>
 
 	{% for question in questions %}	
@@ -23,13 +23,13 @@
 					<img class='img-rounded' src='{{question.picture.thumbnail.url}}'/>
 				</a>
 			</div>
-			<div class='span4' >
+			<div class='span5' >
 				<a href='{{question.slug}}'><h5>{{ question.title }}</h5></a>
 				<p>{{ question.message|truncatechars:80 }}</p>
 			</div>
-			<div class='span4'>
+			<div class='span3'>
 				<div class='row-fluid'>
-					<div class='span4'>
+					<div class='span6'>
 						<table class='table table-bordered'>
 							<tr height='30px'>
 								<td class="small">REPONSES</td>
@@ -39,7 +39,7 @@
 							</tr>
 						</table>
 					</div>
-					<div class='span4'>
+					<div class='span6'>
 						<table class='table table-bordered'>
 							<tr height='30px'>
 								<td class="small">VUES</td>
@@ -48,32 +48,21 @@
 								<td class="big">{{ question.views }}</td>
 							</tr>
 						</table>
-					</div>
-					<div class='span4'>
-						<table class='table table-bordered'>
-							<tr height='30px'>
-								<td class="small">SUIVRE</td>
-							</tr>
-							<tr height='50px'>
-								<td class='follow'>
-									{% if question.currentUserFollows %}
-									Vous suivez									
-									{% else %}
-									<form class="followForm" action="" method="post" enctype="multipart/form-data">
-										{% csrf_token %}
-										<input class="questionId" type="hidden" name="questionId" value="{{question.id}}"></input>
-										<input name="hidden" type="hidden" value="follow">
-										<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="followSubmit">Suivre</button>
-									</form>
-									{% endif %}
-								</td>
-							</tr>
-						</table>
-					</div>
+					</div>					
 				</div>
 			</div>
 			<div class='span2'>
 				<button class='btn btn-primary btn-block vcenter'  onclick='location.href="{{question.slug}}"'>REPONDRE</button>
+				
+				<form class="followForm" action="" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+						<input class="questionId" type="hidden" name="questionId" value="{{question.id}}"></input>
+					<div class='follow'>
+						<input name="hidden" type="hidden" value="{% if question.currentUserFollows %}unfollow{% else %}follow{% endif %}" />
+						<button class='btn btn-{% if question.currentUserFollows %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followSubmit">{% if question.currentUserFollows %}Ne plus suivre{% else %}Suivre{% endif %}</button>
+					</div>
+				</form>									
+				
 			</div>
 		</div>
 

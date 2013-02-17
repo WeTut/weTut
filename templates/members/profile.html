@@ -46,6 +46,16 @@
 			</div>
 			<button class='btn btn-primary' name='submit' type="submit" value="profileSubmit" >Enregistrer</button>
 		</form>
+		<div>
+			<p>Questions suivies</p><br />
+			<ul>
+			{% for question in followedquestions %}				
+				<li><a href='/questions/{{question.slug}}'>{{question.title}}</a></li>
+			{% endfor %}
+			</ul>	
+
+			
+		</div>	
 	</div>
 </div>
 

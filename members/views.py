@@ -8,6 +8,8 @@ from django.shortcuts import render_to_response
 from members.forms import ProfileForm
 from members.models import *
 
+from tutorials.models import Question, FollowQuestion
+
 def profile(request):
 	profile = Profile.objects.get(user=request.user)
 	if request.method == 'POST': # If the form has been submitted...
@@ -25,10 +27,12 @@ def profile(request):
 				post.save()
 				profile = Profile.objects.get(user=request.user)
 
-
-
+	followedquestions = []
+	follows = FollowQuestion.objects.filter(user=request.user) 
+	for follow in follows:
+		followedquestions.append ( get_object_or_404(Question, id=follow.question.id) )
 
 	profileform = ProfileForm(instance=profile) # An unbound form
 	
-	return render_to_response('members/profile.html', {'profileform': profileform}, context_instance=RequestContext(request))
+	return render_to_response('members/profile.html', {'profileform': profileform, 'followedquestions':followedquestions }, context_instance=RequestContext(request))
 	
