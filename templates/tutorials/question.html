@@ -21,18 +21,20 @@
 						<table class='table table-bordered'>
 							<tr height='30px'>
 								<td class='big'>{{ answer.getLikesCount }}</td>
-									<td class='small'>
-										{% if answer.currentUserLiked %}
-										Vous aimez									
-										{% else %}
-										<form class="likeForm" action="" method="post" enctype="multipart/form-data">
-											{% csrf_token %}
-											<input class="answerId" type="hidden" name="answerId" value="{{answer.id}}"></input>
-											<input class="nbLikes" type="hidden" name="nbLikes" value="{{answer.getLikesCount}}"></input>
-											<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="likeSubmit">Like</button>
-										</form>									
-										{% endif %}								
+								{% if user.is_authenticated %}
+									<td class='small'>										
+											{% if answer.currentUserLiked %}
+											Vous aimez									
+											{% else %}
+											<form class="likeForm" action="" method="post" enctype="multipart/form-data">
+												{% csrf_token %}
+												<input class="answerId" type="hidden" name="answerId" value="{{answer.id}}"></input>
+												<input class="nbLikes" type="hidden" name="nbLikes" value="{{answer.getLikesCount}}"></input>
+												<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="likeSubmit">Like</button>
+											</form>									
+											{% endif %}																	
 									</td>
+								{% endif %}	
 							</tr>
 							<tr height='50px'>
 								<td colspan="2">{{ answer.user }}</td>

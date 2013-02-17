@@ -53,15 +53,16 @@
 			</div>
 			<div class='span2'>
 				<button class='btn btn-primary btn-block vcenter'  onclick='location.href="{{question.slug}}"'>REPONDRE</button>
-				
-				<form class="followForm" action="" method="post" enctype="multipart/form-data">
+				{% if user.is_authenticated %}
+				<form  class="followForm" action="" method="post" enctype="multipart/form-data">
 						{% csrf_token %}
 						<input class="questionId" type="hidden" name="questionId" value="{{question.id}}"></input>
 					<div class='follow'>
 						<input name="hidden" type="hidden" value="{% if question.currentUserFollows %}unfollow{% else %}follow{% endif %}" />
 						<button class='btn btn-{% if question.currentUserFollows %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followSubmit">{% if question.currentUserFollows %}Ne plus suivre{% else %}Suivre{% endif %}</button>
 					</div>
-				</form>									
+				</form>
+				{% endif %}								
 				
 			</div>
 		</div>

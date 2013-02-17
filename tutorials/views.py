@@ -16,30 +16,27 @@ def questions(request):
 			
 	questions = Question.objects.all().order_by('-date')
  
-	if request.method == 'POST' and request.user.is_authenticated() :
-		if request.POST['submit'] == 'followSubmit':
-			if request.POST['hidden'] == 'follow':
-				follow = FollowQuestion()
-				follow.user = request.user
-				follow.question = get_object_or_404(Question, id=request.POST['questionId'])
-				follow.save()
-				return HttpResponse('saved')
-			elif request.POST['hidden'] == 'unfollow':
-				follow = get_object_or_404(FollowQuestion, question=request.POST['questionId'], user=request.user)
-				follow.delete()
-				return HttpResponse('deleted')			
-		else : 
-			questions = Question.objects.all().order_by(request.POST['filter'])
+	if request.user.is_authenticated() :
+		if request.method == 'POST' : 
+			if request.POST['submit'] == 'followSubmit':
+				if request.POST['hidden'] == 'follow':
+					follow = FollowQuestion()
+					follow.user = request.user
+					follow.question = get_object_or_404(Question, id=request.POST['questionId'])
+					follow.save()
+					return HttpResponse('saved')
+				elif request.POST['hidden'] == 'unfollow':
+					follow = get_object_or_404(FollowQuestion, question=request.POST['questionId'], user=request.user)
+					follow.delete()
+					return HttpResponse('deleted')			
+			elif request.POST['submit'] == 'filterSubmit': 
+				questions = Question.objects.all().order_by(request.POST['filter'])	
 
-			
-
-
-
-	for question in questions:
-		question.currentUserFollows = False
-		follow = FollowQuestion.objects.filter(question=question, user=request.user)
-		if follow.exists():
-			question.currentUserFollows = True
+		for question in questions:
+			question.currentUserFollows = False
+			follow = FollowQuestion.objects.filter(question=question, user=request.user)
+			if follow.exists():
+				question.currentUserFollows = True
 
 
 	return render_to_response('tutorials/questions.html', {'questions': questions, 'filterform':filterform}, context_instance=RequestContext(request))
@@ -87,11 +84,11 @@ def question(request,slug):
 				answer.save()
 				return HttpResponse( like.answer.getLikesCount() )
 
-	for answer in answers:
-		answer.currentUserLiked = False
-		like = Like.objects.filter(answer=answer, user=request.user)
-		if like.exists():
-			answer.currentUserLiked = True
+			for answer in answers:
+				answer.currentUserLiked = False
+				like = Like.objects.filter(answer=answer, user=request.user)
+				if like.exists():
+					answer.currentUserLiked = True
 
 
 	answerform = AnswerForm() # An unbound form
