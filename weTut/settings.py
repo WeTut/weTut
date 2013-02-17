@@ -138,6 +138,7 @@ INSTALLED_APPS = (
     'tutorials',
     'members',
     'registration',
+    'haystack',
 )
 
 PASSWORD_HASHERS = (
@@ -171,4 +172,11 @@ LOGGING = {
             'propagate': True,
         },
     }
+}
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        # For Simple:
+        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+    },
 }

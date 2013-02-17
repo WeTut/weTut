@@ -4,8 +4,19 @@
 	<div id="glass">
 		<img src="{{STATIC_URL}}images/loupe.png" alt="Recherche" />
 	</div>
-	<div id="line_search"></div>
+	<div id="line_search">
+
+
+	</div>
 </div>
 
 <div class="back_search_bar"></div>
 <div class="clear"></div>
+
+<form method="get" action="../search">
+	{% if query %}
+	<input id="id_q" type="text" name="q" value="{{ query }}" />
+	{% else %}
+	<input id="id_q" type="text" name="q" />
+	{% endif %}
+</form>

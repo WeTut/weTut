@@ -1,0 +1,31 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<div class="content">
+    <h2>Votre recherche</h2>
+    {{ query }}
+
+        {% if query %}
+            <h2>Résultats ({{ paginator.count }})</h2>
+
+            {% for result in page.object_list %}
+                <p>
+                    <a href="../questions/{{ result.object.slug }}">{{ result.object.title }}</a>
+                    <p>{{ result.object.message }}</p>
+                </p>
+            {% empty %}
+                <p>Pas de résultat.</p>
+            {% endfor %}
+
+            {% if page.has_previous or page.has_next %}
+                <div>
+                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Précédent{% if page.has_previous %}</a>{% endif %}
+                    |
+                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Suivant &raquo;{% if page.has_next %}</a>{% endif %}
+                </div>
+            {% endif %}
+        {% else %}
+            {# Show some example queries to run, maybe query syntax, something else? #}
+        {% endif %}
+</div>
+{% endblock %}
