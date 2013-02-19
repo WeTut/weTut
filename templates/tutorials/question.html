@@ -3,26 +3,32 @@
 {% block content %}
 
 <div class="content">
+	<form method="post" class="ValidateForm" action="">
+	{% csrf_token %}
+		<div id="question">
+			{% if question.user == user %} <!-- If the authentificated user is the author -->
+				<button class='btn btn-success btn-block vcenter' id="usefullValidate">J'ai eu ma réponse</button>
+				<button class='btn btn-primary btn-block vcenter pendingValidation' name='submit' type="submit" value="validateSubmit">Check!</button>
+			{% endif %}
 
-	<div id="question">
-		<h1>{{question.title}}</h1>
-		<h5>posté par {{question.user.username}}</h5>
-		
-		<p>{{question.message}}</p>
-		<img src='{{question.picture.url}}'/>
-		
-		<hr>
-		
-		{% for answer in answers %}	
-		
-			<div id='answer{{answer.id}}' class='row-fluid'>
-				<div class='span2'>
-					<div class='span11'>
-						<table class='table table-bordered'>
-							<tr height='30px'>
-								<td class='big'>{{ answer.getLikesCount }}</td>
-								{% if user.is_authenticated %}
-									<td class='small'>										
+			<h1>{{question.title}}</h1>
+			<h5>posté par {{question.user.username}}</h5>
+			
+			<p>{{question.message}}</p>
+			<img src='{{question.picture.url}}'/>
+			
+			<hr>
+			
+			<form method="post" action="">
+			{% for answer in answers %}	
+			
+				<div id='answer{{answer.id}}' class='row-fluid'>
+					<div class='span2'>
+						<div class='span11'>
+							<table class='table table-bordered'>
+								<tr height='30px'>
+									<td class='big'>{{ answer.getLikesCount }}</td>
+										<td class='small'>
 											{% if answer.currentUserLiked %}
 											Vous aimez									
 											{% else %}
@@ -32,78 +38,87 @@
 												<input class="nbLikes" type="hidden" name="nbLikes" value="{{answer.getLikesCount}}"></input>
 												<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="likeSubmit">Like</button>
 											</form>									
-											{% endif %}																	
-									</td>
-								{% endif %}	
+											{% endif %}								
+										</td>
+								</tr>
+								<tr height='50px'>
+									<td colspan="2">{{ answer.user }}</td>
+								</tr>
+							</table>
+						</div>			
+					</div>
+					<div class='span10' >
+						<table class='table table-bordered'>
+							<tr height='80px'>
+								<td colspan='2'>{{ answer.answer|truncatechars:200|safe }}</td>
+									<input class="pendingValidation" type="checkbox" value="{{answer.id}}" name="usefull">
 							</tr>
-							<tr height='50px'>
-								<td colspan="2">{{ answer.user }}</td>
+							<tr height='20px'>
+								<td ><i>{{ answer.date }}</i></td>
+								<td ><a href=''>Signaler un abus</a></td>					
 							</tr>
 						</table>
-					</div>			
-				</div>
-				<div class='span10' >
-					<table class='table table-bordered'>
-						<tr height='80px'>
-							<td colspan='2'>{{ answer.answer|truncatechars:200|safe }}</td>
-						</tr>
-						<tr height='20px'>
-							<td ><i>{{ answer.date }}</i></td>
-							<td ><a href=''>Signaler un abus</a></td>					
-						</tr>
-					</table>
-				</div>
-					
-				{% for comment in answer.getComments %}
-				<div class='span12' >
-					<div class='span1' >
-						{{ comment.user.username }}
 					</div>
-					<div class='span11' >
-						{{ comment.comment|truncatechars:200 }}
+						
+					{% for comment in answer.getComments %}
+					<div class='span12' >
+						<div class='span1' >
+							{{ comment.user.username }}
+						</div>
+						<div class='span11' >
+							{{ comment.comment|truncatechars:200 }}
+						</div>
 					</div>
+					{% endfor %}
+			
+					<form action="" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+					    <div class="span12">
+					    	{{ commentform.comment.errors }}
+						    {{ commentform.comment }}
+							<input type="hidden" name="answerId" value="{{answer.id}}"></input>
+						</div>
+						<div class="span2">
+					    	<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="commentSubmit">Commenter</button>
+						</div>
+					</form>							
 				</div>
-				{% endfor %}
-		
-				<form action="" method="post" enctype="multipart/form-data">
-					{% csrf_token %}
-				    <div class="span12">
-				    	{{ commentform.comment.errors }}
-					    {{ commentform.comment }}
-						<input type="hidden" name="answerId" value="{{answer.id}}"></input>
+			
+				<hr/>
+				
+			{% endfor %}
+
+			<button class='btn btn-primary btn-block vcenter pendingValidation' name='submit' type="submit" value="validateSubmit">Check!</button>
+			<hr/>
+			</form>
+			
+			<form action="" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="row">
+				    <div class="span10">
+					   	{{ answerform.answer.errors }}
+						{{ answerform.answer }}
 					</div>
 					<div class="span2">
-				    	<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="commentSubmit">Commenter</button>
+				    	<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="answerSubmit">Envoyer</button>
 					</div>
-				</form>							
-			</div>
-		
-			<hr/>
-			
-		{% endfor %}
-		
-		
-		<!-- NicEdit -->
-		    <script src="{{ STATIC_URL }}javascripts/NicEdit.js"></script>
-		
-			<script type="text/javascript">
-				bkLib.onDomLoaded(function() {
-		        	new nicEditor({buttonList : ['bold','italic','image','upload','link','youTube']}).panelInstance('id_answer');
-		    	});
-			</script>
-		
-		<form action="" method="post" enctype="multipart/form-data">
-			{% csrf_token %}
-			<div class="row">
-			    <div class="span10">
-				   	{{ answerform.answer.errors }}
-					{{ answerform.answer }}
 				</div>
-				<div class="span2">
-			    	<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="answerSubmit">Envoyer</button>
-				</div>
-			</div>
-		</form>
-	</div>
+			</form>
+		</div>
+	</form>
 </div>
+
+<script src="{{ STATIC_URL }}javascripts/NicEdit.js"></script>
+<script type="text/javascript">
+/* NicEdit script */
+	bkLib.onDomLoaded(function() {
+    	new nicEditor({buttonList : ['bold','italic','image','upload','link','youTube']}).panelInstance('id_answer');
+	});
+
+/* Revealator for the validate button */
+	$("#usefullValidate").click(function () {
+		  $(".pendingValidation").show();
+		  $("#usefullValidate").hide();
+	});
+</script>
 {% endblock content %}

@@ -5,12 +5,12 @@ from django.forms import ModelForm
 class QuestionForm(ModelForm):
 	class Meta:
 		model = Question
-		exclude=['slug', 'user', 'views', 'date', 'answers','tag1','tag2','tag3', 'currentUserFollows']
+		exclude=['slug', 'user', 'views', 'date', 'answers','tag1','tag2','tag3', 'currentUserFollows','validate']
 
 class AnswerForm(ModelForm):
 	class Meta:
 		model = Answer
-		exclude=['currentUserLiked', 'date', 'user', 'question', 'nb_likes' ]
+		exclude=['currentUserLiked', 'date', 'user', 'question', 'nb_likes','usefull' ]
 
 		widgets = {
 		          'answer': forms.Textarea(attrs={'style':"width:100%"}),

@@ -22,8 +22,13 @@ urlpatterns = patterns('',
 
     url(r'home', 'weTut.views.home', name='home'),
     url(r'questions/', include ('tutorials.urls')),
+
+    url(r'^tutoriels/$', 'tutorials.views.tutorials', name='tutorials'), #list of tutorials
+    url(r'^tutoriels/(?P<slug>[\w-]+)/?$', 'tutorials.views.tutorial', name='tutorial'), #One specific tutorial
+
     url(r'login', 'weTut.views.login_view', name='login'),
     url(r'logout', 'weTut.views.logout_view', name='logout'),
+
     url(r'profile/', include ('members.urls')),
     # url(r'^weTut/', include('weTut.foo.urls')),
 

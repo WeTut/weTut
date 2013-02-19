@@ -1,0 +1,65 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+
+<div class="content">
+
+	<div id="question">
+		<h1>{{question.title}}</h1>
+		<h5>posté par {{question.user.username}}</h5>
+		
+		<p>{{question.message}}</p>
+		<img src='{{question.picture.url}}'/>
+		
+		<hr>
+		
+		{% for answer in answers %}
+			<div id='answer{{answer.id}}' class='row-fluid'>
+				<div class='span2'>
+					<div class='span11'>
+						<table class='table table-bordered'>
+							<tr height='30px'>
+								<td class='big'>{{ answer.getLikesCount }}</td>
+							</tr>
+							<tr height='50px'>
+								<td colspan="2">{{ answer.user }}</td>
+							</tr>
+						</table>
+					</div>			
+				</div>
+					{% if answer.usefull %}
+						<div class='span10' style="background-color:#51a351">
+					{% else %}
+						<div class='span10' >
+					{% endif %}	
+					<table class='table table-bordered'>
+						<tr height='80px'>
+							<td colspan='2'>{{ answer.answer|truncatechars:200|safe }}</td>
+						</tr>
+						<tr height='20px'>
+							<td ><i>{{ answer.date }}</i></td>
+							<td ><a href=''>Signaler un abus</a></td>					
+						</tr>
+					</table>
+				</div>
+					
+				{% for comment in answer.getComments %}
+				<div class='span12' >
+					<div class='span1' >
+						{{ comment.user.username }}
+					</div>
+					<div class='span11' >
+						{{ comment.comment|truncatechars:200 }}
+					</div>
+				</div>
+				{% endfor %}
+
+			</div>
+		
+			<hr/>
+			
+		{% endfor %}
+		
+	</div>
+</div>
+{% endblock content %}

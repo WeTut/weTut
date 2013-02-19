@@ -15,7 +15,6 @@ class Tag(models.Model):
 class Question (models.Model):
 	currentUserFollows = models.BooleanField(default=1)
 	title = models.CharField(max_length = 200)
-	#picture = models.ImageField(upload_to='questions')
 	picture = StdImageField(upload_to='questions', blank=True, size=(440, 380), thumbnail_size=(160, 120, True))
 	message = models.TextField(max_length = 400)
 	slug = models.SlugField(max_length = 200)
@@ -26,6 +25,7 @@ class Question (models.Model):
 	tag2 = models.IntegerField()
 	tag3 = models.IntegerField()
 	date = models.DateField()
+	validate = models.BooleanField(default=False)
 
 
 	def __unicode__(self):
@@ -43,6 +43,7 @@ class Answer (models.Model):
 	user = models.ForeignKey(User)
 	question = models.ForeignKey(Question)
 	nb_likes = models.IntegerField()
+	usefull = models.BooleanField(default=False)
 
 	def __unicode__(self):
 		return u'%s' % (self.date)
