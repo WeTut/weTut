@@ -12,15 +12,31 @@ from django.core.validators import validate_email
 from django.contrib.auth.models import User
 import re
 
+from tutorials.models import *
+from tutorials.forms import QuestionForm, AnswerForm, CommentAnswerForm, FilterForm
+
 from registration.backends import get_backend
 from members.models import Profile
 
 
+
 def start(request):
-	return render_to_response('general/start.html', context_instance=RequestContext(request))
+	filterform = FilterForm()
+	if request.is_ajax() and request.method == 'POST':
+		questions = Question.objects.all().order_by(request.POST['filter'])
+		
+	else :
+		questions = Question.objects.all().order_by('-date')
+	return render_to_response('general/start.html', {'questions': questions, 'filterform':filterform}, context_instance=RequestContext(request))
 
 def home(request):
-	return render_to_response('general/home.html', context_instance=RequestContext(request))
+	filterform = FilterForm()
+	if request.is_ajax() and request.method == 'POST':
+		questions = Question.objects.all().order_by(request.POST['filter'])
+		
+	else :
+		questions = Question.objects.all().order_by('-date')
+	return render_to_response('general/home.html', {'questions': questions, 'filterform':filterform}, context_instance=RequestContext(request))
 
 def login_view(request):
 	if request.method == 'POST': # If the form has been submitted...

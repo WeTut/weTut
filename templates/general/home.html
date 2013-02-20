@@ -1,9 +1,202 @@
 {% extends "layout/base.html" %}
 
 {% block content %}
-<div class="content">
-	<h1>HOME PAGE</h1>
-	<p>To do</p>
+<div id="banner">
+	<div id="content_banner">
+		<div class="row-fluid marketing">
+			<div class="span6">
+				<div class="notifications">
+					<h4>Vos notifications</h4>
+					<div class="notif_box">
+						<div class="notif_filters">
+							<div class="questions_filter"><p>Questions</p></div>
+							<div class="tags_filter"><p>Tags</p></div>
+						</div>
+						<div id="notifs">
+							<div class="img_notif"><img src=""></div>
+							<div class="question_notif">Quel est le prénom de Miou-Miou ?</div>
+							<div class="name_notif">par Gisele77</div>
+							<div class="text_notif">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent pellentesque hendrerit nisi, vel tempor turpis suscipit non. In sed dui odio, sit amet euismod nibh. Nam ut diam risus...</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="span6">
+				<div class="ask_question">
+					<div class="ask_question_button">
+						<a href="/questions/ask">Poser une question</a>
+					</div>
+					<h2 class="text_ask">Lance toi et pose ta question !</h2>
+					<p>WETUT, VOTRE PLATEFORME <br />PARTICIPATIVE DE CONNAISSANCES<br /><br /></p>
+					<p style="font-size:12px; font-family: 'Rambla', sans-serif; color:#a4a4a4;">Comment ça marche ?</p>
+					<hr>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+<div class="content">
+	<div id="consultation">
+		<div class="row-fluid marketing">
+			<div class="span6">
+				<div class="back_box"><p>Consulter les tutos</p></div>
+				<div class="tri">
+					<div class="date_selection" style="background-color:#01c6e8;">
+						<img src="../../static/images/pictos/plus_picto.png">
+						<p>Derniers créés</p>
+					</div>
+					<div class="famous_selection">
+						<img src="../../static/images/pictos/coeur_picto.png">
+						<p>Plus populaires</p>
+					</div>
+				</div>
+				<div class="line_tri"></div>
+				{% for question in questions %}
+					<div class="white_box">
+						<div class="question_body">
+							<div class="illustration_tutos">
+								<div class="img_question"><a href='{{question.slug}}'><img src="../../static/images/image_tuts.png"></a></div>
+								<div class="infos_members" style="background-color:#01c6e8;">
+									<div class="img_members"><a href='{{question.slug}}'><img src="../../static/images/membre.png" style="width:70px; height:75px;"></a></div>
+									<div class="infos_questions">
+									<a href='{{question.slug}}'>
+										
+										<div class="img_wetut_accueil">
+											<img src="../../static/images/pictos/like_wetut_accueil.png">
+											<img src="../../static/images/pictos/bulle_wetut_accueil.png">
+										</div>
+										
+										<div class="Text_wetut_accueil">
+											<p>{{ question.views }}</p>
+											<p>{{ question.views }}</p>
+										</div>
+									</a>
+									</div>
+								</div>
+							</div>
+							<div class="description_tutos">
+							<a href='{{question.slug}}'>
+								<div class="title"><h4>{{question.title}}</h4></div>
+								<div class="text"><p>{{ question.message|truncatechars:80 }}</p></div>
+							</a>
+							</div>	
+						</div>
+						<div class="line_end"></div>
+						</div>
+					{% endfor %}
+					
+				</div>
+
+			<div class="span6">
+				<div class="box_tuts">
+					<div class="back_box" id="pink_box"><p>Consulter les questions</p></div>
+					<div class="tri">
+						<div class="date_selection" style="background-color:#f53749;">
+							<img src="../../static/images/pictos/plus_picto.png">
+							<p>Derniers créés</p>
+						</div>
+						<div class="famous_selection">
+							<img src="../../static/images/pictos/coeur_picto.png">
+							<p>Plus populaires</p>
+						</div>
+					</div>
+					<div class="line_tri" style="background-color:#f53749;"></div>
+					{% for question in questions %}
+					<div class="white_box">
+						<div class="question_body">
+							<div class="illustration_tutos">
+								<div class="img_question"><a href="#"><img src="../../static/images/image_tuts.png"></a></div>
+								<div class="infos_members" style="background-color:#f53749;">
+									<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
+									<div class="infos_questions">
+										<a href='{{question.slug}}'>
+										
+										<div class="img_wetut_accueil">
+											<img src="../../static/images/pictos/like_wetut_accueil.png">
+											<img src="../../static/images/pictos/bulle_wetut_accueil.png">
+										</div>
+										
+										<div class="Text_wetut_accueil">
+											<p style="color:#f53749;">{{ question.views }}</p>
+											<p style="color:#f53749;">{{ question.views }}</p>
+										</div>
+									</a>
+									</div>
+								</div>
+							</div>
+							<div class="description_tutos">
+								
+								<div class="title"><a href='{{question.slug}}'><h4>{{question.title}}</h4></a></div>
+								<div class="text"><a href='{{question.slug}}'><p>{{ question.message|truncatechars:80 }}</p></a></div>
+								
+							</div>	
+						</div>
+						<div class="line_end"></div>
+						</div>
+					{% endfor %}
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="clear"></div>
+	<div class="best_members">
+		<div class="members"><p>Les membres</p></div>
+		<div class="box_members">
+			<div class="row-fluid marketing">
+				<div class="span3">
+					<div class="member">
+						<div class="infos_members">
+							<img src="../../static/images/pictos/like_wetut_accueil.png">
+							<img src="../../static/images/pictos/bulle_wetut_accueil.png">
+						</div>
+						<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
+						<div class="description_members">
+							<div class="name_member"><p>Lucette Lama</div>
+							<div class="job_member"><p>Motion Designer</div>
+						</div>
+					</div>
+					<div class="end_line_member"></div>
+				</div>
+				<div class="span3">
+					<div class="infos_members">
+						<img src="../../static/images/pictos/like_wetut_accueil.png">
+						<img src="../../static/images/pictos/bulle_wetut_accueil.png">
+					</div>
+					<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
+					<div class="description_members">
+						<div class="name_member"><p>Lucette Lama</div>
+						<div class="job_member"><p>Motion Designer</div>
+					</div>
+				</div>
+				<div class="span3" style="margin-left:20px;">
+					<div class="infos_members">
+						<img src="../../static/images/pictos/like_wetut_accueil.png">
+						<img src="../../static/images/pictos/bulle_wetut_accueil.png">
+					</div>
+					<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
+					<div class="description_members">
+						<div class="name_member"><p>Lucette Lama</div>
+						<div class="job_member"><p>Motion Designer</div>
+					</div>
+				</div>
+				<div class="span3">
+					<div class="infos_members">
+						<img src="../../static/images/pictos/like_wetut_accueil.png">
+						<img src="../../static/images/pictos/bulle_wetut_accueil.png">
+					</div>
+					<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
+					<div class="description_members">
+						<div class="name_member"><p>Lucette Lama</div>
+						<div class="job_member"><p>Motion Designer</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
 
 {% endblock content %}

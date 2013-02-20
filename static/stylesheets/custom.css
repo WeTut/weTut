@@ -113,7 +113,7 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 .ask_question{font-family:'bebas_neue'; margin-top:100px; text-align:center;}
 .ask_question h2{color:#01c6e8;}
 
-#consultation{position:relative; //height:300px;}
+#consultation{position:relative; margin-bottom:60px;}
 .back_box{width:450px; height:70px; background-color:#01c6e8; text-align:center; font-family:'bebas_neue'; color:#FFFFFF; font-size:32px; border-radius: 3px;}
 #pink_box{background-color:#f53749; width:450px; height:70px;}
 .back_box p{display:block; top:20px; line-height: 78px;}
@@ -139,7 +139,7 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 .description_tutos{float:left; margin-top:-18px; font-family:'bebas_neue'; color:#46423f;}
 .description_tutos h4{font-family:'bebas_neue'; color:#46423f;}
 .description_tutos a{font-family: 'Rambla', sans-serif; font-size:12px; margin-top:15px; color:#46423f;}
-.line_end{width:450px; height:2px; background-color:#bcbcbc; margin-top:5px;}
+.line_end{width:450px; height:2px; background-color:#bcbcbc; margin-top:5px; position:relative; z-index:16;}
 .question_body{height:125px; position:relative; z-index:2; top:5px;}
 .infos_members{float:left;width:70px; height:120px;}
 .box_tuts{margin-left:10px;}
@@ -147,7 +147,7 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 .img_wetut_accueil img{float:left; margin-top:2px; display:block; width:35px; text-align:center;}
 .Text_wetut_accueil p{float:left; display:block; width:35px; text-align:center; margin-top:-22px; font-family: 'bebas_neue', sans-serif; font-size:11px; color:#01c6e8;}
 
-.members{clear:left; width:940px; height:70px; background-color:#bcbcbc; text-align:center; font-family:'bebas_neue'; color:#FFFFFF; font-size:32px; border-radius: 3px; position:relative; margin-top:180px;}
+.members{clear:left; width:940px; height:70px; background-color:#bcbcbc; text-align:center; font-family:'bebas_neue'; color:#FFFFFF; font-size:32px; border-radius: 3px; }
 .members p{display:block; top:20px; line-height: 78px;}
 .box_members{height:75px; margin-top:20px;}
 .box_members .infos_members{float:left; width:32px; height:75px;background-color:#01c6e8; border-top-left-radius:3px; border-bottom-left-radius:3px;}
@@ -159,6 +159,7 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 .name_member{font-family:'bebas_neue';font-size:18px;}
 .job_member{font-family: 'Rambla', sans-serif; font-size:12px;}
 .members_line_end{with:100px; height:3px; background-color:#bcbcbc; position:relative;}
+.best_members{position:relative;}
 
 .span12{height:20px; background-color:#46423f;}
 
