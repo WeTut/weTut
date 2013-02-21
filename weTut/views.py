@@ -21,22 +21,16 @@ from members.models import Profile
 
 
 def start(request):
-	filterform = FilterForm()
-	if request.is_ajax() and request.method == 'POST':
-		questions = Question.objects.all().order_by(request.POST['filter'])
-		
-	else :
-		questions = Question.objects.all().order_by('-date')
-	return render_to_response('general/start.html', {'questions': questions, 'filterform':filterform}, context_instance=RequestContext(request))
+	questions = Question.objects.filter(validate=0).order_by('-date')[:3]
+	tutorials = Question.objects.filter(validate=1).order_by('-date')[:3]
+
+	return render_to_response('general/start.html', {'questions': questions, 'tutorials':tutorials}, context_instance=RequestContext(request))
 
 def home(request):
-	filterform = FilterForm()
-	if request.is_ajax() and request.method == 'POST':
-		questions = Question.objects.all().order_by(request.POST['filter'])
-		
-	else :
-		questions = Question.objects.all().order_by('-date')
-	return render_to_response('general/home.html', {'questions': questions, 'filterform':filterform}, context_instance=RequestContext(request))
+	questions = Question.objects.filter(validate=0).order_by('-date')[:3]
+	tutorials = Question.objects.filter(validate=1).order_by('-date')[:3]
+	
+	return render_to_response('general/home.html', {'questions': questions, 'tutorials': tutorials}, context_instance=RequestContext(request))
 
 def login_view(request):
 	if request.method == 'POST': # If the form has been submitted...

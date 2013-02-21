@@ -33,15 +33,15 @@
 					</div>
 				</div>
 				<div class="line_tri"></div>
-				{% for question in questions %}
+				{% for tutorial in tutorials %}
 					<div class="white_box">
 						<div class="question_body">
 							<div class="illustration_tutos">
-								<div class="img_question"><a href='{{question.slug}}'><img src="../../static/images/image_tuts.png"></a></div>
+								<div class="img_question"><a href='tutoriels/{{tutorial.slug}}'><img src="../../static/images/image_tuts.png"></a></div>
 								<div class="infos_members" style="background-color:#01c6e8;">
-									<div class="img_members"><a href='{{question.slug}}'><img src="../../static/images/membre.png" style="width:70px; height:75px;"></a></div>
+									<div class="img_members"><a href='tutoriels/{{tutorial.slug}}'><img src="../../static/images/membre.png" style="width:70px; height:75px;"></a></div>
 									<div class="infos_questions">
-									<a href='{{question.slug}}'>
+									<a href='tutoriels/{{tutorial.slug}}'>
 										
 										<div class="img_wetut_accueil">
 											<img src="../../static/images/pictos/like_wetut_accueil.png">
@@ -49,23 +49,24 @@
 										</div>
 										
 										<div class="Text_wetut_accueil">
-											<p>{{ question.views }}</p>
-											<p>{{ question.views }}</p>
+											<p>{{ tutorial.views }}</p>
+											<p>{{ tutorial.views }}</p>
 										</div>
 									</a>
 									</div>
 								</div>
 							</div>
 							<div class="description_tutos">
-							<a href='{{question.slug}}'>
-								<div class="title"><h4>{{question.title}}</h4></div>
-								<div class="text"><p>{{ question.message|truncatechars:80 }}</p></div>
+							<a href='tutoriels/{{tutorial.slug}}'>
+								<div class="title"><h4>{{tutorial.title}}</h4></div>
+								<div class="text"><p>{{ tutorial.message|truncatechars:80 }}</p></div>
 							</a>
 							</div>	
 						</div>
-						<div class="line_end"></div>
 						</div>
+						<div class="line_end"></div>
 					{% endfor %}
+
 					
 				</div>
 
@@ -91,7 +92,7 @@
 								<div class="infos_members" style="background-color:#f53749;">
 									<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
 									<div class="infos_questions">
-										<a href='{{question.slug}}'>
+										<a href='questions/{{question.slug}}'>
 										
 										<div class="img_wetut_accueil">
 											<img src="../../static/images/pictos/like_wetut_accueil.png">
@@ -108,14 +109,16 @@
 							</div>
 							<div class="description_tutos">
 								
-								<div class="title"><a href='{{question.slug}}'><h4>{{question.title}}</h4></a></div>
-								<div class="text"><a href='{{question.slug}}'><p>{{ question.message|truncatechars:80 }}</p></a></div>
+								<div class="title"><a href='questions/{{question.slug}}'><h4>{{question.title}}</h4></a></div>
+								<div class="text"><a href='questions/{{question.slug}}'><p>{{ question.message|truncatechars:80 }}</p></a></div>
 								
 							</div>	
 						</div>
-						<div class="line_end"></div>
 						</div>
+						<div class="line_end"></div>
 					{% endfor %}
+
+
 					
 				</div>
 			</div>

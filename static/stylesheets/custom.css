@@ -78,7 +78,9 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 
 .search_bar #glass{margin:9px 13px 0px 85px;float:left;}
 .search_bar #line_search{float:left; width:2px; height:22px; margin-top:11px;;background-color:#FFFFFF;}
-.search_bar form{float:left; margin-top:13px; margin-left:140px;}
+.search_bar form{float:left; margin-top:8px; margin-left:140px;}
+.search_bar form input{background:none; border:none; width:700px; height:30px; box-shadow:none; -webkit-transition:none; font-family:'bebas_neue'; color:#FFFFFF; font-size:1.5em;}
+.search_bar form input:focus{border:none; box-shadow:none;}
 
 #footer{background-color:#1e2226; width:100%; height:180px; margin-top:40px;}
 #footer #content_footer{width:940px;margin:auto;}
@@ -104,14 +106,27 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 .enroll_button p{font-family: 'Rambla', sans-serif; font-size:15px; line-height:23px;}
 #banner hr{background-color:#a4a4a4; color:#1e2226; border: none; height:1px; width:250px; margin:auto; margin-top:20px; margin-bottom:30px;}
 
-.notifications{margin-top:80px;}
+.notifications{margin-top:70px;}
+.notifications h4{font-family:'bebas_neue'; color:#46423f;}
+.notifs{width:538px; height:62px; background-color:#FFFFFF; position:relative; z-index:13; padding:7px;}
+.img_notif{float:left; width:60px; height:60px; background-color:#000000; margin-right:10px;}
+.member_notif{float:left; width:110px; margin-right:10px; font-family:'bebas_neue';}
+.member_notif .question_notif{font-size:16px; color:#46423f;}
+.member_notif .name_notif{font-size:12px; color:#46423f;}
+.text_notif{float:left; width:348px; font-family: 'Rambla', sans-serif; font-size:12px; color:#46423f;}
+.line_end_notif{width:552px; height:2px; background-color:#bcbcbc; position:relative;}
+//.notif_filters{width:554px;}
+.notif_filters .questions_filter{float:left; width:271px; height:45px; background-color:#FFFFFF; margin-right:10px; border-top-left-radius:3px; border-top-right-radius:3px;}
+.notif_filters .tags_filter{float:left; width:271px; height:45px; background-color:#e6e6e6; border-top-left-radius:3px; border-top-right-radius:3px;}
+.notif_filters .questions_filter p, .notif_filters .tags_filter p{font-family:'bebas_neue'; font-size:16px; line-height:50px; margin-left:20px; color:#FFFFFF;}
+.notif_filters .questions_filter p{color:#01c6e8;}
 
-.ask_question_button{float:left; width:270px; height:120px; background-image:url(../images/ask_button.png);text-align:center; }
+.ask_question_button{float:left; width:300px; height:120px; border-radius:3px; background-image:url(../images/ask_button.png);text-align:center; margin-bottom:40px;}
 .ask_question_button a{color:#FFFFFF; font-size:30px; line-height:130px;}
-.ask_question.text_ask h2{width:370px; height:120px;}
+.ask_question .text_ask{font-size:28px; color:#01c6e8; text-align:center; margin-bottom:25px;}
 
-.ask_question{font-family:'bebas_neue'; margin-top:100px; text-align:center;}
-.ask_question h2{color:#01c6e8;}
+.ask_question{font-family:'bebas_neue'; margin-top:70px; text-align:center;}
+.ask_question h2{color:#01c6e8; text-align:center;}
 
 #consultation{position:relative; margin-bottom:60px;}
 .back_box{width:450px; height:70px; background-color:#01c6e8; text-align:center; font-family:'bebas_neue'; color:#FFFFFF; font-size:32px; border-radius: 3px;}
@@ -121,7 +136,7 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 .blue{background-color:#01c6e8;}
 
 
-.span4{width:450px;}
+//.span4{width:450px;}
 .line_tri{width:450px; height:10px; background-color:#01c6e8;}
 .tri{width:450px; height:45px; margin-top:20px; }
 .date_selection{float:left; width:205px; height:45px; border-top-left-radius:3px; border-top-right-radius:3px; padding-right:15px;}
@@ -139,7 +154,7 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 .description_tutos{float:left; margin-top:-18px; font-family:'bebas_neue'; color:#46423f;}
 .description_tutos h4{font-family:'bebas_neue'; color:#46423f;}
 .description_tutos a{font-family: 'Rambla', sans-serif; font-size:12px; margin-top:15px; color:#46423f;}
-.line_end{width:450px; height:2px; background-color:#bcbcbc; margin-top:5px; position:relative; z-index:16;}
+.line_end{width:450px; height:2px; background-color:#bcbcbc; position:relative; z-index:16;}
 .question_body{height:125px; position:relative; z-index:2; top:5px;}
 .infos_members{float:left;width:70px; height:120px;}
 .box_tuts{margin-left:10px;}
@@ -151,7 +166,7 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 .members p{display:block; top:20px; line-height: 78px;}
 .box_members{height:75px; margin-top:20px;}
 .box_members .infos_members{float:left; width:32px; height:75px;background-color:#01c6e8; border-top-left-radius:3px; border-bottom-left-radius:3px;}
-.span3{box-shadow: 0px 3px 0px #bcbcbc;border-bottom-left-radius:3px; border-bottom-right-radius:3px;}
+.box_members .span3{box-shadow: 0px 3px 0px #bcbcbc;border-bottom-left-radius:3px; border-bottom-right-radius:3px;}
 .member{width:220px; height:75px;}
 .infos_members img{float:left;}
 .img_members{float:left;}
@@ -161,7 +176,6 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 .members_line_end{with:100px; height:3px; background-color:#bcbcbc; position:relative;}
 .best_members{position:relative;}
 
-.span12{height:20px; background-color:#46423f;}
 
 #profileForm h1{font-size:1.5em;}
 #profileForm h2{font-size:1.3em;}
