@@ -57,8 +57,16 @@ def question(request,slug):
 	question.save()
 	answers = Answer.objects.filter(question=question).order_by('-nb_likes')
 
-	if request.method == 'POST': # If the form has been submitted...
-		if request.user.is_authenticated():# If there isn't any logged user
+	if request.user.is_authenticated():
+
+		for answer in answers:
+			answer.currentUserLiked = False
+			like = Like.objects.filter(answer=answer, user=request.user)
+			if like.exists():
+				answer.currentUserLiked = True
+
+
+		if  request.method == 'POST' and 'submit' in request.POST: # If the form has been submitted...
 			
 			if request.POST['submit'] == 'answerSubmit':#Si une reponse a ete envoyee 
 				form = AnswerForm(request.POST, request.FILES) # A form bound to the POST data
@@ -100,12 +108,6 @@ def question(request,slug):
 				question.validate=True #The Question is finished. Set Bool validate attribute to True
 				question.save() #Save it
 				return HttpResponseRedirect('/tutoriels') # Redirect
-
-			for answer in answers:
-				answer.currentUserLiked = False
-				like = Like.objects.filter(answer=answer, user=request.user)
-				if like.exists():
-					answer.currentUserLiked = True
 
 
 	answerform = AnswerForm() # An unbound form

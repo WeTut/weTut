@@ -3,7 +3,7 @@ $(document).ready(function(){
 
 
 	$('.likeForm').submit(function(){
-		
+		alert("likeform");
 		var csrf = $(this).find('input[name=csrfmiddlewaretoken]').val();
 		var answerId = $(this).find('input.answerId').val();
 		
@@ -15,7 +15,6 @@ $(document).ready(function(){
 
 				$('#answer'+answerId+' table td.big').text(likes);
 				$('#answer'+answerId+' table td.small').text('Vous aimez');
-				//innerHTML'<p>Vous aimez</p>')
 				return false
 
 			
