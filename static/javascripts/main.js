@@ -1,11 +1,10 @@
 $(document).ready(function(){
 
+	
 
-
-	$('.likeForm').submit(function(){
-		alert("likeform");
+	$('#question .likeform').submit(function(){
 		var csrf = $(this).find('input[name=csrfmiddlewaretoken]').val();
-		var answerId = $(this).find('input.answerId').val();
+		var answerId = $(this).find('input[name=answerId]').val();
 		
 		$.ajax({
 		  	type: "POST",
@@ -15,9 +14,7 @@ $(document).ready(function(){
 
 				$('#answer'+answerId+' table td.big').text(likes);
 				$('#answer'+answerId+' table td.small').text('Vous aimez');
-				return false
-
-			
+				return false			
 		});
 
 		return false;

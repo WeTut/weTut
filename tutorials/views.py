@@ -17,7 +17,14 @@ def questions(request):
 	questions = Question.objects.all().order_by('-date')
  
 	if request.user.is_authenticated() :
-		if request.method == 'POST' : 
+		for question in questions:
+			question.currentUserFollows = False
+			follow = FollowQuestion.objects.filter(question=question, user=request.user)
+			if follow.exists():
+				question.currentUserFollows = True
+
+		if request.method == 'POST' and 'submit' in request.POST: 
+			
 			if request.POST['submit'] == 'followSubmit':
 				if request.POST['hidden'] == 'follow':
 					follow = FollowQuestion()
@@ -28,15 +35,10 @@ def questions(request):
 				elif request.POST['hidden'] == 'unfollow':
 					follow = get_object_or_404(FollowQuestion, question=request.POST['questionId'], user=request.user)
 					follow.delete()
-					return HttpResponse('deleted')			
-			elif request.POST['submit'] == 'filterSubmit': 
-				questions = Question.objects.all().order_by(request.POST['filter'])	
+					return HttpResponse('deleted')
 
-		for question in questions:
-			question.currentUserFollows = False
-			follow = FollowQuestion.objects.filter(question=question, user=request.user)
-			if follow.exists():
-				question.currentUserFollows = True
+			elif request.POST['submit'] == 'filterSubmit': 
+				questions = Question.objects.all().order_by(request.POST['filter'])		
 
 	return render_to_response('tutorials/questions.html', {'questions': questions, 'filterform':filterform}, context_instance=RequestContext(request))
 
