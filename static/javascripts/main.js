@@ -42,6 +42,27 @@ $(document).ready(function(){
 	});
 
 
+	$('.followTagForm').submit(function(){
+		var csrf = $(this).find('input[name=csrfmiddlewaretoken]').val();
+		var tagId = $(this).find('input.tagId').val();
+		var hidden = $(this).find('input[name=hidden]').val();
+		var divcontent = "<input name='hidden' type='hidden' value='follow' /><button class='btn btn-primary btn-block vcenter' name='submit' type='submit' value='followTagSubmit'>Suivre ce tag</button>";		
+		if (hidden == 'follow')
+			divcontent = "<input name='hidden' type='hidden' value='unfollow' /><button class='btn btn-danger btn-block vcenter' name='submit' type='submit' value='followTagSubmit'>Ne plus suivre</button>";	
+
+		$.ajax({
+		  	type: "POST",
+			url: "",
+		  	data: { submit:'followTagSubmit', hidden: hidden, csrfmiddlewaretoken:csrf, tagId:tagId}
+		}).done(function( msg ) {
+			$('.followTagForm .follow').html(divcontent);
+			return false;			
+		});
+
+		return false;
+	});
+
+
 	$('#id_filter').change(function(){
 
 		var filter = $(this).val();
@@ -119,6 +140,14 @@ $(document).ready(function(){
  
  		return false;
  	});
+
+
+ 	$('#filtertag a').click(function(){
+		$('#filtertag a').removeClass('bold')
+		$(this).addClass('bold')
+ 	});
+
+
 
 
 

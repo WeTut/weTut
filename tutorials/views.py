@@ -13,13 +13,14 @@ from tutorials.models import *
 def questions(request):
 
 	filterform = FilterForm()
-			
+	currentag = 0
 	questions = Question.objects.all().order_by('-date')
 	tags = Tag.objects.all()
+	userfollowstag = False
  
-	if request.user.is_authenticated() :		
+	if request.method == 'POST' and 'submit' in request.POST:
 
-		if request.method == 'POST' and 'submit' in request.POST: 
+		if request.user.is_authenticated() : 
 			
 			if request.POST['submit'] == 'followSubmit':
 				if request.POST['hidden'] == 'follow':
@@ -33,27 +34,43 @@ def questions(request):
 					follow.delete()
 					return HttpResponse('deleted')
 
-			elif request.POST['submit'] == 'filterSubmit': 
-				questions = Question.objects.all().order_by(request.POST['filter'])
+			elif request.POST['submit'] == 'followTagSubmit':
+				if request.POST['hidden'] == 'follow':
+					follow = FollowTag()
+					follow.user = request.user
+					follow.tag = get_object_or_404(Tag, id=request.POST['tagId'])
+					follow.save()
+					return HttpResponse('saved')
+				elif request.POST['hidden'] == 'unfollow':
+					follow = get_object_or_404(FollowTag, tag=request.POST['tagId'], user=request.user)
+					follow.delete()
+					return HttpResponse('deleted')
 
-		if 'tag' in request.GET:
-			tag = int(request.GET['tag'])
-			temp = []
-			for question in questions:
-				print ('tag ', tag)
-				print ('question.tag1 ', question.tag1)
-				print ('verif ', question.tag1 == tag)
-				if question.tag1 == tag or question.tag2 == tag or question.tag3 == tag:
-					temp.append(question)
-			questions = temp
+		if request.POST['submit'] == 'filterSubmit': 
+			questions = Question.objects.all().order_by(request.POST['filter'])
 
+	if 'tag' in request.GET:
+		currentag = int(request.GET['tag'])
+
+		if request.user.is_authenticated() :
+			followTag = FollowTag.objects.filter(tag=currentag, user=request.user)
+			if followTag.exists():
+				userfollowstag = True
+
+		temp = []
+		for question in questions:
+			if question.tag1 == currentag or question.tag2 == currentag or question.tag3 == currentag:
+				temp.append(question)
+		questions = temp
+
+	if request.user.is_authenticated() :
 		for question in questions:
 			question.currentUserFollows = False
 			follow = FollowQuestion.objects.filter(question=question, user=request.user)
 			if follow.exists():
 				question.currentUserFollows = True	
 
-	return render_to_response('tutorials/questions.html', {'questions': questions, 'filterform':filterform, 'tags':tags}, context_instance=RequestContext(request))
+	return render_to_response('tutorials/questions.html', {'questions': questions, 'filterform':filterform, 'tags':tags, 'currentag':currentag, 'userfollowstag':userfollowstag}, context_instance=RequestContext(request))
 
 def tutorials(request):
 

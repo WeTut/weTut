@@ -18,15 +18,33 @@
 
         <div id='filtertag' >
 			{% for tag in tags %}
-				<a href="/questions?tag={{tag.id}}">{{tag.name}}</a> | 
+				<a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}">{{tag.name}}</a> | 
 			{% endfor %}
-				<a href="/questions">tous</a>
+				<a {% if currentag == 0 %}class='bold'{% endif %} href="/questions">tous</a>
         </div>
         <br />
 
+        
+        {% if user.is_authenticated %}
+			{% if currentag != 0 %}
+			<div>
+				<form  class="followTagForm" action="" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
+					<div class='follow'>
+						<input name="hidden" type="hidden" value="{% if userfollowstag %}unfollow{% else %}follow{% endif %}" />
+						<button class='btn btn-{% if userfollowstag %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followTagSubmit">{% if userfollowstag %}Ne plus suivre{% else %}Suivre ce tag{% endif %}</button>
+					</div>
+				</form>
+			</div>
+        	{% endif %}
+		{% endif %}						
+
+        
+
 
     {% if not questions %}
-    	<div>
+    	<div style="position:relative;">
     		<p>Il n'y a pas de question dans cette catégorie</p><br />
     	</div>
 

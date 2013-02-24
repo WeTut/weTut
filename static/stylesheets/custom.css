@@ -180,3 +180,5 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 #profileForm h1{font-size:1.5em;}
 #profileForm h2{font-size:1.3em;}
 #profileForm h3{font-size:1.0em;}
+
+.bold{font-weight:bold;}
