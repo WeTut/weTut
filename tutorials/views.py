@@ -15,13 +15,9 @@ def questions(request):
 	filterform = FilterForm()
 			
 	questions = Question.objects.all().order_by('-date')
+	tags = Tag.objects.all()
  
-	if request.user.is_authenticated() :
-		for question in questions:
-			question.currentUserFollows = False
-			follow = FollowQuestion.objects.filter(question=question, user=request.user)
-			if follow.exists():
-				question.currentUserFollows = True
+	if request.user.is_authenticated() :		
 
 		if request.method == 'POST' and 'submit' in request.POST: 
 			
@@ -38,9 +34,26 @@ def questions(request):
 					return HttpResponse('deleted')
 
 			elif request.POST['submit'] == 'filterSubmit': 
-				questions = Question.objects.all().order_by(request.POST['filter'])		
+				questions = Question.objects.all().order_by(request.POST['filter'])
 
-	return render_to_response('tutorials/questions.html', {'questions': questions, 'filterform':filterform}, context_instance=RequestContext(request))
+		if 'tag' in request.GET:
+			tag = int(request.GET['tag'])
+			temp = []
+			for question in questions:
+				print ('tag ', tag)
+				print ('question.tag1 ', question.tag1)
+				print ('verif ', question.tag1 == tag)
+				if question.tag1 == tag or question.tag2 == tag or question.tag3 == tag:
+					temp.append(question)
+			questions = temp
+
+		for question in questions:
+			question.currentUserFollows = False
+			follow = FollowQuestion.objects.filter(question=question, user=request.user)
+			if follow.exists():
+				question.currentUserFollows = True	
+
+	return render_to_response('tutorials/questions.html', {'questions': questions, 'filterform':filterform, 'tags':tags}, context_instance=RequestContext(request))
 
 def tutorials(request):
 

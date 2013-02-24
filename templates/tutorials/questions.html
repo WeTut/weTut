@@ -15,6 +15,23 @@
 	        <input name="submit" type="hidden" value="filterSubmit" />
         </form>
 
+
+        <div id='filtertag' >
+			{% for tag in tags %}
+				<a href="/questions?tag={{tag.id}}">{{tag.name}}</a> | 
+			{% endfor %}
+				<a href="/questions">tous</a>
+        </div>
+        <br />
+
+
+    {% if not questions %}
+    	<div>
+    		<p>Il n'y a pas de question dans cette catégorie</p><br />
+    	</div>
+
+    {% else %}
+
 	{% for question in questions %}
 		{% if not question.validate %}
 	
@@ -70,9 +87,11 @@
 
 		<hr />
 		
-	{% endif %}
+		{% endif %}
 
-{% endfor %}
+	{% endfor %}
+
+{% endif %}
 	</div>
 </div>
 

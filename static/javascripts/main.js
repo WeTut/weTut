@@ -21,7 +21,6 @@ $(document).ready(function(){
 	});
 
 	$('.followForm').submit(function(){
-		
 		var csrf = $(this).find('input[name=csrfmiddlewaretoken]').val();
 		var questionId = $(this).find('input.questionId').val();
 		var hidden = $(this).find('input[name=hidden]').val();
@@ -44,6 +43,7 @@ $(document).ready(function(){
 
 
 	$('#id_filter').change(function(){
+
 		var filter = $(this).val();
 		var csrf = $('#filterform').find('input[name=csrfmiddlewaretoken]').val();
 				
@@ -52,7 +52,6 @@ $(document).ready(function(){
 			url: "",
 		  	data: { submit:'filterSubmit', filter: filter, csrfmiddlewaretoken:csrf}
 		}).done(function( data ) {
-			//alert(data)
             $('body').html(data);
            $('#filterform option[value='+filter+']').attr("selected", "selected");
 			return false;			
