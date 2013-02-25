@@ -3,46 +3,50 @@
 
 {% block content %}
 
+ <!-- START BANNER--!> 
+ 		<div class="banner_questions">
+ 			<div class="content_banner_questions">
+ 				<div class="questions_filters">
+					<form id='filterform' action="" method="POST">
+						{% csrf_token %}
+				        <ul>
+				        {{ filterform.as_ul}}	        
+				        </ul>
+				        <input name="submit" type="hidden" value="filterSubmit" />
+			        </form>
+			
+			
+			        <div id='filtertag' >
+						{% for tag in tags %}
+							<a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}">{{tag.name}}</a> | 
+						{% endfor %}
+							<a {% if currentag == 0 %}class='bold'{% endif %} href="/questions">tous</a>
+			        </div>
+			        <br />
+			
+			        
+			        {% if user.is_authenticated %}
+						{% if currentag != 0 %}
+						<div>
+							<form  class="followTagForm" action="" method="post" enctype="multipart/form-data">
+								{% csrf_token %}
+								<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
+								<div class='follow'>
+									<input name="hidden" type="hidden" value="{% if userfollowstag %}unfollow{% else %}follow{% endif %}" />
+									<button class='btn btn-{% if userfollowstag %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followTagSubmit">{% if userfollowstag %}Ne plus suivre{% else %}Suivre ce tag{% endif %}</button>
+								</div>
+							</form>
+						</div>
+			        	{% endif %}
+					{% endif %}	
+				</div>
+			</div>					
+		</div>
+ <!-- END BANNER--!>      
+
 <div class="content">
-
+	<div class="ask_questions_button"><a href="/questions/ask"><p>Poser une question</p></a></div>
 	<div id="questions">
-
-		<form id='filterform' action="" method="POST">
-			{% csrf_token %}
-	        <ul>
-	        {{ filterform.as_ul}}	        
-	        </ul>
-	        <input name="submit" type="hidden" value="filterSubmit" />
-        </form>
-
-
-        <div id='filtertag' >
-			{% for tag in tags %}
-				<a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}">{{tag.name}}</a> | 
-			{% endfor %}
-				<a {% if currentag == 0 %}class='bold'{% endif %} href="/questions">tous</a>
-        </div>
-        <br />
-
-        
-        {% if user.is_authenticated %}
-			{% if currentag != 0 %}
-			<div>
-				<form  class="followTagForm" action="" method="post" enctype="multipart/form-data">
-					{% csrf_token %}
-					<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
-					<div class='follow'>
-						<input name="hidden" type="hidden" value="{% if userfollowstag %}unfollow{% else %}follow{% endif %}" />
-						<button class='btn btn-{% if userfollowstag %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followTagSubmit">{% if userfollowstag %}Ne plus suivre{% else %}Suivre ce tag{% endif %}</button>
-					</div>
-				</form>
-			</div>
-        	{% endif %}
-		{% endif %}						
-
-        
-
-
     {% if not questions %}
     	<div style="position:relative;">
     		<p>Il n'y a pas de question dans cette catégorie</p><br />
@@ -53,57 +57,50 @@
 	{% for question in questions %}
 		{% if not question.validate %}
 	
-			<div id='question{{question.id}}' class='row-fluid'>
-				<div class='span2'>
+			<div class="one_question">
+				<div class="img">
 					<a href='{{question.slug}}'>
-						<img class='img-rounded' src='{{question.picture.thumbnail.url}}'/>
-					</a>
+									<img class='image_one_question' src='{{question.picture.thumbnail.url}}'/>
+								</a>
 				</div>
-				<div class='span5' >
-					<a href='{{question.slug}}'><h5>{{ question.title }}</h5></a>
-					<p>{{ question.message|truncatechars:80 }}</p>
-				</div>
-				<div class='span3'>
-					<div class='row-fluid'>
-						<div class='span6'>
-							<table class='table table-bordered'>
-								<tr height='30px'>
-									<td class="small">REPONSES</td>
-								</tr>
-								<tr height='50px'>
-									<td class="big">{{ question.getAnswersCount }}</td>
-								</tr>
-							</table>
+				<div class="member">
+					<div class="img_member"></div>
+					<div class="infos_member">
+						<div class="view">
+							<img src="../../static/images/pictos/view_questions_wetut.png">
+							<p>{{ question.views }}</p>
 						</div>
-						<div class='span6'>
-							<table class='table table-bordered'>
-								<tr height='30px'>
-									<td class="small">VUES</td>
-								</tr>
-								<tr height='50px'>
-									<td class="big">{{ question.views }}</td>
-								</tr>
-							</table>
-						</div>					
+						<div class="responses">
+							<img src="../../static/images/pictos/bulle_questions_wetut.png">
+							<p>{{ question.getAnswersCount }}</p>
+						</div>
 					</div>
 				</div>
-				<div class='span2'>
-					<button class='btn btn-primary btn-block vcenter'  onclick='location.href="{{question.slug}}"'>REPONDRE</button>
+				<div class="infos_questions">
+					<div class="title"><a href='{{question.slug}}'>{{ question.title }}</a></div>
+					<div class="date"><p>Par Gisele 77</p> <p style="font-style:italic; font-size:10px; margin-top:1px;">le 12/02/2012</p></div>
+					<div class="tags"></div>
+					<div class="text"><p>{{ question.message|truncatechars:80 }}</p></div>
+				</div>
+				<div class="action_member">
+					<div class="answer">
+						<a href=""><img src="../../static/images/pictos/answer_picto.png"><p>Je sais !</p></a>
+					</div>
+					<div class="question_follow">
 					{% if user.is_authenticated %}
-					<form  class="followForm" action="" method="post" enctype="multipart/form-data">
-							{% csrf_token %}
-							<input class="questionId" type="hidden" name="questionId" value="{{question.id}}"></input>
+						<form  class="followForm" action="" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+						<input class="questionId" type="hidden" name="questionId" value="{{question.id}}"></input>
 						<div class='follow'>
 							<input name="hidden" type="hidden" value="{% if question.currentUserFollows %}unfollow{% else %}follow{% endif %}" />
-							<button class='btn btn-{% if question.currentUserFollows %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followSubmit">{% if question.currentUserFollows %}Ne plus suivre{% else %}Suivre{% endif %}</button>
+							<button class='btn-{% if question.currentUserFollows %}ok{% else %}nok{% endif %}' name='submit' type="submit" value="followSubmit">{% if question.currentUserFollows %}Ne plus suivre{% else %}Suivre{% endif %}</button>
 						</div>
-					</form>
-					{% endif %}								
-					
-				</div>
+						</form>
+					{% endif %}	
+					</div>
+	
 			</div>
-
-		<hr />
+			</div>
 		
 		{% endif %}
 
@@ -111,9 +108,8 @@
 
 {% endif %}
 	</div>
+	<div class="clear"></div>
+	<div class="ask_questions_button"><a href="/questions/ask"><p>Poser une question</p></a></div>
 </div>
-
 {% endblock content %}
-
-
 
