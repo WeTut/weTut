@@ -1,0 +1,54 @@
+{% extends "layout/base.html" %}
+
+
+{% block content %}
+	
+<div class="content">
+	 <!-- START BANNER --> 
+	<div class='banner_members'>
+	    <form id='filtermembersform' action="" method="POST">
+			{% csrf_token %}
+	        <ul>
+	        {{ filterform.as_ul}}	        
+	        </ul>
+	        <input name="submit" type="hidden" value="filterMembersSubmit" />
+        </form>
+	</div>
+	 <!-- END BANNER -->
+
+	<div id="members">
+	{% for member in members %}
+		<div id="member{{member.id}}" class="span12" >
+			<div class="span4">
+				<img src="{{MEDIA_URL}}{{member.avatar}}" title="{{member.user.username}}" alt="{{member.user.username}}" />
+			</div>
+			<div class"span4">
+				<a href='{{member.user.username}}'><h1>{{member.user.username}}</h1></a>
+				<hr />				
+				<h2>{% if member.job and member.employer %} {{member.job}}, {{member.employer}} {% else %} Emploi non renseigné {% endif %}</h2>
+				
+			</div>
+			<div class"span4">
+				<table border="1">
+					<tr>
+						<td>Questions</td>
+						<td>Vues</td>
+						<td>Points</td>
+						<td>Likes</td>
+					</tr>
+					<tr>
+						<td>{{ member.nb_questions }}</td>
+						<td>{{ member.views }}</td>
+						<td>{{ member.points }}</td>
+						<td>{{ member.nb_likes }}</td>
+					</tr>
+				</table>				
+			</div>	
+		</div>
+		<br />
+	{% endfor %}
+	</div>
+	 
+</div>
+{% endblock content %}
+

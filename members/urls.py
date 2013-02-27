@@ -5,6 +5,7 @@ from members.views import *
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('members.views',
-	url(r'^$', 'profile', name='profile'), #list of questions	
+urlpatterns = patterns('members.views',		
+	url(r'^$', 'members', name='members'), #list of members
+	url(r'profile', 'profile', name='profile'), #list of questions
 )

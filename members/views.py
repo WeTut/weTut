@@ -5,13 +5,12 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 
-from members.forms import ProfileForm
+from members.forms import ProfileForm, FilterForm
 from members.models import *
 
 from tutorials.models import Question, FollowQuestion
 
 def profile(request):
-	profile = Profile.objects.get(user=request.user)
 	if request.method == 'POST': # If the form has been submitted...
 		if request.POST['submit'] == 'profileSubmit':#Si une reponse a ete envoyee
 			form = ProfileForm(request.POST, request.FILES) # A form bound to the POST data
@@ -36,3 +35,14 @@ def profile(request):
 	
 	return render_to_response('members/profile.html', {'profileform': profileform, 'followedquestions':followedquestions }, context_instance=RequestContext(request))
 	
+
+def members(request):
+	filterform = FilterForm()	
+
+	if request.method == 'POST' and 'submit' in request.POST:
+		if request.POST['submit'] == 'filterMembersSubmit':
+			members = Profile.objects.all().order_by(request.POST['filtermembers'])
+	else:
+		members = Profile.objects.all().order_by('-nb_likes')
+
+	return render_to_response('members/members.html', {'members': members, 'filterform':filterform}, context_instance=RequestContext(request))

@@ -10,6 +10,8 @@ from datetime import datetime
 from tutorials.forms import QuestionForm, AnswerForm, CommentAnswerForm, FilterForm
 from tutorials.models import *
 
+from members.models import Profile
+
 def questions(request):
 
 	filterform = FilterForm()
@@ -180,6 +182,11 @@ def ask(request):
 			post.tag3 = max(tech3, soft3)
 
 			post.save()
+
+			profile = get_object_or_404(Profile, user=request.user)
+			profile.nb_questions += 1
+			profile.save()
+
 			return HttpResponseRedirect('/questions') # Redirect after POST
 	else:
 		form = QuestionForm() # An unbound form #initial={'user': request.user}

@@ -43,7 +43,7 @@ $(document).ready(function() {
         <ul class="nav">
           <li><a href="/questions">Questions</a></li>
           <li><a href="/tutoriels">Tutoriels</a></li>
-          <li><a href="/membres">Membres</a></li>
+          <li><a href="/members">Membres</a></li>
           <li><a class="ask_question" href="/questions/ask">Poser une question</a></li>
 		</ul>
 		<div id="enroll_connexion">
@@ -51,7 +51,7 @@ $(document).ready(function() {
             {% if user.is_authenticated %}
             <li class="user"><a href="#user_menu">{{ user.username }}</a></li>
             <div id="user_menu">
-                <a href="/profile" role="button" data-toggle="modal">Voir le profil</a>
+                <a href="/members/profile" role="button" data-toggle="modal">Voir le profil</a>
                 <a href="/logout" role="button" data-toggle="modal">Se déconnecter</a>
             </div>
             {% else %}<li><a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal" class="first">Connexion</a></li>
