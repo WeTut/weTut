@@ -11,9 +11,10 @@ QUESTIONS STYLESHEET
 .ask_questions_button a{color:#FFFFFF;}
 
 .one_question{width:940px; height:120px; padding:5px; background-color:#FFFFFF; border-radius:3px; margin-bottom:15px;}
-.one_question .img{float:left; width:160px; height:120px;}
+.one_question .img{float:left; width:155px; height:120px;}
+.one_question .img img{width:155px; height:120px;}
 .one_question .member{float:left; width:80px; height:120px; background-color:#f53749; margin-right:10px; color:#FFFFFF;}
-.one_question .infos_questions{width:450; float:left; font-family: 'Rambla', sans-serif; margin-right:95px;}
+.one_question .infos_questions{width:455; float:left; font-family: 'Rambla', sans-serif; margin-right:95px;}
 .one_question .action_member{float:left; width:145px; color:#46423f;}
 
 
@@ -35,7 +36,9 @@ QUESTIONS STYLESHEET
 
 
 .one_question .action_member .answer{width:131px; height:66px; padding:7px; background-color:#f53749; border-radius:3px; text-align:center;}
-.one_question .action_member .answer a{font-family:'bebas_neue'; font-size:20px; color:#FFFFFF; text-align:center;}
+.one_question .action_member .answer a{font-family:'bebas_neue'; text-align:center;}
+.one_question .action_member .answer p{font-size:20px; color:#FFFFFF; text-align:center;}
+
 .one_question .action_member .answer img{align:center; margin-bottom:5px;}
 
 .one_question .action_member .question_follow{height:38px;}
