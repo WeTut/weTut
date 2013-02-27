@@ -110,10 +110,10 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 .member_notif .question_notif{font-size:16px; color:#46423f;}
 .member_notif .name_notif{font-size:12px; color:#46423f;}
 .text_notif{float:left; width:348px; font-family: 'Rambla', sans-serif; font-size:12px; color:#46423f;}
-.line_end_notif{width:552px; height:2px; background-color:#bcbcbc; position:relative;}
+.line_end_notif{width:552px; height:1px; background-color:#bcbcbc; position:relative;}
 //.notif_filters{width:554px;}
 .notif_filters .questions_filter{float:left; width:271px; height:45px; background-color:#FFFFFF; margin-right:10px; border-top-left-radius:3px; border-top-right-radius:3px;}
-.notif_filters .tags_filter{float:left; width:271px; height:45px; background-color:#e6e6e6; border-top-left-radius:3px; border-top-right-radius:3px;}
+.notif_filters .tags_filter{float:left; width:271px; height:45px; background-color:#bcbcbc; border-top-left-radius:3px; border-top-right-radius:3px;}
 .notif_filters .questions_filter p, .notif_filters .tags_filter p{font-family:'bebas_neue'; font-size:16px; line-height:50px; margin-left:20px; color:#FFFFFF;}
 .notif_filters .questions_filter p{color:#01c6e8;}
 
@@ -138,7 +138,7 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 .date_selection{float:left; width:205px; height:45px; border-top-left-radius:3px; border-top-right-radius:3px; padding-right:15px;}
 .famous_selection{float:left; width:205px; height:45px; background-color:#bcbcbc; margin-left:10px; border-top-left-radius:3px; border-top-right-radius:3px; padding-right:15px;}
 
-.tri p{float:right; color:#FFFFFF; font-family:'bebas_neue'; font-size:20px; line-height:48px;}
+.tri p{float:right; color:#FFFFFF; font-family:'bebas_neue'; font-size:20px; line-height:54px;}
 .tri img{ margin:11px 0px 0px 10px;}
 
 .white_box{width:450px; height:130px; background-color:#FFFFFF; position:relative; z-index:1;}

@@ -85,9 +85,11 @@
 					<div class="text"><p>{{ question.message|truncatechars:80 }}</p></div>
 				</div>
 				<div class="action_member">
+					<a href="">
 					<div class="answer">
-						<a href=""><img src="../../static/images/pictos/answer_picto.png"><p>Je sais !</p></a>
+						<img src="../../static/images/pictos/answer_picto.png"><p>Je sais !</p>
 					</div>
+					</a>
 					<div class="question_follow">
 					{% if user.is_authenticated %}
 						<form  class="followForm" action="" method="post" enctype="multipart/form-data">
