@@ -2,15 +2,14 @@
 
 {% block content %}
 
-
 <div class="content">
 	<form method="post" class="validateform" action="">
 	{% csrf_token %}
 		<div id="question">
 			<!-- If the authentificated user is the author -->
-			<div {% if question.user != user %}style='display:none;'{% endif %} >
-			<button class='btn btn-success btn-block vcenter' id="usefullValidate">J'ai eu ma réponse</button>
-			<button class='btn btn-primary btn-block vcenter pendingValidation' name='submit' type="submit" value="validateSubmit">Check!</button>
+			<div {% if question.user != user %} style='display:none;'{% endif %}>
+				<a class='btn btn-success btn-block vcenter' id="usefullValidate">J'ai eu ma réponse</a>
+				<button class='btn btn-primary btn-block vcenter pendingValidation' name='submit' type="submit" value="validateSubmit" id="validateSubmit">Check!</button>
 			</div>
 			
 			<h1>{{question.title}}</h1>
@@ -19,7 +18,7 @@
 			<p>{{question.message}}</p>
 			<img src='{{question.picture.url}}'/>
 			
-			<hr>
+			<hr/>
 			
 			{% for answer in answers %}	
 			
@@ -39,8 +38,7 @@
 												{% csrf_token %}
 												<input type='hidden' name='answerId' value='{{answer.id}}' />
 												<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="likeSubmit">J'aime</button>
-											</form>
-																				
+											</form>						
 											{% endif %}								
 										</td>
 									{% endif %}
@@ -56,11 +54,11 @@
 						<table class='table table-bordered'>
 							<tr height='80px'>
 								<td colspan='2'>{{ answer.answer|truncatechars:200|safe }}</td>
-									<input class="pendingValidation" type="checkbox" value="{{answer.id}}" name="usefull">
+								<input class="pendingValidation" type="checkbox" value="{{answer.id}}" name="usefull">
 							</tr>
 							<tr height='20px'>
-								<td ><i>{{ answer.date }}</i></td>
-								<td ><a href=''>Signaler un abus</a></td>					
+								<td><i>{{ answer.date }}</i></td>
+								<td><a href=''>Signaler un abus</a></td>					
 							</tr>
 						</table>
 					</div>
@@ -94,9 +92,6 @@
 			<hr/>
 				
 			{% endfor %}
-
-		</form>
-
 		
 			<form action="" method="post" enctype="multipart/form-data">
 				{% csrf_token %}
@@ -107,14 +102,15 @@
 					</div>
 					<div class="span2">
 						{% if user.is_authenticated %}
-				    	<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="answerSubmit">Envoyer</button>
-				    	{% else %}
-				    	<a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal" class="first">Connexion</a>
-				    	{% endif %}
+							<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="answerSubmit">Envoyer</button>
+						{% else %}
+							<a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal" class="first">Connexion</a>
+						{% endif %}
 					</div>
 				</div>
 			</form>
 		</div>
+	</form>
 </div>
 
 
