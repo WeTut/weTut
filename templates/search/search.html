@@ -10,9 +10,17 @@
 
             {% for result in page.object_list %}
                 <p>
+                    {% if result.object.validate %}
+                    <a href="../tutoriels/{{ result.object.slug }}">{{ result.object.title }}</a>
+                    {% else %}
                     <a href="../questions/{{ result.object.slug }}">{{ result.object.title }}</a>
-                    <p>{{ result.object.message }}</p>
+                    {% endif %}
+                    <p>Posté par {{ result.object.user.username }} le {{ result.object.date }}</p>
+                    <img src="{{ result.object.picture.thumbnail.url }}" alt="{{ result.object.title }}" />
+                    <p>{{ result.object.message|truncatechars:80 }}</p>
+                    <p>{{ result.object.views }} vues / {{ result.object.answers }} réponses</p>
                 </p>
+                <hr />
             {% empty %}
                 <p>Pas de résultat.</p>
             {% endfor %}

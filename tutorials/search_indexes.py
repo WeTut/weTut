@@ -7,6 +7,10 @@ class QuestionIndex(indexes.SearchIndex, indexes.Indexable):
     title = indexes.CharField(model_attr='title')
     message = indexes.CharField(model_attr='message')
     slug = indexes.CharField(model_attr='slug')
+    validate = indexes.CharField(model_attr='validate')
+    picture = indexes.CharField(model_attr='picture')
+    user = indexes.CharField(model_attr='user_id')
+    date = indexes.CharField(model_attr='date')
 
     def get_model(self):
         return Question

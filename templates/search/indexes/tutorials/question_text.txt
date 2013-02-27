@@ -1,3 +1,10 @@
 {{ object.title }}
 {{ object.message }}
 {{ object.slug }}
+{{ object.picture }}
+{{ object.picture.thumbnail.url }}
+{{ objet.validate }}
+{{ object.views }}
+{{ object.answers }}
+{{ object.user }}
+{{ object.date }}
