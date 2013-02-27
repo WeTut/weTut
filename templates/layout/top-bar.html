@@ -92,8 +92,8 @@ $(document).ready(function() {
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="inscriptionModalLabel">M'inscrire !</h3>
   </div>
-  <div class="modal-body">
-    <form method="post" action="/accounts/register/">
+  <div class="modal-body" id="signupC">
+    <!--<form method="post" action="/accounts/register/">
     {% csrf_token %}
     Username : <input type="text" name="username" /> <br />
     Email : <input type="text" name="email" /> <br />
@@ -102,11 +102,12 @@ $(document).ready(function() {
   </div>
   <div class="modal-footer">
     <input type="submit" value="M'inscrire" class="btn btn-primary" />
-    </form>
+    </form>-->
   </div>
 </div>
 
 <script>
   $('#loginModal').modal('hide');
   $('#inscriptionModal').modal('hide');
+  $('#signupC').load('/accounts/register');
 </script>
