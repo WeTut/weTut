@@ -2,17 +2,47 @@
 
 {% block content %}
 
-<div class="content">
+{% if user.is_authenticated %}
+		<div id="ask_banner">
+			<div id="content_banner">
+				<p>Pose ta question</p>
+			</div>
+		</div>
 
-	{% if user.is_authenticated %}
-	<div id="ask">
-		<h1>HAVE A QUESTION ?</h1>
-		<p>Here you can ask everything you want</p>
+	<div class="content">
+
+		<p style="font-style:italic; color:#9c9c9c; font-size:12px;">* Champs obligatoires</p>
 	
 		<form id="questionForm" action="" method="post" enctype="multipart/form-data">
-			{% csrf_token %}
-			{{ form.as_p }}
-			<h2>Ajouter des tags (1 minimum, 3 maximum)</h2>
+			<div class="row-fluid marketing">
+				<div class='span6'>
+					<div style='display:none'>
+						<input type='hidden' name='csrfmiddlewaretoken' value='2pCAgrdAiZ0kaCm6CXX5kNCPn2F3HfqK' />
+					</div>
+					<p><input type="text" name="title" placeholder="Title*"  id="id_title" class="" size="40" title="Title*" /></p>
+					
+					<div class="fileinputs">
+						<input class="file" type="file">
+						<div class="fakefile">
+							<input type="text" class="filevisible" placeholder="Selectionner une image*">
+							<div class="file_img">	
+								<img src="../../static/images/pictos/upload.png">
+							</div>
+						</div>
+					</div>
+					
+					<p style="font-style:italic; color:#9c9c9c; font-size:12px; position:relative; margin-top:8px;">(Format JPEG, PNG, GIF , minimum 240 x 120px)</p>
+					
+					
+				</div>
+				<div class='span6'>
+					<p>
+						<textarea type="text" name="message" placeholder="Message*"  id="id_message" class="" size="400" title="Message*"></textarea>
+					</p>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<p style="color:#9c9c9c; font-size:14px;">Ajouter des tags (1 minimum, 3 maximum)</p>
 			<div class="row-fluid">
 				<div id="tag1" class="ui-widget">
 					<label>Tag 1 :</label>
@@ -63,11 +93,21 @@
 
 
 			
-			<h2>Ajouter des medias ?</h2>
+			<p style="color:#9c9c9c; font-size:14px;">Ajouter des medias</p>
 			<p>illustrez votre question avec des médias supplémentaires</p>
-			<input type="submit" value="Submit" />
+			<div class="row-fluid marketing">
+				<div class='span4'></div>
+				<div class='span4'><input type="submit" class="ask_your_question_button"value="Pose ta question" /></div>
+				<div class='span4'></div>
+			</div>
+			
+			
 		</form>
 	
+		<script type="text/javascript">  
+			$(document).ready( function(){ $(".file").change( function(){ $(".filevisible").attr("value",$(".file").attr("value")); });	}); 
+		</script> 
+		
 		<script>
 		  
 			 (function( $) {
@@ -191,7 +231,6 @@
 			  });
 		  </script>
 		</div>
-</div>
   {% endif %}
 
 {% endblock content %}
