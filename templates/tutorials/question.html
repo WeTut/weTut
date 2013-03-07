@@ -2,74 +2,108 @@
 
 {% block content %}
 
-<div class="content">
-	<form method="post" class="validateform" action="">
-	{% csrf_token %}
-		<div id="question">
-			<!-- If the authentificated user is the author -->
-			<div {% if question.user != user %} style='display:none;'{% endif %}>
-				<a class='btn btn-success btn-block vcenter' id="usefullValidate">J'ai eu ma réponse</a>
-				<button class='btn btn-primary btn-block vcenter pendingValidation' name='submit' type="submit" value="validateSubmit" id="validateSubmit">Check!</button>
-			</div>
+<!-- START BANNER -->
+	<div class="question_banner">
+		<div class="content_banner">
 			
-			<h1>{{question.title}}</h1>
-			<h5>posté par {{question.user.username}}</h5>
-			
-			<p>{{question.message}}</p>
-			<img src='{{question.picture.url}}'/>
-			
-			<hr/>
+			<form method="post" class="validateform" action="">
+			{% csrf_token %}
+			<div id="question">
+				<!-- If the authentificated user is the author -->
+				<div {% if question.user != user %} style='display:none;'{% endif %}>
+					<a class='btn btn-success btn-block vcenter' id="usefullValidate">J'ai eu ma réponse</a>
+					<button class='btn btn-primary btn-block vcenter pendingValidation' name='submit' type="submit" value="validateSubmit" id="validateSubmit">Check !</button>
+				</div>
+				
+				<div class="body_question">
+					<div class="left_question_body">
+						<div class="member">
+							<div class="image"><img src="../../static/images/membre_de_luxe.png" /></div>
+							<div class="infos">
+								<div class="name"><p>Posté par {{question.user.username}}</p></div>
+								<div class="date"><p>le {{question.date}}<p></div>
+							</div>
+						</div>
+						<img src='{{question.picture.url}}'/>
+					</div>
+					<div class="right_question_body">
+						<div class="title"><p>{{question.title}}</p></div>
+						<div class="tags"></div>
+						<div class="text">
+							<p>{{question.message}}</p>
+						</div>
+						<div class="medias">
+							<p>Autres Medias :</p>
+							<div class="other_media"><img src="../../static/images/pictos/play.png" /></div>
+							<div class="supermedia"></div>
+							<div class="supermedia"></div>
+							<div class="supermedia"></div>
+						</div>
+						<div class="abus"><p>Signaler un abus</p></div>
+					</div>
+				
+				</div>
+			</div>	
+			</div>	
+		</div>
+		
+<!-- END BANNER -->		
+
+		<div class="content">
 			
 			{% for answer in answers %}	
 			
 				<div id='answer{{answer.id}}' class='row-fluid'>
-
 					<div class='span2'>
-						<div class='span11'>
-							<table class='table table-bordered'>
-								<tr height='30px'>
-									<td class='big'>{{ answer.getLikesCount }}</td>
-									{% if user.is_authenticated %}
-										<td class='small'>
-											{% if answer.currentUserLiked %}
-											Vous aimez									
-											{% else %}
-											<form method='post' action='' class='likeform'>
-												{% csrf_token %}
-												<input type='hidden' name='answerId' value='{{answer.id}}' />
-												<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="likeSubmit">J'aime</button>
-											</form>						
-											{% endif %}								
-										</td>
-									{% endif %}
-								</tr>
-								<tr height='50px'>
-									<td colspan="2">{{ answer.user }}</td>
-								</tr>
-							</table>
-						</div>			
+						<div {% if question.user != user %} style='display:none;'{% endif %}>		
+							<input style="float:right;" class="pendingValidation" type="checkbox" value="{{answer.id}}" name="usefull">	
+						</div>	
 					</div>
-
-					<div class='span10' >
-						<table class='table table-bordered'>
-							<tr height='80px'>
-								<td colspan='2'>{{ answer.answer|truncatechars:200|safe }}</td>
-								<input class="pendingValidation" type="checkbox" value="{{answer.id}}" name="usefull">
-							</tr>
-							<tr height='20px'>
-								<td><i>{{ answer.date }}</i></td>
-								<td><a href=''>Signaler un abus</a></td>					
-							</tr>
-						</table>
-					</div>
-			
-					{% for comment in answer.getComments %}
-					<div class='span12' >
-						<div class='span1' >
-							{{ comment.user.username }}
+					<div class='span10'>
+						<div class="one_answer">
+							<div class="member">
+								<div class='like_member'>{{ answer.getLikesCount }}</div>
+								<div class='arrow'>
+									<div class='top_arrow'><img src="../../static/images/pictos/top_arrow.png" /></div>
+									<div class='bottom_arrow'><img src="../../static/images/pictos/bottom_arrow.png" /></div>
+								</div>
+								<div class='image'><img src="../../static/images/membre_de_luxe.png" /></div>
+							</div>
+							<div class="body_answer">
+								<div class="date"><p>Par {{ answer.user }} le {{ answer.date }}</p></div>
+								<div class='text'>
+									<p>{{ answer.answer|truncatechars:400|safe }}
+									</p>
+								</div>
+								<div class='abus'><p>Signaler un abus</p></div>
+							</div>
 						</div>
-						<div class='span11' >
-							{{ comment.comment|truncatechars:200 }}
+					</div>
+					<div class="comment_read">
+						<div class='row-fluid' >
+							<div class='span4'></div>
+							<div class='span8'>
+								<img src="../../static/images/pictos/plus.png" alt="plus" />
+								<p>{{ answer.getComments.count }} commentaires</p>
+							</div>
+						</div>
+					</div>
+				
+				<div class="comments_answer" style="display:none;">
+					{% for comment in answer.getComments %}
+					<div class="comment_question">
+						<div class='row-fluid' >
+							<div class='span4'></div>
+							<div class='span8'  style="">
+								<div class='image'>
+									<img src="../../static/images/membre_de_luxe.png" />
+								</div>
+								<div class='texte' >
+									<div class="name"><p>Posté par {{question.user.username}} le {{comment.date}}</p></div>
+									{{ comment.comment|truncatechars:200 }}
+									<div class='abus'><p>Signaler un abus</p></div>
+								</div>
+							</div>
 						</div>
 					</div>
 					{% endfor %}
@@ -77,44 +111,64 @@
 					{% if user.is_authenticated %}
 					<form action="" method="post" enctype="multipart/form-data">
 						{% csrf_token %}
-					    <div class="span12">
-					    	{{ commentform.comment.errors }}
-						    {{ commentform.comment }}
-							<input type="hidden" name="answerId" value="{{answer.id}}"></input>
+						<div class='row-fluid' >
+							<div class='span4'></div>
+						    <div class="span8">
+						    	{{ commentform.comment.errors }}
+							    {{ commentform.comment }}
+								<input style="" type="hidden" name="answerId" value="{{answer.id}}"></input>
+							</div>
 						</div>
-						<div class="span2">
-					    	<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="commentSubmit">Commenter</button>
-						</div>
+						<div class='row-fluid' >
+							<div class='span10'></div>
+							<div class='span2'>
+						    	<button style="margin-bottom:20px;" class='wetut' name='submit' type="submit" value="commentSubmit">Commenter</button>
+						     </div>
+						 </div>
+						 
 					</form>	
-					{% endif %}						
+					{% endif %}	
+					
 				</div>
-			
-			<hr/>
 				
-			{% endfor %}
-		
-			<form action="" method="post" enctype="multipart/form-data">
+				{% endfor %}
+				
+				<form action="" method="post" enctype="multipart/form-data">
 				{% csrf_token %}
 				<div class="row">
-				    <div class="span10">
+					<div class="span2"></div>
+				    <div class="span10" style="margin-top:20px;">
 					   	{{ answerform.answer.errors }}
 						{{ answerform.answer }}
 					</div>
-					<div class="span2">
+				</div>
+				<div class="row">
+					<div class="span9"></div>
+					<div class="span3" style="margin-top:15px;">
 						{% if user.is_authenticated %}
-							<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="answerSubmit">Envoyer</button>
+							<button class='wetut' name='submit' type="submit" value="answerSubmit">Répondre</button>
 						{% else %}
 							<a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal" class="first">Connexion</a>
 						{% endif %}
 					</div>
 				</div>
 			</form>
-		</div>
-	</form>
 </div>
 
-
+<!--{% if user.is_authenticated %}
+	{% if answer.currentUserLiked %}
+		Vous aimez									
+	{% else %}
+		<form method='post' action='' class='likeform'>
+			{% csrf_token %}
+			<input type='hidden' name='answerId' value='{{answer.id}}' />
+			<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="likeSubmit">J'aime</button>
+		</form>						
+	{% endif %}
+{% endif %}-->
+				
 <script src="{{ STATIC_URL }}javascripts/NicEdit.js"></script>
+
 <script type="text/javascript">
 /* NicEdit script */
 	bkLib.onDomLoaded(function() {
@@ -126,5 +180,32 @@
 		  $(".pendingValidation").show();
 		  $("#usefullValidate").hide();
 	});
+	
+
 </script>
+
+<script type="text/javascript">
+$(".comment_read").click(
+		function (event) {
+			//fait apparaitre/disparaitre le texte
+			$(event.currentTarget).next(".comments_answer").slideToggle();
+			//on change l'image +/- a coté du titre
+			var imgUrl = $(event.currentTarget).find("img").attr("src");
+			
+			var flip = 0;
+			$("p").toggle( flip++ % 2 == 0 );
+
+			//si on trouve plus.png -> on met minus et inversement
+			if(imgUrl.search(/plus.png/i) != -1) {
+				$(event.currentTarget).find("img").attr("src", "../../static/images/pictos/minus.png");
+				$(event.currentTarget).find("img").attr("alt", "minus");
+			}
+			else {
+				$(event.currentTarget).find("img").attr("src", "../../static/images/pictos/plus.png");
+				$(event.currentTarget).find("img").attr("alt", "plus");
+		}
+	});
+</script>
+</div></div></div></div></div></div></div>
+<div class="clear"></div>
 {% endblock content %}
