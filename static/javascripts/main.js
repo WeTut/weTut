@@ -81,6 +81,26 @@ $(document).ready(function(){
  		return false;
  	});
 
+
+ 	$('#id_filtermembers').change(function(){
+		var filtermembers = $(this).val();
+		var csrf = $('#filtermembersform').find('input[name=csrfmiddlewaretoken]').val();
+				
+		$.ajax({
+		  	type: "POST",
+			url: "",
+		  	data: { submit:'filterMembersSubmit', filtermembers: filtermembers, csrfmiddlewaretoken:csrf}
+		}).done(function( data ) {
+            $('body').html(data);
+            $('#filtermembersform option[value='+filtermembers+']').attr("selected", "selected");
+			return false;			
+		});
+ 
+ 		return false;
+ 	});
+
+ 	
+
  	$('#tag1 select').change(function(){
 		var val = $(this).val();
 		var csrf = $('#questionForm').find('input[name=csrfmiddlewaretoken]').val();

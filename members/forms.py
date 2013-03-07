@@ -18,5 +18,16 @@ class ProfileForm(ModelForm):
 	
 	class Meta:
 		model = Profile
-		exclude=['email', 'points', 'status', 'user']
+		exclude=['email', 'points', 'status', 'user', 'views', 'nb_questions', 'nb_likes']
+
+
+class FilterForm(forms.Form):
+    FILTER_CHOICES = (
+        ('-nb_likes', 'Popularite'),
+        ('-points', 'Points'),
+        ('-nb_questions', 'Nombre de questions'),
+        ('-views', 'Nombre de vues'),
+    )    
+    
+    filtermembers = forms.ChoiceField(choices=FILTER_CHOICES, widget=forms.Select())
 
