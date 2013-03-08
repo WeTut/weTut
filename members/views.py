@@ -11,6 +11,8 @@ from members.models import *
 from tutorials.models import Question, FollowQuestion
 
 def profile(request):
+	profile = Profile.objects.get(user=request.user)
+
 	if request.method == 'POST': # If the form has been submitted...
 		if request.POST['submit'] == 'profileSubmit':#Si une reponse a ete envoyee
 			form = ProfileForm(request.POST, request.FILES) # A form bound to the POST data
@@ -20,8 +22,11 @@ def profile(request):
 					post.avatar = profile.avatar
 				post.user = request.user
 				post.email = profile.email
-				post.points = 0
+				post.points = profile.points
 				post.status = profile.status
+				post.views = profile.views
+				post.nb_likes = profile.nb_likes
+				post.nb_questions = profile.nb_questions
 				profile.delete()
 				post.save()
 				profile = Profile.objects.get(user=request.user)
