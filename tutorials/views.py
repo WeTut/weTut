@@ -90,6 +90,7 @@ def question(request,slug):
 	question.views += 1
 	question.save()
 	answers = Answer.objects.filter(question=question).order_by('-nb_likes')
+	ready = False
 
 	if request.user.is_authenticated():
 
@@ -159,11 +160,14 @@ def question(request,slug):
 				question.save() #Save it
 				return HttpResponseRedirect('/tutoriels') # Redirect
 
+		if  request.method == 'GET' and 'ready' in request.GET :
+			ready = True
+
 
 	answerform = AnswerForm() # An unbound form
 	commentform = CommentAnswerForm() # An unbound form
 
-	return render_to_response('tutorials/question.html', {'question': question, 'answerform':answerform, 'commentform':commentform, 'answers':answers}, context_instance=RequestContext(request))
+	return render_to_response('tutorials/question.html', {'question': question, 'answerform':answerform, 'commentform':commentform, 'answers':answers, 'ready':ready}, context_instance=RequestContext(request))
 
 def tutorial(request,slug):
 	tutorial = get_object_or_404(Question, slug=slug)

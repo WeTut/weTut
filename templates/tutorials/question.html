@@ -6,15 +6,20 @@
 	<div class="question_banner">
 		<div class="content_banner">
 			
-			<!-- <form method="post" class="validateform" action="">
-			{% csrf_token %} -->
 			<div id="question">
+
+			{% if question.user == user %}					
 				<!-- If the authentificated user is the author -->
-				<!--<div {% if question.user != user %} style='display:none;'{% endif %}>
-					<a class='btn btn-success btn-block vcenter' id="usefullValidate">J'ai eu ma réponse</a>
-					<button class='btn btn-primary btn-block vcenter pendingValidation' name='validateSubmit' type="submit" value="validateSubmit" id="validateSubmit">Check !</button>
-				</div> -->
-				
+				{% if not ready %}
+				<a href='/questions/{{question.slug}}?ready=1' class='btn btn-success btn-block vcenter' id='usefullValidate'>J'ai eu ma réponse</a>
+				{% else %}
+				<a href='/questions/{{question.slug}}' class='btn btn-success btn-block vcenter' id='usefullValidate'>Finalement non !</a>
+				<form method="post" class="validateform" action="">
+				{% csrf_token %}
+				<button class='btn btn-primary btn-block vcenter pendingValidation' name='validateSubmit' type='submit' value='validateSubmit' id='validateSubmit'>Check !</button>
+				{% endif %}
+
+			{% endif %}
 				<div class="body_question">
 					<div class="left_question_body">
 						<div class="member">
@@ -58,9 +63,14 @@
 	<!-- START ANSWER -->			
 				<div id='answer{{answer.id}}' class='row-fluid'>
 					<div class='span2'>
-						<div {% if question.user != user %} style='display:none;'{% endif %}>		
-							<!-- <input style="float:right;" class="pendingValidation" type="checkbox" value="{{answer.id}}" name="usefull"> -->
-						</div>	
+
+						{% if question.user == user %}
+							{% if ready %}
+						<div>		
+							<input style="float:right;" class="pendingValidation" type="checkbox" value="{{answer.id}}" name="usefull">
+						</div>
+							{% endif %}
+						{% endif %}
 					</div>
 					<div class='span10'>
 						<div class="one_answer">
@@ -68,6 +78,7 @@
 								<div class='like_member'>{{ answer.getLikesCount }}</div>
 								<div class='arrow'>
 									{% if user.is_authenticated %}
+										{% if not ready %}
 										<form method='post' action='' class='likeform'>
 											{% csrf_token %}
 											<input type='hidden' name='answerId' value='{{answer.id}}' />
@@ -86,6 +97,7 @@
 											{% endif %}
 											</div>
 										</form>
+										{% endif %}
 									{% endif %}								
 								</div>
 								<div class='image'><img src="../../static/images/membre_de_luxe.png" /></div>
@@ -156,7 +168,12 @@
 			</div>
 	<!-- END ANSWER -->			
 			{% endfor %}
-<!-- END ANSWERS -->			
+<!-- END ANSWERS -->
+			{% if question.user == user %}					
+				{% if ready %}</form>{% endif %}
+			{% endif %}
+
+
 				<form action="" method="post" enctype="multipart/form-data">
 				{% csrf_token %}
 				<div class="row">
