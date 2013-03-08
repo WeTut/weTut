@@ -1,24 +1,34 @@
 $(document).ready(function(){
-
 	
 
-	$('#question .likeform').submit(function(){
+	$('.likeform').submit(function(){
+		var submit = $(this).find('button').val() ;
 		var csrf = $(this).find('input[name=csrfmiddlewaretoken]').val();
 		var answerId = $(this).find('input[name=answerId]').val();
 		
+		var top_arrow = "<button class='likebutton' name='likesubmit' type='submit' value='likesubmit'></button>";
+		var bottom_arrow = "<button class='dislikebutton' name='dislikesubmit' type='submit' value='dislikesubmit'></button>";
+
+		if ( submit == 'likesubmit' )
+			var top_arrow = "<img src='/static/images/pictos/top_arrow_g.png' />";
+		else
+			var bottom_arrow = "<img src='/static/images/pictos/top_arrow_g.png' />";
+
+	
 		$.ajax({
 		  	type: "POST",
 			url: "",
-		  	data: { submit:'likeSubmit', csrfmiddlewaretoken:csrf, answerId:answerId}
+		  	data: { submit:submit, csrfmiddlewaretoken:csrf, answerId:answerId}
 		}).done(function( likes ) {
-
-				$('#answer'+answerId+' table td.big').text(likes);
-				$('#answer'+answerId+' table td.small').text('Vous aimez');
-				return false			
+				$('#answer'+answerId+' .like_member').text(likes);
+				$('#answer'+answerId+' .top_arrow').html(top_arrow);
+				$('#answer'+answerId+' .bottom_arrow').html(bottom_arrow);
+				return false;			
 		});
 
 		return false;
 	});
+
 
 	$('.followForm').submit(function(){
 		var csrf = $(this).find('input[name=csrfmiddlewaretoken]').val();
@@ -61,6 +71,12 @@ $(document).ready(function(){
 
 		return false;
 	});
+
+
+	$('.validateform').submit(function(){
+		alert("validateform");
+	});
+
 
 
 	$('#id_filter').change(function(){

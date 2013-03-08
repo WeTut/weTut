@@ -126,7 +126,8 @@ input.file {width:460px; position: relative; text-align: right; -moz-opacity:0; 
 
 textarea#id_comment{border:solid 1px #f53749; height:120px; font-family: 'Rambla', sans-serif; color:#b8b7b6;}
 
-
+.likebutton{ background: url("/static/images/pictos/top_arrow.png"); border: medium none; width:26px; height:29px;}
+.dislikebutton{ background: url("/static/images/pictos/bottom_arrow.png"); border: medium none; width:26px; height:29px;}
 
 
 

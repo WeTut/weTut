@@ -95,14 +95,19 @@ def question(request,slug):
 
 		for answer in answers:
 			answer.currentUserLiked = False
+			answer.currentUserDisliked = False
 			like = Like.objects.filter(answer=answer, user=request.user)
-			if like.exists():
-				answer.currentUserLiked = True
+			if like.exists():				
+				like = Like.objects.get(answer=answer, user=request.user)
+				if like.type == 0:
+					answer.currentUserDisliked = True
+				else:
+					answer.currentUserLiked = True
 
 
-		if  request.method == 'POST' and 'submit' in request.POST: # If the form has been submitted...
-			
-			if request.POST['submit'] == 'answerSubmit':#Si une reponse a ete envoyee 
+		if  request.method == 'POST': # If the form has been submitted...
+
+			if 'answersubmit' in request.POST:#Si une reponse a ete envoyee 
 				form = AnswerForm(request.POST, request.FILES) # A form bound to the POST data
 				if form.is_valid(): # All validation rules pass
 					post = form.save(commit=False)
@@ -116,7 +121,7 @@ def question(request,slug):
 					question.save()
 
 
-			elif request.POST['submit'] == 'commentSubmit':#Si un commentaire a ete envoye
+			elif 'commentsubmit' in request.POST:#Si un commentaire a ete envoye
 				form = CommentAnswerForm(request.POST, request.FILES) # A form bound to the POST data
 				if form.is_valid(): # All validation rules pass
 					post = form.save(commit=False)
@@ -125,18 +130,29 @@ def question(request,slug):
 					post.answer = get_object_or_404(Answer, id=request.POST['answerId'])
 					post.save()
 
-			elif request.POST['submit'] == 'likeSubmit':#Si un like a ete envoye
-				like = Like()
-				like.user = request.user
-				like.answer = get_object_or_404(Answer, id=request.POST['answerId'])
-				like.save()
-				
+			elif 'submit' in request.POST:#Si un like a ete envoye
 				answer = get_object_or_404(Answer, id=request.POST['answerId'])
-				answer.nb_likes +=1
-				answer.save()
-				return HttpResponse( like.answer.getLikesCount() )
+				currentlike = Like.objects.filter(answer=answer, user=request.user)
+				if currentlike.exists():
+					currentlike = Like.objects.get(answer=answer, user=request.user)
+				else:
+					currentlike = Like()
+					currentlike.user = request.user
+					currentlike.answer = answer				
 
-			elif request.POST['submit'] == 'validateSubmit':#Valider une question
+				if request.POST['submit'] == 'likesubmit':
+					currentlike.type = 1
+				else:
+					currentlike.type = 0
+
+				currentlike.save()
+				answer.nb_likes = answer.getLikesCount()
+				answer.save()
+
+				return HttpResponse( answer.nb_likes )
+
+
+			elif 'validatesubmit' in request.POST:#Valider une question
 				usefull_checked = request.POST.getlist('usefull') #Get the list of the checked answers
 				Answer.objects.filter(id__in=usefull_checked).update(usefull=True) #According to this list, Set the matching "usefull" field to True
 				question.validate=True #The Question is finished. Set Bool validate attribute to True
