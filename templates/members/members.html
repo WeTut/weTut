@@ -3,52 +3,79 @@
 
 {% block content %}
 	
-<div class="content">
+
 	 <!-- START BANNER --> 
 	<div class='banner_members'>
-	    <form id='filtermembersform' action="" method="POST">
-			{% csrf_token %}
-	        <ul>
-	        {{ filterform.as_ul}}	        
-	        </ul>
-	        <input name="submit" type="hidden" value="filterMembersSubmit" />
-        </form>
-	</div>
-	 <!-- END BANNER -->
-
-	<div id="members">
-	{% for member in members %}
-		<div id="member{{member.id}}" class="span12" >
-			<div class="span4">
-				<img src="{{MEDIA_URL}}{{member.avatar}}" title="{{member.user.username}}" alt="{{member.user.username}}" />
-			</div>
-			<div class"span4">
-				<a href='{{member.user.username}}'><h1>{{member.user.username}}</h1></a>
-				<hr />				
-				<h2>{% if member.job and member.employer %} {{member.job}}, {{member.employer}} {% else %} Emploi non renseigné {% endif %}</h2>
-				
-			</div>
-			<div class"span4">
-				<table border="1">
-					<tr>
-						<td>Questions</td>
-						<td>Vues</td>
-						<td>Points</td>
-						<td>Likes</td>
-					</tr>
-					<tr>
-						<td>{{ member.nb_questions }}</td>
-						<td>{{ member.views }}</td>
-						<td>{{ member.points }}</td>
-						<td>{{ member.nb_likes }}</td>
-					</tr>
-				</table>				
-			</div>	
+		<div class='content_banner_members'>
+	        <div class="search_members">
+	        	 <div class="glass"><img src="../../static/images/pictos/grey_glass.png" /></div>
+	        	 <div class="separator"></div>
+	        	 <div class="text">Rechercher un membre</div>
+	        </div>
+	        <div class="tri">
+	        	<div class="tri_choice" id="selected" style="margin-right:11px; background-color:#9C9C9C;">Plus actifs</div>
+	        	<div class="tri_choice" style="margin-right:11px;">Plus populaires</div>
+	        	<div class="tri_choice" style="margin-right:11px;">Plus vus</div>
+	        	<div class="tri_choice">Mieux notés</div>
+	        </div>
 		</div>
-		<br />
-	{% endfor %}
 	</div>
-	 
+	<div class='grey_line'></div>
+	 <!-- END BANNER -->
+<div class="content_members">	
+		<div class='row-fluid' >
+			{% for member in members %}
+				<div class='cat4'>
+					<div class="one_member">
+						<div class="infos">
+							<div class="picture">
+								<img src="{{MEDIA_URL}}{{member.avatar}}" title="{{member.user.username}}" alt="{{member.user.username}}" />
+							</div>
+							<div class="socials_infos">
+								<div class="likes">{{ member.nb_likes }}</div>
+								<div class="responses">{{ member.nb_questions }}</div>
+								<div class="views">{{ member.views }}</div>
+							</div>
+						</div>
+						<div class="perso_infos">
+							<div class="left_infos">
+								<div class="name">
+									<a href='{{member.user.username}}'>{{member.user.username}}</a>
+								</div>
+								<div class="city">
+									{% if member.city and member.state %} 
+										{{member.city}}, {{member.state}} 
+									{% else %} 
+										{% if member.city %} 
+											{{member.city}}
+										{% endif %}
+										{% if member.state %} 
+											{{member.state}}
+										{% endif %}
+									{% endif %}
+								</div>
+								<div class="date"></div>
+							</div>
+							<div class="right_infos">
+								<div class="job">
+									{% if member.job %} {{member.job}} {% else %} {% endif %}
+								</div>
+								<div class="city_job">
+									{% if member.employer %} {{member.employer}} {% else %} {% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>	 
 </div>
+<form id='filtermembersform' action="" method="POST">
+				{% csrf_token %}
+		        <ul>
+		        {{ filterform.as_ul}}	        
+		        </ul>
+		        <input name="submit" type="hidden" value="filterMembersSubmit" />
+	        </form>
 {% endblock content %}
 
