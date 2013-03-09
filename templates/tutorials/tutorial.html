@@ -2,64 +2,157 @@
 
 {% block content %}
 
-<div class="content">
-
-	<div id="question">
-		<h1>{{question.title}}</h1>
-		<h5>posté par {{question.user.username}}</h5>
-		
-		<p>{{question.message}}</p>
-		<img src='{{question.picture.url}}'/>
-		
-		<hr>
-		
-		{% for answer in answers %}
-			<div id='answer{{answer.id}}' class='row-fluid'>
-				<div class='span2'>
-					<div class='span11'>
-						<table class='table table-bordered'>
-							<tr height='30px'>
-								<td class='big'>{{ answer.getLikesCount }}</td>
-							</tr>
-							<tr height='50px'>
-								<td colspan="2">{{ answer.user }}</td>
-							</tr>
-						</table>
-					</div>			
-				</div>
-					{% if answer.usefull %}
-						<div class='span10' style="background-color:#51a351">
-					{% else %}
-						<div class='span10' >
-					{% endif %}	
-					<table class='table table-bordered'>
-						<tr height='80px'>
-							<td colspan='2'>{{ answer.answer|truncatechars:200|safe }}</td>
-						</tr>
-						<tr height='20px'>
-							<td ><i>{{ answer.date }}</i></td>
-							<td ><a href=''>Signaler un abus</a></td>					
-						</tr>
-					</table>
-				</div>
-					
-				{% for comment in answer.getComments %}
-				<div class='span12' >
-					<div class='span1' >
-						{{ comment.user.username }}
-					</div>
-					<div class='span11' >
-						{{ comment.comment|truncatechars:200 }}
-					</div>
-				</div>
-				{% endfor %}
-
-			</div>
-		
-			<hr/>
+<!-- START BANNER -->
+	<div class="question_banner">
+		<div class="content_banner">
 			
-		{% endfor %}
-		
+			<div id="question">
+				<div class="body_question">
+					<div class="left_question_body">
+						<div class="member">
+							<div class="image"><img src="../../static/images/membre_de_luxe.png" /></div>
+							<div class="infos" style="background-color:#01c6e8;">
+								<div class="name"><p>Posté par {{question.user.username}}</p></div>
+								<div class="date"><p>le {{question.date}}</p></div>
+							</div>
+						</div>
+						<img src='{{question.picture.url}}'/>
+					</div>
+					<div class="right_question_body">
+						<div class="title"><p>{{question.title}}</p></div>
+						<div class="tags"></div>
+						<div class="text">
+							<p>{{question.message}}</p>
+						</div>
+						<div class="medias">
+							<p>Autres Medias :</p>
+							<div class="other_media" style="background-color:#01c6e8;"><img src="../../static/images/pictos/play.png" /></div>
+							<div class="supermedia"></div>
+							<div class="supermedia"></div>
+							<div class="supermedia"></div>
+						</div>
+						<div class="abus"><p style="color:#01c6e8;">Signaler un abus</p></div>
+					</div>
+				
+				</div>
+			</div>	
+		</div>	
 	</div>
-</div>
+		
+<!-- END BANNER -->		
+
+		<div class="content">
+
+<!-- START ANSWERS -->
+
+		{% for answer in answers %}	
+
+	<!-- START ANSWER -->			
+				<div id='answer{{answer.id}}' class='row-fluid'>
+					{% if answer.usefull %}
+					<div class='span2'>
+							<img src="../../static/images/certified.png" />
+					</div>
+					{% else %}
+						<div class='span2'></div>
+					{% endif %}	
+					<div class='span10'>
+						<div class="one_answer">
+							<div class="member" style="background-color:#01c6e8;">
+								<div class='like_member'>{{ answer.getLikesCount }}</div>
+								<div class='arrow'>						
+								</div>
+								<div class='image'><img src="../../static/images/membre_de_luxe.png" /></div>
+							</div>
+							<div class="body_answer">
+								<div class="date"><p>Par {{ answer.user }} le {{ answer.date }}</p></div>
+								<div class='text'>
+									<p>{{ answer.answer|truncatechars:400|safe }}
+									</p>
+								</div>
+								<div class='abus'><p style="color:#01c6e8;">Signaler un abus</p></div>
+							</div>
+						</div>
+					</div>
+					<div class="comment_read">
+						<div class='row-fluid' >
+							<div class='span4'></div>
+							<div class='span8'>
+								<img src="../../static/images/pictos/plus.png" alt="plus" />
+								<p>{{ answer.getComments.count }} commentaires</p>
+							</div>
+						</div>
+					</div>
+
+		<!-- START COMMENTS -->		
+				<div class="comments_answer" style="display:none;">
+					{% for comment in answer.getComments %}
+					<div class="comment_question">
+						<div class='row-fluid' >
+							<div class='span4'></div>
+							<div class='span8'  style="">
+								<div class='image'>
+									<img src="../../static/images/membre_de_luxe.png" />
+								</div>
+								<div class='texte' >
+									<div class="name"><p>Posté par {{comment.user}} le {{comment.date}}</p></div>
+									{{ comment.comment|truncatechars:200 }}
+									<div class='abus'><p style="color:#01c6e8;">Signaler un abus</p></div>
+								</div>
+							</div>
+						</div>
+					</div>				
+				{% endfor %}
+				</div>
+		<!-- END COMMENTS -->
+
+		<!-- START COMMENTFORM -->
+
+		<!-- END COMMENTFORM -->
+			</div>
+	<!-- END ANSWER -->			
+			{% endfor %}
+<!-- END ANSWERS -->
+				
+<script src="{{ STATIC_URL }}javascripts/NicEdit.js"></script>
+
+<script type="text/javascript">
+/* NicEdit script */
+	bkLib.onDomLoaded(function() {
+    	new nicEditor({buttonList : ['bold','italic','image','upload','link','youTube']}).panelInstance('id_answer');
+	});
+
+/* Revealator for the validate button */
+	$("#usefullValidate").click(function () {
+		  $(".pendingValidation").show();
+		  $("#usefullValidate").hide();
+	});
+	
+
+</script>
+
+<script type="text/javascript">
+$(".comment_read").click(
+		function (event) {
+			//fait apparaitre/disparaitre le texte
+			$(event.currentTarget).next(".comments_answer").slideToggle();
+			//on change l'image +/- a coté du titre
+			var imgUrl = $(event.currentTarget).find("img").attr("src");
+			
+			var flip = 0;
+			$("p").toggle( flip++ % 2 == 0 );
+
+			//si on trouve plus.png -> on met minus et inversement
+			if(imgUrl.search(/plus.png/i) != -1) {
+				$(event.currentTarget).find("img").attr("src", "../../static/images/pictos/minus.png");
+				$(event.currentTarget).find("img").attr("alt", "minus");
+			}
+			else {
+				$(event.currentTarget).find("img").attr("src", "../../static/images/pictos/plus.png");
+				$(event.currentTarget).find("img").attr("alt", "plus");
+		}
+	});
+</script>
+
+<div class="clear"></div>
 {% endblock content %}
