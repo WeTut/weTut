@@ -25,7 +25,7 @@
 						<div class="member">
 							<div class="image"><img src="../../static/images/membre_de_luxe.png" /></div>
 							<div class="infos">
-								<div class="name"><p>Posté par {{question.user.username}}</p></div>
+								<div class="name"><p>Posté par <a href="">{{question.user.username}}</a></p></div>
 								<div class="date"><p>le {{question.date}}</p></div>
 							</div>
 						</div>
@@ -103,7 +103,7 @@
 								<div class='image'><img src="../../static/images/membre_de_luxe.png" /></div>
 							</div>
 							<div class="body_answer">
-								<div class="date"><p>Par {{ answer.user }} le {{ answer.date }}</p></div>
+								<div class="date"><p>Par <a href=""> {{ answer.user }}</a> le {{ answer.date }}</p></div>
 								<div class='text'>
 									<p>{{ answer.answer|truncatechars:400|safe }}
 									</p>
@@ -117,7 +117,12 @@
 							<div class='span4'></div>
 							<div class='span8'>
 								<img src="../../static/images/pictos/plus.png" alt="plus" />
-								<p>{{ answer.getComments.count }} commentaires</p>
+								<p>{{ answer.getComments.count }} 
+									{% if answer.getComments.count == 0 or answer.getComments.count == 1 %}														commentaire
+									{% else %}
+										commentaires
+									{% endif %}
+								</p>
 							</div>
 						</div>
 					</div>
@@ -133,8 +138,8 @@
 									<img src="../../static/images/membre_de_luxe.png" />
 								</div>
 								<div class='texte' >
-									<div class="name"><p>Posté par {{comment.user}} le {{comment.date}}</p></div>
-									{{ comment.comment|truncatechars:200 }}
+									<div class="name"><p>Posté par <a href="">{{comment.user}}</a> le {{comment.date}}</p></div>
+									<div class="text_comment"><p>{{ comment.comment}}</p></div>
 									<div class='abus'><p>Signaler un abus</p></div>
 								</div>
 							</div>

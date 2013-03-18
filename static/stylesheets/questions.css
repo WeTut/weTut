@@ -89,6 +89,7 @@ input.file {width:460px; position: relative; text-align: right; -moz-opacity:0; 
 .left_question_body .member .image{width:80px; height:80px; float:left;}
 .left_question_body .member .infos{float:left;width:230px; height:65px; background-color:#f53749; color:#FFFFFF; text-align:center; padding-top:15px;}
 .left_question_body .member .infos .name{font-size:16px;}
+.left_question_body .member .infos .name a{color:#FFFFFF;}
 .left_question_body .member .infos .date{font-style:italic; font-size:14px;}
 
 .right_question_body{width:610px; height:320px; float:left;}
@@ -114,17 +115,22 @@ input.file {width:460px; position: relative; text-align: right; -moz-opacity:0; 
 .one_answer .member .image img{border-bottom-left-radius:3px;}
 
 .one_answer .body_answer .date{color:#b8b7b6; font-size:14px;}
-.one_answer .body_answer{float:left; background-color:#FFFFFF; padding:5px 10px 5px 10px; width:680px; border-top-right-radius:3px; border-bottom-right-radius:3px; height:200px;}
+.one_answer .body_answer .date a{color:#b8b7b6;}
+.one_answer .body_answer{float:left; background-color:#FFFFFF; padding:5px 10px 5px 10px; width:679px; border-top-right-radius:3px; border-bottom-right-radius:3px; height:200px;}
 .one_answer .body_answer .text{height:155px;}
 .one_answer .body_answer .abus p{font-size:12px; color:#f53749; clear:both; float:right;}
 
-.comment_question .span8{background-color:#FFFFFF; margin-bottom:5px; padding:5px;}
+.comment_question .span8{background-color:#FFFFFF; margin-bottom:5px; padding:5px; min-height:97px;}
 .comment_question .span8 .image{float:left; margin-right:10px;}
-.comment_question .span8 .abus p{font-size:12px; color:#f53749; clear:both; float:right;}
+.comment_question .span8 .abus{height:10px;}
+.comment_question .span8 .texte{width:520px; margin-left:90px;}
+.comment_question .span8 .abus p{font-size:12px; color:#f53749; float:right; height:10px;}
 .comment_question .span8 .texte .name p{font-size:14px; color:#b8b7b6;}
+.comment_question .span8 .texte .name a{color:#b8b7b6;}
+.comment_question .span8 .texte .text_comment p{min-height:27px;}
 
 .comment_read{width:940px; height:40px; float:right; margin-top:5px; margin-bottom:5px;}
-.comment_read .span8{background-color:#FFFFFF; width:620px; height:40px; padding:5px;}
+.comment_read .span8{background-color:#FFFFFF; width:619px; height:40px; padding:5px;}
 .comment_read img{float:left; margin-right:15px; margin-top:6px;}
 .comment_read p{margin-top:6px;}
 
@@ -132,7 +138,7 @@ input.file {width:460px; position: relative; text-align: right; -moz-opacity:0; 
 
 .span2 button.wetut{background-color:#f53749; border:none; border-radius:3px; color:#FFFFFF; font-family: 'bebas_neue'; font-size:16px; width: 140px; height:30px;}
 
-textarea#id_comment{border:solid 1px #f53749; height:120px; font-family: 'Rambla', sans-serif; color:#b8b7b6;}
+textarea#id_comment{border:solid 1px #f53749; height:40px; font-family: 'Rambla', sans-serif; color:#b8b7b6; border-radius:3px; line-height:30px;}
 
 .likebutton{ background: url("/static/images/pictos/top_arrow.png"); border: medium none; width:26px; height:29px;}
 .dislikebutton{ background: url("/static/images/pictos/bottom_arrow.png"); border: medium none; width:26px; height:29px;}
