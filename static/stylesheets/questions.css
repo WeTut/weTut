@@ -5,11 +5,11 @@ QUESTIONS STYLESHEET
 /* ------------------RUBRIQUE QUESTIONS------------------ */
 
 
-.banner_questions{width:100%; height:413px; background-image:url(../images/background_banner.png); background-repeat:x; position:relative; z-index:1; top:-34px; box-shadow: 0px 2px 8px #DDDDDD;}
+.banner_questions{width:100%; height:413px; background-image:url(../images/background_banner.png); background-repeat:x; position:relative; z-index:1; box-shadow: 0px 2px 8px #DDDDDD;}
 
 .content_banner_questions{width: 880px; height:413px; margin:0 auto; padding-top:60px;}
 
-.ask_questions_button{width:310px; height:60px; background-color:#f53749; text-align:center; border-radius:3px;}
+.ask_questions_button{width:310px; height:60px; background-color:#f53749; text-align:center; border-radius:3px; margin-top:30px;}
 .ask_questions_button p{font-family:'bebas_neue'; font-size:25px; line-height:65px;}
 .ask_questions_button a{color:#FFFFFF;}
 
@@ -59,7 +59,7 @@ QUESTIONS STYLESHEET
 /* ------------------POSER UNE QUESTION------------------ */
 
 
-#ask_banner{background-image:url('../images/back_ask_banner.png'); width:100%; height:132px; background-repeat:x; position:relative; z-index:1; top:-34px; box-shadow: 0px 2px 8px #DDDDDD;}
+#ask_banner{background-image:url('../images/back_ask_banner.png'); width:100%; height:132px; background-repeat:x; position:relative; z-index:1; box-shadow: 0px 2px 8px #DDDDDD;}
 #ask_banner #content_banner{width: 880px; height:132px; margin:0 auto; padding-top:75px;}
 #ask_banner #content_banner p{font-family:'bebas_neue'; font-size:40px; color:#1e2226;}
 
@@ -140,7 +140,7 @@ textarea#id_comment{border:solid 1px #f53749; height:120px; font-family: 'Rambla
 
 /* ------------------RUBRIQUE TUTOS------------------ */
 
-.banner_tutos{width:100%; height:266px; background-image:url(../images/back_banner_tutos.png); background-repeat:x; position:relative; z-index:1; top:-34px; box-shadow: 0px 2px 8px #DDDDDD;}
+.banner_tutos{width:100%; height:266px; background-image:url(../images/back_banner_tutos.png); background-repeat:x; position:relative; z-index:1; box-shadow: 0px 2px 8px #DDDDDD;}
 .banner_tutos .content_tutos{width:940px; margin:0 auto; padding-top:60px;}
 
 .one_tuto{background-color:#FFFFFF; width:195px; height:180px; padding:5px; margin-bottom:50px;}
@@ -151,4 +151,6 @@ textarea#id_comment{border:solid 1px #f53749; height:120px; font-family: 'Rambla
 .one_tuto .img .infos{float:left;width:34px; height:86px; background-color:#01c6e8; padding:17px 3px 17px 3px; text-align:center; color:#01c6e8; font-family:'bebas_neue'; font-size:14px;}
 .one_tuto .img .infos .responses{ background-image:url("/static/images/pictos/bulle_wetut_tutos.png"); height:29px; line-height:31px;}
 .one_tuto .img .infos .views{ background-image:url("/static/images/pictos/like_wetut_tutos.png"); height:29px; margin-top:30px; line-height:30px;}
+
+.content_tutos{margin-top:30px;}
 
