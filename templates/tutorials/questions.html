@@ -80,7 +80,7 @@
 				</div>
 				<div class="infos_questions">
 					<div class="title"><a href='{{question.slug}}'>{{ question.title }}</a></div>
-					<div class="date"><p>Par Gisele 77</p> <p style="font-style:italic; font-size:10px; margin-top:1px;">le 12/02/2012</p></div>
+					<div class="date"><p>Par {{question.user}}</p> <p style="font-style:italic; font-size:10px; margin-top:1px;">le {{question.date}}</p></div>
 					<div class="tags"></div>
 					<div class="text"><p>{{ question.message|truncatechars:80 }}</p></div>
 				</div>

@@ -14,22 +14,24 @@
 		<p style="font-style:italic; color:#9c9c9c; font-size:12px;">* Champs obligatoires</p>
 	
 		<form id="questionForm" action="" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
 			<div class="row-fluid marketing">
 				<div class='span6'>
-					<div style='display:none'>
-						<input type='hidden' name='csrfmiddlewaretoken' value='2pCAgrdAiZ0kaCm6CXX5kNCPn2F3HfqK' />
-					</div>
 					<p><input type="text" name="title" placeholder="Title*"  id="id_title" class="" size="40" title="Title*" /></p>
 					
-					<div class="fileinputs">
+					<!--<div class="fileinputs">
 						<input class="file" type="file">
 						<div class="fakefile">
 							<input type="text" class="filevisible" placeholder="Selectionner une image*">
-							<div class="file_img">	
-								<img src="../../static/images/pictos/upload.png">
+							<div class="file_img">
+								<img src="/static/images/pictos/upload.png">
 							</div>
 						</div>
+					</div>-->
+					<div>
+						{{form.picture}}						
 					</div>
+
 					
 					<p style="font-style:italic; color:#9c9c9c; font-size:12px; position:relative; margin-top:8px;">(Format JPEG, PNG, GIF , minimum 240 x 120px)</p>
 					

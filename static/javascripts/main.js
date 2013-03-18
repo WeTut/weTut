@@ -118,64 +118,47 @@ $(document).ready(function(){
  	
 
  	$('#tag1 select').change(function(){
-		var val = $(this).val();
-		var csrf = $('#questionForm').find('input[name=csrfmiddlewaretoken]').val();
+		var c1 = $(this).attr('class')
+		var c2 = "technical"
+		if (c1 == "technical"){
+			c2 = "software"
+		}
 
-		$.ajax({
-		  	type: "POST",
-			url: "",
-		  	data: { csrfmiddlewaretoken:csrf }
-		}).done(function( data ) {
-            if (val != 0)
-           		document.getElementById('tag2').style.display = 'block';
-			return false;			
-		});
- 
- 		return false;
+		if ($(this).val() != 0){
+           	document.getElementById('tag2').style.display = 'block';
+           	$('#tag1 .'+c2+' option[value=0]').attr('selected', 'selected');
+        }       
+		
  	});
 
  	$('#tag2 select').change(function(){
-		var val = $(this).val();
-		var csrf = $('#questionForm').find('input[name=csrfmiddlewaretoken]').val();
-
-		$.ajax({
-		  	type: "POST",
-			url: "",
-		  	data: { csrfmiddlewaretoken:csrf }
-		}).done(function( data ) {
-            if (val != 0)
-           		document.getElementById('tag3').style.display = 'block';
-			return false;			
-		});
- 
- 		return false;
- 	});
-
-
- 	$('#questionForm select').change(function(){
-		var val = $(this).val();
-		var csrf = $('#questionForm').find('input[name=csrfmiddlewaretoken]').val();		
-		var selectClass = $(this).attr('class');
-		var selectClassToUpdate = '.technical';
-		if (selectClass == 'technical'){
-			selectClassToUpdate = '.software';
+		var c1 = $(this).attr('class')
+		var c2 = "technical"
+		if (c1 == "technical"){
+			c2 = "software"
 		}
-		var parent = '#'+ $(this).closest("div").attr("id");
 
-		$.ajax({
-		  	type: "POST",
-			url: "",
-		  	data: { csrfmiddlewaretoken:csrf }
-		}).done(function( data ) {
-            if (val != 0){
-       			$(parent + ' ' + selectClassToUpdate +' option[value=0]').attr('selected', 'selected');
-           	}
-
-			return false;			
-		});
- 
- 		return false;
+		if ($(this).val() != 0){
+           	document.getElementById('tag3').style.display = 'block';
+           	$('#tag2 .'+c2+' option[value=0]').attr('selected', 'selected');
+        }       
+		
  	});
+
+ 	$('#tag3 select').change(function(){
+		var c1 = $(this).attr('class')
+		var c2 = "technical"
+		if (c1 == "technical"){
+			c2 = "software"
+		}
+
+		if ($(this).val() != 0){
+           	$('#tag3 .'+c2+' option[value=0]').attr('selected', 'selected');
+        }       
+		
+ 	});
+
+
 
 
  	$('#filtertag a').click(function(){
