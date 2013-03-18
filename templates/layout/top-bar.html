@@ -58,9 +58,25 @@ $(document).ready(function() {
             <li><a href="#inscriptionModal" role="button" data-toggle="modal" data-target="#inscriptionModal">Inscription</a></li>
             {% endif %}
            </ul>
+   	 </div>
     </div>
+	
     </div>
-    </div>
+    
+        <div class="back_search_bar"></div>
+		<div class="search_bar">
+			<div id="glass">
+				<img src="{{STATIC_URL}}images/loupe.png" alt="Recherche" />
+			</div>
+			<div id="line_search"></div>
+			<form method="get" action="../search" style="position:absolute; z-index:100;">
+				{% if query %}
+				<input id="id_q" type="text" name="q" value="{{ query }}" />
+				{% else %}
+				<input id="id_q" type="text" name="q" />
+				{% endif %}
+			</form>
+		</div>
   </div>
 
 <!-- Modal -->
@@ -105,6 +121,7 @@ $(document).ready(function() {
     </form>-->
   </div>
 </div>
+
 
 <script>
   $('#loginModal').modal('hide');

@@ -10,7 +10,7 @@ class QuestionForm(ModelForm):
 class AnswerForm(ModelForm):
 	class Meta:
 		model = Answer
-		exclude=['currentUserLiked', 'date', 'user', 'question', 'nb_likes','usefull' ]
+		exclude=['currentUserLiked', 'currentUserDisliked', 'date', 'user', 'question', 'nb_likes','usefull' ]
 
 		widgets = {
 		          'answer': forms.Textarea(attrs={'style':"width:100%"}),

@@ -6,22 +6,27 @@
 	<div class="question_banner">
 		<div class="content_banner">
 			
-			<form method="post" class="validateform" action="">
-			{% csrf_token %}
 			<div id="question">
+
+			{% if question.user == user %}					
 				<!-- If the authentificated user is the author -->
-				<div {% if question.user != user %} style='display:none;'{% endif %}>
-					<a class='btn btn-success btn-block vcenter' id="usefullValidate">J'ai eu ma réponse</a>
-					<button class='btn btn-primary btn-block vcenter pendingValidation' name='submit' type="submit" value="validateSubmit" id="validateSubmit">Check !</button>
-				</div>
-				
+				{% if not ready %}
+				<a href='/questions/{{question.slug}}?ready=1' class='btn btn-success btn-block vcenter' id='usefullValidate'>J'ai eu ma réponse</a>
+				{% else %}
+				<a href='/questions/{{question.slug}}' class='btn btn-success btn-block vcenter' id='usefullValidate'>Finalement non !</a>
+				<form method="post" class="validateform" action="">
+				{% csrf_token %}
+				<button class='btn btn-primary btn-block vcenter pendingValidation' name='validateSubmit' type='submit' value='validateSubmit' id='validateSubmit'>Check !</button>
+				{% endif %}
+
+			{% endif %}
 				<div class="body_question">
 					<div class="left_question_body">
 						<div class="member">
 							<div class="image"><img src="../../static/images/membre_de_luxe.png" /></div>
 							<div class="infos">
-								<div class="name"><p>Posté par {{question.user.username}}</p></div>
-								<div class="date"><p>le {{question.date}}<p></div>
+								<div class="name"><p>Posté par <a href="">{{question.user.username}}</a></p></div>
+								<div class="date"><p>le {{question.date}}</p></div>
 							</div>
 						</div>
 						<img src='{{question.picture.url}}'/>
@@ -44,33 +49,61 @@
 				
 				</div>
 			</div>	
-			</div>	
-		</div>
+		</div>	
+	</div>
 		
 <!-- END BANNER -->		
 
 		<div class="content">
-			
-			{% for answer in answers %}	
-			
+
+<!-- START ANSWERS -->
+
+		{% for answer in answers %}	
+
+	<!-- START ANSWER -->			
 				<div id='answer{{answer.id}}' class='row-fluid'>
 					<div class='span2'>
-						<div {% if question.user != user %} style='display:none;'{% endif %}>		
-							<input style="float:right;" class="pendingValidation" type="checkbox" value="{{answer.id}}" name="usefull">	
-						</div>	
+
+						{% if question.user == user %}
+							{% if ready %}
+						<div>		
+							<input style="float:right;" class="pendingValidation" type="checkbox" value="{{answer.id}}" name="usefull">
+						</div>
+							{% endif %}
+						{% endif %}
 					</div>
 					<div class='span10'>
 						<div class="one_answer">
 							<div class="member">
 								<div class='like_member'>{{ answer.getLikesCount }}</div>
 								<div class='arrow'>
-									<div class='top_arrow'><img src="../../static/images/pictos/top_arrow.png" /></div>
-									<div class='bottom_arrow'><img src="../../static/images/pictos/bottom_arrow.png" /></div>
+									{% if user.is_authenticated %}
+										{% if not ready %}
+										<form method='post' action='' class='likeform'>
+											{% csrf_token %}
+											<input type='hidden' name='answerId' value='{{answer.id}}' />
+											<div class='top_arrow'>
+											{% if answer.currentUserLiked %}
+											<img src="/static/images/pictos/top_arrow_g.png" />
+											{% else %}
+											<button class='likebutton' name='likesubmit' type="submit" value="likesubmit"></button>
+											{% endif %}
+											</div>
+											<div class='bottom_arrow'>
+											{% if answer.currentUserDisliked %}
+											<img src="/static/images/pictos/bottom_arrow_g.png" />
+											{% else %}
+											<button class='dislikebutton' name='dislikesubmit' type="submit" value="dislikesubmit"></button>
+											{% endif %}
+											</div>
+										</form>
+										{% endif %}
+									{% endif %}								
 								</div>
 								<div class='image'><img src="../../static/images/membre_de_luxe.png" /></div>
 							</div>
 							<div class="body_answer">
-								<div class="date"><p>Par {{ answer.user }} le {{ answer.date }}</p></div>
+								<div class="date"><p>Par <a href=""> {{ answer.user }}</a> le {{ answer.date }}</p></div>
 								<div class='text'>
 									<p>{{ answer.answer|truncatechars:400|safe }}
 									</p>
@@ -84,11 +117,17 @@
 							<div class='span4'></div>
 							<div class='span8'>
 								<img src="../../static/images/pictos/plus.png" alt="plus" />
-								<p>{{ answer.getComments.count }} commentaires</p>
+								<p>{{ answer.getComments.count }} 
+									{% if answer.getComments.count == 0 or answer.getComments.count == 1 %}														commentaire
+									{% else %}
+										commentaires
+									{% endif %}
+								</p>
 							</div>
 						</div>
 					</div>
-				
+
+		<!-- START COMMENTS -->		
 				<div class="comments_answer" style="display:none;">
 					{% for comment in answer.getComments %}
 					<div class="comment_question">
@@ -99,15 +138,18 @@
 									<img src="../../static/images/membre_de_luxe.png" />
 								</div>
 								<div class='texte' >
-									<div class="name"><p>Posté par {{comment.user}} le {{comment.date}}</p></div>
-									{{ comment.comment|truncatechars:200 }}
+									<div class="name"><p>Posté par <a href="">{{comment.user}}</a> le {{comment.date}}</p></div>
+									<div class="text_comment"><p>{{ comment.comment}}</p></div>
 									<div class='abus'><p>Signaler un abus</p></div>
 								</div>
 							</div>
 						</div>
-					</div>
-					{% endfor %}
-					
+					</div>				
+				{% endfor %}
+				</div>
+		<!-- END COMMENTS -->
+
+		<!-- START COMMENTFORM -->
 					{% if user.is_authenticated %}
 					<form action="" method="post" enctype="multipart/form-data">
 						{% csrf_token %}
@@ -122,17 +164,21 @@
 						<div class='row-fluid' >
 							<div class='span10'></div>
 							<div class='span2'>
-						    	<button style="margin-bottom:20px;" class='wetut' name='submit' type="submit" value="commentSubmit">Commenter</button>
+						    	<button style="margin-bottom:20px;" class='wetut' name='commentsubmit' type="submit" value="commentSubmit">Commenter</button>
 						     </div>
-						 </div>
-						 
+						 </div>						 
 					</form>	
 					{% endif %}	
-					
-				</div>
-				
-				{% endfor %}
-				
+		<!-- END COMMENTFORM -->
+			</div>
+	<!-- END ANSWER -->			
+			{% endfor %}
+<!-- END ANSWERS -->
+			{% if question.user == user %}					
+				{% if ready %}</form>{% endif %}
+			{% endif %}
+
+
 				<form action="" method="post" enctype="multipart/form-data">
 				{% csrf_token %}
 				<div class="row">
@@ -146,26 +192,14 @@
 					<div class="span9"></div>
 					<div class="span3" style="margin-top:15px;">
 						{% if user.is_authenticated %}
-							<button class='wetut' name='submit' type="submit" value="answerSubmit">Répondre</button>
+							<button class='wetut' name='answersubmit' type="submit" value="answerSubmit">Répondre</button>
 						{% else %}
 							<a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal" class="first">Connexion</a>
 						{% endif %}
 					</div>
 				</div>
 			</form>
-</div>
-
-<!--{% if user.is_authenticated %}
-	{% if answer.currentUserLiked %}
-		Vous aimez									
-	{% else %}
-		<form method='post' action='' class='likeform'>
-			{% csrf_token %}
-			<input type='hidden' name='answerId' value='{{answer.id}}' />
-			<button class='btn btn-primary btn-block vcenter' name='submit' type="submit" value="likeSubmit">J'aime</button>
-		</form>						
-	{% endif %}
-{% endif %}-->
+		</div>
 				
 <script src="{{ STATIC_URL }}javascripts/NicEdit.js"></script>
 
@@ -206,6 +240,6 @@ $(".comment_read").click(
 		}
 	});
 </script>
-</div></div></div></div></div></div></div>
+
 <div class="clear"></div>
 {% endblock content %}

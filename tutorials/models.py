@@ -37,6 +37,8 @@ class Question (models.Model):
 
 class Answer (models.Model):
 	currentUserLiked = models.BooleanField(default=1)
+	currentUserDisliked = models.BooleanField(default=1)
+
 	answer = models.TextField(default="Entrez votre reponse ici")
 	date = models.DateField()
 
@@ -52,7 +54,9 @@ class Answer (models.Model):
 		return CommentAnswer.objects.filter(answer=self)
 
 	def getLikesCount(self):
-		return Like.objects.filter(answer=self).count()
+		likes = Like.objects.filter(answer=self, type=1).count()
+		dislikes = Like.objects.filter(answer=self, type=0).count()
+		return max(likes-dislikes, 0)
 
 
 class Software(models.Model):
@@ -78,6 +82,7 @@ class CommentAnswer(models.Model):
 class Like(models.Model):
 	user = models.ForeignKey(User)
 	answer = models.ForeignKey(Answer)
+	type = models.IntegerField()
 
 	def hasLiked(self):
 		return Like.objects.filter(user=self.user, answer=self.answer)
