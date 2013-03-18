@@ -29,6 +29,11 @@ urlpatterns = patterns('',
     url(r'login', 'weTut.views.login_view', name='login'),
     url(r'logout', 'weTut.views.logout_view', name='logout'),
 
+    url(r'legal', 'weTut.views.legal', name='legal'),
+    url(r'contact', 'weTut.views.contact', name='contact'),
+    url(r'thanks', 'weTut.views.thanks', name='thanks'),
+    url(r'guide', 'weTut.views.guide', name='guide'),
+
     url(r'members/', include ('members.urls')),
     # url(r'^weTut/', include('weTut.foo.urls')),
 
