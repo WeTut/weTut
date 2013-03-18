@@ -103,11 +103,11 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 .notifications{margin-top:70px;}
 .notifications h4{font-family:'bebas_neue'; color:#46423f;}
 .notifs{width:538px; height:62px; background-color:#FFFFFF; position:relative; z-index:13; padding:7px;}
-.img_notif{float:left; width:60px; height:60px; background-color:#000000; margin-right:10px;}
-.member_notif{float:left; width:110px; margin-right:10px; font-family:'bebas_neue';}
+.img_notif{float:left; width:77px; height:60px; background-color:#000000; margin-right:5px;}
+.member_notif{float:left; width:110px; margin-right:5px; font-family:'bebas_neue';}
 .member_notif .question_notif{font-size:16px; color:#46423f;}
 .member_notif .name_notif{font-size:12px; color:#46423f;}
-.text_notif{float:left; width:348px; font-family: 'Rambla', sans-serif; font-size:12px; color:#46423f;}
+.text_notif{float:left; width:341px; font-family: 'Rambla', sans-serif; font-size:12px; color:#46423f;}
 .line_end_notif{width:552px; height:1px; background-color:#bcbcbc; position:relative;}
 //.notif_filters{width:554px;}
 .notif_filters .questions_filter{float:left; width:271px; height:45px; background-color:#FFFFFF; margin-right:10px; border-top-left-radius:3px; border-top-right-radius:3px;}
