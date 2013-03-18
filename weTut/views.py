@@ -4,12 +4,15 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from weTut.forms import AuthForm
+from weTut.forms import ContactForm
 from registration.forms import RegistrationForm
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.validators import validate_email
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
+
 import re
 
 from tutorials.models import *
@@ -17,8 +20,6 @@ from tutorials.forms import QuestionForm, AnswerForm, CommentAnswerForm, FilterF
 
 from registration.backends import get_backend
 from members.models import Profile
-
-
 
 def start(request):
 	questions = Question.objects.filter(validate=0).order_by('-date')[:3]
@@ -72,113 +73,27 @@ def subscribe(request):
 		form = RegistrationForm()
 	return render(request, 'general/signup.html',{'form': RegistrationForm()})
 
-# def register(request, backend, success_url='/', form_class=None,
-#              disallowed_url='registration_disallowed',
-#              template_name='general/signup.html',
-#              extra_context=None):
-#     """
-#     Allow a new user to register an account.
+def guide(request):
+	return render(request,'general/guide.html')
 
-#     The actual registration of the account will be delegated to the
-#     backend specified by the ``backend`` keyword argument (see below);
-#     it will be used as follows:
+def legal(request):
+	return render(request,'general/legal.html')
 
-#     1. The backend's ``registration_allowed()`` method will be called,
-#        passing the ``HttpRequest``, to determine whether registration
-#        of an account is to be allowed; if not, a redirect is issued to
-#        the view corresponding to the named URL pattern
-#        ``registration_disallowed``. To override this, see the list of
-#        optional arguments for this view (below).
+def contact(request):
+	if request.method == 'POST': # If the form has been submitted...
+		form = ContactForm(request.POST) # A form bound to the POST data
+		if form.is_valid(): # All validation rules pass
+			subject=form.cleaned_data['subject']
+			message=form.cleaned_data['message']
+			email=form.cleaned_data['sender']
+			recipients=['teamwetut@gmail.com']
+			#Send the mail
+			send_mail(subject, message, email, recipients)
+			return HttpResponseRedirect('/thanks/') # Redirect after POST
+	else:
+		form = ContactForm() # An unbound form
 
-#     2. The form to use for account registration will be obtained by
-#        calling the backend's ``get_form_class()`` method, passing the
-#        ``HttpRequest``. To override this, see the list of optional
-#        arguments for this view (below).
+	return render(request, 'general/contact.html', {'form': form})
 
-#     3. If valid, the form's ``cleaned_data`` will be passed (as
-#        keyword arguments, and along with the ``HttpRequest``) to the
-#        backend's ``register()`` method, which should return the new
-#        ``User`` object.
-
-#     4. Upon successful registration, the backend's
-#        ``post_registration_redirect()`` method will be called, passing
-#        the ``HttpRequest`` and the new ``User``, to determine the URL
-#        to redirect the user to. To override this, see the list of
-#        optional arguments for this view (below).
-    
-#     **Required arguments**
-    
-#     None.
-    
-#     **Optional arguments**
-
-#     ``backend``
-#         The dotted Python import path to the backend class to use.
-
-#     ``disallowed_url``
-#         URL to redirect to if registration is not permitted for the
-#         current ``HttpRequest``. Must be a value which can legally be
-#         passed to ``django.shortcuts.redirect``. If not supplied, this
-#         will be whatever URL corresponds to the named URL pattern
-#         ``registration_disallowed``.
-    
-#     ``form_class``
-#         The form class to use for registration. If not supplied, this
-#         will be retrieved from the registration backend.
-    
-#     ``extra_context``
-#         A dictionary of variables to add to the template context. Any
-#         callable object in this dictionary will be called to produce
-#         the end result which appears in the context.
-
-#     ``success_url``
-#         URL to redirect to after successful registration. Must be a
-#         value which can legally be passed to
-#         ``django.shortcuts.redirect``. If not supplied, this will be
-#         retrieved from the registration backend.
-    
-#     ``template_name``
-#         A custom template to use. If not supplied, this will default
-#         to ``registration/registration_form.html``.
-    
-#     **Context:**
-    
-#     ``form``
-#         The registration form.
-    
-#     Any extra variables supplied in the ``extra_context`` argument
-#     (see above).
-    
-#     **Template:**
-    
-#     registration/registration_form.html or ``template_name`` keyword
-#     argument.
-    
-#     """
-#     backend = get_backend(backend)
-#     if not backend.registration_allowed(request):
-#         return redirect(disallowed_url)
-#     if form_class is None:
-#         form_class = backend.get_form_class(request)
-
-#     if request.method == 'POST':
-#         form = form_class(data=request.POST, files=request.FILES)
-#         if form.is_valid():
-#             new_user = backend.register(request, **form.cleaned_data)
-#             if success_url is None:
-#                 to, args, kwargs = backend.post_registration_redirect(request, new_user)
-#                 return redirect(to, *args, **kwargs)
-#             else:
-#                 return redirect(success_url)
-#     else:
-#         form = form_class()
-    
-#     if extra_context is None:
-#         extra_context = {}
-#     context = RequestContext(request)
-#     for key, value in extra_context.items():
-#         context[key] = callable(value) and value() or value
-
-#     return render_to_response(template_name,
-#                               {'form': form},
-#                               context_instance=context)	
+def thanks(request):
+	return render(request,'general/thanks.html')
