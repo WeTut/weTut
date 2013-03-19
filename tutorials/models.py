@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django import forms
 from stdimage import StdImageField
+from django.contrib.admin.widgets import AdminDateWidget 
 
 
 class Tag(models.Model):

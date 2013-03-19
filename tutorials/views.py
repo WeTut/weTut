@@ -143,8 +143,10 @@ def question(request,slug):
 
 				if request.POST['submit'] == 'likesubmit':
 					currentlike.type = 1
+					print('LIKE')
 				else:
 					currentlike.type = 0
+					print('DISLIKE')
 
 				currentlike.save()
 				answer.nb_likes = answer.getLikesCount()

@@ -89,6 +89,10 @@
 											<button class='likebutton' name='likesubmit' type="submit" value="likesubmit"></button>
 											{% endif %}
 											</div>
+										</form>
+										<form method='post' action='' class='dislikeform'>
+											{% csrf_token %}
+											<input type='hidden' name='answerId' value='{{answer.id}}' />
 											<div class='bottom_arrow'>
 											{% if answer.currentUserDisliked %}
 											<img src="/static/images/pictos/bottom_arrow_g.png" />

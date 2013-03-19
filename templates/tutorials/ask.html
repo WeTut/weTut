@@ -19,18 +19,17 @@
 				<div class='span6'>
 					<p><input type="text" name="title" placeholder="Title*"  id="id_title" class="" size="40" title="Title*" /></p>
 					
-					<!--<div class="fileinputs">
-						<input class="file" type="file">
+					<div class="fileinputs">
+						<div style="display:none">{{form.picture}}</div>
 						<div class="fakefile">
-							<input type="text" class="filevisible" placeholder="Selectionner une image*">
+							<input type="text" name="filename" class="filevisible" placeholder="Selectionner une image*">
 							<div class="file_img">
-								<img src="/static/images/pictos/upload.png">
+								<img src="/static/images/pictos/upload.png" onclick="$('#id_picture').click();">
 							</div>
 						</div>
-					</div>-->
-					<div>
-						{{form.picture}}						
 					</div>
+					
+					
 
 					
 					<p style="font-style:italic; color:#9c9c9c; font-size:12px; position:relative; margin-top:8px;">(Format JPEG, PNG, GIF , minimum 240 x 120px)</p>
@@ -107,7 +106,7 @@
 		</form>
 	
 		<script type="text/javascript">  
-			$(document).ready( function(){ $(".file").change( function(){ $(".filevisible").attr("value",$(".file").attr("value")); });	}); 
+			$(document).ready( function(){ 	$("#id_picture").change( function(){ $(".filevisible").attr("value", document.getElementById("id_picture").files[0].name ); }); }); 
 		</script> 
 		
 		<script>
@@ -236,3 +235,4 @@
   {% endif %}
 
 {% endblock content %}
+

@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	
 
-	$('.likeform').submit(function(){
+	$('.likeform, .dislikeform').submit(function(){
 		var submit = $(this).find('button').val() ;
 		var csrf = $(this).find('input[name=csrfmiddlewaretoken]').val();
 		var answerId = $(this).find('input[name=answerId]').val();
@@ -12,7 +12,7 @@ $(document).ready(function(){
 		if ( submit == 'likesubmit' )
 			var top_arrow = "<img src='/static/images/pictos/top_arrow_g.png' />";
 		else
-			var bottom_arrow = "<img src='/static/images/pictos/top_arrow_g.png' />";
+			var bottom_arrow = "<img src='/static/images/pictos/bottom_arrow_g.png' />";
 
 	
 		$.ajax({
