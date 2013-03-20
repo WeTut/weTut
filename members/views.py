@@ -51,3 +51,9 @@ def members(request):
 		members = Profile.objects.all().order_by('-nb_likes')
 
 	return render_to_response('members/members.html', {'members': members, 'filterform':filterform}, context_instance=RequestContext(request))
+
+def member(request,slug):
+	profile = get_object_or_404(User, username=slug)
+	member = Profile.objects.get(user=profile)
+
+	return render_to_response('members/member.html', {'profile': profile, 'member': member}, context_instance=RequestContext(request))

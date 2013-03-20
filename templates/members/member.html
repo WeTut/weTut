@@ -1,0 +1,16 @@
+{% extends 'layout/base.html' %}
+
+
+{% block content %}
+
+<br/><br/><br/>
+<div class="content">
+
+	<div id='profile' >
+		<img src='{{member.avatar.url}}'/>
+		<h1>{{profile.username}}</h1>	
+		<p>{{member.city}}, {{member.state}}</p>
+	</div>
+</div>
+
+{% endblock content %}
