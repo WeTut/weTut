@@ -30,8 +30,10 @@ def start(request):
 def home(request):
 	questions = Question.objects.filter(validate=0).order_by('-date')[:3]
 	tutorials = Question.objects.filter(validate=1).order_by('-date')[:3]
-	
-	return render_to_response('general/home.html', {'questions': questions, 'tutorials': tutorials}, context_instance=RequestContext(request))
+	actualityQuestion = ActualityQuestion.objects.filter(user=request.user).order_by('-date')[:3]
+	actualityTag = ActualityTag.objects.filter(user=request.user).order_by('-date')[:3]
+
+	return render_to_response('general/home.html', {'questions': questions, 'tutorials': tutorials, 'actualityQuestion':actualityQuestion, 'actualityTag':actualityTag}, context_instance=RequestContext(request))
 
 def login_view(request):
 	if request.method == 'POST': # If the form has been submitted...
@@ -57,7 +59,7 @@ def login_view(request):
 
 def logout_view(request):
 	logout(request)
-	return HttpResponseRedirect('/home/')
+	return HttpResponseRedirect('/')
 
 def subscribe(request):
 	if request.method == 'POST':

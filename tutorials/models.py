@@ -88,6 +88,18 @@ class Like(models.Model):
 	def hasLiked(self):
 		return Like.objects.filter(user=self.user, answer=self.answer)
 
+class ActualityTag(models.Model):
+	user = models.ForeignKey(User)
+	question = models.ForeignKey(Question)
+	tag = models.ForeignKey(Tag)
+	date = models.DateField()
+
+class ActualityQuestion(models.Model):
+	user = models.ForeignKey(User)
+	question = models.ForeignKey(Question)
+	answer = models.ForeignKey(Answer)
+	date = models.DateField()
+
 class FollowQuestion (models.Model):
 	user = models.ForeignKey(User)
 	question = models.ForeignKey(Question)

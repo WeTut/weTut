@@ -110,10 +110,16 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 .text_notif{float:left; width:341px; font-family: 'Rambla', sans-serif; font-size:12px; color:#46423f;}
 .line_end_notif{width:552px; height:1px; background-color:#bcbcbc; position:relative;}
 //.notif_filters{width:554px;}
-.notif_filters .questions_filter{float:left; width:271px; height:45px; background-color:#FFFFFF; margin-right:10px; border-top-left-radius:3px; border-top-right-radius:3px;}
-.notif_filters .tags_filter{float:left; width:271px; height:45px; background-color:#bcbcbc; border-top-left-radius:3px; border-top-right-radius:3px;}
-.notif_filters .questions_filter p, .notif_filters .tags_filter p{font-family:'bebas_neue'; font-size:16px; line-height:50px; margin-left:20px; color:#FFFFFF;}
-.notif_filters .questions_filter p{color:#01c6e8;}
+
+#tags_notifs, #questions_notifs{ width:552px; height:228; background-color:#FFFFFF; }
+
+
+#questions_filter { margin-right:10px; }
+#questions_filter, #tags_filter{ float:left; width:271px; height:45px; border-top-left-radius:3px; border-top-right-radius:3px; }
+.notif_filters .active_filter{ background-color:#FFFFFF; }
+.notif_filters .inactive_filter{background-color:#bcbcbc; cursor:pointer;}
+.notif_filters .active_filter p, .notif_filters .inactive_filter p{font-family:'bebas_neue'; font-size:16px; line-height:50px; margin-left:20px; color:#FFFFFF;}
+.notif_filters .active_filter p{color:#01c6e8;}
 
 .ask_question_button{float:left; width:300px; height:120px; border-radius:3px; background-image:url(../images/ask_button.png);text-align:center; margin-bottom:40px;}
 .ask_question_button a{color:#FFFFFF; font-size:30px; line-height:130px;}

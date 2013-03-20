@@ -89,6 +89,28 @@ def question(request,slug):
 	question = get_object_or_404(Question, slug=slug)
 	question.views += 1
 	question.save()
+
+	actualityTag = ActualityTag()
+	try:
+		actualityTag = ActualityTag.objects.get(user=request.user, question=question)
+	except actualityTag.DoesNotExist:
+		actualityTag = None
+
+	if actualityTag is not None:
+		actualityTag.delete()
+
+
+	actualityQuestion = ActualityQuestion()
+	try:
+		actualityQuestion = ActualityQuestion.objects.get(user=request.user, question=question)
+	except actualityQuestion.DoesNotExist:
+		actualityQuestion = None
+
+	if actualityQuestion is not None:
+		actualityQuestion.delete()
+
+
+
 	answers = Answer.objects.filter(question=question).order_by('-nb_likes')
 	ready = False
 
@@ -121,6 +143,17 @@ def question(request,slug):
 					question.answers += 1
 					question.save()
 
+					#create actuality for all who follow this question
+					followers = FollowQuestion.objects.filter(question=question)
+					for follower in followers:
+						if request.user != follower.user:
+							actuality = ActualityQuestion()
+							actuality.user = follower.user
+							actuality.answer = post
+							actuality.question = question
+							actuality.date = datetime.now()
+							actuality.save()
+
 
 			elif 'commentsubmit' in request.POST:#Si un commentaire a ete envoye
 				form = CommentAnswerForm(request.POST, request.FILES) # A form bound to the POST data
@@ -143,10 +176,8 @@ def question(request,slug):
 
 				if request.POST['submit'] == 'likesubmit':
 					currentlike.type = 1
-					print('LIKE')
 				else:
 					currentlike.type = 0
-					print('DISLIKE')
 
 				currentlike.save()
 				answer.nb_likes = answer.getLikesCount()
@@ -208,6 +239,17 @@ def ask(request):
 			profile = get_object_or_404(Profile, user=request.user)
 			profile.nb_questions += 1
 			profile.save()
+
+			#create actuality for all who follow one of these tags
+			followers = FollowTag.objects.filter(tag__in=[post.tag1, post.tag2, post.tag3])
+			for follower in followers:
+				if request.user != follower.user:
+					actuality = ActualityTag()
+					actuality.user = follower.user
+					actuality.tag = follower.tag
+					actuality.question = post
+					actuality.date = datetime.now()
+					actuality.save()
 
 			return HttpResponseRedirect('/questions') # Redirect after POST
 	else:
