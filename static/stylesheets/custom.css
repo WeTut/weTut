@@ -184,3 +184,5 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 .bold{font-weight:bold;}
 
 .banner_members{ height:200px;}
+
+.error:not(input){color:#ff0000;margin-left:10px;display:inline;}
