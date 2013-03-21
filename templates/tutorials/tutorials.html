@@ -11,6 +11,7 @@
 		    <ul>
 		        {{ filterform.as_ul}}	        
 			</ul>
+			<input name="submit" type="hidden" value="filterSubmit" />
 		</form>
 	</div>
 </div>
@@ -22,7 +23,7 @@
 				{% if tutorial.validate %}
 			
 				<div class='span3' >
-					<div class="one_tuto">
+					<div id="tutorial{{tutorial.id}}" class="one_tuto">
 						<div class="title"><a href='{{tutorial.slug}}'>{{ tutorial.title }}</a></div>
 						<div class="img">
 							<div class="picture">
@@ -37,6 +38,16 @@
 							</div>
 							</a>
 						</div>
+						{% if user.is_authenticated %}
+							<form  class="likeTuto" action="" method="post" enctype="multipart/form-data">
+							{% csrf_token %}
+							<input class="tutoId" type="hidden" name="tutoId" value="{{tutorial.id}}"></input>
+							<div class='like'>
+								<input name="hidden" type="hidden" value="{% if tutorial.currentUserLikes %}dislike{% else %}like{% endif %}" />
+								<button class='btn-{% if tutorial.currentUserLikes %}ok{% else %}nok{% endif %}' name='likeTutoSubmit' type="submit" value="likeTutoSubmit">{% if tutorial.currentUserLikes %}Je n'aime plus{% else %}J'aime{% endif %}</button>
+							</div>
+							</form>
+						{% endif %}
 					</div>
 				</div>
 		

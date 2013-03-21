@@ -77,13 +77,35 @@ def questions(request):
 def tutorials(request):
 
 	filterform = FilterForm()
-	if request.is_ajax() and request.method == 'POST':
-		tutorials = Question.objects.all().order_by(request.POST['filter'])
-		
-	else :
-		tutorials = Question.objects.all().order_by('-date')
+
+	tutorials = Question.objects.all().order_by('-date')
+	if request.method == 'POST':
+
+		if 'filterSubmit' in request.POST:
+			tutorials = Question.objects.all().order_by(request.POST['filter'])
+
+		elif 'likeTutoSubmit' in request.POST:
+			if request.POST['hidden'] == 'like':
+				like = LikeTuto()
+				like.user = request.user
+				like.tutorial = get_object_or_404(Question, id=request.POST['tutoId'])
+				like.save()
+				return HttpResponse('liked')
+			elif request.POST['hidden'] == 'dislike':
+				like = get_object_or_404(LikeTuto, tutorial=request.POST['tutoId'], user=request.user)
+				like.delete()
+				return HttpResponse('disliked')
+
+
+	if request.user.is_authenticated() :
+		for tutorial in tutorials:
+			tutorial.currentUserLikes = False
+			like = LikeTuto.objects.filter(tutorial=tutorial, user=request.user)
+			if like.exists():
+				tutorial.currentUserLikes = True
 
 	return render_to_response('tutorials/tutorials.html', {'tutorials': tutorials, 'filterform':filterform}, context_instance=RequestContext(request))
+	
 
 def question(request,slug):
 	question = get_object_or_404(Question, slug=slug)
@@ -119,9 +141,9 @@ def question(request,slug):
 		for answer in answers:
 			answer.currentUserLiked = False
 			answer.currentUserDisliked = False
-			like = Like.objects.filter(answer=answer, user=request.user)
+			like = LikeAnswer.objects.filter(answer=answer, user=request.user)
 			if like.exists():				
-				like = Like.objects.get(answer=answer, user=request.user)
+				like = LikeAnswer.objects.get(answer=answer, user=request.user)
 				if like.type == 0:
 					answer.currentUserDisliked = True
 				else:
@@ -166,11 +188,11 @@ def question(request,slug):
 
 			elif 'submit' in request.POST:#Si un like a ete envoye
 				answer = get_object_or_404(Answer, id=request.POST['answerId'])
-				currentlike = Like.objects.filter(answer=answer, user=request.user)
+				currentlike = LikeAnswer.objects.filter(answer=answer, user=request.user)
 				if currentlike.exists():
-					currentlike = Like.objects.get(answer=answer, user=request.user)
+					currentlike = LikeAnswer.objects.get(answer=answer, user=request.user)
 				else:
-					currentlike = Like()
+					currentlike = LikeAnswer()
 					currentlike.user = request.user
 					currentlike.answer = answer				
 

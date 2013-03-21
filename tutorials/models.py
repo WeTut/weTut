@@ -15,6 +15,7 @@ class Tag(models.Model):
 
 class Question (models.Model):
 	currentUserFollows = models.BooleanField(default=1)
+	currentUserLikes = models.BooleanField(default=1)
 	title = models.CharField(max_length = 200)
 	picture = StdImageField(upload_to='questions', blank=True, size=(440, 380), thumbnail_size=(160, 120, True))
 	message = models.TextField(max_length = 400)
@@ -55,8 +56,8 @@ class Answer (models.Model):
 		return CommentAnswer.objects.filter(answer=self)
 
 	def getLikesCount(self):
-		likes = Like.objects.filter(answer=self, type=1).count()
-		dislikes = Like.objects.filter(answer=self, type=0).count()
+		likes = LikeAnswer.objects.filter(answer=self, type=1).count()
+		dislikes = LikeAnswer.objects.filter(answer=self, type=0).count()
 		return max(likes-dislikes, 0)
 
 
@@ -80,13 +81,14 @@ class CommentAnswer(models.Model):
 	date = models.DateField()
 	answer = models.ForeignKey(Answer)
 
-class Like(models.Model):
+class LikeAnswer(models.Model):
 	user = models.ForeignKey(User)
 	answer = models.ForeignKey(Answer)
 	type = models.IntegerField()
 
-	def hasLiked(self):
-		return Like.objects.filter(user=self.user, answer=self.answer)
+class LikeTuto(models.Model):
+	user = models.ForeignKey(User)
+	tutorial = models.ForeignKey(Question)
 
 class ActualityTag(models.Model):
 	user = models.ForeignKey(User)
