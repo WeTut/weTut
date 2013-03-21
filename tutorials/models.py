@@ -17,7 +17,7 @@ class Question (models.Model):
 	currentUserFollows = models.BooleanField(default=1)
 	currentUserLikes = models.BooleanField(default=1)
 	title = models.CharField(max_length = 200)
-	picture = StdImageField(upload_to='questions', blank=True, size=(440, 380), thumbnail_size=(160, 120, True))
+	picture = StdImageField(upload_to='questions', blank=True, size=(310, 224, True), thumbnail_size=(160, 120, True))
 	message = models.TextField(max_length = 400)
 	slug = models.SlugField(max_length = 200)
 	views = models.IntegerField()

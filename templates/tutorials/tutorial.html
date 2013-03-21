@@ -2,6 +2,18 @@
 
 {% block content %}
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
 <!-- START BANNER -->
 	<div class="question_banner">
 		<div class="content_banner">
@@ -33,6 +45,10 @@
 						</div>
 						<div class="abus"><p style="color:#01c6e8;">Signaler un abus</p></div>
 					</div>
+
+					<div class="fb-like" data-href="http://127.0.0.1:8000/tutoriels/{{question.slug}}" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-action="recommend"></div>
+					
+					<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://127.0.0.1:8000/tutoriels/{{question.slug}}" data-text="Découvre cette page trop cool !" data-lang="fr">Tweeter</a>
 				
 				</div>
 			</div>	
