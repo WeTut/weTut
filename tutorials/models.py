@@ -68,8 +68,8 @@ class Software(models.Model):
 		return u'%s' % (self.name)
 
 class Media(models.Model):
-	link = models.CharField(max_length = 200)
-
+	#link = models.CharField(max_length = 200)
+	link = StdImageField(upload_to='media', blank=True, size=(310, 224, True), thumbnail_size=(160, 120, True))
 	question = models.ForeignKey("Question")
 
 	def __unicode__(self):

@@ -1,5 +1,5 @@
 from django import forms
-from models import Question, Answer, CommentAnswer
+from models import Question, Answer, CommentAnswer, Media
 from django.forms import ModelForm
 
 class QuestionForm(ModelForm):
@@ -32,3 +32,8 @@ class FilterForm(forms.Form):
     )    
     
     filter = forms.ChoiceField(choices=FILTER_CHOICES, widget=forms.Select())
+
+#class MediaForm(ModelForm):
+#	class Model:
+#		model = Media
+#		exclude=['question_id']

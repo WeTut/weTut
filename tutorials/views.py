@@ -269,6 +269,7 @@ def ask(request):
 
 	if request.method == 'POST': # If the form has been submitted...
 		form = QuestionForm(request.POST, request.FILES) # A form bound to the POST data
+		#formMedia = MediaForm(request.POST, request.FILES)
 		if form.is_valid(): # All validation rules pass
 			post = form.save(commit=False)
 			title = form.cleaned_data['title']
@@ -294,6 +295,9 @@ def ask(request):
 			profile = get_object_or_404(Profile, user=request.user)
 			profile.nb_questions += 1
 			profile.save()
+
+			#media = formMedia.save(commit=False)
+			#media.question_id = post.id
 
 			#create actuality for all who follow one of these tags
 			followers = FollowTag.objects.filter(tag__in=[post.tag1, post.tag2, post.tag3])
