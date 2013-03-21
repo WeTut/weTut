@@ -126,27 +126,51 @@
 					
 				</div>
 
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$('div.questionsViews').hide();
+
+					$('a.questionsByViews').click(function() {
+						$('div.questionsDate').hide();
+						$('div.questionsViews').show();
+						$('div.box_tuts div.famous_selection').css({'backgroundColor':'#F53749'});
+						$('div.box_tuts div.date_selection').css({'backgroundColor':'#BCBCBC'});
+						return false;
+					});
+
+					$('a.questionsByDate').click(function() {
+						$('div.questionsViews').hide();
+						$('div.questionsDate').show();
+						$('div.box_tuts div.date_selection').css({'backgroundColor':'#F53749'});
+						$('div.box_tuts div.famous_selection').css({'backgroundColor':'#BCBCBC'});
+						return false;
+					});
+				})
+				</script>
+
 			<div class="span6">
 				<div class="box_tuts">
-					<a href="/questions"><div class="back_box" id="pink_box"><p>Consulter les questions</p></div></a>
+					<div class="back_box" id="pink_box"><p>Consulter les questions</p></div>
 					<div class="tri">
-						<div class="date_selection" style="background-color:#f53749;">
-							<img src="{{STATIC_URL}}images/pictos/plus_picto.png">
+						<a href="" class="questionsByDate"><div class="date_selection" style="background-color:#f53749;">
+							<img src="../../static/images/pictos/plus_picto.png">
 							<p>Derniers créés</p>
-						</div>
-						<div class="famous_selection">
-							<img src="{{STATIC_URL}}images/pictos/coeur_picto.png">
+						</div></a>
+						<a href="" class="questionsByViews"><div class="famous_selection">
+							<img src="../../static/images/pictos/coeur_picto.png">
 							<p>Plus populaires</p>
-						</div>
+						</div></a>
 					</div>
 					<div class="line_tri" style="background-color:#f53749;"></div>
-					{% for question in questions %}
+
+					<div class="questionsDate">
+					{% for questionDate in questionsDate %}
 					<div class="white_box">
 						<div class="question_body">
 							<div class="illustration_tutos">
-								<div class="img_question"><a href="#"><img src="{{STATIC_URL}}images/image_tuts.png"></a></div>
+								<div class="img_question"><a href="#"><img src="../../static/images/image_tuts.png"></a></div>
 								<div class="infos_members" style="background-color:#f53749;">
-									<div class="img_members"><img src="{{STATIC_URL}}images/membre.png" style="width:70px; height:75px;"></div>
+									<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
 									<div class="infos_questions">
 										<a href='questions/{{question.slug}}'>
 										
@@ -156,8 +180,8 @@
 										</div>
 										
 										<div class="Text_wetut_accueil">
-											<p style="color:#f53749; position:relative; z-index:1">{{ question.views }}</p>
-											<p style="color:#f53749;">{{ question.answers }}</p>
+											<p style="color:#f53749; position:relative; z-index:1">{{ questionDate.views }}</p>
+											<p style="color:#f53749;">{{ questionDate.answers }}</p>
 										</div>
 									</a>
 									</div>
@@ -165,14 +189,52 @@
 							</div>
 							<div class="description_tutos">
 								
-								<div class="title"><a href='questions/{{question.slug}}'><h4>{{question.title}}</h4></a></div>
-								<div class="text"><a href='questions/{{question.slug}}'><p>{{ question.message|truncatechars:80 }}</p></a></div>
+								<div class="title"><a href='questions/{{question.slug}}'><h4>{{questionDate.title}}</h4></a></div>
+								<div class="text"><a href='questions/{{question.slug}}'><p>{{ questionDate.message|truncatechars:80 }}</p></a></div>
 								
 							</div>	
 						</div>
 						</div>
 						<div class="line_end"></div>
 					{% endfor %}
+					</div>
+
+					<div class="questionsViews">
+					{% for questionViews in questionsViews %}
+					<div class="white_box">
+						<div class="question_body">
+							<div class="illustration_tutos">
+								<div class="img_question"><a href="#"><img src="../../static/images/image_tuts.png"></a></div>
+								<div class="infos_members" style="background-color:#f53749;">
+									<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
+									<div class="infos_questions">
+										<a href='questions/{{question.slug}}'>
+										
+										<div class="img_wetut_accueil">
+											<img src="{{STATIC_URL}}images/pictos/view_wetut_accueil.png" style="position:relative; top:3px; z-index:0;"/>
+											<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png" />
+										</div>
+										
+										<div class="Text_wetut_accueil">
+											<p style="color:#f53749; position:relative; z-index:1">{{ questionViews.views }}</p>
+											<p style="color:#f53749;">{{ questionViews.answers }}</p>
+										</div>
+									</a>
+									</div>
+								</div>
+							</div>
+							<div class="description_tutos">
+								
+								<div class="title"><a href='questions/{{question.slug}}'><h4>{{questionViews.title}}</h4></a></div>
+								<div class="text"><a href='questions/{{question.slug}}'><p>{{ questionViews.message|truncatechars:80 }}</p></a></div>
+								
+							</div>	
+						</div>
+						</div>
+						<div class="line_end"></div>
+					{% endfor %}
+					</div>
+
 					
 				</div>
 			</div>
