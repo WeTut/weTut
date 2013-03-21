@@ -112,31 +112,30 @@ def question(request,slug):
 	question.views += 1
 	question.save()
 
-	actualityTag = ActualityTag()
-	try:
-		actualityTag = ActualityTag.objects.get(user=request.user, question=question)
-	except actualityTag.DoesNotExist:
-		actualityTag = None
-
-	if actualityTag is not None:
-		actualityTag.delete()
-
-
-	actualityQuestion = ActualityQuestion()
-	try:
-		actualityQuestion = ActualityQuestion.objects.get(user=request.user, question=question)
-	except actualityQuestion.DoesNotExist:
-		actualityQuestion = None
-
-	if actualityQuestion is not None:
-		actualityQuestion.delete()
-
-
-
 	answers = Answer.objects.filter(question=question).order_by('-nb_likes')
 	ready = False
 
 	if request.user.is_authenticated():
+
+		actualityTag = ActualityTag()
+		try:
+			actualityTag = ActualityTag.objects.get(user=request.user, question=question)
+		except actualityTag.DoesNotExist:
+			actualityTag = None
+
+		if actualityTag is not None:
+			actualityTag.delete()
+
+
+		actualityQuestion = ActualityQuestion()
+		try:
+			actualityQuestion = ActualityQuestion.objects.get(user=request.user, question=question)
+		except actualityQuestion.DoesNotExist:
+			actualityQuestion = None
+
+		if actualityQuestion is not None:
+			actualityQuestion.delete()
+
 
 		for answer in answers:
 			answer.currentUserLiked = False
