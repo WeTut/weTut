@@ -1,0 +1,33 @@
+
+/* ------------------CONNEXION------------------ */
+
+
+#loginModal{width:300px; height:310px; background-color:#f6f6f1; margin:0 auto; padding:20px;}
+.modal-body p{font-family:'bebas_neue';font-size:22px; color:#9c9c9c; margin-bottom:20px;}
+
+.modal-body .input_connexion{background-color:#FFFFFF; width:300px; height:45px; border-radius:3px; margin-top:15px;}
+
+.modal-body .input_connexion .input_img{width:45px; height:45px; border-top-left-radius:3px; border-bottom-left-radius:3px; background-color:#01c6e8; float:left; margin-right:10px; text-align:center;}
+.modal-body .input_connexion .input_img img{margin-top:8px;}
+
+.modal-body .input_connexion  input{margin-top:12px; outline-style:none; border:transparent; color:#9c9c9c; font-size:14px; font-family: 'Rambla', sans-serif;}
+
+input.btn_connexion{width:70px; height:45px; background:#01c6e8 url("../../static/images/pictos/arrow_connexion.png") no-repeat center center; border:none; border-radius:3px; float:right; margin-top:20px;}
+
+.line_end_connexion{width:160px; height:2px; background-color:#9c9c9c; margin:0 auto; margin-top:30px;}
+
+.facebook_connexion{width:width:300px; height:45px; background-image:url("../../static/images/facebook_btn_connexion.png"); margin-top:30px;}
+
+/* ------------------INSCRIPTION------------------ */
+
+#inscriptionModal{width:300px; height:435px; background-color:#f6f6f1; margin:0 auto; padding:20px;}
+
+.modal-body .input_inscription{background-color:#FFFFFF; width:300px; height:45px; border-radius:3px; margin-top:15px;}
+
+.modal-body .input_inscription .input_img{width:45px; height:45px; border-top-left-radius:3px; border-bottom-left-radius:3px; background-color:#01c6e8; float:left; margin-right:10px; text-align:center;}
+.modal-body .input_inscription .input_img img{margin-top:8px;}
+.modal-body .input_inscription input.required{margin-top:12px; border:transparent; background-color:transparent; position:relative; z-index:10;}
+
+input.submit_inscription{width:70px; height:45px; background:#01c6e8 url("../../static/images/pictos/arrow_connexion.png") no-repeat center center; border:none; border-radius:3px; float:right; margin-top:20px;}
+
+.modal-body .input_inscription  input{color:#9c9c9c; font-size:14px; font-family: 'Rambla', sans-serif;}

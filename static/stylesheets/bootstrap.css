@@ -1109,15 +1109,7 @@ input[type="search"],
 input[type="tel"],
 input[type="color"],
 .uneditable-input {
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
-     -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
-       -o-transition: border linear 0.2s, box-shadow linear 0.2s;
-          transition: border linear 0.2s, box-shadow linear 0.2s;
+
 }
 
 textarea:focus,
@@ -5103,12 +5095,11 @@ input[type="submit"].btn.btn-mini {
 }
 
 .modal {
-  position: fixed;
+  position: relative;
   top: 10%;
-  left: 50%;
   z-index: 1050;
-  width: 560px;
-  margin-left: -280px;
+  width: 100%;
+  margin: 0 auto;
   background-color: #ffffff;
   border: 1px solid #999;
   border: 1px solid rgba(0, 0, 0, 0.3);
@@ -5138,7 +5129,6 @@ input[type="submit"].btn.btn-mini {
 }
 
 .modal-header {
-  padding: 9px 15px;
   border-bottom: 1px solid #eee;
 }
 
@@ -5153,8 +5143,6 @@ input[type="submit"].btn.btn-mini {
 
 .modal-body {
   position: relative;
-  max-height: 400px;
-  padding: 15px;
   overflow-y: auto;
 }
 
