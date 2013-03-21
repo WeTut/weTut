@@ -15,18 +15,15 @@ from members.models import Profile
 
 def questions(request):
 	
-	if 'filter' not in request.session:
-		request.session['filter'] = '-date'
-
-	print ("session ",request.session['filter'])
-
+	if 'filterQuestion' not in request.session:
+		request.session['filterQuestion'] = '-date'
 
 	filterform = FilterForm()
 	currentag = 0	
 	tags = Tag.objects.all()
 	userfollowstag = False
 
-	questions_list = Question.objects.filter(validate=False).order_by(request.session['filter'])	
+	questions_list = Question.objects.filter(validate=False).order_by(request.session['filterQuestion'])	
  
 	if request.method == 'POST' and 'submit' in request.POST:
 
@@ -58,7 +55,7 @@ def questions(request):
 
 		if request.POST['submit'] == 'filterSubmit': 
 			questions_list = Question.objects.filter(validate=False).order_by(request.POST['filter'])
-			request.session['filter'] = request.POST['filter']
+			request.session['filterQuestion'] = request.POST['filter']
 
 
 	paginator = Paginator(questions_list, 10)
@@ -94,19 +91,23 @@ def questions(request):
 			if follow.exists():
 				question.currentUserFollows = True	
 
-	return render_to_response('tutorials/questions.html', {'questions': questions, 'filterform':filterform, 'tags':tags, 'currentag':currentag, 'userfollowstag':userfollowstag, 'filtervalue':request.session['filter'] }, context_instance=RequestContext(request))
+	return render_to_response('tutorials/questions.html', {'questions': questions, 'filterform':filterform, 'tags':tags, 'currentag':currentag, 'userfollowstag':userfollowstag, 'filtervalue':request.session['filterQuestion'] }, context_instance=RequestContext(request))
 
 def tutorials(request):
 
 	filterform = FilterForm()
 
-	tutorials = Question.objects.all().order_by('-date')
-	if request.method == 'POST':
+	if 'filterTuto' not in request.session:
+		request.session['filterTuto'] = '-date'
 
-		if 'filterSubmit' in request.POST:
-			tutorials = Question.objects.all().order_by(request.POST['filter'])
+	tutorials_list = Question.objects.filter(validate=True).order_by(request.session['filterTuto'])
+	if request.method == 'POST' and 'submit' in request.POST:
 
-		elif 'likeTutoSubmit' in request.POST:
+		if request.POST['submit'] == 'filterSubmit':
+			tutorials_list = Question.objects.filter(validate=True).order_by(request.POST['filter'])
+			request.session['filterTuto'] = request.POST['filter']
+
+		elif request.POST['submit'] == 'likeTutoSubmit':
 			if request.POST['hidden'] == 'like':
 				like = LikeTuto()
 				like.user = request.user
@@ -119,6 +120,17 @@ def tutorials(request):
 				return HttpResponse('disliked')
 
 
+	paginator = Paginator(tutorials_list, 10)
+	tutorials = paginator.page(1)
+	if 'page' in request.GET:
+		page = request.GET.get('page')
+		try:
+			tutorials = paginator.page(page)
+		except PageNotAnInteger:
+			tutorials = paginator.page(1)
+		except EmptyPage:
+			tutorials = paginator.page(paginator.num_pages)
+
 	if request.user.is_authenticated() :
 		for tutorial in tutorials:
 			tutorial.currentUserLikes = False
@@ -126,7 +138,7 @@ def tutorials(request):
 			if like.exists():
 				tutorial.currentUserLikes = True
 
-	return render_to_response('tutorials/tutorials.html', {'tutorials': tutorials, 'filterform':filterform}, context_instance=RequestContext(request))
+	return render_to_response('tutorials/tutorials.html', {'tutorials': tutorials, 'filterform':filterform, 'filtervalue':request.session['filterTuto'] }, context_instance=RequestContext(request))
 	
 
 def question(request,slug):
