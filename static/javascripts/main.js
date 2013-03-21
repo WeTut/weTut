@@ -114,8 +114,7 @@ $(document).ready(function(){
 			url: "",
 		  	data: { submit:'filterSubmit', filter: filter, csrfmiddlewaretoken:csrf}
 		}).done(function( data ) {
-            $('body').html(data);
-           $('#filterform option[value='+filter+']').attr("selected", "selected");
+            $('body').html(data);           
 			return false;			
 		});
  

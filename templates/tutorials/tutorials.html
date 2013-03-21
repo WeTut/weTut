@@ -6,12 +6,11 @@
 
 <div class="banner_tutos">
 	<div class="content_tutos">
-		<form id='filterform' action="" method="POST">
+		<form id='filterform' action="" method="GET">
 			{% csrf_token %}
 		    <ul>
 		        {{ filterform.as_ul}}	        
 			</ul>
-			<input name="submit" type="hidden" value="filterSubmit" />
 		</form>
 	</div>
 </div>

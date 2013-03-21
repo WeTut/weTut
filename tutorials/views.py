@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 from datetime import datetime 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from tutorials.forms import QuestionForm, AnswerForm, CommentAnswerForm, FilterForm
 from tutorials.models import *
@@ -13,12 +14,19 @@ from tutorials.models import *
 from members.models import Profile
 
 def questions(request):
+	
+	if 'filter' not in request.session:
+		request.session['filter'] = '-date'
+
+	print ("session ",request.session['filter'])
+
 
 	filterform = FilterForm()
-	currentag = 0
-	questions = Question.objects.all().order_by('-date')
+	currentag = 0	
 	tags = Tag.objects.all()
 	userfollowstag = False
+
+	questions_list = Question.objects.filter(validate=False).order_by(request.session['filter'])	
  
 	if request.method == 'POST' and 'submit' in request.POST:
 
@@ -49,7 +57,20 @@ def questions(request):
 					return HttpResponse('deleted')
 
 		if request.POST['submit'] == 'filterSubmit': 
-			questions = Question.objects.all().order_by(request.POST['filter'])
+			questions_list = Question.objects.filter(validate=False).order_by(request.POST['filter'])
+			request.session['filter'] = request.POST['filter']
+
+
+	paginator = Paginator(questions_list, 10)
+	questions = paginator.page(1)
+	if 'page' in request.GET:
+		page = request.GET.get('page')
+		try:
+			questions = paginator.page(page)
+		except PageNotAnInteger:
+			questions = paginator.page(1)
+		except EmptyPage:
+			questions = paginator.page(paginator.num_pages)
 
 	if 'tag' in request.GET:
 		currentag = int(request.GET['tag'])
@@ -65,6 +86,7 @@ def questions(request):
 				temp.append(question)
 		questions = temp
 
+
 	if request.user.is_authenticated() :
 		for question in questions:
 			question.currentUserFollows = False
@@ -72,7 +94,7 @@ def questions(request):
 			if follow.exists():
 				question.currentUserFollows = True	
 
-	return render_to_response('tutorials/questions.html', {'questions': questions, 'filterform':filterform, 'tags':tags, 'currentag':currentag, 'userfollowstag':userfollowstag}, context_instance=RequestContext(request))
+	return render_to_response('tutorials/questions.html', {'questions': questions, 'filterform':filterform, 'tags':tags, 'currentag':currentag, 'userfollowstag':userfollowstag, 'filtervalue':request.session['filter'] }, context_instance=RequestContext(request))
 
 def tutorials(request):
 
