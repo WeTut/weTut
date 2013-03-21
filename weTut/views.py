@@ -22,18 +22,20 @@ from registration.backends import get_backend
 from members.models import Profile
 
 def start(request):
-	questions = Question.objects.filter(validate=0).order_by('-date')[:3]
+	questionsDate = Question.objects.filter(validate=0).order_by('-date')[:3]
+	questionsViews = Question.objects.filter(validate=0).order_by('-views')[:3]
 	tutorials = Question.objects.filter(validate=1).order_by('-date')[:3]
 
-	return render_to_response('general/start.html', {'questions': questions, 'tutorials':tutorials}, context_instance=RequestContext(request))
+	return render_to_response('general/start.html', {'questionsDate': questionsDate, 'questionsViews': questionsViews, 'tutorials':tutorials}, context_instance=RequestContext(request))
 
 def home(request):
-	questions = Question.objects.filter(validate=0).order_by('-date')[:3]
+	questionsDate = Question.objects.filter(validate=0).order_by('-date')[:3]
+	questionsViews = Question.objects.filter(validate=0).order_by('-views')[:3]
 	tutorials = Question.objects.filter(validate=1).order_by('-date')[:3]
 	actualityQuestion = ActualityQuestion.objects.filter(user=request.user).order_by('-date')[:3]
 	actualityTag = ActualityTag.objects.filter(user=request.user).order_by('-date')[:3]
 
-	return render_to_response('general/home.html', {'questions': questions, 'tutorials': tutorials, 'actualityQuestion':actualityQuestion, 'actualityTag':actualityTag}, context_instance=RequestContext(request))
+	return render_to_response('general/home.html', {'questionsDate': questionsDate, 'questionsViews': questionsViews, 'tutorials': tutorials, 'actualityQuestion':actualityQuestion, 'actualityTag':actualityTag}, context_instance=RequestContext(request))
 
 def login_view(request):
 	if request.method == 'POST': # If the form has been submitted...

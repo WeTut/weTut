@@ -9,7 +9,10 @@
             <h2>Résultats ({{ paginator.count }})</h2>
 
             {% for result in page.object_list %}
+
+                {% ifequal result.model_name 'question' %}
                 <p>
+
                     {% if result.object.validate %}
                     <a href="../tutoriels/{{ result.object.slug }}">{{ result.object.title }}</a>
                     {% else %}
@@ -21,6 +24,13 @@
                     <p>{{ result.object.views }} vues / {{ result.object.answers }} réponses</p>
                 </p>
                 <hr />
+
+                {% else %}
+                    <div class="membersFound">
+                        {{ result.object }}
+                        {{ result.object.avatar }}
+                    </div>
+                {% endifequal %}
             {% empty %}
                 <p>Pas de résultat.</p>
             {% endfor %}
@@ -32,8 +42,19 @@
                     {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Suivant &raquo;{% if page.has_next %}</a>{% endif %}
                 </div>
             {% endif %}
+
+
         {% else %}
+
+
+
             {# Show some example queries to run, maybe query syntax, something else? #}
+             {% for result in page.object_list %}
+                <p>
+                    {{ result.object.user }}
+                </p>
+
+            {% endfor %}
         {% endif %}
-</div>
+
 {% endblock %}
