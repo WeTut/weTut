@@ -22,10 +22,11 @@ from registration.backends import get_backend
 from members.models import Profile
 
 def start(request):
-	questions = Question.objects.filter(validate=0).order_by('-date')[:3]
+	questionsDate = Question.objects.filter(validate=0).order_by('-date')[:3]
+	questionsViews = Question.objects.filter(validate=0).order_by('-views')[:3]
 	tutorials = Question.objects.filter(validate=1).order_by('-date')[:3]
 
-	return render_to_response('general/start.html', {'questions': questions, 'tutorials':tutorials}, context_instance=RequestContext(request))
+	return render_to_response('general/start.html', {'questionsDate': questionsDate, 'questionsViews': questionsViews, 'tutorials':tutorials}, context_instance=RequestContext(request))
 
 def home(request):
 	questions = Question.objects.filter(validate=0).order_by('-date')[:3]
