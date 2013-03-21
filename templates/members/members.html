@@ -10,7 +10,61 @@
 	        <div class="search_members">
 	        	 <div class="glass"><img src="../../static/images/pictos/grey_glass.png" /></div>
 	        	 <div class="separator"></div>
-	        	 <div class="text">Rechercher un membre</div>
+	        	 <div class="text">
+
+	        	 	<script type="text/javascript">
+	        	 	$(document).ready(function() {
+	        	 		/*$('form.search-members input[name=q]').keypress(function(e) { 
+						      if(e.keyCode == 13) {
+						      	$('div.good_results').empty();
+						      		var url='../search/?q=' + $('form.search-members input[name=q]').val();
+						      		$('div.result_members').hide();
+						   			$('div.result_members').load(url, function() {
+						   				$('div.good_results').html($('div.membersFound'));
+						   			});
+						   		
+						            return false;
+						       }
+						});*/
+
+	        	 		$('form.search-members').submit(function() {
+	        	 			var str = $(this).serialize();
+	        	 			var select='../search/?q=' + $('form.search-members input[name=q]').val();
+					        $.ajax({
+					            url: select,
+					            data: str,     
+					            async: true,
+					            type: 'GET',
+					            global: false,
+					            cache: false,
+					            success: function(html){
+					                $("div.result_members").empty();
+					                $("div.good_results").empty();
+					                $("div.result_members").hide();
+					                $("div.result_members").append(html);
+					                $('div.good_results').html($('div.membersFound'));
+					            }
+					        });
+
+					        return false;
+	        	 		})
+	        	 	});
+	        	 	</script>
+
+	        	 	<form method="get" action="../search" class="search-members">
+						{% if query %}
+						<input type="text" name="q" value="{{ query }}" />
+						{% else %}
+						<input type="text" name="q" />
+						{% endif %}
+					</form>
+	        	 </div>
+	        </div>
+
+	        <div class="good_results">
+	        </div>
+
+	        <div class="result_members">
 	        </div>
 	        <div class="tri">
 	        	<div class="tri_choice" id="selected" style="margin-right:11px; background-color:#9C9C9C;">Plus actifs</div>
