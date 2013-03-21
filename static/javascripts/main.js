@@ -34,9 +34,10 @@ $(document).ready(function(){
 		var csrf = $(this).find('input[name=csrfmiddlewaretoken]').val();
 		var questionId = $(this).find('input.questionId').val();
 		var hidden = $(this).find('input[name=hidden]').val();
-		var divcontent = "<input name='hidden' type='hidden' value='follow' /><button class='btn btn-primary btn-block vcenter' name='submit' type='submit' value='followSubmit'>Suivre</button>";		
+		
+		var divcontent = "<input name='hidden' type='hidden' value='follow' /><button class='btn-nok' name='submit' type='submit' value='followSubmit'>Suivre</button>";		
 		if (hidden == 'follow')
-			divcontent = "<input name='hidden' type='hidden' value='unfollow' /><button class='btn btn-danger btn-block vcenter' name='submit' type='submit' value='followSubmit'>Ne plus suivre</button>";	
+			divcontent = "<input name='hidden' type='hidden' value='unfollow' /><button class='btn-ok' name='submit' type='submit' value='followSubmit'>Ne plus suivre</button>";	
 
 
 		$.ajax({

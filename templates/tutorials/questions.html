@@ -59,7 +59,7 @@
 	{% for question in questions %}
 		{% if not question.validate %}
 	
-			<div class="one_question">
+			<div id="question{{question.id}}" class="one_question">
 				<div class="img">
 					<a href='{{question.slug}}'>
 									<img class='image_one_question' src='{{question.picture.thumbnail.url}}'/>
@@ -93,7 +93,7 @@
 					<div class="question_follow">
 					{% if user.is_authenticated %}
 						<form  class="followForm" action="" method="post" enctype="multipart/form-data">
-					{% csrf_token %}
+						{% csrf_token %}
 						<input class="questionId" type="hidden" name="questionId" value="{{question.id}}"></input>
 						<div class='follow'>
 							<input name="hidden" type="hidden" value="{% if question.currentUserFollows %}unfollow{% else %}follow{% endif %}" />
