@@ -120,7 +120,7 @@
 										<a href='questions/{{question.slug}}'>
 										
 										<div class="img_wetut_accueil">
-											<img src="../../static/images/pictos/like_wetut_accueil.png">
+											<img src="../../static/images/pictos/view_wetut_accueil.png">
 											<img src="../../static/images/pictos/bulle_wetut_accueil.png">
 										</div>
 										
@@ -156,12 +156,12 @@
 										<a href='questions/{{question.slug}}'>
 										
 										<div class="img_wetut_accueil">
-											<img src="../../static/images/pictos/like_wetut_accueil.png">
-											<img src="../../static/images/pictos/bulle_wetut_accueil.png">
+											<img src="{{STATIC_URL}}images/pictos/view_wetut_accueil.png" style="position:relative; top:3px; z-index:0;"/>
+											<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png" />
 										</div>
 										
 										<div class="Text_wetut_accueil">
-											<p style="color:#f53749;">{{ questionViews.views }}</p>
+											<p style="color:#f53749; position:relative; z-index:1">{{ question.views }}</p>
 											<p style="color:#f53749;">{{ questionViews.answers }}</p>
 										</div>
 									</a>
