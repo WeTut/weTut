@@ -6,8 +6,8 @@ from tutorials.views import *
 # admin.autodiscover()
 
 urlpatterns = patterns('tutorials.views',
-url(r'^$', 'questions', name='questions'), #list of questions
-url(r'ask', 'ask', name='ask'), #ask a question
+    url(r'^$', 'questions', name='questions'), #list of questions
+    url(r'ask', 'ask', name='ask'), #ask a question
 
-url(r'^(?P<slug>[\w-]+)/?$', 'question', name='question'), #one specific question
+    url(r'^(?P<slug>[\w-]+)/?$', 'question', name='question'), #one specific question
 )
