@@ -96,12 +96,12 @@ $(document).ready(function() {
     <form method="post" action="/login">
     {% csrf_token %}
     	<div class="input_connexion">
-    		<div class="input_img"><img src="{{STATIC_URL}}images/pictos/user_connexion.png"/></div>
-    		<input type="text" name="username" placeholder="Pseudo / Email"/>
+    		<div class="input_img"><img src="static/images/pictos/user_connexion.png"/></div>
+    		<input type="text" name="username_connexion" placeholder="Pseudo / Email*"/>
     	</div>
     	<div class="input_connexion">
-    		<div class="input_img"><img src="{{STATIC_URL}}images/pictos/padlock_connexion.png"/></div>
-    		<input type="password" name="password" placeholder="Mot de passe" />
+    		<div class="input_img"><img src="static/images/pictos/padlock_connexion.png"/></div>
+    		<input type="password" name="password" placeholder="Mot de passe*" />
     	</div>
     	<input type="submit" value="" class="btn_connexion"></input>
 	</form>

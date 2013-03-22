@@ -18,7 +18,7 @@ class Profile (models.Model):
 	urlFacebook = models.CharField (max_length = 200)
 	points = models.IntegerField(default=0)
 	status = models.CharField(max_length = 200)
-	user = models.ForeignKey(User, unique=True)
+	user = models.OneToOneField(User)
 	views = models.IntegerField()
 	nb_likes = models.IntegerField()
 	nb_questions = models.IntegerField()

@@ -6,7 +6,7 @@
     {{ query }}
 
         {% if query %}
-            <h2>Résultats ({{ paginator.count }})</h2>
+            <h2>Résultats (<span class="nbResults">{{ paginator.count }}</span>)</h2>
 
             {% for result in page.object_list %}
 
@@ -18,7 +18,7 @@
                     {% else %}
                     <a href="../questions/{{ result.object.slug }}">{{ result.object.title }}</a>
                     {% endif %}
-                    <p>Posté par {{ result.object.user.username }} le {{ result.object.date }}</p>
+                    <p>Posté par <img src="{{MEDIA_URL}}{{ result.object.user.profile.avatar }}" alt="{{ result.object.user.username }}" /> {{ result.object.user.username }} le {{ result.object.date }}</p>
                     <img src="{{ result.object.picture.thumbnail.url }}" alt="{{ result.object.title }}" />
                     <p>{{ result.object.message|truncatechars:80 }}</p>
                     <p>{{ result.object.views }} vues / {{ result.object.answers }} réponses</p>
@@ -27,8 +27,50 @@
 
                 {% else %}
                     <div class="membersFound">
-                        {{ result.object }}
-                        {{ result.object.avatar }}
+
+
+                        <div class='cat4'>
+                            <div class="one_member">
+                                <div class="infos">
+                                    <div class="picture">
+                                        <img src="{{MEDIA_URL}}{{result.object.profile.avatar}}" title="{{ result.object.username }}" alt="{{ result.object.username}}" />
+                                    </div>
+                                    <div class="socials_infos">
+                                        <div class="likes">{{ result.object.profile.nb_likes }}</div>
+                                        <div class="responses">{{ result.object.profile.nb_questions }}</div>
+                                        <div class="views">{{ result.object.profile.views }}</div>
+                                    </div>
+                                </div>
+                                <div class="perso_infos">
+                                    <div class="left_infos">
+                                        <div class="name">
+                                            <a href='{{result.object.username}}'>{{result.object.username}}</a>
+                                        </div>
+                                        <div class="city">
+                                            {% if result.object.profile.city and result.object.profile.state %} 
+                                                {{result.object.profile.city}}, {{result.object.profile.state}} 
+                                            {% else %} 
+                                                {% if result.object.profile.city %} 
+                                                    {{result.object.profile.city}}
+                                                {% endif %}
+                                                {% if result.object.profile.state %} 
+                                                    {{result.object.profile.state}}
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                        <div class="date"></div>
+                                    </div>
+                                    <div class="right_infos">
+                                        <div class="job">
+                                            {% if result.object.profile.job %} {{result.object.profile.job}} {% else %} {% endif %}
+                                        </div>
+                                        <div class="city_job">
+                                            {% if result.object.profile.employer %} {{result.object.profile.employer}} {% else %} {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 {% endifequal %}
             {% empty %}
