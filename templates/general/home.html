@@ -77,52 +77,112 @@
 		<div class="row-fluid marketing">
 			<div class="span6">
 				<a href="/tutoriels"><div class="back_box"><p>Consulter les tutos</p></div></a>
+				<script type="text/javascript">
+				$(document).ready(function() {
+					$('div.tutosLike').hide();
+
+					$('a.tutosByLike').click(function() {
+						$('div.tutosDate').hide();
+						$('div.tutosLike').show();
+						$('a.tutosByLike div.famous_selection').css({'backgroundColor':'#01C6E8'});
+						$('a.tutosByDate div.date_selection').css({'backgroundColor':'#BCBCBC'});
+						return false;
+					});
+
+					$('a.tutosByDate').click(function() {
+						$('div.tutosLike').hide();
+						$('div.tutosDate').show();
+						$('a.tutosByDate div.date_selection').css({'backgroundColor':'#01C6E8'});
+						$('a.tutosByLike div.famous_selection').css({'backgroundColor':'#BCBCBC'});
+						return false;
+					});
+				})
+				</script>
+
+
 				<div class="tri">
-					<div class="date_selection" style="background-color:#01c6e8;">
-						<img src="{{STATIC_URL}}images/pictos/plus_picto.png">
+					<a href="" class="tutosByDate"><div class="date_selection" style="background-color:#01c6e8;">
+						<img src="../../static/images/pictos/plus_picto.png">
 						<p>Derniers créés</p>
-					</div>
-					<div class="famous_selection">
-						<img src="{{STATIC_URL}}images/pictos/coeur_picto.png">
+					</div></a>
+					<a href="" class="tutosByLike"><div class="famous_selection">
+						<img src="../../static/images/pictos/coeur_picto.png">
 						<p>Plus populaires</p>
-					</div>
+					</div></a>
 				</div>
 				<div class="line_tri"></div>
-				{% for tutorial in tutorials %}
+
+				<div class="tutosDate">
+				{% for tutorialDate in tutorialsDate %}
 					<div class="white_box">
 						<div class="question_body">
 							<div class="illustration_tutos">
-								<div class="img_question"><a href='tutoriels/{{tutorial.slug}}'><img src="{{STATIC_URL}}images/image_tuts.png"></a></div>
+								<div class="img_question"><a href='tutoriels/{{tutorialDate.slug}}'><img src="../../static/images/image_tuts.png"></a></div>
 								<div class="infos_members" style="background-color:#01c6e8;">
-									<div class="img_members"><a href='tutoriels/{{tutorial.slug}}'><img src="{{STATIC_URL}}images/membre.png" style="width:70px; height:75px;"></a></div>
-									
-									
+									<div class="img_members"><a href='tutoriels/{{tutorialDate.slug}}'><img src="../../static/images/membre.png" style="width:70px; height:75px;"></a></div>
 									<div class="infos_questions">
-									<a href='tutoriels/{{tutorial.slug}}'>
+									<a href='tutoriels/{{tutorialDate.slug}}'>
 										
 										<div class="img_wetut_accueil">
-											<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
-											<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
+											<img src="../../static/images/pictos/like_wetut_accueil.png">
+											<img src="../../static/images/pictos/bulle_wetut_accueil.png">
 										</div>
 										
 										<div class="Text_wetut_accueil">
-											<p>{{ tutorial.views }}</p>
-											<p>{{ tutorial.answers }}</p>
+											<p>{{ tutorialDate.getLikesCount }}</p>
+											<p>{{ tutorialDate.views }}</p>
 										</div>
 									</a>
 									</div>
 								</div>
 							</div>
 							<div class="description_tutos">
-							<a href='tutoriels/{{tutorial.slug}}'>
-								<div class="title"><h4>{{tutorial.title}}</h4></div>
-								<div class="text"><p>{{ tutorial.message|truncatechars:80 }}</p></div>
+							<a href='tutoriels/{{tutorialDate.slug}}'>
+								<div class="title"><h4>{{tutorialDate.title}}</h4></div>
+								<div class="text"><p>{{ tutorialDate.message|truncatechars:80 }}</p></div>
 							</a>
 							</div>	
 						</div>
 						</div>
 						<div class="line_end"></div>
 					{% endfor %}
+					</div>
+
+					<div class="tutosLike">
+					{% for tutorialLike in tutorialsLike %}
+						<div class="white_box">
+							<div class="question_body">
+								<div class="illustration_tutos">
+									<div class="img_question"><a href='tutoriels/{{tutorialLike.slug}}'><img src="../../static/images/image_tuts.png"></a></div>
+									<div class="infos_members" style="background-color:#01c6e8;">
+										<div class="img_members"><a href='tutoriels/{{tutorialLike.slug}}'><img src="../../static/images/membre.png" style="width:70px; height:75px;"></a></div>
+										<div class="infos_questions">
+										<a href='tutoriels/{{tutorialLike.slug}}'>
+											
+											<div class="img_wetut_accueil">
+												<img src="../../static/images/pictos/like_wetut_accueil.png">
+												<img src="../../static/images/pictos/bulle_wetut_accueil.png">
+											</div>
+											
+											<div class="Text_wetut_accueil">
+												<p>{{ tutorialLike.getLikesCount }}</p>
+												<p>{{ tutorialLike.views }}</p>
+											</div>
+										</a>
+										</div>
+									</div>
+								</div>
+								<div class="description_tutos">
+								<a href='tutoriels/{{tutorialLike.slug}}'>
+									<div class="title"><h4>{{tutorialLike.title}}</h4></div>
+									<div class="text"><p>{{ tutorialLike.message|truncatechars:80 }}</p></div>
+								</a>
+								</div>	
+							</div>
+							</div>
+							<div class="line_end"></div>
+						{% endfor %}
+						</div>
 					
 				</div>
 
