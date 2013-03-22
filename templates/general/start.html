@@ -65,7 +65,7 @@
 							<div class="illustration_tutos">
 								<div class="img_question"><a href='tutoriels/{{tutorialDate.slug}}'><img src="{{tutorialDate.picture.thumbnail.url}}"></a></div>
 								<div class="infos_members" style="background-color:#01c6e8;">
-									<div class="img_members"><a href='tutoriels/{{tutorialDate.slug}}'><img src="{{MEDIA_URL}}{{tutorialDate.user.profile.avatar}}" style="width:70px; height:75px;"></a></div>
+									<div class="img_members"><a href='members/{{tutorialDate.user}}'><img src="{{MEDIA_URL}}{{tutorialDate.user.profile.avatar}}" style="width:70px; height:75px;"></a></div>
 									<div class="infos_questions">
 									<a href='tutoriels/{{tutorialDate.slug}}'>
 										
@@ -101,7 +101,7 @@
 								<div class="illustration_tutos">
 									<div class="img_question"><a href='tutoriels/{{tutorialLike.slug}}'><img src="{{tutorialLike.picture.thumbnail.url}}"></a></div>
 									<div class="infos_members" style="background-color:#01c6e8;">
-										<div class="img_members"><a href='tutoriels/{{tutorialLike.slug}}'><img src="{{MEDIA_URL}}{{tutorialLike.user.profile.avatar}}" style="width:70px; height:75px;"></a></div>
+										<div class="img_members"><a href='members/{{tutorialLike.user}}'><img src="{{MEDIA_URL}}{{tutorialLike.user.profile.avatar}}" style="width:70px; height:75px;"></a></div>
 										<div class="infos_questions">
 										<a href='tutoriels/{{tutorialLike.slug}}'>
 											
@@ -176,7 +176,7 @@
 							<div class="illustration_tutos">
 								<div class="img_question"><a href="questions/{{questionDate.slug}}"><img src="{{questionDate.picture.thumbnail.url}}"></a></div>
 								<div class="infos_members" style="background-color:#f53749;">
-									<div class="img_members"><img src="{{MEDIA_URL}}{{questionDate.user.profile.avatar}}" style="width:70px; height:75px;"></div>
+									<div class="img_members"><a href='members/{{questionDate.user}}'><img src="{{MEDIA_URL}}{{questionDate.user.profile.avatar}}" style="width:70px; height:75px;"></a></div>
 									<div class="infos_questions">
 										<a href='questions/{{questionDate.slug}}'>
 										
@@ -212,7 +212,7 @@
 							<div class="illustration_tutos">
 								<div class="img_question"><a href="questions/{{questionViews.slug}}"><img src="{{questionViews.picture.thumbnail.url}}"></a></div>
 								<div class="infos_members" style="background-color:#f53749;">
-									<div class="img_members"><img src="{{MEDIA_URL}}{{questionViews.user.profile.avatar}}" style="width:70px; height:75px;"></div>
+									<div class="img_members"><a href='members/{{questionViews.user}}'><img src="{{MEDIA_URL}}{{questionViews.user.profile.avatar}}" style="width:70px; height:75px;"></a></div>
 									<div class="infos_questions">
 										<a href='questions/{{questionView.slug}}'>
 										
