@@ -37,6 +37,9 @@ class Question (models.Model):
 	def getAnswersCount(self):
 		return Answer.objects.filter(question=self).count()
 
+	def getLikesCount(self):
+		return LikeTuto.objects.filter(tutorial_id=self).count()
+
 
 class Answer (models.Model):
 	answer = models.TextField(default="Entrez votre reponse ici")
