@@ -2,11 +2,24 @@
 
 {% block content %}
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
 <!-- START BANNER -->
 	<div class="question_banner">
 		<div class="content_banner">
 			
 			<div id="question">
+
+
 
 			{% if question.user == user %}					
 				<!-- If the authentificated user is the author -->
@@ -20,12 +33,14 @@
 				{% endif %}
 
 			{% endif %}
+
+
 				<div class="body_question">
 					<div class="left_question_body">
 						<div class="member">
 							<div class="image"><img src="../../static/images/membre_de_luxe.png" /></div>
 							<div class="infos">
-								<div class="name"><p>Posté par {{question.user.username}}</p></div>
+								<div class="name"><p>Posté par <a href="">{{question.user.username}}</a></p></div>
 								<div class="date"><p>le {{question.date}}</p></div>
 							</div>
 						</div>
@@ -46,7 +61,12 @@
 						</div>
 						<div class="abus"><p>Signaler un abus</p></div>
 					</div>
-				
+
+					<div class="fb-like" data-href="http://127.0.0.1:8000/questions/{{question.slug}}" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-action="recommend"></div>
+					
+					<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://127.0.0.1:8000/questions/{{question.slug}}" data-text="Découvre cette page trop cool !" data-lang="fr">Tweeter</a>
+
+
 				</div>
 			</div>	
 		</div>	
@@ -89,6 +109,10 @@
 											<button class='likebutton' name='likesubmit' type="submit" value="likesubmit"></button>
 											{% endif %}
 											</div>
+										</form>
+										<form method='post' action='' class='dislikeform'>
+											{% csrf_token %}
+											<input type='hidden' name='answerId' value='{{answer.id}}' />
 											<div class='bottom_arrow'>
 											{% if answer.currentUserDisliked %}
 											<img src="/static/images/pictos/bottom_arrow_g.png" />
@@ -103,7 +127,7 @@
 								<div class='image'><img src="../../static/images/membre_de_luxe.png" /></div>
 							</div>
 							<div class="body_answer">
-								<div class="date"><p>Par {{ answer.user }} le {{ answer.date }}</p></div>
+								<div class="date"><p>Par <a href=""> {{ answer.user }}</a> le {{ answer.date }}</p></div>
 								<div class='text'>
 									<p>{{ answer.answer|truncatechars:400|safe }}
 									</p>
@@ -117,7 +141,12 @@
 							<div class='span4'></div>
 							<div class='span8'>
 								<img src="../../static/images/pictos/plus.png" alt="plus" />
-								<p>{{ answer.getComments.count }} commentaires</p>
+								<p>{{ answer.getComments.count }} 
+									{% if answer.getComments.count == 0 or answer.getComments.count == 1 %}														commentaire
+									{% else %}
+										commentaires
+									{% endif %}
+								</p>
 							</div>
 						</div>
 					</div>
@@ -133,8 +162,8 @@
 									<img src="../../static/images/membre_de_luxe.png" />
 								</div>
 								<div class='texte' >
-									<div class="name"><p>Posté par {{comment.user}} le {{comment.date}}</p></div>
-									{{ comment.comment|truncatechars:200 }}
+									<div class="name"><p>Posté par <a href="">{{comment.user}}</a> le {{comment.date}}</p></div>
+									<div class="text_comment"><p>{{ comment.comment}}</p></div>
 									<div class='abus'><p>Signaler un abus</p></div>
 								</div>
 							</div>

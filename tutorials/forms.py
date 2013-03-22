@@ -1,11 +1,11 @@
 from django import forms
-from models import Question, Answer, CommentAnswer
+from models import Question, Answer, CommentAnswer, Media
 from django.forms import ModelForm
 
 class QuestionForm(ModelForm):
 	class Meta:
 		model = Question
-		exclude=['slug', 'user', 'views', 'date', 'answers','tag1','tag2','tag3', 'currentUserFollows','validate']
+		exclude=['slug', 'user', 'views', 'date', 'answers','tag1','tag2','tag3', 'currentUserFollows', 'currentUserLikes','validate']
 
 class AnswerForm(ModelForm):
 	class Meta:
@@ -32,3 +32,8 @@ class FilterForm(forms.Form):
     )    
     
     filter = forms.ChoiceField(choices=FILTER_CHOICES, widget=forms.Select())
+
+#class MediaForm(ModelForm):
+#	class Model:
+#		model = Media
+#		exclude=['question_id']

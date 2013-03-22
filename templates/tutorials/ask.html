@@ -9,27 +9,30 @@
 			</div>
 		</div>
 
-	<div class="content">
+	<div class="content" style="margin-top:30px;">
 
 		<p style="font-style:italic; color:#9c9c9c; font-size:12px;">* Champs obligatoires</p>
 	
 		<form id="questionForm" action="" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
 			<div class="row-fluid marketing">
 				<div class='span6'>
-					<div style='display:none'>
-						<input type='hidden' name='csrfmiddlewaretoken' value='2pCAgrdAiZ0kaCm6CXX5kNCPn2F3HfqK' />
-					</div>
 					<p><input type="text" name="title" placeholder="Title*"  id="id_title" class="" size="40" title="Title*" /></p>
-					
+
+					<div class="mainPicture">
 					<div class="fileinputs">
-						<input class="file" type="file">
+						<div style="display:none">{{form.picture}}</div>
 						<div class="fakefile">
-							<input type="text" class="filevisible" placeholder="Selectionner une image*">
-							<div class="file_img">	
-								<img src="../../static/images/pictos/upload.png">
+							<input type="text" name="filename" class="filevisible" placeholder="Selectionner une image*">
+							<div class="file_img">
+								<img src="/static/images/pictos/upload.png" onclick="$('#id_picture').click();">
 							</div>
 						</div>
 					</div>
+					</div>
+					
+					
+
 					
 					<p style="font-style:italic; color:#9c9c9c; font-size:12px; position:relative; margin-top:8px;">(Format JPEG, PNG, GIF , minimum 240 x 120px)</p>
 					
@@ -100,12 +103,115 @@
 				<div class='span4'><input type="submit" class="ask_your_question_button" value="Pose ta question" /></div>
 				<div class='span4'></div>
 			</div>
+
+			<script type="text/javascript">
+
+        $(document).ready(function() {
+        	$('#nextMedia2').hide();
+        	$('#nextMedia3').hide();
+        	$('.upload-img2').hide();
+        $('.upload-img3').hide();
+
+        $('#nextMedia2').click(function() {
+        	$('.upload-img2').show();
+        	return false;
+        });
+        $('#nextMedia3').click(function() {
+        	$('.upload-img3').show();
+        	return false;
+        });
+        })
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $(input).next().next('img')
+                        .attr('src', e.target.result)
+                        .width(150);
+                    $(input).next().next().next('a').show();
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        
+    </script>
+			
+
+			<!--<form action="" id="media-img1" method="post" runat="server" enctype="multipart/form-data">
+		        <div class="fileinputs">
+		        		<div class="upload-img1">
+						<input class="file" type="file" onchange="readURL(this);">
+						<div class="fakefile">
+							<input type="text" name="media" class="filevisible" placeholder="Selectionner une image*">
+							<div class="file_img">	
+								<img src="../../static/images/pictos/upload.png">
+							</div>
+						</div>
+						 <img src="#" alt="" />
+		        		<a href="" id="nextMedia2">Ajouter une autre image</a>
+		        		</div>
+		        </div>
+
+		        <div class="fileinputs">
+		        		<div class="upload-img2">
+		        		<input class="file" type="file" onchange="readURL(this);">
+						<div class="fakefile">
+							<input type="text" class="filevisible" placeholder="Selectionner une image*">
+							<div class="file_img">	
+								<img src="../../static/images/pictos/upload.png">
+							</div>
+						</div>
+						 <img src="#" alt="" />
+		        		<a href="" id="nextMedia3">Ajouter une autre image</a>
+		        		</div>
+		        </div>
+
+		        <div class="fileinputs">
+		        		<div class="upload-img3">
+		        		<input class="file" type="file" onchange="readURL(this);">
+						<div class="fakefile">
+							<input type="text" class="filevisible" placeholder="Selectionner une image*">
+							<div class="file_img">	
+								<img src="../../static/images/pictos/upload.png">
+							</div>
+						</div>
+						 <img src="#" alt="" />
+						</div>
+				</div>
+
+		    </form>-->
+			
+		</form>
+	
+		<script type="text/javascript">  
+			$(document).ready( function(){ 	
+				$(".mainPicture input").change( function(){ 
+					$(".mainPicture .filevisible").attr("value",$(".mainPicture input").attr("value")); 
+				});
+
+				$(".upload-img1 .file").change( function(){ 
+					$(".upload-img1 .filevisible").attr("value",$(".upload-img1 .file").attr("value")); 
+				});	
+
+				$(".upload-img2 .file").change( function(){ 
+					$(".upload-img2 .filevisible").attr("value",$(".upload-img2 .file").attr("value")); 
+				});	
+
+				$(".upload-img3 .file").change( function(){ 
+					$(".upload-img3 .filevisible").attr("value",$(".upload-img3 .file").attr("value")); 
+				});	
+			}); 
+		</script> 
 			
 			
 		</form>
 	
 		<script type="text/javascript">  
-			$(document).ready( function(){ $(".file").change( function(){ $(".filevisible").attr("value",$(".file").attr("value")); });	}); 
+			//$(document).ready( function(){ 	$("#id_picture").change( function(){ $(".filevisible").attr("value", document.getElementById("id_picture").files[0].name ); }); }); 
 		</script> 
 		
 		<script>
@@ -234,3 +340,4 @@
   {% endif %}
 
 {% endblock content %}
+

@@ -9,41 +9,52 @@
 					<h4>Vos notifications</h4>
 					<div class="notif_box">
 						<div class="notif_filters">
-							<div class="questions_filter"><p>Questions</p></div>
-							<div class="tags_filter"><p>Tags</p></div>
+							<div id="questions_filter" class="active_filter"><p>Questions</p></div>
+							<div id="tags_filter" class="inactive_filter"><p>Tags</p></div>
 						</div>
 						<div class="clear"></div>
-						<div class="notifs">
-							<div class="img_notif"><img src=""></div>
-							<div class="member_notif">
-								<div class="question_notif">Quel est le prénom de Miou-Miou ?</div>
-								<div class="name_notif">par Gisele77</div>
-							</div>
-							<div class="text_notif">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent pellentesque hendrerit nisi, vel tempor turpis suscipit non. In sed dui odio, sit amet euismod nibh. Nam ut diam risus...
-							</div>
-						</div>
-						<div class="line_end_notif"></div>
 						
-						<div class="notifs">
-							<div class="img_notif"><img src=""></div>
-							<div class="member_notif">
-								<div class="question_notif">Quel est le prénom de Miou-Miou ?</div>
-								<div class="name_notif">par Gisele77</div>
-							</div>
-							<div class="text_notif">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent pellentesque hendrerit nisi, vel tempor turpis suscipit non. In sed dui odio, sit amet euismod nibh. Nam ut diam risus...
-							</div>
+						<div id="questions_notifs">
+							{% if actualityQuestion %}
+								{% for actuality in actualityQuestion %}
+								<a href="/questions/{{actuality.question.slug}}">
+								<div class="notifs">
+									<div class="img_notif"><img src="{{actuality.question.picture}}"></div>
+									<div class="member_notif">
+										<div class="question_notif">{{actuality.question.title}}</div>
+										<div class="name_notif">par {{actuality.question.user.username}}</div>
+									</div>
+									<div class="text_notif">{{actuality.answer.answer}}</div>
+								</div>
+								<div class="line_end_notif"></div>
+								</a>
+								{% endfor %}
+							{% else %}
+								<p>Vous n'avez pas de notifications concernant les questions que vous suivez</p>
+							{% endif %}
 						</div>
-						<div class="line_end_notif"></div>
-						<div class="notifs">
-							<div class="img_notif"><img src=""></div>
-							<div class="member_notif">
-								<div class="question_notif">Quel est le prénom de Miou-Miou ?</div>
-								<div class="name_notif">par Gisele77</div>
-							</div>
-							<div class="text_notif">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent pellentesque hendrerit nisi, vel tempor turpis suscipit non. In sed dui odio, sit amet euismod nibh. Nam ut diam risus...
-							</div>
+
+						<div id="tags_notifs" style="display:none;">
+							{% if actualityTag %}
+								{% for actuality in actualityTag %}
+								<a href="/questions/{{actuality.question.slug}}">
+								<div class="notifs">
+									<div class="img_notif">{{actuality.tag.name}}"></div>
+									<div class="text_notif">
+										<div class="question_notif">{{actuality.question.title}}</div>
+										<div class="name_notif">par {{actuality.question.user.username}}</div>
+									</div>
+								</div>
+								<div class="line_end_notif"></div>
+								</a>
+								{% endfor %}
+							{% else %}
+								<p>Vous n'avez pas de notifications concernant les tags que vous suivez</p>
+							{% endif %}
 						</div>
-						<div class="line_end_notif"></div>
+
+
+
 					</div>
 				</div>
 			</div>
@@ -65,14 +76,14 @@
 	<div id="consultation">
 		<div class="row-fluid marketing">
 			<div class="span6">
-				<div class="back_box"><p>Consulter les tutos</p></div>
+				<a href="/tutoriels"><div class="back_box"><p>Consulter les tutos</p></div></a>
 				<div class="tri">
 					<div class="date_selection" style="background-color:#01c6e8;">
-						<img src="../../static/images/pictos/plus_picto.png">
+						<img src="{{STATIC_URL}}images/pictos/plus_picto.png">
 						<p>Derniers créés</p>
 					</div>
 					<div class="famous_selection">
-						<img src="../../static/images/pictos/coeur_picto.png">
+						<img src="{{STATIC_URL}}images/pictos/coeur_picto.png">
 						<p>Plus populaires</p>
 					</div>
 				</div>
@@ -81,17 +92,17 @@
 					<div class="white_box">
 						<div class="question_body">
 							<div class="illustration_tutos">
-								<div class="img_question"><a href='tutoriels/{{tutorial.slug}}'><img src="../../static/images/image_tuts.png"></a></div>
+								<div class="img_question"><a href='tutoriels/{{tutorial.slug}}'><img src="{{STATIC_URL}}images/image_tuts.png"></a></div>
 								<div class="infos_members" style="background-color:#01c6e8;">
-									<div class="img_members"><a href='tutoriels/{{tutorial.slug}}'><img src="../../static/images/membre.png" style="width:70px; height:75px;"></a></div>
+									<div class="img_members"><a href='tutoriels/{{tutorial.slug}}'><img src="{{STATIC_URL}}images/membre.png" style="width:70px; height:75px;"></a></div>
 									
 									
 									<div class="infos_questions">
 									<a href='tutoriels/{{tutorial.slug}}'>
 										
 										<div class="img_wetut_accueil">
-											<img src="../../static/images/pictos/like_wetut_accueil.png">
-											<img src="../../static/images/pictos/bulle_wetut_accueil.png">
+											<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
+											<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
 										</div>
 										
 										<div class="Text_wetut_accueil">
@@ -115,38 +126,62 @@
 					
 				</div>
 
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$('div.questionsViews').hide();
+
+					$('a.questionsByViews').click(function() {
+						$('div.questionsDate').hide();
+						$('div.questionsViews').show();
+						$('div.box_tuts div.famous_selection').css({'backgroundColor':'#F53749'});
+						$('div.box_tuts div.date_selection').css({'backgroundColor':'#BCBCBC'});
+						return false;
+					});
+
+					$('a.questionsByDate').click(function() {
+						$('div.questionsViews').hide();
+						$('div.questionsDate').show();
+						$('div.box_tuts div.date_selection').css({'backgroundColor':'#F53749'});
+						$('div.box_tuts div.famous_selection').css({'backgroundColor':'#BCBCBC'});
+						return false;
+					});
+				})
+				</script>
+
 			<div class="span6">
 				<div class="box_tuts">
 					<div class="back_box" id="pink_box"><p>Consulter les questions</p></div>
 					<div class="tri">
-						<div class="date_selection" style="background-color:#f53749;">
+						<a href="" class="questionsByDate"><div class="date_selection" style="background-color:#f53749;">
 							<img src="../../static/images/pictos/plus_picto.png">
 							<p>Derniers créés</p>
-						</div>
-						<div class="famous_selection">
+						</div></a>
+						<a href="" class="questionsByViews"><div class="famous_selection">
 							<img src="../../static/images/pictos/coeur_picto.png">
 							<p>Plus populaires</p>
-						</div>
+						</div></a>
 					</div>
 					<div class="line_tri" style="background-color:#f53749;"></div>
-					{% for question in questions %}
+
+					<div class="questionsDate">
+					{% for questionDate in questionsDate %}
 					<div class="white_box">
 						<div class="question_body">
 							<div class="illustration_tutos">
-								<div class="img_question"><a href="#"><img src="../../static/images/image_tuts.png"></a></div>
+								<div class="img_question"><a href="questions/{{questionDate.slug}}"><img src="../../static/images/image_tuts.png"></a></div>
 								<div class="infos_members" style="background-color:#f53749;">
 									<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
 									<div class="infos_questions">
-										<a href='questions/{{question.slug}}'>
+										<a href='questions/{{questionDate.slug}}'>
 										
 										<div class="img_wetut_accueil">
-											<img src="../../static/images/pictos/view_wetut_accueil.png" style="position:relative; top:3px; z-index:0;"/>
-											<img src="../../static/images/pictos/bulle_wetut_accueil.png" />
+											<img src="{{STATIC_URL}}images/pictos/view_wetut_accueil.png" style="position:relative; top:3px; z-index:0;"/>
+											<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png" />
 										</div>
 										
 										<div class="Text_wetut_accueil">
-											<p style="color:#f53749; position:relative; z-index:1">{{ question.views }}</p>
-											<p style="color:#f53749;">{{ question.answers }}</p>
+											<p style="color:#f53749; position:relative; z-index:1">{{ questionDate.views }}</p>
+											<p style="color:#f53749;">{{ questionDate.getAnswersCount }}</p>
 										</div>
 									</a>
 									</div>
@@ -154,14 +189,52 @@
 							</div>
 							<div class="description_tutos">
 								
-								<div class="title"><a href='questions/{{question.slug}}'><h4>{{question.title}}</h4></a></div>
-								<div class="text"><a href='questions/{{question.slug}}'><p>{{ question.message|truncatechars:80 }}</p></a></div>
+								<div class="title"><a href='questions/{{questionDate.slug}}'><h4>{{questionDate.title}}</h4></a></div>
+								<div class="text"><a href='questions/{{questionDate.slug}}'><p>{{ questionDate.message|truncatechars:80 }}</p></a></div>
 								
 							</div>	
 						</div>
 						</div>
 						<div class="line_end"></div>
 					{% endfor %}
+					</div>
+
+					<div class="questionsViews">
+					{% for questionViews in questionsViews %}
+					<div class="white_box">
+						<div class="question_body">
+							<div class="illustration_tutos">
+								<div class="img_question"><a href="questions/{{questionViews.slug}}"><img src="../../static/images/image_tuts.png"></a></div>
+								<div class="infos_members" style="background-color:#f53749;">
+									<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
+									<div class="infos_questions">
+										<a href='questions/{{questionView.slug}}'>
+										
+										<div class="img_wetut_accueil">
+											<img src="{{STATIC_URL}}images/pictos/view_wetut_accueil.png" style="position:relative; top:3px; z-index:0;"/>
+											<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png" />
+										</div>
+										
+										<div class="Text_wetut_accueil">
+											<p style="color:#f53749; position:relative; z-index:1">{{ questionViews.views }}</p>
+											<p style="color:#f53749;">{{ questionViews.getAnswersCount }}</p>
+										</div>
+									</a>
+									</div>
+								</div>
+							</div>
+							<div class="description_tutos">
+								
+								<div class="title"><a href='questions/{{questionViews.slug}}'><h4>{{questionViews.title}}</h4></a></div>
+								<div class="text"><a href='questions/{{questionViews.slug}}'><p>{{ questionViews.message|truncatechars:80 }}</p></a></div>
+								
+							</div>	
+						</div>
+						</div>
+						<div class="line_end"></div>
+					{% endfor %}
+					</div>
+
 					
 				</div>
 			</div>
@@ -170,16 +243,16 @@
 
 	<div class="clear"></div>
 	<div class="best_members">
-		<div class="members"><p>Les membres</p></div>
+		<a href="/members"><div class="members"><p>Les membres</p></div></a>
 		<div class="box_members">
 			<div class="row-fluid marketing">
 				<div class="span3">
 					<div class="member">
 						<div class="infos_members">
-							<img src="../../static/images/pictos/like_wetut_accueil.png">
-							<img src="../../static/images/pictos/bulle_wetut_accueil.png">
+							<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
+							<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
 						</div>
-						<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
+						<div class="img_members"><img src="{{STATIC_URL}}images/membre.png" style="width:70px; height:75px;"></div>
 						<div class="description_members">
 							<div class="name_member"><p>Lucette Lama</div>
 							<div class="job_member"><p>Motion Designer</div>
@@ -189,10 +262,10 @@
 				</div>
 				<div class="span3">
 					<div class="infos_members">
-						<img src="../../static/images/pictos/like_wetut_accueil.png">
-						<img src="../../static/images/pictos/bulle_wetut_accueil.png">
+						<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
+						<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
 					</div>
-					<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
+					<div class="img_members"><img src="{{STATIC_URL}}images/membre.png" style="width:70px; height:75px;"></div>
 					<div class="description_members">
 						<div class="name_member"><p>Lucette Lama</div>
 						<div class="job_member"><p>Motion Designer</div>
@@ -200,10 +273,10 @@
 				</div>
 				<div class="span3" style="margin-left:20px;">
 					<div class="infos_members">
-						<img src="../../static/images/pictos/like_wetut_accueil.png">
-						<img src="../../static/images/pictos/bulle_wetut_accueil.png">
+						<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
+						<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
 					</div>
-					<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
+					<div class="img_members"><img src="{{STATIC_URL}}images/membre.png" style="width:70px; height:75px;"></div>
 					<div class="description_members">
 						<div class="name_member"><p>Lucette Lama</div>
 						<div class="job_member"><p>Motion Designer</div>
@@ -211,10 +284,10 @@
 				</div>
 				<div class="span3">
 					<div class="infos_members">
-						<img src="../../static/images/pictos/like_wetut_accueil.png">
-						<img src="../../static/images/pictos/bulle_wetut_accueil.png">
+						<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
+						<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
 					</div>
-					<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
+					<div class="img_members"><img src="{{STATIC_URL}}images/membre.png" style="width:70px; height:75px;"></div>
 					<div class="description_members">
 						<div class="name_member"><p>Lucette Lama</div>
 						<div class="job_member"><p>Motion Designer</div>
@@ -225,6 +298,24 @@
 	</div>
 	
 </div>
+<script type="text/javascript">
+	$(document).ready( function(){
+	 	$("#questions_filter").click( function(){
+	 		$(this).attr("class", "active_filter");
+	 		$("#tags_filter").attr("class", "inactive_filter");
+	 		document.getElementById("questions_notifs").style.display = "block";
+	 		document.getElementById("tags_notifs").style.display = "none";
+	 	});
+
+	 	$("#tags_filter").click( function(){
+	 		$(this).attr("class", "active_filter");
+	 		$("#questions_filter").attr("class", "inactive_filter");
+	 		document.getElementById("tags_notifs").style.display = "block";
+	 		document.getElementById("questions_notifs").style.display = "none";
+	 	});
+	});
+
+</script>
 
 
 {% endblock content %}

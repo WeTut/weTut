@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	
 
-	$('.likeform').submit(function(){
+	$('.likeform, .dislikeform').submit(function(){
 		var submit = $(this).find('button').val() ;
 		var csrf = $(this).find('input[name=csrfmiddlewaretoken]').val();
 		var answerId = $(this).find('input[name=answerId]').val();
@@ -34,9 +34,10 @@ $(document).ready(function(){
 		var csrf = $(this).find('input[name=csrfmiddlewaretoken]').val();
 		var questionId = $(this).find('input.questionId').val();
 		var hidden = $(this).find('input[name=hidden]').val();
-		var divcontent = "<input name='hidden' type='hidden' value='follow' /><button class='btn btn-primary btn-block vcenter' name='submit' type='submit' value='followSubmit'>Suivre</button>";		
+		
+		var divcontent = "<input name='hidden' type='hidden' value='follow' /><button class='btn-nok' name='submit' type='submit' value='followSubmit'>Suivre</button>";		
 		if (hidden == 'follow')
-			divcontent = "<input name='hidden' type='hidden' value='unfollow' /><button class='btn btn-danger btn-block vcenter' name='submit' type='submit' value='followSubmit'>Ne plus suivre</button>";	
+			divcontent = "<input name='hidden' type='hidden' value='unfollow' /><button class='btn-ok' name='submit' type='submit' value='followSubmit'>Ne plus suivre</button>";	
 
 
 		$.ajax({
@@ -50,6 +51,30 @@ $(document).ready(function(){
 
 		return false;
 	});
+
+
+	$('.likeTuto').submit(function(){
+		var csrf = $(this).find('input[name=csrfmiddlewaretoken]').val();
+		var tutoId = $(this).find('input.tutoId').val();
+		var hidden = $(this).find('input[name=hidden]').val();
+		
+		var divcontent = "<input name='hidden' type='hidden' value='like' /><button class='btn-nok' name='submit' type='submit' value='likeTutoSubmit'>J'aime</button>";		
+		if (hidden == 'like')
+			divcontent = "<input name='hidden' type='hidden' value='dislike' /><button class='btn-ok' name='submit' type='submit' value='likeTutoSubmit'>Je n'aime plus</button>";	
+
+
+		$.ajax({
+		  	type: "POST",
+			url: "",
+		  	data: { likeTutoSubmit:'likeTutoSubmit', hidden: hidden, csrfmiddlewaretoken:csrf, tutoId:tutoId}
+		}).done(function( msg ) {
+			$('#tutorial'+tutoId+' .like').html(divcontent);
+			return false;			
+		});
+
+		return false;
+	});
+
 
 
 	$('.followTagForm').submit(function(){
@@ -89,8 +114,7 @@ $(document).ready(function(){
 			url: "",
 		  	data: { submit:'filterSubmit', filter: filter, csrfmiddlewaretoken:csrf}
 		}).done(function( data ) {
-            $('body').html(data);
-           $('#filterform option[value='+filter+']').attr("selected", "selected");
+            $('body').html(data);           
 			return false;			
 		});
  
@@ -118,64 +142,47 @@ $(document).ready(function(){
  	
 
  	$('#tag1 select').change(function(){
-		var val = $(this).val();
-		var csrf = $('#questionForm').find('input[name=csrfmiddlewaretoken]').val();
+		var c1 = $(this).attr('class')
+		var c2 = "technical"
+		if (c1 == "technical"){
+			c2 = "software"
+		}
 
-		$.ajax({
-		  	type: "POST",
-			url: "",
-		  	data: { csrfmiddlewaretoken:csrf }
-		}).done(function( data ) {
-            if (val != 0)
-           		document.getElementById('tag2').style.display = 'block';
-			return false;			
-		});
- 
- 		return false;
+		if ($(this).val() != 0){
+           	document.getElementById('tag2').style.display = 'block';
+           	$('#tag1 .'+c2+' option[value=0]').attr('selected', 'selected');
+        }       
+		
  	});
 
  	$('#tag2 select').change(function(){
-		var val = $(this).val();
-		var csrf = $('#questionForm').find('input[name=csrfmiddlewaretoken]').val();
-
-		$.ajax({
-		  	type: "POST",
-			url: "",
-		  	data: { csrfmiddlewaretoken:csrf }
-		}).done(function( data ) {
-            if (val != 0)
-           		document.getElementById('tag3').style.display = 'block';
-			return false;			
-		});
- 
- 		return false;
- 	});
-
-
- 	$('#questionForm select').change(function(){
-		var val = $(this).val();
-		var csrf = $('#questionForm').find('input[name=csrfmiddlewaretoken]').val();		
-		var selectClass = $(this).attr('class');
-		var selectClassToUpdate = '.technical';
-		if (selectClass == 'technical'){
-			selectClassToUpdate = '.software';
+		var c1 = $(this).attr('class')
+		var c2 = "technical"
+		if (c1 == "technical"){
+			c2 = "software"
 		}
-		var parent = '#'+ $(this).closest("div").attr("id");
 
-		$.ajax({
-		  	type: "POST",
-			url: "",
-		  	data: { csrfmiddlewaretoken:csrf }
-		}).done(function( data ) {
-            if (val != 0){
-       			$(parent + ' ' + selectClassToUpdate +' option[value=0]').attr('selected', 'selected');
-           	}
-
-			return false;			
-		});
- 
- 		return false;
+		if ($(this).val() != 0){
+           	document.getElementById('tag3').style.display = 'block';
+           	$('#tag2 .'+c2+' option[value=0]').attr('selected', 'selected');
+        }       
+		
  	});
+
+ 	$('#tag3 select').change(function(){
+		var c1 = $(this).attr('class')
+		var c2 = "technical"
+		if (c1 == "technical"){
+			c2 = "software"
+		}
+
+		if ($(this).val() != 0){
+           	$('#tag3 .'+c2+' option[value=0]').attr('selected', 'selected');
+        }       
+		
+ 	});
+
+
 
 
  	$('#filtertag a').click(function(){

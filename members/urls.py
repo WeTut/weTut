@@ -7,5 +7,7 @@ from members.views import *
 
 urlpatterns = patterns('members.views',		
 	url(r'^$', 'members', name='members'), #list of members
-	url(r'profile', 'profile', name='profile'), #list of questions
+	url(r'profile', 'profile', name='profile'), #the profile
+
+	url(r'^(?P<slug>[\w-]+)/?$', 'member', name='member'), #one specific member
 )

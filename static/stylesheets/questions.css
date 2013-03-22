@@ -5,11 +5,11 @@ QUESTIONS STYLESHEET
 /* ------------------RUBRIQUE QUESTIONS------------------ */
 
 
-.banner_questions{width:100%; height:413px; background-image:url(../images/background_banner.png); background-repeat:x; position:relative; z-index:1; top:-34px; box-shadow: 0px 2px 8px #DDDDDD;}
+.banner_questions{width:100%; height:413px; background-image:url(../images/background_banner.png); background-repeat:x; position:relative; z-index:1; box-shadow: 0px 2px 8px #DDDDDD;}
 
 .content_banner_questions{width: 880px; height:413px; margin:0 auto; padding-top:60px;}
 
-.ask_questions_button{width:310px; height:60px; background-color:#f53749; text-align:center; border-radius:3px;}
+.ask_questions_button{width:310px; height:60px; background-color:#f53749; text-align:center; border-radius:3px; margin-top:30px;}
 .ask_questions_button p{font-family:'bebas_neue'; font-size:25px; line-height:65px;}
 .ask_questions_button a{color:#FFFFFF;}
 
@@ -59,7 +59,7 @@ QUESTIONS STYLESHEET
 /* ------------------POSER UNE QUESTION------------------ */
 
 
-#ask_banner{background-image:url('../images/back_ask_banner.png'); width:100%; height:132px; background-repeat:x; position:relative; z-index:1; top:-34px; box-shadow: 0px 2px 8px #DDDDDD;}
+#ask_banner{background-image:url('../images/back_ask_banner.png'); width:100%; height:132px; background-repeat:x; position:relative; z-index:1; box-shadow: 0px 2px 8px #DDDDDD;}
 #ask_banner #content_banner{width: 880px; height:132px; margin:0 auto; padding-top:75px;}
 #ask_banner #content_banner p{font-family:'bebas_neue'; font-size:40px; color:#1e2226;}
 
@@ -89,6 +89,7 @@ input.file {width:460px; position: relative; text-align: right; -moz-opacity:0; 
 .left_question_body .member .image{width:80px; height:80px; float:left;}
 .left_question_body .member .infos{float:left;width:230px; height:65px; background-color:#f53749; color:#FFFFFF; text-align:center; padding-top:15px;}
 .left_question_body .member .infos .name{font-size:16px;}
+.left_question_body .member .infos .name a{color:#FFFFFF;}
 .left_question_body .member .infos .date{font-style:italic; font-size:14px;}
 
 .right_question_body{width:610px; height:320px; float:left;}
@@ -114,17 +115,22 @@ input.file {width:460px; position: relative; text-align: right; -moz-opacity:0; 
 .one_answer .member .image img{border-bottom-left-radius:3px;}
 
 .one_answer .body_answer .date{color:#b8b7b6; font-size:14px;}
-.one_answer .body_answer{float:left; background-color:#FFFFFF; padding:5px 10px 5px 10px; width:680px; border-top-right-radius:3px; border-bottom-right-radius:3px; height:200px;}
+.one_answer .body_answer .date a{color:#b8b7b6;}
+.one_answer .body_answer{float:left; background-color:#FFFFFF; padding:5px 10px 5px 10px; width:679px; border-top-right-radius:3px; border-bottom-right-radius:3px; height:200px;}
 .one_answer .body_answer .text{height:155px;}
 .one_answer .body_answer .abus p{font-size:12px; color:#f53749; clear:both; float:right;}
 
-.comment_question .span8{background-color:#FFFFFF; margin-bottom:5px; padding:5px;}
+.comment_question .span8{background-color:#FFFFFF; margin-bottom:5px; padding:5px; min-height:97px;}
 .comment_question .span8 .image{float:left; margin-right:10px;}
-.comment_question .span8 .abus p{font-size:12px; color:#f53749; clear:both; float:right;}
+.comment_question .span8 .abus{height:10px;}
+.comment_question .span8 .texte{width:520px; margin-left:90px;}
+.comment_question .span8 .abus p{font-size:12px; color:#f53749; float:right; height:10px;}
 .comment_question .span8 .texte .name p{font-size:14px; color:#b8b7b6;}
+.comment_question .span8 .texte .name a{color:#b8b7b6;}
+.comment_question .span8 .texte .text_comment p{min-height:27px;}
 
 .comment_read{width:940px; height:40px; float:right; margin-top:5px; margin-bottom:5px;}
-.comment_read .span8{background-color:#FFFFFF; width:620px; height:40px; padding:5px;}
+.comment_read .span8{background-color:#FFFFFF; width:619px; height:40px; padding:5px;}
 .comment_read img{float:left; margin-right:15px; margin-top:6px;}
 .comment_read p{margin-top:6px;}
 
@@ -132,7 +138,7 @@ input.file {width:460px; position: relative; text-align: right; -moz-opacity:0; 
 
 .span2 button.wetut{background-color:#f53749; border:none; border-radius:3px; color:#FFFFFF; font-family: 'bebas_neue'; font-size:16px; width: 140px; height:30px;}
 
-textarea#id_comment{border:solid 1px #f53749; height:120px; font-family: 'Rambla', sans-serif; color:#b8b7b6;}
+textarea#id_comment{border:solid 1px #f53749; height:40px; font-family: 'Rambla', sans-serif; color:#b8b7b6; border-radius:3px; line-height:30px;}
 
 .likebutton{ background: url("/static/images/pictos/top_arrow.png"); border: medium none; width:26px; height:29px;}
 .dislikebutton{ background: url("/static/images/pictos/bottom_arrow.png"); border: medium none; width:26px; height:29px;}
@@ -140,7 +146,7 @@ textarea#id_comment{border:solid 1px #f53749; height:120px; font-family: 'Rambla
 
 /* ------------------RUBRIQUE TUTOS------------------ */
 
-.banner_tutos{width:100%; height:266px; background-image:url(../images/back_banner_tutos.png); background-repeat:x; position:relative; z-index:1; top:-34px; box-shadow: 0px 2px 8px #DDDDDD;}
+.banner_tutos{width:100%; height:266px; background-image:url(../images/back_banner_tutos.png); background-repeat:x; position:relative; z-index:1; box-shadow: 0px 2px 8px #DDDDDD;}
 .banner_tutos .content_tutos{width:940px; margin:0 auto; padding-top:60px;}
 
 .one_tuto{background-color:#FFFFFF; width:195px; height:180px; padding:5px; margin-bottom:50px;}
@@ -151,4 +157,6 @@ textarea#id_comment{border:solid 1px #f53749; height:120px; font-family: 'Rambla
 .one_tuto .img .infos{float:left;width:34px; height:86px; background-color:#01c6e8; padding:17px 3px 17px 3px; text-align:center; color:#01c6e8; font-family:'bebas_neue'; font-size:14px;}
 .one_tuto .img .infos .responses{ background-image:url("/static/images/pictos/bulle_wetut_tutos.png"); height:29px; line-height:31px;}
 .one_tuto .img .infos .views{ background-image:url("/static/images/pictos/like_wetut_tutos.png"); height:29px; margin-top:30px; line-height:30px;}
+
+.content_tutos{margin-top:30px;}
 
