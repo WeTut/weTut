@@ -41,7 +41,7 @@ def login_view(request):
 	if request.method == 'POST': # If the form has been submitted...
 		form = AuthForm(request.POST) # A form bound to the POST data
 		if form.is_valid(): # All validation rules pass
-			username = request.POST['username']
+			username = request.POST['username_connexion']
 			password = request.POST['password']
 			if re.match("[^@]+@[^@]+\.[^@]+", username):
 				username = User.objects.get(email=username)
