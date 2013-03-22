@@ -39,9 +39,6 @@ class Question (models.Model):
 
 
 class Answer (models.Model):
-	currentUserLiked = models.BooleanField(default=1)
-	currentUserDisliked = models.BooleanField(default=1)
-
 	answer = models.TextField(default="Entrez votre reponse ici")
 	date = models.DateField()
 
@@ -49,6 +46,9 @@ class Answer (models.Model):
 	question = models.ForeignKey(Question)
 	nb_likes = models.IntegerField()
 	usefull = models.BooleanField(default=False)
+
+	currentUserLiked = False
+	currentUserDisliked = False
 
 	def __unicode__(self):
 		return u'%s' % (self.date)
