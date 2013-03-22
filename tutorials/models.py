@@ -29,7 +29,6 @@ class Question (models.Model):
 	date = models.DateField()
 	validate = models.BooleanField(default=False)
 
-
 	def __unicode__(self):
 		return u'%s' % (self.title)
 
