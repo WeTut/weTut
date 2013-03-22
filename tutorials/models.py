@@ -16,12 +16,12 @@ class Tag(models.Model):
 class Question (models.Model):
 	
 	title = models.CharField(max_length = 200)
-	picture = StdImageField(upload_to='questions', blank=True, size=(310, 224, True), thumbnail_size=(160, 120, True))
+	picture = StdImageField(upload_to='questions', blank=True, size=(310, 224, True), thumbnail_size=(155, 120, True))
 	message = models.TextField(max_length = 400)
 	slug = models.SlugField(max_length = 200)
 	views = models.IntegerField()
 	answers = models.IntegerField()
-	user = models.ForeignKey(User)
+	user = models.OneToOneField(User)
 	tag1 = models.IntegerField()
 	tag2 = models.IntegerField()
 	tag3 = models.IntegerField()
