@@ -14,8 +14,7 @@ class Tag(models.Model):
 
 
 class Question (models.Model):
-	currentUserFollows = models.BooleanField(default=1)
-	currentUserLikes = models.BooleanField(default=1)
+	
 	title = models.CharField(max_length = 200)
 	picture = StdImageField(upload_to='questions', blank=True, size=(310, 224, True), thumbnail_size=(160, 120, True))
 	message = models.TextField(max_length = 400)
@@ -29,7 +28,9 @@ class Question (models.Model):
 	date = models.DateField()
 	validate = models.BooleanField(default=False)
 
-
+	currentUserFollows = False
+	currentUserLikes = False
+	
 	def __unicode__(self):
 		return u'%s' % (self.title)
 
