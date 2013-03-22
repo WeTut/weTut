@@ -101,13 +101,17 @@ def tutorials(request):
 		request.session['filterTuto'] = '-date'
 
 	tutorials_list = Question.objects.filter(validate=True).order_by(request.session['filterTuto'])
+	print ("REQUEST.POST ",request.POST)
 	if request.method == 'POST' and 'submit' in request.POST:
 
+
 		if request.POST['submit'] == 'filterSubmit':
+			print ("FILTER")
 			tutorials_list = Question.objects.filter(validate=True).order_by(request.POST['filter'])
 			request.session['filterTuto'] = request.POST['filter']
 
 		elif request.POST['submit'] == 'likeTutoSubmit':
+			print ("LIKE")
 			if request.POST['hidden'] == 'like':
 				like = LikeTuto()
 				like.user = request.user
