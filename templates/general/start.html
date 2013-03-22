@@ -63,15 +63,15 @@
 					<div class="white_box">
 						<div class="question_body">
 							<div class="illustration_tutos">
-								<div class="img_question"><a href='tutoriels/{{tutorialDate.slug}}'><img src="../../static/images/image_tuts.png"></a></div>
+								<div class="img_question"><a href='tutoriels/{{tutorialDate.slug}}'><img src="{{tutorialDate.picture.thumbnail.url}}"></a></div>
 								<div class="infos_members" style="background-color:#01c6e8;">
-									<div class="img_members"><a href='tutoriels/{{tutorialDate.slug}}'><img src="../../static/images/membre.png" style="width:70px; height:75px;"></a></div>
+									<div class="img_members"><a href='tutoriels/{{tutorialDate.slug}}'><img src="{{MEDIA_URL}}{{tutorialDate.user.profile.avatar}}" style="width:70px; height:75px;"></a></div>
 									<div class="infos_questions">
 									<a href='tutoriels/{{tutorialDate.slug}}'>
 										
 										<div class="img_wetut_accueil">
-											<img src="../../static/images/pictos/like_wetut_accueil.png">
-											<img src="../../static/images/pictos/bulle_wetut_accueil.png">
+											<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
+											<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
 										</div>
 										
 										<div class="Text_wetut_accueil">
@@ -99,9 +99,9 @@
 						<div class="white_box">
 							<div class="question_body">
 								<div class="illustration_tutos">
-									<div class="img_question"><a href='tutoriels/{{tutorialLike.slug}}'><img src="../../static/images/image_tuts.png"></a></div>
+									<div class="img_question"><a href='tutoriels/{{tutorialLike.slug}}'><img src="{{tutorialLike.picture.thumbnail.url}}"></a></div>
 									<div class="infos_members" style="background-color:#01c6e8;">
-										<div class="img_members"><a href='tutoriels/{{tutorialLike.slug}}'><img src="../../static/images/membre.png" style="width:70px; height:75px;"></a></div>
+										<div class="img_members"><a href='tutoriels/{{tutorialLike.slug}}'><img src="{{MEDIA_URL}}{{tutorialLike.user.profile.avatar}}" style="width:70px; height:75px;"></a></div>
 										<div class="infos_questions">
 										<a href='tutoriels/{{tutorialLike.slug}}'>
 											
@@ -132,8 +132,7 @@
 					
 				</div>
 
-
-				<script type="text/javascript">
+			<script type="text/javascript">
 				$(document).ready(function() {
 					$('div.questionsViews').hide();
 
@@ -175,9 +174,9 @@
 					<div class="white_box">
 						<div class="question_body">
 							<div class="illustration_tutos">
-								<div class="img_question"><a href="questions/{{questionDate.slug}}"><img src="../../static/images/image_tuts.png"></a></div>
+								<div class="img_question"><a href="questions/{{questionDate.slug}}"><img src="{{questionDate.picture.thumbnail.url}}"></a></div>
 								<div class="infos_members" style="background-color:#f53749;">
-									<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
+									<div class="img_members"><img src="{{MEDIA_URL}}{{questionDate.user.profile.avatar}}" style="width:70px; height:75px;"></div>
 									<div class="infos_questions">
 										<a href='questions/{{questionDate.slug}}'>
 										
@@ -211,9 +210,9 @@
 					<div class="white_box">
 						<div class="question_body">
 							<div class="illustration_tutos">
-								<div class="img_question"><a href="questions/{{questionViews.slug}}"><img src="../../static/images/image_tuts.png"></a></div>
+								<div class="img_question"><a href="questions/{{questionViews.slug}}"><img src="{{questionViews.picture.thumbnail.url}}"></a></div>
 								<div class="infos_members" style="background-color:#f53749;">
-									<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
+									<div class="img_members"><img src="{{MEDIA_URL}}{{questionViews.user.profile.avatar}}" style="width:70px; height:75px;"></div>
 									<div class="infos_questions">
 										<a href='questions/{{questionView.slug}}'>
 										
