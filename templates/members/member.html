@@ -3,19 +3,138 @@
 
 {% block content %}
 
-<br/><br/><br/>
-<div class="content">
 
-	<div id='profile' >
-		{% if member.avatar.url != "" %}
-			<img src='{{member.avatar.url}}'/>
-		{% else %}
-			<img src="{{MEDIA_URL}}members/avatar.jpg"/>
-		{% endif %}
-		
-		<h1>{{profile.username}}</h1>	
-		<p>{{member.city}}, {{member.state}}</p>
+<div class="banner_profile">
+	<div class="content_banner_members">
+		<div class='infos_persos'>
+			<div class="left">
+				<div class="img">
+					{% if member.avatar.url != "" %}
+     					<img src='{{member.avatar.url}}'/>
+					{% else %}
+						<img src="{{MEDIA_URL}}members/avatar.jpg"/>
+					{% endif %}
+				</div>
+				<div class="social_media">
+					<div class="social_icone">
+						{% if member.urlViadeo %} 
+							<img src="{{STATIC_URL}}images/pictos/profile_viadeo.png" />
+						{% else %} 
+						{% endif %}
+					</div>
+					<div class="social_icone">
+						{% if member.urlLinkedin %} 
+							<img src="{{STATIC_URL}}images/pictos/profile_linkedin.png" />
+						{% else %} 
+						{% endif %}
+					</div>
+					<div class="social_icone">
+						{% if member.urlFacebook %} 
+							<img src="{{STATIC_URL}}images/pictos/profile_facebook.png" />
+						{% else %} 
+						{% endif %}
+					</div>
+					<div class="social_icone">
+						{% if member.urlTwitter %} 
+							<img src="{{STATIC_URL}}images/pictos/profile_twitter.png" />
+						{% else %} 
+						{% endif %}
+						</div>
+				</div>
+			</div>
+	
+					
+			<div class="right">
+				<div class="name">
+					<p>{{profile.username}}</p>
+				</div>
+				<div class="job">{% if member.job %} {{member.job}} {% else %} {% endif %}</div>
+				<div class="employer"><p>{% if member.employer %} {{member.employer}} {% else %} {% endif %}</p></div>
+				<div class="city">
+					<p>{% if member.city and member.state %} 
+										{{member.city}}, {{member.state}} 
+									{% else %} 
+										{% if member.city %} 
+											{{member.city}}
+										{% endif %}
+										{% if member.state %} 
+											{{member.state}}
+										{% endif %}
+									{% endif %}
+					</p>
+				</div>
+				<div class="inscription_date"><p>Inscrit le</p></div>
+				<div class="website"><p>{{member.urlPortfolio}}</p></div>
+			</div>
+		</div>
+		<div class='skills'>
+			<div class="title"><p>Compétences</p></div>
+			<div class="subtitle"><p>Techniques</p></div>
+			<div class="text"><p>Composition,Tracking </p></div>
+			<div class="subtitle"><p>Logiciels</p></div>
+			<div class="text"><p>Composition,Tracking</p></div>
+		</div>
+		<div class='infos_socials'>
+			<div class="likes">{{ member.nb_likes }}</div>
+			<div class="responses">{{ member.nb_questions }}</div>
+			<div class="views">{{ member.views }}</div>
+		</div>
 	</div>
+</div>		
+	
+<div class="content">
+	<div class="content_profile">
+		<div class="title"><p>Activité</p></div>
+		<div class="activity">
+			<div class="tri_activity">
+	        	<div class="tri_choice" id="selected" style="margin-right:10px; background-color:#9C9C9C;">Questions</div>
+	        	<div class="tri_choice" style="margin-right:10px;">Réponses</div>
+	        	<div class="tri_choice" style="margin-right:10px;">Commentaires</div>
+	        	<div class="tri_choice">Likes</div>
+			</div>
+			<div class='grey_line'></div>
+			<div class="one_actu">
+				<div class="img"></div>
+				<div class="text">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</div>
+			</div>
+			<div class="line_end"></div>
+		</div>
+		<div class="follow">
+			<div class="title_follow"><p>Questions suivies</p></div>
+			
+			{% for question in followedquestions %}		
+				<div class="follow_question">
+					<div class="img"></div>
+					<div class="question">
+						<a href='/questions/{{question.slug}}'>{{question.title}}</a>
+					</div>
+				</div>						
+			{% endfor %}
+			
+
+			<div class="follow_question">
+				<div class="img"></div>
+				<div class="question">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</div>
+			</div>
+			<div class="follow_question">
+				<div class="img"></div>
+				<div class="question">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</div>
+			</div>
+			<div class="clear"></div>
+			<div class="follow_tag">
+				<div class="title_follow"><p>Tags suivis</p></div>
+				<div class="tags"><p></p></div>
+			</div>
+			
+		</div>
+	</div>
+
+	
 </div>
 
+
 {% endblock content %}
+
+	
+	
