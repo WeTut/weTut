@@ -30,6 +30,7 @@ def profile(request):
 				profile.delete()
 				post.save()
 				profile = Profile.objects.get(user=request.user)
+				request.session['profile_user'] = profile
 
 	followedquestions = []
 	follows = FollowQuestion.objects.filter(user=request.user) 

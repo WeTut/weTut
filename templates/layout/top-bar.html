@@ -50,7 +50,13 @@ $(document).ready(function() {
       <ul>
             {% if user.is_authenticated %}
             
-            <li class="user"><a href="#user_menu"><img src="{{request.session.profile_user.avatar.url}}" style="width:40px;height:40px;display:inline;margin-right:10px;"/>{{ user.username }}</a></li>
+            <li class="user"><a href="#user_menu">
+              {% if request.session.profile_user.avatar.url != "" %}
+                <img src="{{request.session.profile_user.avatar.url}}" style="width:40px;height:40px;display:inline;margin-right:10px;"/>
+              {% else %}
+                <img src="{{MEDIA_URL}}members/avatar.jpg" style="width:40px;height:40px;display:inline;margin-right:10px;"/>
+              {% endif %}
+              {{ user.username }}</a></li>
 
             <div id="user_menu">
                 <a href="/members/profile" role="button" data-toggle="modal">Voir le profil</a>
@@ -96,11 +102,11 @@ $(document).ready(function() {
     <form method="post" action="/login">
     {% csrf_token %}
     	<div class="input_connexion">
-    		<div class="input_img"><img src="static/images/pictos/user_connexion.png"/></div>
+    		<div class="input_img"><img src="{{STATIC_URL}}images/pictos/user_connexion.png"/></div>
     		<input type="text" name="username_connexion" placeholder="Pseudo / Email*"/>
     	</div>
     	<div class="input_connexion">
-    		<div class="input_img"><img src="static/images/pictos/padlock_connexion.png"/></div>
+    		<div class="input_img"><img src="{{STATIC_URL}}images/pictos/padlock_connexion.png"/></div>
     		<input type="password" name="password" placeholder="Mot de passe*" />
     	</div>
     	<input type="submit" value="" class="btn_connexion"></input>

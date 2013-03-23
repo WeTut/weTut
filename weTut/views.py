@@ -52,9 +52,7 @@ def login_view(request):
 			if user is not None:
 				if user.is_active:
 					login(request,user)
-					print user.get_profile()
 					request.session['profile_user'] = user.get_profile()
-					print request.session['profile_user']
 					return HttpResponseRedirect('/home/') # Redirect after POST
 
 		else:
