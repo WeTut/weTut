@@ -24,24 +24,26 @@ from members.models import Profile
 def start(request):
 	questionsDate = Question.objects.filter(validate=0).order_by('-date')[:3]
 	questionsViews = Question.objects.filter(validate=0).order_by('-views')[:3]
-	tutorials = Question.objects.filter(validate=1).order_by('-date')[:3]
+	tutorialsDate = Question.objects.filter(validate=1).order_by('-date')[:3]
+	tutorialsLike = Question.objects.filter(validate=1).order_by('-liketuto')[:3]
 
-	return render_to_response('general/start.html', {'questionsDate': questionsDate, 'questionsViews': questionsViews, 'tutorials':tutorials}, context_instance=RequestContext(request))
+	return render_to_response('general/start.html', {'questionsDate': questionsDate, 'questionsViews': questionsViews, 'tutorialsDate':tutorialsDate, 'tutorialsLike':tutorialsLike}, context_instance=RequestContext(request))
 
 def home(request):
 	questionsDate = Question.objects.filter(validate=0).order_by('-date')[:3]
 	questionsViews = Question.objects.filter(validate=0).order_by('-views')[:3]
-	tutorials = Question.objects.filter(validate=1).order_by('-date')[:3]
+	tutorialsDate = Question.objects.filter(validate=1).order_by('-date')[:3]
+	tutorialsLike = Question.objects.filter(validate=1).order_by('-liketuto')[:3]
 	actualityQuestion = ActualityQuestion.objects.filter(user=request.user).order_by('-date')[:3]
 	actualityTag = ActualityTag.objects.filter(user=request.user).order_by('-date')[:3]
 
-	return render_to_response('general/home.html', {'questionsDate': questionsDate, 'questionsViews': questionsViews, 'tutorials': tutorials, 'actualityQuestion':actualityQuestion, 'actualityTag':actualityTag}, context_instance=RequestContext(request))
+	return render_to_response('general/home.html', {'questionsDate': questionsDate, 'questionsViews': questionsViews, 'tutorialsDate':tutorialsDate, 'tutorialsLike':tutorialsLike, 'actualityQuestion':actualityQuestion, 'actualityTag':actualityTag}, context_instance=RequestContext(request))
 
 def login_view(request):
 	if request.method == 'POST': # If the form has been submitted...
 		form = AuthForm(request.POST) # A form bound to the POST data
 		if form.is_valid(): # All validation rules pass
-			username = request.POST['username']
+			username = request.POST['username_connexion']
 			password = request.POST['password']
 			if re.match("[^@]+@[^@]+\.[^@]+", username):
 				username = User.objects.get(email=username)
@@ -50,6 +52,7 @@ def login_view(request):
 			if user is not None:
 				if user.is_active:
 					login(request,user)
+					request.session['profile_user'] = user.get_profile()
 					return HttpResponseRedirect('/home/') # Redirect after POST
 
 		else:

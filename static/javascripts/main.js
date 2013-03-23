@@ -66,7 +66,7 @@ $(document).ready(function(){
 		$.ajax({
 		  	type: "POST",
 			url: "",
-		  	data: { likeTutoSubmit:'likeTutoSubmit', hidden: hidden, csrfmiddlewaretoken:csrf, tutoId:tutoId}
+		  	data: { submit:'likeTutoSubmit', hidden: hidden, csrfmiddlewaretoken:csrf, tutoId:tutoId}
 		}).done(function( msg ) {
 			$('#tutorial'+tutoId+' .like').html(divcontent);
 			return false;			

@@ -7,7 +7,12 @@
 <div class="content">
 
 	<div id='profile' >
-		<img src='{{member.avatar.url}}'/>
+		{% if member.avatar.url != "" %}
+			<img src='{{member.avatar.url}}'/>
+		{% else %}
+			<img src="{{MEDIA_URL}}members/avatar.jpg"/>
+		{% endif %}
+		
 		<h1>{{profile.username}}</h1>	
 		<p>{{member.city}}, {{member.state}}</p>
 	</div>

@@ -14,33 +14,34 @@ class Tag(models.Model):
 
 
 class Question (models.Model):
-	currentUserFollows = models.BooleanField(default=1)
-	currentUserLikes = models.BooleanField(default=1)
+	
 	title = models.CharField(max_length = 200)
-	picture = StdImageField(upload_to='questions', blank=True, size=(310, 224, True), thumbnail_size=(160, 120, True))
+	picture = StdImageField(upload_to='questions', blank=True, size=(310, 224, True), thumbnail_size=(155, 120, True))
 	message = models.TextField(max_length = 400)
 	slug = models.SlugField(max_length = 200)
 	views = models.IntegerField()
 	answers = models.IntegerField()
-	user = models.ForeignKey(User)
+	user = models.OneToOneField(User)
 	tag1 = models.IntegerField()
 	tag2 = models.IntegerField()
 	tag3 = models.IntegerField()
 	date = models.DateField()
 	validate = models.BooleanField(default=False)
 
-
+	currentUserFollows = False
+	currentUserLikes = False
+	
 	def __unicode__(self):
 		return u'%s' % (self.title)
 
 	def getAnswersCount(self):
 		return Answer.objects.filter(question=self).count()
 
+	def getLikesCount(self):
+		return LikeTuto.objects.filter(tutorial_id=self).count()
+
 
 class Answer (models.Model):
-	currentUserLiked = models.BooleanField(default=1)
-	currentUserDisliked = models.BooleanField(default=1)
-
 	answer = models.TextField(default="Entrez votre reponse ici")
 	date = models.DateField()
 
@@ -48,6 +49,9 @@ class Answer (models.Model):
 	question = models.ForeignKey(Question)
 	nb_likes = models.IntegerField()
 	usefull = models.BooleanField(default=False)
+
+	currentUserLiked = False
+	currentUserDisliked = False
 
 	def __unicode__(self):
 		return u'%s' % (self.date)
@@ -68,8 +72,8 @@ class Software(models.Model):
 		return u'%s' % (self.name)
 
 class Media(models.Model):
-	link = models.CharField(max_length = 200)
-
+	#link = models.CharField(max_length = 200)
+	link = StdImageField(upload_to='media', blank=True, size=(310, 224, True), thumbnail_size=(160, 120, True))
 	question = models.ForeignKey("Question")
 
 	def __unicode__(self):

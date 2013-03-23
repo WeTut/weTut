@@ -9,13 +9,29 @@
 			{% csrf_token %}
 			<div id='profileForm' class='span12'>
 				<div class='span6'>
-					<div class='span4'>
-						<img src='{{MEDIA_URL}}{{ profileform.avatar.value }}' >
-						{{ profileform.avatar }}
-					</div>
 					<div class='span8'>
+						<br/><br/>
 						<h1>{{user.username}}</h1>
 						<hr />
+						<h3>Avatar</h3>
+						{% if request.session.profile_user.avatar.url != "" %}
+							{{ profileform.avatar }}
+						{% else %}
+							<table style="border-style: none;">
+							    <tr>
+							        <td style="vertical-align: middle;">Votre avatar:</td>
+							        <td>
+							            <img src='{{MEDIA_URL}}members/avatar.jpg' />
+							        </td>
+							    </tr>
+							    <tr>
+							        <td style="vertical-align: middle;">Changer</td>
+							        <td>
+							            {{ profileform.avatar }}
+							        </td>
+							    </tr>
+							</table>
+						{% endif %}
 						<h3>Métier</h3>
 						{{ profileform.job }}
 						<h3>Employeur</h3>

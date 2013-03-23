@@ -4,24 +4,29 @@
   
   <form method="post" action="/accounts/register/" class="wide" id="signupForm">
   {% csrf_token %}
-    <p>
-      <label for="id_username">Pseudo*:</label>
-      {{ form.username }}
-    </p>
-    <p>
-      <label for="id_email">E-mail*:</label>
-      {{ form.email }}
-    </p>
-    <p>
-      <label for="id_password1">Mot de passe*:</label>
-      {{ form.password1 }}
-    </p>
-    <p>
-      <label for="id_password2">Mot de passe (confirmation)*:</label>
-      {{ form.password2 }}
-    </p>
-    <p><input type="submit" class="btn btn-primary" value="Sign Up"></p>
+  		<div class="input_inscription">
+    		<div class="input_img"><img src="{{STATIC_URL}}images/pictos/user_connexion.png"/></div>
+    		{{ form.username }}
+    	</div>
+    	<div class="input_inscription">
+    		<div class="input_img"><img src="{{STATIC_URL}}images/pictos/user_connexion.png"/></div>
+    		{{ form.email }}
+    	</div>
+    	<div class="input_inscription">
+    		<div class="input_img"><img src="{{STATIC_URL}}images/pictos/padlock_connexion.png"/></div>
+    		{{ form.password1 }}
+    	</div>
+    	<div class="input_inscription">
+    		<div class="input_img"><img src="{{STATIC_URL}}images/pictos/padlock_connexion.png"/></div>
+    		{{ form.password2 }}
+    	</div>
+    
+    <p><input type="submit" class="submit_inscription" value=""></p>
   </form>
+  
+  <div class="clear"></div>
+	<div class="line_end_connexion"></div>
+	<div class="facebook_connexion"></div>
 
 <script>
 $(document).ready(function(){
@@ -34,5 +39,21 @@ $(document).ready(function(){
       }
     }
   });
+});
+</script>
+
+<script>
+$(document).ready(function(){
+  var pseudo = 'Pseudo*';
+  var email = 'Email*';
+  var password1 = 'Mot de passe*';
+  var password2 = 'Confirmation du mot de passe*';
+  
+  $('input[name=username]').attr({placeholder : pseudo});
+  $('input[name=email]').attr({placeholder : email});
+  $('input[name=password1]').attr({placeholder : password1});
+  $('input[name=password2]').attr({placeholder : password2});
+  		 
+ 
 });
 </script>

@@ -41,8 +41,10 @@
 					                $("div.result_members").empty();
 					                $("div.good_results").empty();
 					                $("div.result_members").hide();
+					                $('div.members_default').hide();
 					                $("div.result_members").append(html);
-					                $('div.good_results').html($('div.membersFound'));
+					                $('div.good_results').append($('div.membersFound'));
+
 					            }
 					        });
 
@@ -61,9 +63,7 @@
 	        	 </div>
 	        </div>
 
-	        <div class="good_results">
-	        </div>
-
+	        
 	        <div class="result_members">
 	        </div>
 	        <div class="tri">
@@ -78,12 +78,20 @@
 	 <!-- END BANNER -->
 <div class="content_members">	
 		<div class='row-fluid' >
+			<div class="good_results">
+	        </div>
+
+	        <div class="members_default">
 			{% for member in members %}
 				<div class='cat4'>
 					<div class="one_member">
 						<div class="infos">
 							<div class="picture">
-								<img src="{{MEDIA_URL}}{{member.avatar}}" title="{{member.user.username}}" alt="{{member.user.username}}" />
+								{% if member.avatar.url != "" %}
+									<img src="{{member.avatar.url}}" title="{{member.user.username}}" alt="{{member.user.username}}" />
+								{% else %}
+									<img src="{{MEDIA_URL}}members/avatar.jpg" title="{{member.user.username}}" alt="{{member.user.username}}" />
+								{% endif %}
 							</div>
 							<div class="socials_infos">
 								<div class="likes">{{ member.nb_likes }}</div>
@@ -122,6 +130,7 @@
 					</div>
 				</div>
 			{% endfor %}
+			</div>
 		</div>	 
 </div>
 <form id='filtermembersform' action="" method="POST">
@@ -132,4 +141,3 @@
 		        <input name="submit" type="hidden" value="filterMembersSubmit" />
 	        </form>
 {% endblock content %}
-

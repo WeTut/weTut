@@ -50,7 +50,13 @@ $(document).ready(function() {
       <ul>
             {% if user.is_authenticated %}
             
-            <li class="user"><a href="#user_menu"><img src="{{STATIC_URL}}images/logo.png" style="width:40px;height:40px;display:inline;margin-right:10px;"/>{{ user.username }}</a></li>
+            <li class="user"><a href="#user_menu">
+              {% if request.session.profile_user.avatar.url != "" %}
+                <img src="{{request.session.profile_user.avatar.url}}" style="width:40px;height:40px;display:inline;margin-right:10px;"/>
+              {% else %}
+                <img src="{{MEDIA_URL}}members/avatar.jpg" style="width:40px;height:40px;display:inline;margin-right:10px;"/>
+              {% endif %}
+              {{ user.username }}</a></li>
 
             <div id="user_menu">
                 <a href="/members/profile" role="button" data-toggle="modal">Voir le profil</a>
@@ -83,34 +89,43 @@ $(document).ready(function() {
 
 <!-- Modal -->
 <div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="loginModalLabel">Se connecter !</h3>
-  </div>
+
   <div class="modal-body">
+  
+  	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <p id="loginModalLabel">Je me connecte</p>
+    
     {% if form.errors %}
     <p>Merci de remplir tous les champs</p>
     {% endif %}
 
     <form method="post" action="/login">
     {% csrf_token %}
-    Username / Email : <input type="text" name="username" /> <br />
-    Password : <input type="password" name="password" />
-    
-  </div>
-  <div class="modal-footer">
-    <input type="submit" value="Me connecter" class="btn btn-primary" />
-    </form>
+    	<div class="input_connexion">
+    		<div class="input_img"><img src="{{STATIC_URL}}images/pictos/user_connexion.png"/></div>
+    		<input type="text" name="username_connexion" placeholder="Pseudo / Email*"/>
+    	</div>
+    	<div class="input_connexion">
+    		<div class="input_img"><img src="{{STATIC_URL}}images/pictos/padlock_connexion.png"/></div>
+    		<input type="password" name="password" placeholder="Mot de passe*" />
+    	</div>
+    	<input type="submit" value="" class="btn_connexion"></input>
+	</form>
+	<div class="clear"></div>
+	<div class="line_end_connexion"></div>
+	<div class="facebook_connexion"></div>
   </div>
 </div>
 
 <!-- Modal Inscription -->
 <div id="inscriptionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="inscriptionModalLabel" aria-hidden="true">
-  <div class="modal-header">
+  <div class="modal-body">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="inscriptionModalLabel">M'inscrire !</h3>
+    <p id="inscriptionModalLabel">Je m'inscris</p>
+    <div id="signupC">
+    </div>
   </div>
-  <div class="modal-body" id="signupC">
+  
     <!--<form method="post" action="/accounts/register/">
     {% csrf_token %}
     Username : <input type="text" name="username" /> <br />
@@ -121,7 +136,7 @@ $(document).ready(function() {
   <div class="modal-footer">
     <input type="submit" value="M'inscrire" class="btn btn-primary" />
     </form>-->
-  </div>
+  
 </div>
 
 

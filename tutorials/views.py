@@ -101,13 +101,17 @@ def tutorials(request):
 		request.session['filterTuto'] = '-date'
 
 	tutorials_list = Question.objects.filter(validate=True).order_by(request.session['filterTuto'])
+	print ("REQUEST.POST ",request.POST)
 	if request.method == 'POST' and 'submit' in request.POST:
 
+
 		if request.POST['submit'] == 'filterSubmit':
+			print ("FILTER")
 			tutorials_list = Question.objects.filter(validate=True).order_by(request.POST['filter'])
 			request.session['filterTuto'] = request.POST['filter']
 
 		elif request.POST['submit'] == 'likeTutoSubmit':
+			print ("LIKE")
 			if request.POST['hidden'] == 'like':
 				like = LikeTuto()
 				like.user = request.user
@@ -269,6 +273,7 @@ def ask(request):
 
 	if request.method == 'POST': # If the form has been submitted...
 		form = QuestionForm(request.POST, request.FILES) # A form bound to the POST data
+		#formMedia = MediaForm(request.POST, request.FILES)
 		if form.is_valid(): # All validation rules pass
 			post = form.save(commit=False)
 			title = form.cleaned_data['title']
@@ -294,6 +299,9 @@ def ask(request):
 			profile = get_object_or_404(Profile, user=request.user)
 			profile.nb_questions += 1
 			profile.save()
+
+			#media = formMedia.save(commit=False)
+			#media.question_id = post.id
 
 			#create actuality for all who follow one of these tags
 			followers = FollowTag.objects.filter(tag__in=[post.tag1, post.tag2, post.tag3])
