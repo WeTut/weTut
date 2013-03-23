@@ -37,3 +37,78 @@ QUESTIONS STYLESHEET
 .one_member .perso_infos .left_infos .city{font-size:12px; color:#9C9C9C;}
 
 .one_member .perso_infos .right_infos{float:left; width:140px; font-size:13px; color:#9C9C9C;}
+
+
+/* ------------------PROFIL MEMBRES------------------ */
+
+
+.banner_profile{width:100%; height:360px; background-image:url(../images/back_banner_profile.png); background-repeat:x; position:relative; z-index:1; box-shadow: 0px 2px 8px #DDDDDD;}
+
+.banner_profile .content_banner_members .infos_persos{float:left; width:450px; height:205px; background-color:#FFFFFF; border-radius:3px; margin-right:10px; padding:10px; margin-top:28px;}
+.banner_profile .content_banner_members .infos_persos .left{float:left; margin-right:10px;}
+.banner_profile .content_banner_members .infos_persos .left .img{width:160px; height:160px; background-color:#9C9C9C;}
+.banner_profile .content_banner_members .infos_persos .left .social_icone img{float:left; margin-right:5px; margin-top:10px;}
+.banner_profile .content_banner_members .infos_persos .right .name p{color:#46423F; font-size:24px; font-family:'bebas_neue';}
+.banner_profile .content_banner_members .infos_persos .right .name, .banner_profile .content_banner_members .infos_persos .right .job, .banner_profile .content_banner_members .infos_persos .right .employer, .banner_profile .content_banner_members .infos_persos .right .city, .banner_profile .content_banner_members .infos_persos .right .inscription_date{height:20px;}
+
+.banner_profile .content_banner_members .infos_persos .right .job{font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:14px; margin-top:15px;}
+.banner_profile .content_banner_members .infos_persos .right .employer{font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:14px;}
+.banner_profile .content_banner_members .infos_persos .right .city{margin-top:10px;}
+.banner_profile .content_banner_members .infos_persos .right .city p{font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:14px; font-weight:bold;}
+.banner_profile .content_banner_members .infos_persos .right .inscription_date{margin-top:10px;}
+.banner_profile .content_banner_members .infos_persos .right .inscription_date p{font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:12px;}
+.banner_profile .content_banner_members .infos_persos .right .website{margin-top:43px; text-align:center;}
+
+.banner_profile .content_banner_members .infos_persos .right .website p{font-family: 'Rambla', sans-serif; color:#46423F; font-size:16px; font-weight:bold;}
+
+
+.banner_profile .content_banner_members .skills{float:left; margin-top:28px; width:330px; height:205px; background-color:#FFFFFF; border-radius:3px; margin-right:10px; padding:10px;}
+.banner_profile .content_banner_members .skills .title p{color:#46423F; font-size:24px; font-family:'bebas_neue'; margin-bottom:20px;}
+.banner_profile .content_banner_members .skills .subtitle p{color:#46423F; font-size:18px; font-family:'bebas_neue';}
+.banner_profile .content_banner_members .skills .text p{width:330px;font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:14px;}
+
+.banner_profile .content_banner_members .infos_socials .likes{width:49px; height:42px; background-image:url("/static/images/pictos/like_wetut_member.png"); line-height:43px; font-size:16px; font-family:'bebas_neue'; color:#01c6e8; margin-bottom:25px;}
+.banner_profile .content_banner_members .infos_socials .responses{width:49px; height:42px; background-image:url("/static/images/pictos/bulle_wetut_member.png"); line-height:45px; font-size:16px; font-family:'bebas_neue'; color:#01c6e8; margin-bottom:25px;}
+.banner_profile .content_banner_members .infos_socials .views{width:49px; height:42px; background-image:url("/static/images/pictos/view_wetut_member.png"); line-height:45px; font-size:16px; font-family:'bebas_neue'; color:#01c6e8;}
+
+
+.banner_profile .content_banner_members .infos_socials{float:left; margin-top:28px; width:50px; height:175px; background-color:#01c6e8; border-radius:3px; padding:25px; text-align:center;}
+
+.content .content_profile .activity{width:590px; float:left; margin-right:10px; }
+.content .content_profile .activity .tri_activity .tri_choice{float:left; width:140px; height:40px; background-color:#c9c9c9; border-top-left-radius:3px; border-top-right-radius:3px; margin-top:22px; color:#FFFFFF; font-size:18px; font-family:'bebas_neue'; text-align:center; line-height:45px;}
+
+.content .content_profile .activity .one_actu{ min-height:40px; background-color:#FFFFFF; width:570px; padding:10px;}
+.content .content_profile .activity .one_actu .img{width:40px; height:40px; background-color:#01c6e8; float:left; margin-right:10px;}
+
+.content .content_profile .activity .one_actu .text{color:#9c9c9c; width:520px; margin-left:50px;}
+.content .content_profile .activity .line_end{width:100%; height:2px; background-color:#9c9c9c;}
+
+
+
+.content .content_profile .activity .tri_activity{width:590px; height:40px;}
+
+.content .content_profile .activity .grey_line{margin-top:22px;}
+
+.content .content_profile .follow{float:left; width:320px; min-height:320px; margin-top:22px; background-color:#FFFFFF; border-radius:3px; font-family: 'Rambla', sans-serif; font-size:12px; padding:10px;}
+.content .content_profile .title{color:#46423F; font-size:28px; font-family:'bebas_neue'; margin-top:50px;}
+.content .content_profile .follow .title_follow p{color:#46423F; font-size:24px; font-family:'bebas_neue';}
+.content .content_profile .follow .follow_question{margin-top:15px; }
+.content .content_profile .follow .img{width:78px; height:60px; margin-right:10px; background-color:#46423F; float:left;}
+.content .content_profile .follow .question{width:222px; height:60px; min-height:60px; margin-left:98px; color:#9c9c9c; font-size:14px;}
+
+.content .content_profile .follow .follow_tag{margin-top:30px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
