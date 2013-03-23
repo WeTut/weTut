@@ -5,19 +5,19 @@
   <form method="post" action="/accounts/register/" class="wide" id="signupForm">
   {% csrf_token %}
   		<div class="input_inscription">
-    		<div class="input_img"><img src="{{STATIC_URL}}images/pictos/user_connexion.png"/></div>
+    		<div class="input_img"><img src="static/images/pictos/user_connexion.png"/></div>
     		{{ form.username }}
     	</div>
     	<div class="input_inscription">
-    		<div class="input_img"><img src="{{STATIC_URL}}images/pictos/user_connexion.png"/></div>
+    		<div class="input_img"><img src="static/images/pictos/arobase.png"/></div>
     		{{ form.email }}
     	</div>
     	<div class="input_inscription">
-    		<div class="input_img"><img src="{{STATIC_URL}}images/pictos/padlock_connexion.png"/></div>
+    		<div class="input_img"><img src="static/images/pictos/padlock_connexion.png"/></div>
     		{{ form.password1 }}
     	</div>
     	<div class="input_inscription">
-    		<div class="input_img"><img src="{{STATIC_URL}}images/pictos/padlock_connexion.png"/></div>
+    		<div class="input_img"><img src="static/images/pictos/padlock_connexion.png"/></div>
     		{{ form.password2 }}
     	</div>
     
