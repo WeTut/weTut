@@ -26,6 +26,9 @@ urlpatterns = patterns('',
     url(r'^tutoriels/$', 'tutorials.views.tutorials', name='tutorials'), #list of tutorials
     url(r'^tutoriels/(?P<slug>[\w-]+)/?$', 'tutorials.views.tutorial', name='tutorial'), #One specific tutorial
 
+    url(r'^facebook/login$', 'facebook.views.login'),
+    url(r'^facebook/authentication_callback$', 'facebook.views.authentication_callback'),
+
     url(r'login', 'weTut.views.login_view', name='login'),
     url(r'logout', 'weTut.views.logout_view', name='logout'),
 

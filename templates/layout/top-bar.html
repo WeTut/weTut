@@ -62,7 +62,7 @@ $(document).ready(function() {
                 <a href="/members/profile" role="button" data-toggle="modal">Voir le profil</a>
                 <a href="/logout" role="button" data-toggle="modal">Se déconnecter</a>
             </div>
-            {% else %}<li><a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal" class="first">Connexion</a></li>
+            {% else %}<li><a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal" class="first">Connexion</a></li>            
             <li><a href="#inscriptionModal" role="button" data-toggle="modal" data-target="#inscriptionModal">Inscription</a></li>
             {% endif %}
            </ul>
@@ -113,7 +113,7 @@ $(document).ready(function() {
 	</form>
 	<div class="clear"></div>
 	<div class="line_end_connexion"></div>
-	<div class="facebook_connexion"></div>
+	<a href="/facebook/login"><div class="facebook_connexion"></div></a>
   </div>
 </div>
 

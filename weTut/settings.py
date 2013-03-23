@@ -148,10 +148,21 @@ INSTALLED_APPS = (
     'members',
     'registration',
     'haystack',
+    'facebook',
 )
+
+# Facebook settings are set via environment variables
+FACEBOOK_APP_ID = '369894859790515'
+FACEBOOK_APP_SECRET = '44ec38e638c15a5bb8a07a1fc77ec703'
+FACEBOOK_SCOPE = 'email,publish_stream'
 
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.MD5PasswordHasher',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'facebook.backend.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 # A sample logging configuration. The only tangible logging
