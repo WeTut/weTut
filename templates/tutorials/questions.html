@@ -64,14 +64,20 @@
 								</a>
 				</div>
 				<div class="member">
-					<div class="img_member"></div>
+					<div class="img_member">
+						{% if question.user.profile.avatar.url != "" %}
+     						<img src='{{question.user.profile.avatar.url}}'/>
+						{% else %}
+							<img src="{{MEDIA_URL}}members/avatar.jpg"/>
+						{% endif %}
+					</div>
 					<div class="infos_member">
 						<div class="view">
-							<img src="../../static/images/pictos/view_questions_wetut.png">
+							<img src="{{STATIC_URL}}images/pictos/view_questions_wetut.png">
 							<p>{{ question.views }}</p>
 						</div>
 						<div class="responses">
-							<img src="../../static/images/pictos/bulle_questions_wetut.png">
+							<img src="{{STATIC_URL}}images/pictos/bulle_questions_wetut.png">
 							<p>{{ question.getAnswersCount }}</p>
 						</div>
 					</div>
@@ -85,7 +91,7 @@
 				<div class="action_member">
 					<a href="">
 					<div class="answer">
-						<img src="../../static/images/pictos/answer_picto.png"><p>Je sais !</p>
+						<img src="{{STATIC_URL}}images/pictos/answer_picto.png"><p>Je sais !</p>
 					</div>
 					</a>
 					<div class="question_follow">

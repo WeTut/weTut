@@ -21,7 +21,7 @@ QUESTIONS STYLESHEET
 .one_question .action_member{float:left; width:145px; color:#46423f;}
 
 
-.one_question .member .img_member{width:80px; height:80px; background-image:url('../images/membre_de_luxe.png');}
+.one_question .member .img_member{width:80px; height:80px; background-color:#f53749;}
 .one_question .member .infos_member{width:70px; height:28px; padding:6px 5px 7px 5px;}
 .one_question .member .infos_member .view{float:left; text-align:center; margin-right:10px;}
 .one_question .member .infos_member .responses{text-align:center; margin-left:10px;}

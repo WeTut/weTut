@@ -22,7 +22,15 @@
 				<div class="body_question">
 					<div class="left_question_body">
 						<div class="member">
-							<div class="image"><img src="{{STATIC_URL}}images/membre_de_luxe.png" /></div>
+							<div class="image">
+
+							{% if question.user.profile.avatar.url != "" %}
+     							<img src='{{question.user.profile.avatar.url}}'/>
+							{% else %}
+								<img src="{{MEDIA_URL}}members/avatar.jpg"/>
+							{% endif %}
+
+							</div>
 							<div class="infos" style="background-color:#01c6e8;">
 								<div class="name"><p>Posté par {{question.user.username}}</p></div>
 								<div class="date"><p>le {{question.date}}</p></div>
@@ -78,7 +86,13 @@
 								<div class='like_member'>{{ answer.getLikesCount }}</div>
 								<div class='arrow'>						
 								</div>
-								<div class='image'><img src="{{STATIC_URL}}images/membre_de_luxe.png" /></div>
+								<div class='image'>
+									{% if answer.user.profile.avatar.url != "" %}
+		     							<img src='{{answer.user.profile.avatar.url}}'/>
+									{% else %}
+										<img src="{{MEDIA_URL}}members/avatar.jpg"/>
+									{% endif %}
+								</div>
 							</div>
 							<div class="body_answer">
 								<div class="date"><p>Par {{ answer.user }} le {{ answer.date }}</p></div>
@@ -112,7 +126,11 @@
 							<div class='span4'></div>
 							<div class='span8'  style="">
 								<div class='image'>
-									<img src="{{STATIC_URL}}images/membre_de_luxe.png" />
+									{% if answer.user.profile.avatar.url != "" %}
+		     							<img src='{{comment.user.profile.avatar.url}}' style="width:80px;height:80px;"/>
+									{% else %}
+										<img src="{{MEDIA_URL}}members/avatar.jpg" style="width:80px;height:80px;"/>
+									{% endif %}
 								</div>
 								<div class='texte' >
 									<div class="name"><p>Posté par {{comment.user}} le {{comment.date}}</p></div>
