@@ -21,7 +21,7 @@ class Question (models.Model):
 	slug = models.SlugField(max_length = 200)
 	views = models.IntegerField()
 	answers = models.IntegerField()
-	user = models.OneToOneField(User)
+	user = models.ForeignKey(User)
 	tag1 = models.IntegerField()
 	tag2 = models.IntegerField()
 	tag3 = models.IntegerField()

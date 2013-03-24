@@ -119,7 +119,13 @@
 							<div class="illustration_tutos">
 								<div class="img_question"><a href='tutoriels/{{tutorialDate.slug}}'><img src="{{tutorialDate.picture.thumbnail.url}}"></a></div>
 								<div class="infos_members" style="background-color:#01c6e8;">
-									<div class="img_members"><a href='members/{{tutorialDate.user}}'><img src="{{MEDIA_URL}}{{tutorialDate.user.profile.avatar}}" style="width:70px; height:75px;"></a></div>
+									<div class="img_members"><a href='members/{{tutorialDate.user}}'>
+										{% if tutorialDate.user.profile.avatar.url != ""%}
+											<img src="{{tutorialDate.user.profile.avatar.url}}" style="width:70px; height:75px;"/>
+										{% else %}
+											<img src="{{MEDIA_URL}}members/avatar.jpg" style="width:70px; height:75px;"/>
+										{% endif %}
+									</a></div>
 									<div class="infos_questions">
 									<a href='tutoriels/{{tutorialDate.slug}}'>
 										
@@ -155,7 +161,15 @@
 								<div class="illustration_tutos">
 									<div class="img_question"><a href='tutoriels/{{tutorialLike.slug}}'><img src="{{tutorialLike.picture.thumbnail.url}}"></a></div>
 									<div class="infos_members" style="background-color:#01c6e8;">
-										<div class="img_members"><a href='members/{{tutorialLike.user}}'><img src="{{MEDIA_URL}}{{tutorialLike.user.profile.avatar}}" style="width:70px; height:75px;"></a></div>
+										<div class="img_members"><a href='members/{{tutorialLike.user}}'>
+
+											{% if tutorialLike.user.profile.avatar.url != ""%}
+												<img src="{{tutorialLike.user.profile.avatar.url}}" style="width:70px; height:75px;"/>
+											{% else %}
+												<img src="{{MEDIA_URL}}members/avatar.jpg" style="width:70px; height:75px;"/>
+											{% endif %}
+
+										</a></div>
 										<div class="infos_questions">
 										<a href='tutoriels/{{tutorialLike.slug}}'>
 											
@@ -230,7 +244,15 @@
 							<div class="illustration_tutos">
 								<div class="img_question"><a href="questions/{{questionDate.slug}}"><img src="{{questionDate.picture.thumbnail.url}}"></a></div>
 								<div class="infos_members" style="background-color:#f53749;">
-									<div class="img_members"><a href='members/{{questionDate.user}}'><img src="{{MEDIA_URL}}{{questionDate.user.profile.avatar}}" style="width:70px; height:75px;"></a></div>
+									<div class="img_members"><a href='members/{{questionDate.user}}'>
+
+										{% if questionDate.user.profile.avatar.url != ""%}
+											<img src="{{questionDate.user.profile.avatar.url}}" style="width:70px; height:75px;"/>
+										{% else %}
+											<img src="{{MEDIA_URL}}members/avatar.jpg" style="width:70px; height:75px;"/>
+										{% endif %}
+
+									</a></div>
 									<div class="infos_questions">
 										<a href='questions/{{questionDate.slug}}'>
 										
@@ -266,7 +288,15 @@
 							<div class="illustration_tutos">
 								<div class="img_question"><a href="questions/{{questionViews.slug}}"><img src="{{questionViews.picture.thumbnail.url}}"></a></div>
 								<div class="infos_members" style="background-color:#f53749;">
-									<div class="img_members"><a href='members/{{questionViews.user}}'><img src="{{MEDIA_URL}}{{questionViews.user.profile.avatar}}" style="width:70px; height:75px;"></a></div>
+									<div class="img_members"><a href='members/{{questionViews.user}}'>
+
+										{% if questionViews.user.profile.avatar.url != ""%}
+											<img src="{{questionViews.user.profile.avatar.url}}" style="width:70px; height:75px;"/>
+										{% else %}
+											<img src="{{MEDIA_URL}}members/avatar.jpg" style="width:70px; height:75px;"/>
+										{% endif %}
+
+									</div>
 									<div class="infos_questions">
 										<a href='questions/{{questionView.slug}}'>
 										
