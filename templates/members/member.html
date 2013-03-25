@@ -3,9 +3,14 @@
 
 {% block content %}
 
-
 <div class="banner_profile">
 	<div class="content_banner_members">
+		{% if profile.username == user.username %}
+		<button class='btn_modify' >
+			<a href='profile'>modifier</a>
+		</button>
+		{% endif %}
+		
 		<div class='infos_persos'>
 			<div class="left">
 				<div class="img">
@@ -18,32 +23,38 @@
 				<div class="social_media">
 					<div class="social_icone">
 						{% if member.urlViadeo %} 
-							<a href='{{ member.urlViadeo }}'><img src="{{STATIC_URL}}images/pictos/profile_viadeo.png" /></a>
+							<a href='{{ member.urlViadeo }}'>
+								<img src="{{STATIC_URL}}images/pictos/profile_viadeo.png" />
+							</a>
 						{% else %} 
 						{% endif %}
 					</div>
 					<div class="social_icone">
 						{% if member.urlLinkedin %} 
-							<img src="{{STATIC_URL}}images/pictos/profile_linkedin.png" />
+							<a href='{{ member.urlLinkedin }}'>
+								<img src="{{STATIC_URL}}images/pictos/profile_linkedin.png" />
+							</a>
 						{% else %} 
 						{% endif %}
 					</div>
 					<div class="social_icone">
 						{% if member.urlFacebook %} 
-							<img src="{{STATIC_URL}}images/pictos/profile_facebook.png" />
+							<a href='{{ member.urlFacebook }}'>
+								<img src="{{STATIC_URL}}images/pictos/profile_facebook.png" />
+							</a>
 						{% else %} 
 						{% endif %}
 					</div>
 					<div class="social_icone">
 						{% if member.urlTwitter %} 
-							<img src="{{STATIC_URL}}images/pictos/profile_twitter.png" />
+							<a href='{{ member.urlTwitter }}'>
+								<img src="{{STATIC_URL}}images/pictos/profile_twitter.png" />
+							</a>
 						{% else %} 
 						{% endif %}
 						</div>
 				</div>
-				{% if profile.username == user.username %}
-				<a href='profile'>modifier</a>
-				{% endif %}
+				
 			</div>
 	
 					
@@ -67,7 +78,11 @@
 					</p>
 				</div>
 				<div class="inscription_date"><p>Inscrit le</p></div>
-				<div class="website"><p>{{member.urlPortfolio}}</p></div>
+				<div class="website">
+					<a href='{{ member.urlPortfolio }}'>
+						<p>{{member.urlPortfolio}}</p>
+					</a>
+				</div>
 			</div>
 		</div>
 		<div class='skills'>
