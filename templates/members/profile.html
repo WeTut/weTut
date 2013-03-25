@@ -10,9 +10,9 @@
 			
 			<div class="banner_profile">
 				<div class="content_banner_members">
-					<button class='btn_modify' >
+					<div class='btn_modify' >
 						<a href='{{user.username}}'>Voir mon profil public</a>
-					</button>
+					</div>
 					
 					<div class='infos_persos_modify'>
 						<div class="left">
@@ -65,18 +65,19 @@
 							<div class="name">
 								<p>{{user.username}}</p>
 							</div>
-							<div class="job">{{ profileform.job }}</div>
-							<div class="employer"><p>{{ profileform.employer }}</p></div>
+							<div class="job">Métier {{ profileform.job }}</div>
+							<div class="employer"><p>Entreprise {{ profileform.employer }}</p></div>
 							<div class="city">
 								<p>
-									{{profileform.city}}, {{profileform.state}} 
+									Ville {{profileform.city}}, Pays {{profileform.state}} 
 								
 								</p>
 							</div>
 							<div class="inscription_date"><p>Inscrit le {{ user.date_joined }}</p></div>
 							<div class="website">
 								<a href='{{ member.urlPortfolio }}'>
-									<p>http://{{ profileform.urlPortfolio }}</p>
+									<p>Portfolio
+									http://{{ profileform.urlPortfolio }}</p>
 								</a>
 							</div>
 						</div>
