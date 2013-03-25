@@ -8,7 +8,7 @@ from django.shortcuts import render_to_response
 from members.forms import ProfileForm, FilterForm
 from members.models import *
 
-from tutorials.models import Question, FollowQuestion
+from tutorials.models import Question, FollowQuestion, Answer, CommentAnswer
 
 def profile(request):
 	profile = Profile.objects.get(user=request.user)
@@ -53,7 +53,11 @@ def members(request):
 def member(request,slug):
 	profile = get_object_or_404(User, username=slug)
 	member = Profile.objects.get(user=profile)
+	questions = Question.objects.all().filter(user_id=profile).filter(validate=0)
+	answers = Answer.objects.all().filter(user_id=profile)
+	comments = CommentAnswer.objects.all().filter(user_id=profile)
+	tutorials = Question.objects.all().filter(user_id=profile).filter(validate=1)
 	member.views += 1
 	#member.save()
 
-	return render_to_response('members/member.html', {'profile': profile, 'member': member}, context_instance=RequestContext(request))
+	return render_to_response('members/member.html', {'profile': profile, 'member': member, 'questions':questions, 'answers':answers, 'comments':comments, 'tutorials':tutorials}, context_instance=RequestContext(request))

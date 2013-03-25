@@ -100,25 +100,67 @@
 			<div class="views">{{ member.views }}</div>
 		</div>
 	</div>
-</div>		
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.tri_activity a').click(function() {
+	    $('div.tri_choice').css('background-color','#C9C9C9');
+	    $(this).children('div.tri_choice').css('background-color', '#9C9C9C');
+	    var url = $(this).attr('href');
+	    $('div.current_activity').hide();
+	    $(url).show();
+	    return false;
+	});
+
+});
+</script>
 	
 <div class="content">
 	<div class="content_profile">
 		<div class="title"><p>Activité</p></div>
 		<div class="activity">
 			<div class="tri_activity">
-	        	<div class="tri_choice" id="selected" style="margin-right:10px; background-color:#9C9C9C;">Questions</div>
-	        	<div class="tri_choice" style="margin-right:10px;">Réponses</div>
-	        	<div class="tri_choice" style="margin-right:10px;">Commentaires</div>
-	        	<div class="tri_choice">Likes</div>
+	        	<a href="#profil_questions"><div class="tri_choice" id="selected" style="margin-right:10px; background-color:#9C9C9C;">Questions ({{questions.count}})</div></a>
+	        	<a href="#profil_reponses"><div class="tri_choice" style="margin-right:10px;">Réponses ({{answers.count}})</div></a>
+	        	<a href="#profil_commentaires"><div class="tri_choice" style="margin-right:10px;">Commentaires ({{comments.count}})</div></a>
+	        	<a href="#profil_tutos"><div class="tri_choice">Tutoriels ({{tutorials.count}})</div></a>
 			</div>
 			<div class='grey_line'></div>
-			<div class="one_actu">
-				<div class="img"></div>
-				<div class="text">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</div>
+
+			<div class="current_activity" id="profil_questions">
+				{% for question in questions %}
+				<div class="one_actu">
+					<div class="img"></div>
+					<div class="text"><a href="../questions/{{question.slug}}">{{question.title}}</a></div>
+				</div>
+				{% endfor %}
 			</div>
+
+			<div class="current_activity" id="profil_reponses" style="display:none;">
+				{% for answer in answers %}
+					<div class="text">{{answer.answer}}</div>
+				{% endfor %}
+			</div>
+
+			<div class="current_activity" id="profil_commentaires" style="display:none;">
+				{% for comment in comments %}
+					<div class="text">{{comment.comment}}</div>
+				{% endfor %}
+			</div>
+
+			<div class="current_activity" id="profil_tutos" style="display:none;">
+				{% for tutorial in tutorials %}
+				<div class="one_actu">
+					<div class="img"></div>
+					<div class="text"><a href="../tutorials/{{tutorial.slug}}">{{tutorial.title}}</a></div>
+				</div>
+				{% endfor %}
+			</div>
+
 			<div class="line_end"></div>
+			
+
 		</div>
 		<div class="follow">
 			<div class="title_follow"><p>Questions suivies</p></div>
