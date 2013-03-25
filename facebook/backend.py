@@ -1,10 +1,11 @@
-import cgi, urllib, json, imghdr
+import os, cgi, urllib, json, imghdr
 
 from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
 from django.db import IntegrityError
 from django.shortcuts import get_object_or_404
 from django.core.files.temp import NamedTemporaryFile
+from django.http import HttpResponseRedirect
 
 from facebook.models import FacebookProfile
 from members.models import Profile
@@ -43,7 +44,7 @@ class FacebookBackend:
             # No existing user
 
             # Not all users have usernames
-            username = fb_profile.get('username', fb_profile['email'].split('@')[0])
+            username = (fb_profile['first_name']+fb_profile['last_name']).lower()
 
             if getattr(settings, 'FACEBOOK_FORCE_SIGNUP', False):
                 # No existing user, use anonymous
@@ -69,17 +70,24 @@ class FacebookBackend:
                 user.last_name = fb_profile['last_name']
                 user.save()
 
+                
+                image_url = 'https://graph.facebook.com/'+fb_profile['id']+'/picture?access_token='+access_token+'&type=large'
+                savepath = 'media/members/'+fb_profile['id']+'.jpg'
 
-                image_url = 'http://graph.facebook.com/'+fb_profile['id']+'/picture'
+                urllib.urlretrieve(image_url, savepath)
+
+                #enregistrer l'image dans media/members
                 profile = get_object_or_404(Profile, user=user)
                 profile.email = fb_profile['email']
                 profile.city = fb_profile['location']['name']
+                profile.avatar = 'members/'+fb_profile['id']+'.jpg'
                 profile.save()
-
 
                 # Create the FacebookProfile
                 fb_user = FacebookProfile(user=user, facebook_id=fb_profile['id'], access_token=access_token)
                 fb_user.save()
+
+                
 
         return user
 
