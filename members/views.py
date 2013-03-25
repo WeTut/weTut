@@ -54,6 +54,6 @@ def member(request,slug):
 	profile = get_object_or_404(User, username=slug)
 	member = Profile.objects.get(user=profile)
 	member.views += 1
-	member.save()
+	#member.save()
 
 	return render_to_response('members/member.html', {'profile': profile, 'member': member}, context_instance=RequestContext(request))
