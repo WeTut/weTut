@@ -196,3 +196,4 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 
 
 .error:not(input){color:#ff0000;margin-left:10px;display:inline;}
+.nicEdit-main{background-color:#FFFFFF; outline:none; border-radius:3px; font-family: 'Rambla', sans-serif; color:#b8b7b6}

@@ -59,7 +59,7 @@ $(document).ready(function() {
               {{ user.username }}</a></li>
 
             <div id="user_menu">
-                <a href="/members/profile" role="button" data-toggle="modal">Voir le profil</a>
+                <a href="/members/{{ user.username }}" role="button" data-toggle="modal">Voir le profil</a>
                 <a href="/logout" role="button" data-toggle="modal">Se déconnecter</a>
             </div>
             {% else %}<li><a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal" class="first">Connexion</a></li>            
