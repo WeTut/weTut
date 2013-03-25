@@ -43,18 +43,17 @@ def profile(request):
 	
 
 def members(request):
-	filterform = FilterForm()	
+	membersActifs = Profile.objects.all().order_by('-nb_questions')
+	membersPopulaires = Profile.objects.all().order_by('-nb_likes')
+	membersVus = Profile.objects.all().order_by('-views')
+	membersNotes = Profile.objects.all().order_by('-points')
 
-	if request.method == 'POST' and 'submit' in request.POST:
-		if request.POST['submit'] == 'filterMembersSubmit':
-			members = Profile.objects.all().order_by(request.POST['filtermembers'])
-	else:
-		members = Profile.objects.all().order_by('-nb_likes')
-
-	return render_to_response('members/members.html', {'members': members, 'filterform':filterform}, context_instance=RequestContext(request))
+	return render_to_response('members/members.html', {'membersActifs': membersActifs, 'membersPopulaires': membersPopulaires, 'membersVus': membersVus, 'membersNotes': membersNotes}, context_instance=RequestContext(request))
 
 def member(request,slug):
 	profile = get_object_or_404(User, username=slug)
 	member = Profile.objects.get(user=profile)
+	member.views += 1
+	member.save()
 
 	return render_to_response('members/member.html', {'profile': profile, 'member': member}, context_instance=RequestContext(request))
