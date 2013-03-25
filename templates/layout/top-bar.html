@@ -4,26 +4,24 @@
 $(document).ready(function() {
   var userOn = 0;
 
-  $('#enroll_connexion li.user a').mouseover(function() {
+  $('#enroll_connexion li').mouseover(function() {
     $(this).css('background-color', '#32363b');
   });
 
-  $('#enroll_connexion li.user a').mouseleave(function() {
-    if(userOn==0) {
+  $('#enroll_connexion li').mouseleave(function() {
       $(this).css('background-color', '#1e2226');
-    }
   });
 
-  $('#enroll_connexion li.user a').click(function() {
+  $('#enroll_connexion li.notifs a').click(function() {
     if(userOn==0) {
       userOn=1;
       $('#user_menu').slideDown(300);
-      $('#enroll_connexion li.user a').css('background-color', '#32363b');
+      $('#enroll_connexion li.notifs a').css('background-color', '#32363b');
     }
     else {
       userOn=0;
       $('#user_menu').slideUp(300);
-      $('#enroll_connexion li.user a').css('background-color', '#1e2226');
+      $('#enroll_connexion li.notifs a').css('background-color', '#1e2226');
     }
     
   });
@@ -48,20 +46,27 @@ $(document).ready(function() {
 		</ul>
 		<div id="enroll_connexion">
       <ul>
-            {% if user.is_authenticated %}
-            
-            <li class="user"><a href="#user_menu">
-                <img src="{{user.profile.avatar.url}}" style="width:40px;height:40px;display:inline;margin-right:10px;"/>
-              {{ user.username }}</a></li>
+        {% if user.is_authenticated %}     
+        
+        <li style="width:50px;" class="notifs"><a href="#user_menu">?</a></li>
+        <div id="user_menu">
+            {% for tagactu in user.profile.getTagActualities %}
+            <a href="/question/{{ tagactu.question.slug }}" role="button" data-toggle="modal">Nouvelle question dans le tag {{ tagactu.tag.name }}</a> 
+            {% endfor %}
+            {% for questionactu in user.profile.getQuestionActualities %}
+            <a href="/question/{{ questionactu.question.slug }}" role="button" data-toggle="modal">Nouvelle réponse à la question {{ questionactu.question.title }}</a> 
+            {% endfor %}
+        </div>
 
-            <div id="user_menu">
-                <a href="/members/{{ user.username }}" role="button" data-toggle="modal">Voir le profil</a>
-                <a href="/logout" role="button" data-toggle="modal">Se déconnecter</a>
-            </div>
-            {% else %}<li><a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal" class="first">Connexion</a></li>            
-            <li><a href="#inscriptionModal" role="button" data-toggle="modal" data-target="#inscriptionModal">Inscription</a></li>
-            {% endif %}
-           </ul>
+        <li class="user"><a href="/members/{{ user.username }}">
+            <img src="{{user.profile.avatar.url}}" style="width:40px;height:40px;display:inline;margin-right:10px;"/>
+        {{ user.username }}</a></li>
+
+        {% else %}<li><a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal" class="first">Connexion</a></li>            
+        <li><a href="#inscriptionModal" role="button" data-toggle="modal" data-target="#inscriptionModal">Inscription</a></li>
+        {% endif %}
+     </ul>
+
    	 </div>
     </div>
 	

@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
-from tutorials.models import Question
+from tutorials.models import Question, ActualityTag, ActualityQuestion
 
 from stdimage import StdImageField
 
@@ -36,5 +36,15 @@ class Profile (models.Model):
 
 	def nbQuestions(self):
 		return Question.objects.filter(user=self.user).count()
+
+	def getTagActualities(self):
+		return ActualityTag.objects.filter(user=self.user).order_by('-date')[:3]
+
+	def getQuestionActualities(self):
+		return ActualityQuestion.objects.filter(user=self.user).order_by('-date')[:3]
+		
+
+
+
 
 
