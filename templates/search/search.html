@@ -1,33 +1,130 @@
 {% extends 'layout/base.html' %}
 
 {% block content %}
-<div class="content">
-    <h2>Votre recherche</h2>
-    {{ query }}
+<div class='banner_members' style="box-shadow: 0px 2px 8px #DDDDDD;">
+	<div class='content_banner_members'>
+		<div class="search_title"><p>Résultat de votre recherche</p></div>
+		<div class="search_content"><p><span style="color:#01c6e8; font-size:20px; margin-right:5px;">2 tutoriels</span> et <span style="color:#f53749; font-size:20px;margin-left:5px; margin-right:5px;">5 questions</span> correspondent à : <span style="color:#01c6e8; font-size:20px; margin-left:5px;">{{ query }}</span></p></div>
+	</div>
+</div>
+<div class="content" style="margin-top:30px;">
 
         {% if query %}
-            <h2>Résultats (<span class="nbResults">{{ paginator.count }}</span>)</h2>
 
             {% for result in page.object_list %}
 
                 {% ifequal result.model_name 'question' %}
-                <p>
 
                     {% if result.object.validate %}
-                    <a href="../tutoriels/{{ result.object.slug }}">{{ result.object.title }}</a>
+                    
+                    <div class="one_question">
+						<div class="img">
+							<a href='../tutoriels/{{ result.object.slug }}'>
+								<img src="{{ result.object.picture.thumbnail.url }}" alt="{{ result.object.title }}" />
+							</a>
+							
+						</div>
+						<div class="member">
+							<div class="img_member">
+								
+									 <img src="{{MEDIA_URL}}{{ result.object.user.profile.avatar }}" alt="{{ result.object.user.username }}" />
+
+							</div>
+							<div class="infos_member" id="search_blue">
+								<div class="view">
+									<img src="{{STATIC_URL}}images/pictos/view_questions_wetut.png">
+									<p id="search_blue_text">{{ result.object.views }} </p>
+								</div>
+								<div class="responses">
+									<img src="{{STATIC_URL}}images/pictos/bulle_questions_wetut.png">
+									<p id="search_blue_text">{{ result.object.answers }} </p>
+								</div>
+							</div>
+						</div>
+						<div class="infos_questions">
+							<div class="title"><a href="../tutoriels/{{ result.object.slug }}">{{ result.object.title }}</a></div>
+							<div class="date"><p>Par {{ result.object.user.username }}</p> <p style="font-style:italic; font-size:10px; margin-top:1px;">le {{ result.object.date }}</p></div>
+							<div class="tags"></div>
+							<div class="text"><p>{{ result.object.message|truncatechars:80 }}</p></div>
+						</div>
+						<div class="action_member">
+								{% if user.is_authenticated %}
+									<form  class="likeTuto" action="" method="post" enctype="multipart/form-data">
+									{% csrf_token %}
+									<input class="tutoId" type="hidden" name="tutoId" value="{{tutorial.id}}"></input>
+									<div class='like'>
+										<input name="hidden" type="hidden" value="{% if tutorial.currentUserLikes %}dislike{% else %}like{% endif %}" />
+										<button id="search_blue_button" class='btn-{% if tutorial.currentUserLikes %}ok{% else %}nok{% endif %}' name='likeTutoSubmit' type="submit" value="likeTutoSubmit">
+										<img src="{{STATIC_URL}}/images/pictos/like_wetut_member.png"/>
+										<p style="margin-top:10px;">{% if tutorial.currentUserLikes %}Je n'aime plus{% else %}J'aime{% endif %}</p></button>
+									</div>
+									</form>
+								{% endif %}
+
+						
+						</div>
+					</div>
+
                     {% else %}
-                    <a href="../questions/{{ result.object.slug }}">{{ result.object.title }}</a>
+                    
+                                        
+                    <div id="question{{question.id}}" class="one_question">
+						<div class="img">
+							<a href='{{question.slug}}'>
+								<img src="{{ result.object.picture.thumbnail.url }}" alt="{{ result.object.title }}" />
+							</a>
+							
+						</div>
+						<div class="member">
+							<div class="img_member">
+								
+									 <img src="{{MEDIA_URL}}{{ result.object.user.profile.avatar }}" alt="{{ result.object.user.username }}" />
+
+							</div>
+							<div class="infos_member">
+								<div class="view">
+									<img src="{{STATIC_URL}}images/pictos/view_questions_wetut.png">
+									<p>{{ result.object.views }} </p>
+								</div>
+								<div class="responses">
+									<img src="{{STATIC_URL}}images/pictos/bulle_questions_wetut.png">
+									<p>{{ result.object.answers }} </p>
+								</div>
+							</div>
+						</div>
+						<div class="infos_questions">
+							<div class="title"><a href="../questions/{{ result.object.slug }}">{{ result.object.title }}</a></div>
+							<div class="date"><p>Par {{ result.object.user.username }}</p> <p style="font-style:italic; font-size:10px; margin-top:1px;">le {{ result.object.date }}</p></div>
+							<div class="tags"></div>
+							<div class="text"><p>{{ result.object.message|truncatechars:80 }}</p></div>
+						</div>
+						<div class="action_member">
+							<a href="/questions/{{question.slug}}">
+							<div class="answer">
+								<img src="{{STATIC_URL}}images/pictos/answer_picto.png"><p>Je sais !</p>
+							</div>
+							</a>
+							<div class="question_follow" style="margin-top:5px;">
+							{% if user.is_authenticated %}
+								<form  class="followForm" action="" method="post" enctype="multipart/form-data">
+								{% csrf_token %}
+								<input class="questionId" type="hidden" name="questionId" value="{{question.id}}"></input>
+								<div class='follow'>
+									<input name="hidden" type="hidden" value="{% if question.currentUserFollows %}unfollow{% else %}follow{% endif %}" />
+									<button class='btn-{% if question.currentUserFollows %}ok{% else %}nok{% endif %}' name='submit' type="submit" value="followSubmit">{% if question.currentUserFollows %}Ne plus suivre{% else %}Suivre{% endif %}</button>
+								</div>
+								</form>
+							{% endif %}	
+							</div>	
+					</div>
+					</div>
+                    
+    
                     {% endif %}
-                    <p>Posté par <img src="{{MEDIA_URL}}{{ result.object.user.profile.avatar }}" alt="{{ result.object.user.username }}" /> {{ result.object.user.username }} le {{ result.object.date }}</p>
-                    <img src="{{ result.object.picture.thumbnail.url }}" alt="{{ result.object.title }}" />
-                    <p>{{ result.object.message|truncatechars:80 }}</p>
-                    <p>{{ result.object.views }} vues / {{ result.object.answers }} réponses</p>
-                </p>
-                <hr />
+    
 
                 {% else %}
                     <div class="membersFound">
-
 
                         <div class='cat4'>
                             <div class="one_member">

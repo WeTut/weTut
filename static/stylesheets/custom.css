@@ -72,7 +72,7 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 
 .search_bar #glass{margin:4px 10px 0px 0px;float:left;}
 .search_bar #line_search{float:left; width:2px; height:22px; margin-top:6px; background-color:#FFFFFF;}
-.search_bar form{float:left; margin-top:8px; margin-left:140px;}
+.search_bar form{float:left; margin-top:3px; margin-left:140px;}
 .search_bar form input{background:none; border:none; width:700px; height:30px; box-shadow:none; -webkit-transition:none; font-family:'bebas_neue'; color:#FFFFFF; font-size:1.5em;}
 .search_bar form input:focus{border:none; box-shadow:none;}
 
@@ -183,6 +183,16 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 
 .bold{font-weight:bold;}
 
+/* ------------------RECHERCHE GLOBALE------------------ */
+
 .banner_members{ height:200px;}
+.banner_members .content_banner_members .search_title p{font-family:'bebas_neue'; color:#46423f; font-size:24px; margin-top:30px;}
+.banner_members .content_banner_members .search_content{font-family:'bebas_neue'; font-size:16px; margin-top:30px;}
+#search_blue{background-color:#01c6e8;}
+#search_blue_text{color:#01c6e8;}
+#search_blue_button{height:120px;background-color:#01c6e8;}
+
+
+
 
 .error:not(input){color:#ff0000;margin-left:10px;display:inline;}
