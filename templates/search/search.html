@@ -1,15 +1,29 @@
 {% extends 'layout/base.html' %}
 
 {% block content %}
+
+<script type="text/javascript">
+$(document).ready(function() {
+	var nbQuestions = $('div.aQuestion').length;
+	var nbTutorials = $('div.aTutorial').length;
+	$('span.nbTutorials').html(nbTutorials);
+	if(nbTutorials>1) $('span.nbTutorials').append(' tutoriels'); else $('span.nbTutorials').append(' tutoriel');
+	$('span.nbQuestions').html(nbQuestions);
+	if(nbQuestions>1) $('span.nbQuestions').append(' questions'); else $('span.nbQuestions').append(' question');
+})
+</script>
+
 <div class='banner_members' style="box-shadow: 0px 2px 8px #DDDDDD;">
 	<div class='content_banner_members'>
 		<div class="search_title"><p>Résultat de votre recherche</p></div>
-		<div class="search_content"><p><span style="color:#01c6e8; font-size:20px; margin-right:5px;">2 tutoriels</span> et <span style="color:#f53749; font-size:20px;margin-left:5px; margin-right:5px;">5 questions</span> correspondent à : <span style="color:#01c6e8; font-size:20px; margin-left:5px;">{{ query }}</span></p></div>
+		<div class="search_content"><p><span style="color:#01c6e8; font-size:20px; margin-right:5px;" class="nbTutorials"></span> et <span style="color:#f53749; font-size:20px;margin-left:5px; margin-right:5px;" class="nbQuestions"></span> correspondent à : <span style="color:#01c6e8; font-size:20px; margin-left:5px;">{{ query }}</span></p></div>
 	</div>
 </div>
 <div class="content" style="margin-top:30px;">
 
         {% if query %}
+
+        {{ query.type }}
 
             {% for result in page.object_list %}
 
@@ -17,7 +31,7 @@
 
                     {% if result.object.validate %}
                     
-                    <div class="one_question">
+                    <div class="one_question aTutorial">
 						<div class="img">
 							<a href='../tutoriels/{{ result.object.slug }}'>
 								<img src="{{ result.object.picture.thumbnail.url }}" alt="{{ result.object.title }}" />
@@ -68,7 +82,7 @@
                     {% else %}
                     
                                         
-                    <div id="question{{question.id}}" class="one_question">
+                    <div id="question{{question.id}}" class="one_question aQuestion">
 						<div class="img">
 							<a href='{{question.slug}}'>
 								<img src="{{ result.object.picture.thumbnail.url }}" alt="{{ result.object.title }}" />
