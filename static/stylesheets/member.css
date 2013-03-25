@@ -44,7 +44,7 @@ QUESTIONS STYLESHEET
 
 .banner_profile{width:100%; height:360px; background-image:url(../images/back_banner_profile.png); background-repeat:x; position:relative; z-index:1; box-shadow: 0px 2px 8px #DDDDDD;}
 
-.banner_profile .content_banner_members .infos_persos{float:left; width:450px; height:205px; background-color:#FFFFFF; border-radius:3px; margin-right:10px; padding:10px; margin-top:28px;}
+.banner_profile .content_banner_members .infos_persos{float:left; width:450px; height:205px; background-color:#FFFFFF; border-radius:3px; margin-right:10px; padding:10px; margin-top:52px;}
 .banner_profile .content_banner_members .infos_persos .left{float:left; margin-right:10px;}
 .banner_profile .content_banner_members .infos_persos .left .img{width:160px; height:160px; background-color:#9C9C9C;}
 .banner_profile .content_banner_members .infos_persos .left .social_icone img{float:left; margin-right:5px; margin-top:10px;}
@@ -62,7 +62,7 @@ QUESTIONS STYLESHEET
 .banner_profile .content_banner_members .infos_persos .right .website p{font-family: 'Rambla', sans-serif; color:#46423F; font-size:16px; font-weight:bold;}
 
 
-.banner_profile .content_banner_members .skills{float:left; margin-top:28px; width:330px; height:205px; background-color:#FFFFFF; border-radius:3px; margin-right:10px; padding:10px;}
+.banner_profile .content_banner_members .skills{float:left; margin-top:18px; width:330px; height:205px; background-color:#FFFFFF; border-radius:3px; margin-right:10px; padding:10px;}
 .banner_profile .content_banner_members .skills .title p{color:#46423F; font-size:24px; font-family:'bebas_neue'; margin-bottom:20px;}
 .banner_profile .content_banner_members .skills .subtitle p{color:#46423F; font-size:18px; font-family:'bebas_neue';}
 .banner_profile .content_banner_members .skills .text p{width:330px;font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:14px;}
@@ -72,7 +72,7 @@ QUESTIONS STYLESHEET
 .banner_profile .content_banner_members .infos_socials .views{width:49px; height:42px; background-image:url("/static/images/pictos/view_wetut_member.png"); line-height:45px; font-size:16px; font-family:'bebas_neue'; color:#01c6e8;}
 
 
-.banner_profile .content_banner_members .infos_socials{float:left; margin-top:28px; width:50px; height:175px; background-color:#01c6e8; border-radius:3px; padding:25px; text-align:center;}
+.banner_profile .content_banner_members .infos_socials{float:left; margin-top:18px; width:50px; height:175px; background-color:#01c6e8; border-radius:3px; padding:25px; text-align:center;}
 
 .content .content_profile .activity{width:590px; float:left; margin-right:10px; }
 .content .content_profile .activity .tri_activity .tri_choice{float:left; width:140px; height:40px; background-color:#c9c9c9; border-top-left-radius:3px; border-top-right-radius:3px; margin-top:22px; color:#FFFFFF; font-size:18px; font-family:'bebas_neue'; text-align:center; line-height:45px;}
@@ -98,8 +98,33 @@ QUESTIONS STYLESHEET
 
 .content .content_profile .follow .follow_tag{margin-top:30px;}
 
+.content_banner_members .btn_modify{background-color:#9C9C9C; border-radius:3px; border:none; font-family:'bebas_neue'; width:170px; float:right; height:35px; line-height:38px; text-align:center;}
+.content_banner_members .btn_modify a{font-size:18px; color:#FFFFFF;}
+.banner_profile .content_banner_members .infos_persos .infos_persos_modify{width:350px;}
 
+.banner_profile .content_banner_members .infos_persos_modify{float:left; width:400px; height:205px; background-color:#FFFFFF; border-radius:3px; margin-right:10px; padding:10px; margin-top:52px; }
+.banner_profile .content_banner_members .infos_persos_modify .left{float:left; margin-right:10px;}
+.banner_profile .content_banner_members .infos_persos_modify .left .img{width:160px; height:160px; background-color:#9C9C9C;}
+.banner_profile .content_banner_members .infos_persos_modify .left .social_icone img{float:left; margin-right:5px; margin-top:10px;}
+.banner_profile .content_banner_members .infos_persos_modify .right .name p{color:#46423F; font-size:24px; font-family:'bebas_neue';}
+.banner_profile .content_banner_members .infos_persos_modify .right .name, .banner_profile .content_banner_members .infos_persos .right .job, .banner_profile .content_banner_members .infos_persos .right .employer, .banner_profile .content_banner_members .infos_persos .right .city, .banner_profile .content_banner_members .infos_persos_modify .right .inscription_date{height:20px;}
 
+.banner_profile .content_banner_members .infos_persos_modify .right .job{font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:14px; margin-top:15px;}
+.banner_profile .content_banner_members .infos_persos_modify .right .employer{font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:14px;}
+.banner_profile .content_banner_members .infos_persos_modify .right .city{margin-top:10px;}
+.banner_profile .content_banner_members .infos_persos_modify .right .city p{font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:14px; font-weight:bold;}
+.banner_profile .content_banner_members .infos_persos_modify .right .inscription_date{margin-top:10px;}
+.banner_profile .content_banner_members .infos_persos_modify .right .inscription_date p{font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:12px;}
+.banner_profile .content_banner_members .infos_persos_modify .right .website{margin-top:43px; text-align:center;}
+
+.banner_profile .content_banner_members .infos_persos_modify .right .website p{font-family: 'Rambla', sans-serif; color:#46423F; font-size:16px; font-weight:bold;}
+
+.banner_profile .content_banner_members .skills_modify{float:left; margin-top:18px; margin-right:10px; width:240px; height:205px; background-color:#FFFFFF; border-radius:3px; margin-right:10px; padding:10px;}
+.banner_profile .content_banner_members .skills_modify .title p{color:#46423F; font-size:24px; font-family:'bebas_neue'; margin-bottom:20px;}
+.banner_profile .content_banner_members .skills_modify .subtitle p{color:#46423F; font-size:18px; font-family:'bebas_neue';}
+.banner_profile .content_banner_members .skills_modify .text p{width:330px;font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:14px;}
+
+.banner_profile .content_banner_members .social_modify{width:220px; height:205px; padding:10px; background-color:#FFFFFF; float:left; border-radius:3px;}
 
 
 

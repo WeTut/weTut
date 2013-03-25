@@ -2,11 +2,105 @@
 
 
 {% block content %}
-<div class="content">
+
 
 	<div id='profile' >
 		<form action='' method='post' enctype='multipart/form-data'>
 			{% csrf_token %}
+			
+			<div class="banner_profile">
+				<div class="content_banner_members">
+					<div class='btn_modify' >
+						<a href='{{user.username}}'>Voir mon profil public</a>
+					</div>
+					
+					<div class='infos_persos_modify'>
+						<div class="left">
+							<div class="img">
+								{% if member.avatar.url != "" %}
+			     					<img src='{{member.avatar.url}}'/>
+								{% else %}
+									<img src="{{MEDIA_URL}}members/avatar.jpg"/>
+								{% endif %}
+							</div>
+							<div class="social_media">
+								<div class="social_icone">
+									{% if member.urlViadeo %} 
+										<a href='{{ member.urlViadeo }}'>
+											<img src="{{STATIC_URL}}images/pictos/profile_viadeo.png" />
+										</a>
+									{% else %} 
+									{% endif %}
+								</div>
+								<div class="social_icone">
+									{% if member.urlLinkedin %} 
+										<a href='{{ member.urlLinkedin }}'>
+											<img src="{{STATIC_URL}}images/pictos/profile_linkedin.png" />
+										</a>
+									{% else %} 
+									{% endif %}
+								</div>
+								<div class="social_icone">
+									{% if member.urlFacebook %} 
+										<a href='{{ member.urlFacebook }}'>
+											<img src="{{STATIC_URL}}images/pictos/profile_facebook.png" />
+										</a>
+									{% else %} 
+									{% endif %}
+								</div>
+								<div class="social_icone">
+									{% if member.urlTwitter %} 
+										<a href='{{ member.urlTwitter }}'>
+											<img src="{{STATIC_URL}}images/pictos/profile_twitter.png" />
+										</a>
+									{% else %} 
+									{% endif %}
+									</div>
+							</div>
+							
+						</div>
+				
+								
+						<div class="right">
+							<div class="name">
+								<p>{{user.username}}</p>
+							</div>
+							<div class="job">Métier {{ profileform.job }}</div>
+							<div class="employer"><p>Entreprise {{ profileform.employer }}</p></div>
+							<div class="city">
+								<p>
+									Ville {{profileform.city}}, Pays {{profileform.state}} 
+								
+								</p>
+							</div>
+							<div class="inscription_date"><p>Inscrit le {{ user.date_joined }}</p></div>
+							<div class="website">
+								<a href='{{ member.urlPortfolio }}'>
+									<p>Portfolio
+									http://{{ profileform.urlPortfolio }}</p>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class='skills_modify'>
+						<div class="title"><p>Compétences</p></div>
+						<div class="subtitle"><p>Techniques</p></div>
+						<div class="text"><p>Composition,Tracking </p></div>
+						<div class="subtitle"><p>Logiciels</p></div>
+						<div class="text"><p>Composition,Tracking</p></div>
+					</div>
+					<div class='social_modify'>
+						<div class="title"><p>http://viadeo.com/{{ profileform.urlViadeo }}</p></div>
+						<div class="subtitle"><p>http://linkedin.com/{{ profileform.urlLinkedin }}</p></div>
+						<div class="text"><p>http://twitter.com/{{ profileform.urlTwitter }}</p></div>
+						<div class="subtitle"><p>http://facebook.com/{{ profileform.urlFacebook }}</p></div>
+					</div>
+				</div>
+			</div>
+			
+
+		
+<div class="content">			
 			<div id='profileForm' class='span12'>
 				<div class='span6'>
 					<div class='span4'>
@@ -53,8 +147,8 @@
 			{% for question in followedquestions %}				
 				<li><a href='/questions/{{question.slug}}'>{{question.title}}</a></li>
 				{{ member.nb_likes }}
-			{{ member.nb_questions }}
-			{{ member.views }}
+				{{ member.nb_questions }}
+				{{ member.views }}
 			{% endfor %}
 			</ul>	
 
