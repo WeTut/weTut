@@ -98,33 +98,58 @@ QUESTIONS STYLESHEET
 
 .content .content_profile .follow .follow_tag{margin-top:30px;}
 
-.content_banner_members .btn_modify{background-color:#9C9C9C; border-radius:3px; border:none; font-family:'bebas_neue'; width:170px; float:right; height:35px; line-height:38px; text-align:center;}
+.content_banner_members .btn_modify{background-color:#9C9C9C; border-radius:3px; border:none; font-family:'bebas_neue'; width:170px; margin-left:750px; height:35px; line-height:38px; text-align:center;}
 .content_banner_members .btn_modify a{font-size:18px; color:#FFFFFF;}
 .banner_profile .content_banner_members .infos_persos .infos_persos_modify{width:350px;}
 
-.banner_profile .content_banner_members .infos_persos_modify{float:left; width:400px; height:205px; background-color:#FFFFFF; border-radius:3px; margin-right:10px; padding:10px; margin-top:52px; }
+.banner_profile .content_banner_members .infos_persos_modify{float:left; width:400px; height:205px; background-color:#FFFFFF; border-radius:3px; margin-right:10px; padding:10px; margin-top:30px; }
 .banner_profile .content_banner_members .infos_persos_modify .left{float:left; margin-right:10px;}
 .banner_profile .content_banner_members .infos_persos_modify .left .img{width:160px; height:160px; background-color:#9C9C9C;}
 .banner_profile .content_banner_members .infos_persos_modify .left .social_icone img{float:left; margin-right:5px; margin-top:10px;}
 .banner_profile .content_banner_members .infos_persos_modify .right .name p{color:#46423F; font-size:24px; font-family:'bebas_neue';}
 .banner_profile .content_banner_members .infos_persos_modify .right .name, .banner_profile .content_banner_members .infos_persos .right .job, .banner_profile .content_banner_members .infos_persos .right .employer, .banner_profile .content_banner_members .infos_persos .right .city, .banner_profile .content_banner_members .infos_persos_modify .right .inscription_date{height:20px;}
 
-.banner_profile .content_banner_members .infos_persos_modify .right .job{font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:14px; margin-top:15px;}
+.banner_profile .content_banner_members .infos_persos_modify .right .job{font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:14px; margin-top:12px;}
 .banner_profile .content_banner_members .infos_persos_modify .right .employer{font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:14px;}
 .banner_profile .content_banner_members .infos_persos_modify .right .city{margin-top:10px;}
-.banner_profile .content_banner_members .infos_persos_modify .right .city p{font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:14px; font-weight:bold;}
+.banner_profile .content_banner_members .infos_persos_modify .right .city p{font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:14px;}
+
+.banner_profile .content_banner_members .infos_persos_modify .right .state{margin-top:-10px; float:right;}
+.banner_profile .content_banner_members .infos_persos_modify .right .state p{font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:14px; position:relative; z-index:99;}
+
 .banner_profile .content_banner_members .infos_persos_modify .right .inscription_date{margin-top:10px;}
 .banner_profile .content_banner_members .infos_persos_modify .right .inscription_date p{font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:12px;}
-.banner_profile .content_banner_members .infos_persos_modify .right .website{margin-top:43px; text-align:center;}
+.banner_profile .content_banner_members .infos_persos_modify .right .website{text-align:center; float:right;}
 
-.banner_profile .content_banner_members .infos_persos_modify .right .website p{font-family: 'Rambla', sans-serif; color:#46423F; font-size:16px; font-weight:bold;}
+.banner_profile .content_banner_members .infos_persos_modify .right .website p{font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:14px;}
 
-.banner_profile .content_banner_members .skills_modify{float:left; margin-top:18px; margin-right:10px; width:240px; height:205px; background-color:#FFFFFF; border-radius:3px; margin-right:10px; padding:10px;}
+.banner_profile .content_banner_members .skills_modify{float:left; margin-top:30px; margin-right:10px; width:240px; height:205px; background-color:#FFFFFF; border-radius:3px; margin-right:10px; padding:10px;}
 .banner_profile .content_banner_members .skills_modify .title p{color:#46423F; font-size:24px; font-family:'bebas_neue'; margin-bottom:20px;}
 .banner_profile .content_banner_members .skills_modify .subtitle p{color:#46423F; font-size:18px; font-family:'bebas_neue';}
 .banner_profile .content_banner_members .skills_modify .text p{width:330px;font-family: 'Rambla', sans-serif; color:#9C9C9C; font-size:14px;}
 
-.banner_profile .content_banner_members .social_modify{width:220px; height:205px; padding:10px; background-color:#FFFFFF; float:left; border-radius:3px;}
+.banner_profile .content_banner_members .social_modify{width:220px; height:205px; padding:10px; background-color:#FFFFFF; float:left; border-radius:3px; margin-top:30px;}
+
+.social_modify input {margin-top:8px; border:1px solid #C2C2C2; border-radius:3px; color:#46423F;font-family: 'Rambla', sans-serif;font-size:14px;}
+.text_social_modify {height:205px; float:left;}
+.text_social_modify p{margin-top:10px; color:#9C9C9C;}
+input#id_urlViadeo {width:108px;}
+input#id_urlLinkedin {width:100px;}
+input#id_urlTwitter {width:105px;}
+input#id_urlFacebook {width:92px;}
+
+.banner_profile .content_banner_members .infos_persos_modify input{border:1px solid #C2C2C2; border-radius:3px; color:#46423F;font-family: 'Rambla', sans-serif;font-size:14px; margin-top:8px;}
+input#id_job{width:189px;}
+input#id_employer{width:168px;}
+input#id_city{width:200px;}
+input#id_state{width:200px; }
+input#id_urlPortfolio{width:130px;}
+input#id_avatar{border:1px solid transparent; color:#9c9c9c; opacity:0;}
+
+.banner_profile .content_banner_members .infos_persos_modify .fakefile{margin-top:160px;}
+.banner_profile .content_banner_members .infos_persos_modify .fakefile input{width:125px; height:36px; border-top-right-radius:0px; border-bottom-right-radius:0px;}
+.banner_profile .content_banner_members .infos_persos_modify .fakefile .file_img{width:35px; heigth:35px; margin-top:8px;}
+.file_img{cursor:pointer;}
 
 
 

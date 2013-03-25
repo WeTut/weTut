@@ -18,20 +18,40 @@
 					
 					<div class='infos_persos_modify'>
 						<div class="left">
-							<div class="img_miou">
-						            {% if request.session.profile_user.avatar.url != "" %}
-						              {{ profileform.avatar }}
-						            {% else %}
-						                 <img src='{{MEDIA_URL}}members/avatar.jpg' />
-						                {{ profileform.avatar }}
+							<div class="img">
+						       {% if request.session.profile_user.avatar.url != "" %}
+						            <div class="mainPicture">
+									<div class="fileinputs">
+										<div style="">{{ profileform.avatar }}</div>
+										<div class="fakefile">
+											<input type="text" name="filename" class="filevisible" placeholder="Changer l'image">
+											<div class="file_img">
+												<img src="/static/images/pictos/upload.png" onclick="$('#id_avatar').click();">
+											</div>
+										</div>
+									</div>
+									</div>
+						          
+						       {% else %}
+						           <img src='{{MEDIA_URL}}members/avatar.jpg' />
+						           <div class="mainPicture">
+									<div class="fileinputs">
+										<div style="">{{ profileform.avatar }}</div>
+										<div class="fakefile">
+											<input type="text" name="filename" class="filevisible" placeholder="Selectionner une image">
+											<div class="file_img">
+												<img src="/static/images/pictos/upload.png" onclick="$('#id_avatar').click();">
+											</div>
+										</div>
+									</div>
+									</div>
 
-						            {% endif %}
+						       {% endif %}
 							</div>
 							
 							
 						</div>
-				
-							<!--	
+					
 						<div class="right">
 							<div class="name">
 								<p>{{user.username}}</p>
@@ -39,16 +59,15 @@
 							<div class="job">Métier {{ profileform.job }}</div>
 							<div class="employer"><p>Entreprise {{ profileform.employer }}</p></div>
 							<div class="city">
-								<p>
-									Ville {{profileform.city}}, Pays {{profileform.state}} 
-								
-								</p>
+								<p>Ville {{profileform.city}}</p>
 							</div>
-							<div class="inscription_date"><p>Inscrit le {{ user.date_joined }}</p></div>
+							<div class="state">
+								<p>Pays {{profileform.state}}</p> 
+							</div>
+							<!--<div class="inscription_date"><p>Inscrit le {{ user.date_joined }}</p></div>-->
 							<div class="website">
 								<a href='{{ member.urlPortfolio }}'>
-									<p>Portfolio
-									http://{{ profileform.urlPortfolio }}</p>
+									<p>Portfolio : http:// {{ profileform.urlPortfolio }}</p>
 								</a>
 							</div>
 						</div>
@@ -61,61 +80,27 @@
 						<div class="text"><p>Composition,Tracking</p></div>
 					</div>
 					<div class='social_modify'>
-						<div class="title"><p>http://viadeo.com/{{ profileform.urlViadeo }}</p></div>
-						<div class="subtitle"><p>http://linkedin.com/{{ profileform.urlLinkedin }}</p></div>
-						<div class="text"><p>http://twitter.com/{{ profileform.urlTwitter }}</p></div>
-						<div class="subtitle"><p>http://facebook.com/{{ profileform.urlFacebook }}</p></div>
-					</div>-->
+						<div class="text_social_modify">
+							<div class="viadeo"><p>http://viadeo.com/ {{ profileform.urlViadeo }}</p></div>
+							<div class="linkedin"><p>http://linkedin.com/ {{ profileform.urlLinkedin }}</p></div>
+							<div class="twitter"><p>http://twitter.com/ {{ profileform.urlTwitter }}</p></div>
+							<div class="facebook"><p>http://facebook.com/ {{ profileform.urlFacebook }}</p></div>
+						</div>
+							
+						</div>
+						
+					</div>
 				</div>
 			</div>
 			
 
-		
-<div class="content">	
-	
-			<div id='profileForm' class='span12'>
-			
-			
-			
-				<div class='span6'>
-					<div class='span4'>
-						
-					</div>
-					<div class='span8'>
-						<h1>{{user.username}}</h1>
-						<hr />
-						<h3>Métier</h3>
-						{{ profileform.job }}
-						<h3>Employeur</h3>
-						{{ profileform.employer }}
-						<h3>localisation</h3>
-						{{ profileform.city }}
-						{{ profileform.state }}
-						<h3>Portfolio</h3>
-						{{ profileform.urlPortfolio }}
-					</div>
-				</div>
-				<div class='span3'>
-					<h2>Compétences</h2>
-					<h3>Techniques</h3>
-					<h3>Logiciels</h3>			
-				</div>
-				<div class='span3'>
-					<h2>Liens réseaux sociaux</h2>
-					<h3>Viadeo</h3>
-					{{ profileform.urlViadeo }}	
-					<h3>Linkedin</h3>
-					{{ profileform.urlLinkedin }}	
-					<h3>Twitter</h3>
-					{{ profileform.urlTwitter }}	
-					<h3>Facebook</h3>
-					{{ profileform.urlFacebook }}	
-				</div>
+
 			</div>
 			
 			<button class='btn btn-primary' name='submit' type="submit" value="profileSubmit" >Enregistrer</button>
 		</form>
 		<div>
+		<div class="content">
 			<p>Questions suivies</p><br />
 			<ul>
 			{% for question in followedquestions %}				
@@ -130,6 +115,52 @@
 		</div>	
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('form div.theAnswer').css('background-color','white');
+		$('div.theAnswer').children().empty();
+		
+		var modify_viadeo = 'Username';
+		var modify_linkedin = 'Username';
+		var modify_facebook = 'Username';
+		var modify_twitter = 'Username';
+		
+		$('input[name=urlViadeo]').attr({placeholder : modify_viadeo});
+		$('input[name=urlLinkedin]').attr({placeholder : modify_linkedin});
+		$('input[name=urlTwitter]').attr({placeholder : modify_facebook});
+		$('input[name=urlFacebook]').attr({placeholder : modify_twitter});
+		
+	});
+</script>
+
+<script type="text/javascript">  
+			$(document).ready( function(){ 	
+				$(".mainPicture input").change( function(){ 
+					$(".mainPicture .filevisible").attr("value",$(".mainPicture input").attr("value")); 
+				});
+
+				$(".upload-img1 .file").change( function(){ 
+					$(".upload-img1 .filevisible").attr("value",$(".upload-img1 .file").attr("value")); 
+				});	
+
+				$(".upload-img2 .file").change( function(){ 
+					$(".upload-img2 .filevisible").attr("value",$(".upload-img2 .file").attr("value")); 
+				});	
+
+				$(".upload-img3 .file").change( function(){ 
+					$(".upload-img3 .filevisible").attr("value",$(".upload-img3 .file").attr("value")); 
+				});	
+			}); 
+		</script> 
+			
+			
+		</form>
+	
+		<script type="text/javascript">  
+			$(document).ready( function(){ 	$("#id_picture").change( function(){ $(".filevisible").attr("value", document.getElementById("id_picture").files[0].name ); }); }); 
+		</script> 
+
 
 {% endblock content %}
 
