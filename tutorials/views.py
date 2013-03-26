@@ -14,16 +14,14 @@ from tutorials.models import *
 from members.models import Profile
 
 def questions(request):
-	
-	if 'filterQuestion' not in request.session:
-		request.session['filterQuestion'] = '-date'
 
-	filterform = FilterForm()
 	currentag = 0	
 	tags = Tag.objects.all()
 	userfollowstag = False
 
-	questions_list = Question.objects.filter(validate=False).order_by(request.session['filterQuestion'])	
+	questions_list_date = Question.objects.filter(validate=False).order_by('-date')	
+	questions_list_views = Question.objects.filter(validate=False).order_by('-views')
+	questions_list_answers = Question.objects.filter(validate=False).order_by('-answers')	
  
 	if request.method == 'POST' and 'submit' in request.POST:
 
@@ -53,21 +51,39 @@ def questions(request):
 					follow.delete()
 					return HttpResponse('deleted')
 
-		if request.POST['submit'] == 'filterSubmit': 
-			questions_list = Question.objects.filter(validate=False).order_by(request.POST['filter'])
-			request.session['filterQuestion'] = request.POST['filter']
 
-
-	paginator = Paginator(questions_list, 10)
-	questions = paginator.page(1)
-	if 'page' in request.GET:
-		page = request.GET.get('page')
+	paginatorDate = Paginator(questions_list_date, 10)
+	questionsDate = paginatorDate.page(1)
+	if 'pageDate' in request.GET:
+		page = request.GET.get('pageDate')
 		try:
-			questions = paginator.page(page)
+			questionsDate = paginatorDate.page(page)
 		except PageNotAnInteger:
-			questions = paginator.page(1)
+			questionsDate = paginatorDate.page(1)
 		except EmptyPage:
-			questions = paginator.page(paginator.num_pages)
+			questionsDate = paginatorDate.page(paginatorDate.num_pages)
+
+	paginatorViews = Paginator(questions_list_views, 10)
+	questionsViews = paginatorViews.page(1)
+	if 'pageViews' in request.GET:
+		page = request.GET.get('pageViews')
+		try:
+			questionsViews = paginatorViews.page(page)
+		except PageNotAnInteger:
+			questionsViews = paginatorViews.page(1)
+		except EmptyPage:
+			questionsViews = paginatorViews.page(paginatorViews.num_pages)
+
+	paginatorAnswers = Paginator(questions_list_answers, 10)
+	questionsAnswers = paginatorAnswers.page(1)
+	if 'pageAnswers' in request.GET:
+		page = request.GET.get('pageAnswers')
+		try:
+			questionsAnswers = paginatorAnswers.page(page)
+		except PageNotAnInteger:
+			questionsAnswers = paginatorAnswers.page(1)
+		except EmptyPage:
+			questionsAnswers = paginatorAnswers.page(paginatorAnswers.num_pages)
 
 	if 'tag' in request.GET:
 		currentag = int(request.GET['tag'])
@@ -85,13 +101,25 @@ def questions(request):
 
 
 	if request.user.is_authenticated() :
-		for question in questions:
+		for question in questionsDate:
 			question.currentUserFollows = False
 			follow = FollowQuestion.objects.filter(question=question, user=request.user)
 			if follow.exists():
-				question.currentUserFollows = True	
+				question.currentUserFollows = True
 
-	return render_to_response('tutorials/questions.html', {'questions': questions, 'filterform':filterform, 'tags':tags, 'currentag':currentag, 'userfollowstag':userfollowstag, 'filtervalue':request.session['filterQuestion'] }, context_instance=RequestContext(request))
+		for question in questionsViews:
+			question.currentUserFollows = False
+			follow = FollowQuestion.objects.filter(question=question, user=request.user)
+			if follow.exists():
+				question.currentUserFollows = True
+
+		for question in questionsAnswers:
+			question.currentUserFollows = False
+			follow = FollowQuestion.objects.filter(question=question, user=request.user)
+			if follow.exists():
+				question.currentUserFollows = True		
+
+	return render_to_response('tutorials/questions.html', {'questionsDate': questionsDate, 'questionsViews': questionsViews, 'questionsAnswers': questionsAnswers, 'tags':tags, 'currentag':currentag, 'userfollowstag':userfollowstag }, context_instance=RequestContext(request))
 
 def tutorials(request):
 
