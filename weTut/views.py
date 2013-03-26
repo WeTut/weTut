@@ -36,8 +36,9 @@ def home(request):
 	tutorialsLike = Question.objects.filter(validate=1).order_by('-liketuto')[:3]
 	actualityQuestion = ActualityQuestion.objects.filter(user=request.user).order_by('-date')[:3]
 	actualityTag = ActualityTag.objects.filter(user=request.user).order_by('-date')[:3]
+	membersPopulaires = Profile.objects.order_by('-nb_likes')[:4]
 
-	return render_to_response('general/home.html', {'questionsDate': questionsDate, 'questionsViews': questionsViews, 'tutorialsDate':tutorialsDate, 'tutorialsLike':tutorialsLike, 'actualityQuestion':actualityQuestion, 'actualityTag':actualityTag}, context_instance=RequestContext(request))
+	return render_to_response('general/home.html', {'questionsDate': questionsDate, 'questionsViews': questionsViews, 'tutorialsDate':tutorialsDate, 'tutorialsLike':tutorialsLike, 'actualityQuestion':actualityQuestion, 'actualityTag':actualityTag, 'membersPopulaires':membersPopulaires}, context_instance=RequestContext(request))
 
 def login_view(request):
 	if request.method == 'POST': # If the form has been submitted...
