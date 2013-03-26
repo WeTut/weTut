@@ -94,10 +94,10 @@ def questions(request):
 				userfollowstag = True
 
 		temp = []
-		for question in questions:
+		for question in questionsDate:
 			if question.tag1 == currentag or question.tag2 == currentag or question.tag3 == currentag:
 				temp.append(question)
-		questions = temp
+		questionsDate = temp
 
 
 	if request.user.is_authenticated() :
