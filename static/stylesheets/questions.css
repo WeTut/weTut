@@ -54,6 +54,8 @@ QUESTIONS STYLESHEET
 #questions{margin-top:30px; font-family:'bebas_neue';}
 #questions button{margin-top:5px;}
 
+.content_banner_questions .questions_filters .title_tri{font-family:'bebas_neue'; font-size:40px; color:#1e2226;}
+
 
 
 /* ------------------POSER UNE QUESTION------------------ */
