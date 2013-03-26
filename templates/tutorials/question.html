@@ -19,8 +19,6 @@
 			
 			<div id="question">
 
-
-
 			{% if question.user == user %}					
 				<!-- If the authentificated user is the author -->
 				{% if not ready %}
@@ -29,7 +27,7 @@
 				<a href='/questions/{{question.slug}}' class='btn btn-success btn-block vcenter' id='usefullValidate'>Finalement non !</a>
 				<form method="post" class="validateform" action="">
 				{% csrf_token %}
-				<button class='btn btn-primary btn-block vcenter pendingValidation' name='validateSubmit' type='submit' value='validateSubmit' id='validateSubmit'>Check !</button>
+				<button class='btn btn-primary btn-block vcenter pendingValidation' name='validateSubmit' type='submit' value='validateSubmit'>Check !</button>
 				{% endif %}
 
 			{% endif %}

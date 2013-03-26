@@ -201,6 +201,7 @@ def question(request,slug):
 					post.save()
 					question.answers += 1
 					question.save()
+					return HttpResponseRedirect('')
 
 					#create actuality for all who follow this question
 					followers = FollowQuestion.objects.filter(question=question)
@@ -212,7 +213,6 @@ def question(request,slug):
 							actuality.question = question
 							actuality.date = datetime.now()
 							actuality.save()
-
 
 			elif 'commentsubmit' in request.POST:#Si un commentaire a ete envoye
 				form = CommentAnswerForm(request.POST, request.FILES) # A form bound to the POST data
@@ -242,10 +242,10 @@ def question(request,slug):
 				answer.nb_likes = answer.getLikesCount()
 				answer.save()
 
-				return HttpResponse( answer.nb_likes )
+				return HttpResponse(answer.nb_likes)
 
 
-			elif 'validatesubmit' in request.POST:#Valider une question
+			elif 'validateSubmit' in request.POST:#Valider une question
 				usefull_checked = request.POST.getlist('usefull') #Get the list of the checked answers
 				Answer.objects.filter(id__in=usefull_checked).update(usefull=True) #According to this list, Set the matching "usefull" field to True
 				question.validate=True #The Question is finished. Set Bool validate attribute to True
@@ -299,9 +299,6 @@ def ask(request):
 			profile = get_object_or_404(Profile, user=request.user)
 			profile.nb_questions += 1
 			profile.save()
-
-			#media = formMedia.save(commit=False)
-			#media.question_id = post.id
 
 			#create actuality for all who follow one of these tags
 			followers = FollowTag.objects.filter(tag__in=[post.tag1, post.tag2, post.tag3])
