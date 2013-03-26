@@ -62,6 +62,8 @@ def login_view(request):
 			#return render(request, 'layout/login.html', {
 		    #    'form': form,
 		    #})
+	else :
+		return HttpResponseRedirect('/facebook/login/')
 
 def logout_view(request):
 	logout(request)
