@@ -75,7 +75,7 @@
 				<div id='answer{{answer.id}}' class='row-fluid'>
 					{% if answer.usefull %}
 					<div class='span2'>
-							<img src="{{STATIC_URL}}images/certified.png" />
+							<img class ="validate_response_tuto" src="{{STATIC_URL}}images/pictos/validate.png" />
 					</div>
 					{% else %}
 						<div class='span2'></div>
@@ -86,7 +86,7 @@
 								<div class='like_member'>{{ answer.getLikesCount }}</div>
 								<div class='arrow'>						
 								</div>
-								<div class='image'>
+								<div class='image' style="margin-top:28px;">
 									{% if answer.user.profile.avatar.url != "" %}
 		     							<img src='{{answer.user.profile.avatar.url}}'/>
 									{% else %}
@@ -95,7 +95,7 @@
 								</div>
 							</div>
 							<div class="body_answer">
-								<div class="date"><p>Par {{ answer.user }} le {{ answer.date }}</p></div>
+								<div class="date"><p>Par<a href="/members/{{answer.user}}"> {{ answer.user }}</a> le {{ answer.date }}</p></div>
 								<div class='text'>
 									<p>{{ answer.answer|truncatechars:400|safe }}
 									</p>
@@ -133,7 +133,7 @@
 									{% endif %}
 								</div>
 								<div class='texte' >
-									<div class="name"><p>Posté par {{comment.user}} le {{comment.date}}</p></div>
+									<div class="name"><p>Posté par <a href="/members/{{comment.user}}">{{comment.user}}</a> le {{comment.date}}</p></div>
 									<div class="text_comment"><p>{{ comment.comment}}</p></div>
 									<div class='abus'><p style="color:#01c6e8;">Signaler un abus</p></div>
 								</div>
