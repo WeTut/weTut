@@ -79,7 +79,7 @@ class FacebookBackend:
                 #enregistrer l'image dans media/members
                 profile = get_object_or_404(Profile, user=user)
                 profile.email = fb_profile['email']
-                profile.city = fb_profile['location']['name']
+                #profile.city = fb_profile['location']['name']
                 profile.avatar = 'members/'+fb_profile['id']+'.jpg'
                 profile.save()
 
