@@ -36,7 +36,7 @@
 				<div class="body_question">
 					<div class="left_question_body">
 						<div class="member">
-							<div class="image"><img src="../../static/images/membre_de_luxe.png" /></div>
+							<div class="image"><img src="{{STATIC_URL}}images/membre_de_luxe.png" /></div>
 							<div class="infos">
 								<div class="name"><p>Posté par <a href="">{{question.user.username}}</a></p></div>
 								<div class="date"><p>le {{question.date}}</p></div>
@@ -52,7 +52,7 @@
 						</div>
 						<div class="medias">
 							<p>Autres Medias :</p>
-							<div class="other_media"><img src="../../static/images/pictos/play.png" /></div>
+							<div class="other_media"><img src="{{STATIC_URL}}images/pictos/play.png" /></div>
 							<div class="supermedia"></div>
 							<div class="supermedia"></div>
 							<div class="supermedia"></div>
@@ -122,7 +122,7 @@
 										{% endif %}
 									{% endif %}								
 								</div>
-								<div class='image'><img src="../../static/images/membre_de_luxe.png" /></div>
+								<div class='image'><img src="{{STATIC_URL}}images/membre_de_luxe.png" /></div>
 							</div>
 							<div class="body_answer">
 								<div class="date"><p>Par <a href=""> {{ answer.user }}</a> le {{ answer.date }}</p></div>
@@ -138,7 +138,7 @@
 						<div class='row-fluid' >
 							<div class='span4'></div>
 							<div class='span8'>
-								<img src="../../static/images/pictos/plus.png" alt="plus" />
+								<img src="{{STATIC_URL}}images/pictos/plus.png" alt="plus" />
 								<p>{{ answer.getComments.count }} 
 									{% if answer.getComments.count == 0 or answer.getComments.count == 1 %}														commentaire
 									{% else %}
@@ -157,7 +157,7 @@
 							<div class='span4'></div>
 							<div class='span8'  style="">
 								<div class='image'>
-									<img src="../../static/images/membre_de_luxe.png" />
+									<img src="{{STATIC_URL}}images/membre_de_luxe.png" />
 								</div>
 								<div class='texte' >
 									<div class="name"><p>Posté par <a href="">{{comment.user}}</a> le {{comment.date}}</p></div>
@@ -253,11 +253,11 @@ $(".comment_read").click(
 
 			//si on trouve plus.png -> on met minus et inversement
 			if(imgUrl.search(/plus.png/i) != -1) {
-				$(event.currentTarget).find("img").attr("src", "../../static/images/pictos/minus.png");
+				$(event.currentTarget).find("img").attr("src", "{{STATIC_URL}}images/pictos/minus.png");
 				$(event.currentTarget).find("img").attr("alt", "minus");
 			}
 			else {
-				$(event.currentTarget).find("img").attr("src", "../../static/images/pictos/plus.png");
+				$(event.currentTarget).find("img").attr("src", "{{STATIC_URL}}images/pictos/plus.png");
 				$(event.currentTarget).find("img").attr("alt", "plus");
 		}
 	});

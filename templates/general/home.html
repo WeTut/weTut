@@ -342,23 +342,25 @@
 			<div class="row-fluid marketing">
 				<div class="span3">
 					{% for member in membersPopulaires %}
-					<div class="member">
-						<div class="infos_members">
-							<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
-							<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
+					<a href="members/{{member.user.username}}">
+						<div class="member">
+							<div class="infos_members">
+								<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
+								<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
+							</div>
+							<div class="img_members">
+								{% if member.user.profile.avatar.url != "" %}
+									<img src="{{member.user.profile.avatar.url}}" style="width:70px; height:75px;">
+								{% else %}
+									<img src="{{MEDIA_URL}}members/avatar.jpg" style="width:70px; height:75px;">
+								{% endif %}
+							</div>
+							<div class="description_members">
+								<div class="name_member"><p>{{member.user.username}}</div>
+								<div class="job_member"><p>{{member.job}}</div>
+							</div>
 						</div>
-						<div class="img_members">
-							{% if member.user.profile.avatar.url != "" %}
-								<img src="{{member.user.profile.avatar.url}}" style="width:70px; height:75px;">
-							{% else %}
-								<img src="{{MEDIA_URL}}members/avatar.jpg" style="width:70px; height:75px;">
-							{% endif %}
-						</div>
-						<div class="description_members">
-							<div class="name_member"><p>{{member.user.username}}</div>
-							<div class="job_member"><p>{{member.job}}</div>
-						</div>
-					</div>
+					</a>
 					{% endfor %}
 					<div class="end_line_member"></div>
 				</div>
