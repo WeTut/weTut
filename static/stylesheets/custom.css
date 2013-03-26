@@ -31,10 +31,12 @@ a:hover{text-decoration:none;}
 .navbar-inner {background-color:#1e2226;background-image:none;height:68px; position:relative; z-index:10;}
 ul .nav {top:27px;width:692px;float:left;}
 
+#enroll_connexion li.notif, #enroll_connexion li.deco {width:65px; height:65px;}
+
 #enroll_connexion {float:right; padding-top:0px; margin-top:0px;}
 #enroll_connexion a{display:block; height:68px; line-height:68px; color:#FFFFFF; padding-left:15px; padding-right:15px;}
 
-#enroll_connexion a:hover, #enroll_connexion li.notifs a:hover {background-color:#32363b; text-decoration:none;}
+#enroll_connexion a:hover, #enroll_connexion li.notif a:hover {background-color:#32363b; text-decoration:none;}
 
 #enroll_connexion ul li{float:left; margin-left:10px; font-family: 'Rambla', sans-serif;
     font-size:1.2em;
