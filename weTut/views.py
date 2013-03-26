@@ -26,8 +26,9 @@ def start(request):
 	questionsViews = Question.objects.filter(validate=0).order_by('-views')[:3]
 	tutorialsDate = Question.objects.filter(validate=1).order_by('-date')[:3]
 	tutorialsLike = Question.objects.filter(validate=1).order_by('-liketuto')[:3]
+	membersPopulaires = Profile.objects.order_by('-nb_likes')[:4]
 
-	return render_to_response('general/start.html', {'questionsDate': questionsDate, 'questionsViews': questionsViews, 'tutorialsDate':tutorialsDate, 'tutorialsLike':tutorialsLike}, context_instance=RequestContext(request))
+	return render_to_response('general/start.html', {'questionsDate': questionsDate, 'questionsViews': questionsViews, 'tutorialsDate':tutorialsDate, 'tutorialsLike':tutorialsLike, 'membersPopulaires':membersPopulaires}, context_instance=RequestContext(request))
 
 def home(request):
 	questionsDate = Question.objects.filter(validate=0).order_by('-date')[:3]
