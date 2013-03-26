@@ -245,7 +245,7 @@ def question(request,slug):
 				return HttpResponse(answer.nb_likes)
 
 
-			elif 'validatesubmit' in request.POST:#Valider une question
+			elif 'validateSubmit' in request.POST:#Valider une question
 				usefull_checked = request.POST.getlist('usefull') #Get the list of the checked answers
 				Answer.objects.filter(id__in=usefull_checked).update(usefull=True) #According to this list, Set the matching "usefull" field to True
 				question.validate=True #The Question is finished. Set Bool validate attribute to True
