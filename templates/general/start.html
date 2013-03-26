@@ -10,8 +10,8 @@
 				<p style="font-size:12px; font-family: 'Rambla', sans-serif; color:#a4a4a4;">Motion design, VFX, WEB, webdesign</p>
 			</div>
 			<hr>
-			<div class="enroll_button"><p>S'inscrire maintenant</p></div>
-			<div class="facebook_button"><img src="{{STATIC_URL}}images/button_facebook.png" alt="Inscription via facebook" /></div>
+			<a href="#inscriptionModal" role="button" data-toggle="modal" data-target="#inscriptionModal"><div class="enroll_button"><p>S'inscrire maintenant</p></div></a>
+			<a href="/facebook/login"><div class="facebook_button"><img src="{{STATIC_URL}}images/button_facebook.png" alt="Inscription via facebook" /></div></a>
 		</div>
 		<div id="video_banner"></div>
 	</div>
@@ -253,53 +253,30 @@
 		<div class="members"><p>Les membres</p></div>
 		<div class="box_members">
 			<div class="row-fluid marketing">
-				<div class="span3">
-					<div class="member">
-						<div class="infos_members">
-							<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
-							<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
+				{% for member in membersPopulaires %}
+					<div class="span3">
+					<a href="members/{{member.user.username}}">
+						<div class="member">
+							<div class="infos_members">
+								<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
+								<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
+							</div>
+							<div class="img_members">
+								{% if member.user.profile.avatar.url != "" %}
+									<img src="{{member.user.profile.avatar.url}}" style="width:70px; height:75px;">
+								{% else %}
+									<img src="{{MEDIA_URL}}members/avatar.jpg" style="width:70px; height:75px;">
+								{% endif %}
+							</div>
+							<div class="description_members">
+								<div class="name_member"><p>{{member.user.username}}</div>
+								<div class="job_member"><p>{{member.job}}</div>
+							</div>
 						</div>
-						<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
-						<div class="description_members">
-							<div class="name_member"><p>Lucette Lama</div>
-							<div class="job_member"><p>Motion Designer</div>
-						</div>
+					</a>
 					</div>
+					{% endfor %}
 					<div class="end_line_member"></div>
-				</div>
-				<div class="span3">
-					<div class="infos_members">
-						<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
-						<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
-					</div>
-					<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
-					<div class="description_members">
-						<div class="name_member"><p>Lucette Lama</div>
-						<div class="job_member"><p>Motion Designer</div>
-					</div>
-				</div>
-				<div class="span3" style="margin-left:20px;">
-					<div class="infos_members">
-						<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
-						<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
-					</div>
-					<div class="img_members"><img src="{{STATIC_URL}}images/membre.png" style="width:70px; height:75px;"></div>
-					<div class="description_members">
-						<div class="name_member"><p>Lucette Lama</div>
-						<div class="job_member"><p>Motion Designer</div>
-					</div>
-				</div>
-				<div class="span3">
-					<div class="infos_members">
-						<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
-						<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
-					</div>
-					<div class="img_members"><img src="{{STATIC_URL}}images/membre.png" style="width:70px; height:75px;"></div>
-					<div class="description_members">
-						<div class="name_member"><p>Lucette Lama</div>
-						<div class="job_member"><p>Motion Designer</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
