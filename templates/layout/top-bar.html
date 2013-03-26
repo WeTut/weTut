@@ -59,7 +59,12 @@ $(document).ready(function() {
         </div>
 
         <li class="user"><a href="/members/{{ user.username }}">
-            <img src="{{user.profile.avatar.url}}" style="width:40px;height:40px;display:inline;margin-right:10px;"/>
+            {% if user.profile.avatar.url != "" %}
+              <img src="{{user.profile.avatar.url}}" style="width:40px;height:40px;display:inline;margin-right:10px;"/>
+            {% else %}
+              <img src="{{MEDIA_URL}}members/avatar.jpg" style="width:40px;height:40px;display:inline;margin-right:10px;"/>
+              
+            {% endif %}
         {{ user.username }}</a></li>
 
         {% else %}<li><a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal" class="first">Connexion</a></li>            
