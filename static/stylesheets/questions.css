@@ -55,7 +55,13 @@ QUESTIONS STYLESHEET
 #questions button{margin-top:5px;}
 
 .content_banner_questions .questions_filters .title_tri{font-family:'bebas_neue'; font-size:40px; color:#1e2226;}
+.content_banner_questions .questions_filters .box_tri{width:920px; height:150px; margin-top:30px; padding:10px;}
+.content_banner_questions .questions_filters .box_tri .famous{float:left; background-color:#FFFFFF; width:220px; height:150px; margin-right:10px;}
+.content_banner_questions .questions_filters .box_tri .famous ul li a{color:#9c9c9c; font-size:20px; font-family:'bebas_neue';}
 
+
+.content_banner_questions .questions_filters .box_tri .logiciel{float:left; background-color:#FFFFFF; width:340px; height:150px; margin-right:10px;}
+.content_banner_questions .questions_filters .box_tri .technique{float:left; background-color:#FFFFFF; width:340px; height:150px;}
 
 
 /* ------------------POSER UNE QUESTION------------------ */
@@ -173,4 +179,6 @@ textarea#id_comment{border:solid 1px #f53749; height:40px; font-family: 'Rambla'
 .one_tuto .img .infos .views{ background-image:url("/static/images/pictos/like_wetut_tutos.png"); height:29px; margin-top:30px; line-height:30px;}
 
 .content_tutos{margin-top:30px;}
+
+.selected_famous_tri_blue{width:160px; height:45px; color:#FFFFFF; background-color:#01c6e8;}
 
