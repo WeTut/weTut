@@ -151,18 +151,24 @@
 		<div class="follow">
 			<div class="title_follow"><p>Questions suivies</p></div>
 			
-			{% for question in followedquestions %}		
-				<div class="follow_question">
-					<div class="img"><img src='{{question.picture.url}}'/></div>
-					<div class="question">
-						<a href='/questions/{{question.slug}}'>{{question.title}}</a>
-					</div>
-				</div>					
+			{% for question in followedquestions %}	
+					{% if question.validate %}	
+					{% else %}	
+						<div class="follow_question">
+							<div class="img"><img src='{{question.picture.url}}'/></div>
+							<div class="question">
+								<a href='/questions/{{question.slug}}'>{{question.title}}</a>
+							</div>
+						</div>	
+					{% endif %}					
 			{% endfor %}
 				<div class="clear"></div>
 			<div class="follow_tag">
 				<div class="title_follow"><p>Tags suivis</p></div>
-				<div class="tags"><p></p></div>
+				{% for tag in followedtags %}	
+					<div class="tags"><p>{{tag.name}}</p></div>	
+			{% endfor %}
+
 			</div>
 			
 			
