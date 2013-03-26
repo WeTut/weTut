@@ -8,7 +8,7 @@
 		<form action='' method='post' enctype='multipart/form-data'>
 			{% csrf_token %}
 			
-			<div class="banner_profile">
+			<div class="banner_profile" style="height:400px;">
 				<div class="content_banner_members">
 					<div class='span12' >
 						<div class='btn_modify' >
@@ -66,9 +66,7 @@
 							</div>
 							<!--<div class="inscription_date"><p>Inscrit le {{ user.date_joined }}</p></div>-->
 							<div class="website">
-								<a href='{{ member.urlPortfolio }}'>
 									<p>Portfolio : http:// {{ profileform.urlPortfolio }}</p>
-								</a>
 							</div>
 						</div>
 					</div>
@@ -90,30 +88,91 @@
 						</div>
 						
 					</div>
+				
 				</div>
+				
 			</div>
 			
-
-
 			</div>
 			
-			<button class='btn btn-primary' name='submit' type="submit" value="profileSubmit" >Enregistrer</button>
-		</form>
 		<div>
-		<div class="content">
-			<p>Questions suivies</p><br />
-			<ul>
-			{% for question in followedquestions %}				
-				<li><a href='/questions/{{question.slug}}'>{{question.title}}</a></li>
-				{{ member.nb_likes }}
-				{{ member.nb_questions }}
-				{{ member.views }}
-			{% endfor %}
-			</ul>	
-
-			
-		</div>	
+		
+<div class="content">
+	<div class="span12">
+		<button class='btn_send_profile' name='submit' type="submit" value="profileSubmit" >Enregistrer</button>
+		</form>
 	</div>
+	<div class="content_profile">
+		
+		<div class="title"><p>Activité</p></div>
+		<div class="activity">
+			<div class="tri_activity">
+	        	<a href="#profil_questions"><div class="tri_choice" id="selected" style="margin-right:10px; background-color:#9C9C9C;">Questions ({{questions.count}})</div></a>
+	        	<a href="#profil_reponses"><div class="tri_choice" style="margin-right:10px;">Réponses ({{answers.count}})</div></a>
+	        	<a href="#profil_commentaires"><div class="tri_choice" style="margin-right:10px;">Commentaires ({{comments.count}})</div></a>
+	        	<a href="#profil_tutos"><div class="tri_choice">Tutoriels ({{tutorials.count}})</div></a>
+			</div>
+			<div class='grey_line'></div>
+
+			<div class="current_activity" id="profil_questions">
+				{% for question in questions %}
+				<div class="one_actu">
+					<div class="img"></div>
+					<div class="text"><a href="../questions/{{question.slug}}">{{question.title}}</a></div>
+				</div>
+				{% endfor %}
+			</div>
+
+			<div class="current_activity" id="profil_reponses" style="display:none;">
+				{% for answer in answers %}
+					<div class="text">{{answer.answer}}</div>
+				{% endfor %}
+			</div>
+
+			<div class="current_activity" id="profil_commentaires" style="display:none;">
+				{% for comment in comments %}
+					<div class="text">{{comment.comment}}</div>
+				{% endfor %}
+			</div>
+
+			<div class="current_activity" id="profil_tutos" style="display:none;">
+				{% for tutorial in tutorials %}
+				<div class="one_actu">
+					<div class="img"></div>
+					<div class="text"><a href="../tutoriels/{{tutorial.slug}}">{{tutorial.title}}</a></div>
+				</div>
+				{% endfor %}
+			</div>
+
+			<div class="line_end"></div>
+			
+
+		</div>
+		<div class="follow">
+			<div class="title_follow"><p>Questions suivies</p></div>
+			
+			{% for question in followedquestions %}		
+				<div class="follow_question">
+					<div class="img"><img src='{{question.picture.url}}'/></div>
+					<div class="question">
+						<a href='/questions/{{question.slug}}'>{{question.title}}</a>
+					</div>
+				</div>					
+			{% endfor %}
+				<div class="clear"></div>
+			<div class="follow_tag">
+				<div class="title_follow"><p>Tags suivis</p></div>
+				<div class="tags"><p></p></div>
+			</div>
+			
+			
+		</div>
+	</div>
+	
+</div>	
+		
+
+</div>
 </div>
 
 <script type="text/javascript">
@@ -160,6 +219,20 @@
 		<script type="text/javascript">  
 			$(document).ready( function(){ 	$("#id_picture").change( function(){ $(".filevisible").attr("value", document.getElementById("id_picture").files[0].name ); }); }); 
 		</script> 
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('.tri_activity a').click(function() {
+				    $('div.tri_choice').css('background-color','#C9C9C9');
+				    $(this).children('div.tri_choice').css('background-color', '#9C9C9C');
+				    var url = $(this).attr('href');
+				    $('div.current_activity').hide();
+				    $(url).show();
+				    return false;
+				});
+			
+			});
+		</script>
 
 
 {% endblock content %}
