@@ -340,8 +340,8 @@
 		<a href="/members"><div class="members"><p>Les membres</p></div></a>
 		<div class="box_members">
 			<div class="row-fluid marketing">
-				<div class="span3">
 					{% for member in membersPopulaires %}
+					<div class="span3">
 					<a href="members/{{member.user.username}}">
 						<div class="member">
 							<div class="infos_members">
@@ -361,9 +361,9 @@
 							</div>
 						</div>
 					</a>
+					</div>
 					{% endfor %}
 					<div class="end_line_member"></div>
-				</div>
 			</div>
 		</div>
 	</div>

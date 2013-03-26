@@ -6,9 +6,21 @@
 
  <!-- START BANNER--> 
 
- 		<div class="banner_questions">
- 			<div class="content_banner_questions">
+ 		<div class="banner_questions" style="height:300px;">
+ 			<div class="content_banner_questions" style="height:300px;">
  				<div class="questions_filters">
+ 					<div class="title_tri">Trier par</div>
+ 					<div class="box_tri">
+	 					<div class="famous">
+	 						<ul>
+	 							<li>Date</li>
+	 							<li>Popularité</li>
+	 							<li></li>
+	 					</div>
+	 					<div class="logiciel"></div>
+	 					<div class="technique"></div>
+	 				</div>
+ 						
 					<form id='filterform' action="" method="POST">
 						{% csrf_token %}
 				        <ul>
