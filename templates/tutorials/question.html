@@ -38,7 +38,7 @@
 						<div class="member">
 							<div class="image"><img src="../../static/images/membre_de_luxe.png" /></div>
 							<div class="infos">
-								<div class="name"><p>Posté par <a href="">{{question.user.username}}</a></p></div>
+								<div class="name"><p>Posté par <a href="/members/{{question.user}}">{{question.user}}</a></p></div>
 								<div class="date"><p>le {{question.date}}</p></div>
 							</div>
 						</div>
@@ -125,7 +125,7 @@
 								<div class='image'><img src="../../static/images/membre_de_luxe.png" /></div>
 							</div>
 							<div class="body_answer">
-								<div class="date"><p>Par <a href=""> {{ answer.user }}</a> le {{ answer.date }}</p></div>
+								<div class="date"><p>Par <a href="/members/{{answer.user}}"> {{ answer.user }}</a> le {{ answer.date }}</p></div>
 								<div class='text'>
 									<p>{{ answer.answer|truncatechars:400|safe }}
 									</p>
@@ -160,7 +160,7 @@
 									<img src="../../static/images/membre_de_luxe.png" />
 								</div>
 								<div class='texte' >
-									<div class="name"><p>Posté par <a href="">{{comment.user}}</a> le {{comment.date}}</p></div>
+									<div class="name"><p>Posté par <a href="/members/{{comment.user}}">{{comment.user}}</a> le {{comment.date}}</p></div>
 									<div class="text_comment"><p>{{ comment.comment}}</p></div>
 									<div class='abus'><p>Signaler un abus</p></div>
 								</div>
