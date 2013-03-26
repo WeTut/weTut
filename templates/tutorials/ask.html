@@ -45,59 +45,76 @@
 				</div>
 			</div>
 			<div class="clear"></div>
-			<p style="color:#9c9c9c; font-size:14px;">Ajouter des tags (1 minimum, 3 maximum)</p>
+			<p class="subtitle_ask">Ajouter des tags (1 minimum, 3 maximum)</p>
 			<div class="row-fluid">
-				<div id="tag1" class="ui-widget">
-					<label>Tag 1 :</label>
-					<select name="technical1" class="technical">
-						<option value="0">TECHNIQUE</option>
-						{% for technical in technicaltags %}
-							<option value="{{technical.id}}">{{technical.name}}</option>
-						{% endfor %}
-					</select>
-					<select name="software1" class="software">
-						<option value="0">LOGICIEL</option>
-						{% for software in softwaretags %}
-							<option value="{{software.id}}">{{software.name}}</option>
-						{% endfor %}
-					</select>
+				<div class="span4">
+					<div id="tag1" class="ui-widget">
+						<label>Tag 1</label>
+							<div class="styled_select_ask">
+								<select name="technical1" class="technical">
+									<option value="0">TECHNIQUE</option>
+									{% for technical in technicaltags %}
+										<option value="{{technical.id}}">{{technical.name}}</option>
+									{% endfor %}
+								</select>
+							</div>
+							<div class="styled_select_ask">
+								<select name="software2" class="software">
+									<option value="0">LOGICIEL</option>
+									{% for software in softwaretags %}
+										<option value="{{software.id}}">{{software.name}}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+					</div>
+				<div class="span4">
+					<div id="tag2" style="display:none;" class="ui-widget">
+						<label>Tag 2</label>
+						<div class="styled_select_ask">
+							<select name="technical2" class="technical">
+								<option value="0">TECHNIQUE</option>
+								{% for technical in technicaltags %}
+									<option value="{{technical.id}}">{{technical.name}}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="styled_select_ask">
+							<select name="software2" class="software">
+								<option value="0">LOGICIEL</option>
+								{% for software in softwaretags %}
+									<option value="{{software.id}}">{{software.name}}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
 				</div>
-				<div id="tag2" style="display:none;" class="ui-widget">
-					<label>Tag 2 :</label>
-					<select name="technical2" class="technical">
-						<option value="0">TECHNIQUE</option>
-						{% for technical in technicaltags %}
-							<option value="{{technical.id}}">{{technical.name}}</option>
-						{% endfor %}
-					</select>
-					<select name="software2" class="software">
-						<option value="0">LOGICIEL</option>
-						{% for software in softwaretags %}
-							<option value="{{software.id}}">{{software.name}}</option>
-						{% endfor %}
-					</select>
-				</div>
-				<div id="tag3" style="display:none;" class="ui-widget">
-					<label>Tag 3:</label>
-					<select name="technical3" class="technical">
-						<option value="0">TECHNIQUE</option>
-						{% for technical in technicaltags %}
-							<option value="{{technical.id}}">{{technical.name}}</option>
-						{% endfor %}
-					</select>
-					<select name="software3" class="software">
-						<option value="0">LOGICIEL</option>
-						{% for software in softwaretags %}
-							<option value="{{software.id}}">{{software.name}}</option>
-						{% endfor %}
-					</select>
+				<div class="span4">
+					<div id="tag3" style="display:none;" class="ui-widget">
+						<label>Tag 3</label>
+						<div class="styled_select_ask">
+							<select name="technical3" class="technical">
+								<option value="0">TECHNIQUE</option>
+								{% for technical in technicaltags %}
+									<option value="{{technical.id}}">{{technical.name}}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="styled_select_ask">
+							<select name="software3" class="software">
+								<option value="0">LOGICIEL</option>
+								{% for software in softwaretags %}
+									<option value="{{software.id}}">{{software.name}}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
 				</div>
 			</div>
 
-
 			
-			<p style="color:#9c9c9c; font-size:14px;">Ajouter des medias</p>
-			<p>illustrez votre question avec des médias supplémentaires</p>
+			<p <p class="subtitle_ask">Ajouter des medias</p>
+			<p class="subtitle_ask2">illustrez votre question avec des médias supplémentaires</p>
 			<div class="row-fluid marketing">
 				<div class='span4'></div>
 				<div class='span4'><input type="submit" class="ask_your_question_button" value="Pose ta question" /></div>
