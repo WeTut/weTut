@@ -156,12 +156,18 @@ $(document).ready(function() {
       $('#logInscriptionModal .loginModal').show();
       $('#logInscriptionModal .inscriptionModal').hide();
       $('#logInscriptionModal').css('height','310px');
+
+      $('#inscriptionModalLabel').css('opacity','0.6');
+      $('#loginModalLabel').css('opacity','1');
     });
 
     $('.linkInscription').click(function() {
       $('#logInscriptionModal .inscriptionModal').show();
       $('#logInscriptionModal .loginModal').hide();
       $('#logInscriptionModal').css('height','435px');
+
+      $('#loginModalLabel').css('opacity','0.6');
+      $('#inscriptionModalLabel').css('opacity','1');
     });
 
     $('.modal-body .linkConnexion').click(function() {
