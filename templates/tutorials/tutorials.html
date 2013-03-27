@@ -2,6 +2,10 @@
 
 {% block content %}
 
+<script type="text/javascript">
+	var title = $('title').text();
+	$('title').html('Tutorials | ' + title);
+</script>
 
 
  <!-- START BANNER--> 
@@ -67,7 +71,7 @@
 									<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
 									<div class='follow'>
 										<input name="hidden" type="hidden" value="{% if userfollowstag %}unfollow{% else %}follow{% endif %}" />
-										<button class='btn btn-{% if userfollowstag %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followTagSubmit">{% if userfollowstag %}Ne plus suivre{% else %}Suivre ce tag{% endif %}</button>
+										<button class='btn-{% if userfollowstag %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followTagSubmit">{% if userfollowstag %}Ne plus suivre{% else %}Suivre ce tag{% endif %}</button>
 									</div>
 								</form>
 							</div>
@@ -166,7 +170,7 @@
 
 		<div class="listTutos tutosViews" style="display:none;">
 			{% for tutorial in tutorialsViews %}			
-				<div class='span3' >
+				<div class='cat3' >
 					<div id="tutorial{{tutorial.id}}" class="one_tuto">
 						<div class="title"><a href='{{tutorial.slug}}'>{{ tutorial.title }}</a></div>
 						<div class="img">
@@ -209,7 +213,7 @@
 		<div class="listTutos tutosLikes" style="display:none;">
 			{% for tutorial in tutorialsLikes %}	
 			
-				<div class='span3' >
+				<div class='cat3' >
 					<div id="tutorial{{tutorial.id}}" class="one_tuto">
 						<div class="title"><a href='{{tutorial.slug}}'>{{ tutorial.title }}</a></div>
 						<div class="img">

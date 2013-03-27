@@ -17,6 +17,14 @@
 <!-- START BANNER -->
 	<div class="question_banner">
 		<div class="content_banner">
+
+			<script type="text/javascript">
+							$(document).ready(function() {
+								var title = $('title').text();
+								$('title').html($('div.title p').text() + ' | ' + title);
+							});
+								
+							</script>
 			
 			<div id="question">
 				<div class="body_question">
@@ -86,7 +94,7 @@
 							{% endifnotequal %}
 						{% endif %}
 
-						<div class="abus"><p style="color:#01c6e8;">Signaler un abus</p></div>
+						<div class="abus"><p style="color:#01c6e8;"><a href="mailto:teamwetut@gmail.com?subject=Abus - QUESTION ID {{question.id}}&body=Mail automatique - Ne rien inscrire ici">Signaler un abus</a></p></div>
 					</div>
 				</div>
 
@@ -133,7 +141,7 @@
 									<p>{{ answer.answer|truncatechars:400|safe }}
 									</p>
 								</div>
-								<div class='abus'><p style="color:#01c6e8;">Signaler un abus</p></div>
+								<div class='abus'><p style="color:#01c6e8;"><a href="mailto:teamwetut@gmail.com?subject=Abus - ANSWER ID {{answer.id}}&body=Mail automatique - Ne rien inscrire ici">Signaler un abus</a></p></div>
 							</div>
 						</div>
 					</div>
@@ -168,7 +176,7 @@
 								<div class='texte' >
 									<div class="name"><p>Posté par <a href="/members/{{comment.user}}">{{comment.user}}</a> le {{comment.date}}</p></div>
 									<div class="text_comment"><p>{{ comment.comment}}</p></div>
-									<div class='abus'><p style="color:#01c6e8;">Signaler un abus</p></div>
+									<div class='abus'><p style="color:#01c6e8;"><a href="mailto:teamwetut@gmail.com?subject=Abus - COMMENTAIRE ID {{comment.id}}&body=Mail automatique - Ne rien inscrire ici">Signaler un abus</a></p></div>
 								</div>
 							</div>
 						</div>

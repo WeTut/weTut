@@ -19,7 +19,13 @@
 			
 			<div id="question">
 
-
+				<script type="text/javascript">
+							$(document).ready(function() {
+								var title = $('title').text();
+								$('title').html($('div.title p').text() + ' | ' + title);
+							});
+								
+							</script>
 
 				<div class="body_question">
 					<div class="left_question_body">
@@ -80,8 +86,10 @@
 						<div class="fb-like" data-href="/questions/{{question.slug}}" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-action="recommend" style="margin-bottom:10px;"></div>
 						
 						<a href="https://twitter.com/share" class="twitter-share-button" data-url="/questions/{{question.slug}}" data-text="Découvre cette page trop cool !" data-lang="fr">Tweeter</a>
-						<div class="abus"><p>Signaler un abus</p></div>
-						</div>
+
+						<div class="abus"><p><a href="mailto:teamwetut@gmail.com?subject=Abus - QUESTION ID {{question.id}}&body=Mail automatique - Ne rien inscrire ici" style="color:#f53749;">Signaler un abus</a></p></div>
+					</div>
+
 				</div>
 			<div class='clear'></div>
 			
@@ -121,6 +129,7 @@
 			</div>			
 		</div>	
 	</div>
+</div>
 <div class="clear"></div>
 <!-- END BANNER -->		
 		<div class="content">
@@ -187,7 +196,7 @@
 									<p>{{ answer.answer|safe }}
 									</p>
 								</div>
-								<div class='abus'><p>Signaler un abus</p></div>
+								<div class='abus'><p><a href="mailto:teamwetut@gmail.com?subject=Abus - REPONSE ID {{answer.id}}&body=Mail automatique - Ne rien inscrire ici" style="color:#f53749;">Signaler un abus</a></p></div>
 							</div>
 						</div>
 					</div>
@@ -223,7 +232,7 @@
 								<div class='texte' >
 									<div class="name"><p>Posté par <a href="/members/{{comment.user}}">{{comment.user}}</a> le {{comment.date}}</p></div>
 									<div class="text_comment"><p>{{ comment.comment}}</p></div>
-									<div class='abus'><p>Signaler un abus</p></div>
+									<div class='abus'><p><a href="mailto:teamwetut@gmail.com?subject=Abus - COMMENTAIRE ID {{comment.id}}&body=Mail automatique - Ne rien inscrire ici" style="color:#f53749;">Signaler un abus</a></p></div>
 								</div>
 							</div>
 						</div>
