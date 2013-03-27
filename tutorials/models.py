@@ -28,9 +28,9 @@ class Question (models.Model):
 	date = models.DateField()
 	validate = models.BooleanField(default=False)
 
-	media1 = StdImageField(upload_to='questions/medias_supplementaires', blank=True, size=(800, 600, True), thumbnail_size=(100, 100, True))
-	media2 = StdImageField(upload_to='questions/medias_supplementaires', blank=True, size=(800, 600, True), thumbnail_size=(100, 100, True))
-	media3 = StdImageField(upload_to='questions/medias_supplementaires', blank=True, size=(800, 600, True), thumbnail_size=(100, 100, True))
+	media1 = StdImageField(upload_to='questions/medias_supplementaires', blank=True, size=(800, 600, True), thumbnail_size=(80, 80, True))
+	media2 = StdImageField(upload_to='questions/medias_supplementaires', blank=True, size=(800, 600, True), thumbnail_size=(80, 80, True))
+	media3 = StdImageField(upload_to='questions/medias_supplementaires', blank=True, size=(800, 600, True), thumbnail_size=(80, 80, True))
 
 	video = models.CharField(max_length = 200)
 
