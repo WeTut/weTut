@@ -34,7 +34,14 @@
 					</div>
 					<div class="right_question_body">
 						<div class="title"><p>{{question.title}}</p></div>
-						<div class="tags"></div>
+						<div class="tags">
+						<ul>
+							<li><mark>{{question.tag1}}</mark></li> 
+							<li><mark>{{question.tag2}}</mark></li> 
+							<li><mark>{{question.tag3}}</mark></li>
+							<li style="clear:both;"></li>
+						</ul>
+					</div>
 						<div class="text">
 							<p>{{question.message}}</p>
 						</div>
@@ -45,8 +52,14 @@
 							<div class="supermedia"></div>
 							<div class="supermedia"></div>
 						</div>
-						<div class="abus"><p>Signaler un abus</p></div>
 					</div>
+					<div class="final_question_body">
+									
+						<div class="fb-like" data-href="http://127.0.0.1:8000/questions/{{question.slug}}" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-action="recommend" style="margin-bottom:10px;"></div>
+						
+						<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://127.0.0.1:8000/questions/{{question.slug}}" data-text="Découvre cette page trop cool !" data-lang="fr">Tweeter</a>
+						<div class="abus"><p>Signaler un abus</p></div>
+						</div>
 				</div>
 			<div class='clear'></div>
 			
@@ -75,18 +88,12 @@
 					{% endif %}
 					</div>
 				</div>
-			</div>
-			
-								
-					<div class="fb-like" data-href="http://127.0.0.1:8000/questions/{{question.slug}}" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-action="recommend"></div>
-					
-					<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://127.0.0.1:8000/questions/{{question.slug}}" data-text="Découvre cette page trop cool !" data-lang="fr">Tweeter</a>
-	
+			</div>	
 
 			</div>			
 		</div>	
 	</div>
-		
+<div class="clear"></div>
 <!-- END BANNER -->		
 		<div class="content">
 
