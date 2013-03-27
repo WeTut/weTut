@@ -105,73 +105,39 @@
 	<div class="content_profile">
 		
 		<div class="title"><p>Activité</p></div>
-		<div class="activity">
-			<div class="tri_activity">
-	        	<a href="#profil_questions"><div class="tri_choice" id="selected" style="margin-right:10px; background-color:#9C9C9C;">Questions ({{questions.count}})</div></a>
-	        	<a href="#profil_reponses"><div class="tri_choice" style="margin-right:10px;">Réponses ({{answers.count}})</div></a>
-	        	<a href="#profil_commentaires"><div class="tri_choice" style="margin-right:10px;">Commentaires ({{comments.count}})</div></a>
-	        	<a href="#profil_tutos"><div class="tri_choice">Tutoriels ({{tutorials.count}})</div></a>
-			</div>
-			<div class='grey_line'></div>
-
-			<div class="current_activity" id="profil_questions">
-				{% for question in questions %}
-				<div class="one_actu">
-					<div class="img"></div>
-					<div class="text"><a href="../questions/{{question.slug}}">{{question.title}}</a></div>
-				</div>
-				{% endfor %}
-			</div>
-
-			<div class="current_activity" id="profil_reponses" style="display:none;">
-				{% for answer in answers %}
-					<div class="text">{{answer.answer}}</div>
-				{% endfor %}
-			</div>
-
-			<div class="current_activity" id="profil_commentaires" style="display:none;">
-				{% for comment in comments %}
-					<div class="text">{{comment.comment}}</div>
-				{% endfor %}
-			</div>
-
-			<div class="current_activity" id="profil_tutos" style="display:none;">
-				{% for tutorial in tutorials %}
-				<div class="one_actu">
-					<div class="img"></div>
-					<div class="text"><a href="../tutoriels/{{tutorial.slug}}">{{tutorial.title}}</a></div>
-				</div>
-				{% endfor %}
-			</div>
-
-			<div class="line_end"></div>
-			
-
+		<div class="row-fluid">
+			<div class="span6">
+				<div class="activity" style="width:450px;">
+					<div class="follow"  style="width:450px; min-height:150px;">
+					<div class="title_follow"><p>Questions suivies</p></div>
+					
+					{% for question in followedquestions %}	
+							{% if question.validate %}	
+							{% else %}	
+								<div class="follow_question">
+									<div class="img"><img src='{{question.picture.url}}'/></div>
+									<div class="question">
+										<a href='/questions/{{question.slug}}'>{{question.title}}</a>
+									</div>
+								</div>	
+							{% endif %}					
+					{% endfor %}
+		
+					</div>
+				</div>			
 		</div>
-		<div class="follow">
-			<div class="title_follow"><p>Questions suivies</p></div>
-			
-			{% for question in followedquestions %}	
-					{% if question.validate %}	
-					{% else %}	
-						<div class="follow_question">
-							<div class="img"><img src='{{question.picture.url}}'/></div>
-							<div class="question">
-								<a href='/questions/{{question.slug}}'>{{question.title}}</a>
-							</div>
-						</div>	
-					{% endif %}					
-			{% endfor %}
-				<div class="clear"></div>
-			<div class="follow_tag">
-				<div class="title_follow"><p>Tags suivis</p></div>
-				{% for tag in followedtags %}	
-					<div class="tags"><p>{{tag.name}}</p></div>	
-			{% endfor %}
-
+		<div class="span6">
+			<div class="activity" style="width:450px;">
+				<div class="follow" style="width:450px; min-height:150px;">
+					<div class="title_follow"><p>Tags suivis</p></div>
+					<div class="follow_tag">
+						{% for tag in followedtags %}	
+							<div class="tags"><p>{{tag.name}}</p></div>	
+					{% endfor %}
+		
+					</div>
+				</div>
 			</div>
-			
-			
 		</div>
 	</div>
 	
