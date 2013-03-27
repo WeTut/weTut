@@ -8,7 +8,7 @@ from django.shortcuts import render_to_response
 from members.forms import ProfileForm, FilterForm
 from members.models import *
 
-from tutorials.models import Question, FollowQuestion, Answer, CommentAnswer
+from tutorials.models import Question, FollowQuestion, Answer, CommentAnswer, FollowTag, Tag
 
 def profile(request):
 	profile = Profile.objects.get(user=request.user)
@@ -37,9 +37,22 @@ def profile(request):
 	for follow in follows:
 		followedquestions.append ( get_object_or_404(Question, id=follow.question.id) )
 
+	if 'deltag' in request.GET:
+		idtag = request.GET.get('deltag')
+		tag = Tag.objects.filter(id=idtag)
+		if tag.exists():
+			followTag = FollowTag.objects.filter(tag=tag)
+			if followTag.exists():
+				FollowTag.objects.get(tag=tag, user=request.user).delete()
+
+	tags = []
+	Ftags = FollowTag.objects.all().filter(user=request.user)
+	for Ftag in Ftags:
+		tags.append(Ftag.tag)
+
 	profileform = ProfileForm(instance=profile) # An unbound form
 	
-	return render_to_response('members/profile.html', {'profileform': profileform, 'followedquestions':followedquestions }, context_instance=RequestContext(request))
+	return render_to_response('members/profile.html', {'profileform': profileform, 'followedquestions':followedquestions, 'tags':tags }, context_instance=RequestContext(request))
 	
 
 def members(request):
@@ -61,6 +74,19 @@ def member(request,slug):
 	if slug != request.user.username:
 		views = member.views + 1
 		Mid = member.id
-		Profile.objects.filter(id=Mid).update(views=views)		
+		Profile.objects.filter(id=Mid).update(views=views)
 
-	return render_to_response('members/member.html', {'profile': profile, 'member': member, 'questions':questions, 'answers':answers, 'comments':comments, 'tutorials':tutorials}, context_instance=RequestContext(request))
+	if 'deltag' in request.GET:
+		idtag = request.GET.get('deltag')
+		tag = Tag.objects.filter(id=idtag)
+		if tag.exists():
+			followTag = FollowTag.objects.filter(tag=tag)
+			if followTag.exists():
+				FollowTag.objects.get(tag=tag, user=request)
+
+	tags = []
+	Ftags = FollowTag.objects.all().filter(user=profile)
+	for Ftag in Ftags:
+		tags.append(Ftag.tag)
+
+	return render_to_response('members/member.html', {'profile': profile, 'member': member, 'questions':questions, 'answers':answers, 'comments':comments, 'tutorials':tutorials, 'tags':tags}, context_instance=RequestContext(request))

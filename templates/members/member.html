@@ -90,9 +90,9 @@
 		<div class='skills'>
 			<div class="title"><p>Compétences</p></div>
 			<div class="subtitle"><p>Techniques</p></div>
-			<div class="text"><p>Composition,Tracking </p></div>
+			<div class="text"><p></p></div>
 			<div class="subtitle"><p>Logiciels</p></div>
-			<div class="text"><p>Composition,Tracking</p></div>
+			<div class="text"><p></p></div>
 		</div>
 		<div class='infos_socials'>
 			<div class="likes">{{ member.nb_likes }}</div>
@@ -186,7 +186,11 @@ $(document).ready(function(){
 			<div class="clear"></div>
 			<div class="follow_tag">
 				<div class="title_follow"><p>Tags suivis</p></div>
-				<div class="tags"><p></p></div>
+				<ul>
+				{% for tag in tags %}
+					<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="followprofile">{{tag.name}}</mark></a></li>
+				{% endfor %}
+				</ul>
 			</div>
 			
 		</div>
@@ -194,7 +198,8 @@ $(document).ready(function(){
 
 	
 </div>
-
+ 
+ 4123
 
 {% endblock content %}
 
