@@ -113,6 +113,8 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 .line_end_notif{width:552px; height:1px; background-color:#bcbcbc; position:relative;}
 //.notif_filters{width:554px;}
 
+li.notif img{margin-top:17px;}
+
 #tags_notifs, #questions_notifs{ width:552px; height:228; background-color:#FFFFFF; }
 
 
