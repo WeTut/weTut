@@ -15,13 +15,27 @@ $(document).ready(function() {
   $('#enroll_connexion li.notif a').click(function() {
     if(userOn==0) {
       userOn=1;
-      $('#user_menu').slideDown(300);
+      $('#notif_menu').slideDown(300);
       $('#enroll_connexion li.notif a').css('background-color', '#32363b');
     }
     else {
       userOn=0;
-      $('#user_menu').slideUp(300);
+      $('#notif_menu').slideUp(300);
       $('#enroll_connexion li.notif a').css('background-color', '#1e2226');
+    }
+    
+  });
+
+  $('#enroll_connexion li.user a').click(function() {
+    if(userOn==0) {
+      userOn=1;
+      $('#user_menu').slideDown(300);
+      $('#enroll_connexion li.user a').css('background-color', '#32363b');
+    }
+    else {
+      userOn=0;
+      $('#user_menu').slideUp(300);
+      $('#enroll_connexion li.user a').css('background-color', '#1e2226');
     }
     
   });
@@ -46,35 +60,43 @@ $(document).ready(function() {
             {% endif %}
             Poser une question</a></li>
 		</ul>
+
 		<div id="enroll_connexion">
       <ul>
         {% if user.is_authenticated %}     
         
-        <li class="notif"><a href="#user_menu"><img src="{% if user.profile.getTagActualities or user.profile.getQuestionActualities %}/static/images/pictos/notifactif.png{% else %}/static/images/pictos/notif.png{% endif %}"/></a></li>
+          <li class="notif"><a href="#notif_menu"><img src="{% if user.profile.getTagActualities or user.profile.getQuestionActualities %}/static/images/pictos/notifactif.png{% else %}/static/images/pictos/notif.png{% endif %}"/></a></li>
 
+          <div id="notif_menu">
+              {% for tagactu in user.profile.getTagActualities %}
+              <a href="/question/{{ tagactu.question.slug }}" role="button" data-toggle="modal">Nouvelle question dans le tag {{ tagactu.tag.name }}</a> 
+              {% endfor %}
+              {% for questionactu in user.profile.getQuestionActualities %}
+              <a href="/question/{{ questionactu.question.slug }}" role="button" data-toggle="modal">Nouvelle réponse à la question {{ questionactu.question.title }}</a> 
+              {% endfor %}
+          </div>
 
-        <div id="user_menu">
-            {% for tagactu in user.profile.getTagActualities %}
-            <a href="/question/{{ tagactu.question.slug }}" role="button" data-toggle="modal">Nouvelle question dans le tag {{ tagactu.tag.name }}</a> 
-            {% endfor %}
-            {% for questionactu in user.profile.getQuestionActualities %}
-            <a href="/question/{{ questionactu.question.slug }}" role="button" data-toggle="modal">Nouvelle réponse à la question {{ questionactu.question.title }}</a> 
-            {% endfor %}
-        </div>
+          <li class="user">
+            <a href="#user_menu">
+              {% if user.profile.avatar.url != "" %}
+                <img src="{{user.profile.avatar.url}}" style="width:40px;height:40px;display:inline;margin-right:10px;"/>
+              {% else %}
+                <img src="{{MEDIA_URL}}members/avatar.jpg" style="width:40px;height:40px;display:inline;margin-right:10px;"/>
+              {% endif %}
+                {{ user.username }}
+            </a>
+          </li>
 
-        <li class="user"><a href="/members/{{ user.username }}">
-            {% if user.profile.avatar.url != "" %}
-              <img src="{{user.profile.avatar.url}}" style="width:40px;height:40px;display:inline;margin-right:10px;"/>
-            {% else %}
-              <img src="{{MEDIA_URL}}members/avatar.jpg" style="width:40px;height:40px;display:inline;margin-right:10px;"/>
-              
-            {% endif %}
-        {{ user.username }}</a></li>
-        
-        <li class="deco"><a href="/logout" role="button" data-toggle="modal"><img src="/static/images/pictos/logout.png"/></a></li>
+          <div id="user_menu">
+                <a href="/members/{{user.username}}" role="button" data-toggle="modal">Voir le profil</a>
+                <a href="/logout" role="button" data-toggle="modal">Se déconnecter</a>
+          </div>
 
-        {% else %}<li><a href="#logInscriptionModal" role="button" data-toggle="modal" data-target="#logInscriptionModal" class="first linkConnexion">Connexion</a></li>            
+        {% else %}
+
+        <li><a href="#logInscriptionModal" role="button" data-toggle="modal" data-target="#logInscriptionModal" class="first linkConnexion">Connexion</a></li>            
         <li><a href="#logInscriptionModal" role="button" data-toggle="modal" data-target="#logInscriptionModal" class="linkInscription">Inscription</a></li>
+
         {% endif %}
      </ul>
 
