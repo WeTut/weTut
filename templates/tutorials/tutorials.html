@@ -9,11 +9,24 @@
  				<div class="questions_filters">
  					<div class="title_tri">Trier par</div>
 			 			<div class="box_tri">
-				 			<div class="famous">
+				 			<div class="famous choiceTutos">
+
+				 				<script type="text/javascript">
+				 				$(document).ready(function() {
+				 					$('.choiceTutos a').click(function() {
+				 						$('.choiceTutos a').removeClass('selected_famous_tri_blue');
+				 						$('.choiceTutos a').css('color','#9C9C9C');
+				 						$(this).addClass('selected_famous_tri_blue');
+				 						$(this).css('color','white');
+				 						return false;
+				 					})
+				 				})
+				 				</script>
+
 								<ul>
-									<li style="margin-top:10px;"><a href=".tutosDate">Date</a></li>
-				 					<li style="margin-top:30px;"><a href=".tutosViews">Vues</a></li>
-				 					<li style="margin-top:30px;"><a href=".tutosLikes">Likes</a></li>
+									<li><a href=".tutosDate" class="selected_famous_tri_blue" style="color:white">Date</a></li>
+				 					<li style="margin-top:10px;"><a href=".tutosViews">Vues</a></li>
+				 					<li style="margin-top:10px;"><a href=".tutosLikes">Likes</a></li>
 				 				</ul>
 				 			</div>
 				 			<div class="separator_box_tri_ask"></div>

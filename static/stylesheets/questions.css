@@ -224,7 +224,10 @@ a.twitter-share-button{margin-top:10px;}
 
 .content_tutos{margin-top:30px;}
 
-.selected_famous_tri_blue{width:160px; height:45px; color:#FFFFFF; background-color:#01c6e8;}
+.selected_famous_tri_blue{color:white; background-color:#01c6e8; outline:none;}
+.selected_famous_tri_pink{color:white; background-color:#F53749; outline:none;}
 #filtertag mark.followtut{background-color:#01c6e8; color:#FFFFFF; border-radius:3px; padding:2px 10px 2px 10px; margin-right:8px; margin-top:10px;}
 #filtertag mark.unfollowtut{background-color:#FFFFFF; color:#01c6e8; border-radius:3px; padding:2px 10px 2px 10px; margin-right:8px; margin-bottom:60px;}
 
+
+.choiceTutos a, .choiceQuestions a{display:block; line-height:45px; width:160px; height:45px; border-radius:3px; outline:none;}
