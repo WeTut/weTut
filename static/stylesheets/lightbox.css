@@ -18,7 +18,7 @@ input.btn_connexion{width:70px; height:45px; background:#01c6e8 url("../../stati
 
 /* ------------------INSCRIPTION------------------ */
 
-#logInscriptionModal{width:300px; height:435px; background-color:#f6f6f1; left:50%; margin-left:-170px; padding:20px; z-index:1199;}
+#logInscriptionModal{width:300px; height:310px; background-color:#f6f6f1; left:50%; margin-left:-170px; padding:20px; z-index:1199;}
 
 .modal-body .input_inscription{background-color:#FFFFFF; width:300px; height:45px; border-radius:3px; margin-top:15px;}
 
