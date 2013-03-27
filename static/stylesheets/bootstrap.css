@@ -4453,7 +4453,7 @@ input[type="submit"].btn.btn-mini {
   position: fixed;
   right: 0;
   left: 0;
-  z-index: 1030;
+  z-index: 800;
   margin-bottom: 0;
 }
 
@@ -5193,7 +5193,7 @@ input[type="submit"].btn.btn-mini {
 
 .tooltip {
   position: absolute;
-  z-index: 1030;
+  z-index: 800;
   display: block;
   padding: 5px;
   font-size: 11px;
