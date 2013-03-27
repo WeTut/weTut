@@ -8,7 +8,7 @@ from django.shortcuts import render_to_response
 from datetime import datetime 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from tutorials.forms import QuestionForm, AnswerForm, CommentAnswerForm, FilterForm, MediaForm
+from tutorials.forms import QuestionForm, AnswerForm, CommentAnswerForm, FilterForm
 from tutorials.models import *
 
 from members.models import Profile

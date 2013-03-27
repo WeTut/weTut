@@ -56,12 +56,16 @@ QUESTIONS STYLESHEET
 
 .content_banner_questions .questions_filters .title_tri{font-family:'bebas_neue'; font-size:40px; color:#1e2226;}
 .content_banner_questions .questions_filters .box_tri{width:920px; height:150px; margin-top:30px; padding:10px;}
-.content_banner_questions .questions_filters .box_tri .famous{float:left; background-color:#FFFFFF; width:220px; height:150px; margin-right:10px;}
+.content_banner_questions .questions_filters .box_tri .famous{float:left; width:220px; height:150px; margin-right:10px; text-align:center;}
 .content_banner_questions .questions_filters .box_tri .famous ul li a{color:#9c9c9c; font-size:20px; font-family:'bebas_neue';}
 
 
-.content_banner_questions .questions_filters .box_tri .logiciel{float:left; background-color:#FFFFFF; width:340px; height:150px; margin-right:10px;}
-.content_banner_questions .questions_filters .box_tri .technique{float:left; background-color:#FFFFFF; width:340px; height:150px;}
+.content_banner_questions .questions_filters .box_tri .logiciel{float:left; width:340px; height:150px; margin-right:10px;}
+.content_banner_questions .questions_filters .box_tri .technique{float:left; width:340px; height:150px;}
+#filtertag mark.follow{background-color:#f53749; color:#FFFFFF; border-radius:3px; padding:2px 10px 2px 10px; margin-right:8px; margin-top:10px;}
+#filtertag mark.unfollow{background-color:#FFFFFF; color:#f53749; border-radius:3px; padding:2px 10px 2px 10px; margin-right:8px; margin-bottom:60px;}
+
+
 
 
 /* ------------------POSER UNE QUESTION------------------ */

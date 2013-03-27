@@ -7,7 +7,7 @@
  <!-- START BANNER--> 
 
  		<div class="banner_questions" style="height:300px;">
- 			<div class="content_banner_questions" style="height:300px;">
+ 			<div class="content_banner_questions" style="height:300px; width:940px;">
  				<div class="questions_filters">
  					<div class="title_tri">Trier par</div>
  					<div class="box_tri">
@@ -16,37 +16,64 @@
 	 							<li><a href=".questionsDate" classe="date_tri" >Date</a></li>
 	 							<li><a href=".questionsViews">Popularité</a></li>
 	 							<li><a href=".questionsAnswers">Réponses</a></li>
+	 						</ul>
 	 					</div>
-	 					<div class="logiciel"></div>
-	 					<div class="technique"></div>
-	 				</div>
- 						
-					
-					<div class="clear"></div>
-			        <div id='filtertag' >
-						{% for tag in tags %}
-							<a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}">{{tag.name}}</a> | 
-						{% endfor %}
-							<a {% if currentag == 0 %}class='bold'{% endif %} href="/questions">tous</a>
-			        </div>
-			        <br />
-			
-			        
-			        {% if user.is_authenticated %}
-						{% if currentag != 0 %}
-						<div>
-							<form  class="followTagForm" action="" method="post" enctype="multipart/form-data">
-								{% csrf_token %}
-								<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
-								<div class='follow'>
-									<input name="hidden" type="hidden" value="{% if userfollowstag %}unfollow{% else %}follow{% endif %}" />
-									<button class='btn btn-{% if userfollowstag %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followTagSubmit">{% if userfollowstag %}Ne plus suivre{% else %}Suivre ce tag{% endif %}</button>
+	 					<div class="logiciel">
+	 						<div id='filtertag' >
+	 						{% for tag in tags %}
+	 							{% if tag.type %}
+	 								{% if userfollowstag %}
+	 									<a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="follow">{{tag.name}}</mark></a>
+	 									{% else %}
+	 										<a {% if currentag == tag.id %}class='coucou'{% endif %} href="/questions?tag={{tag.id}}"><mark class="unfollow">{{tag.name}}</mark></a>
+	 								{% endif %}
+	 							{% endif %}
+	 						{% endfor %}
+	 						<a {% if currentag == 0 %}class='bold'{% endif %} href="/questions"><mark class="follow">tous</mark></a>
+							{% if user.is_authenticated %}
+								{% if currentag != 0 %}
+								<div>
+									<form  class="followTagForm" action="" method="post" enctype="multipart/form-data">
+										{% csrf_token %}
+										<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
+										<div class='follow'>
+											<input name="hidden" type="hidden" value="{% if userfollowstag %}unfollow{% else %}follow{% endif %}" />
+											<button class='btn btn-{% if userfollowstag %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followTagSubmit">{% if userfollowstag %}Ne plus suivre{% else %}Suivre ce tag{% endif %}</button>
+										</div>
+									</form>
 								</div>
-							</form>
-						</div>
-			        	{% endif %}
-					{% endif %}	
-				</div>
+					        	{% endif %}
+						{% endif %}	
+							</div>
+	 					</div>
+	 					
+	 					<div class="technique">
+	 						<div id='filtertag' >
+	 						{% for tag in tags %}
+	 							{% if not tag.type %}
+	 								<a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}">{{tag.name}}</a> | 
+	 							{% endif %}
+	 						{% endfor %}
+	 						<a {% if currentag == 0 %}class='bold'{% endif %} href="/questions">tous</a>
+							{% if user.is_authenticated %}
+								{% if currentag != 0 %}
+								<div>
+									<form  class="followTagForm" action="" method="post" enctype="multipart/form-data">
+										{% csrf_token %}
+										<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
+										<div class='follow'>
+											<input name="hidden" type="hidden" value="{% if userfollowstag %}unfollow{% else %}follow{% endif %}" />
+											<button class='btn btn-{% if userfollowstag %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followTagSubmit">{% if userfollowstag %}Ne plus suivre{% else %}Suivre ce tag{% endif %}</button>
+										</div>
+									</form>
+								</div>
+					        	{% endif %}
+						{% endif %}	
+							</div>
+	 					</div>
+	 				</div>
+ 						</div>	
+					<div class="clear"></div>
 			</div>					
 		</div>
  <!-- END BANNER-->      
