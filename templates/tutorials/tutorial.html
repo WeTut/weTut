@@ -60,7 +60,7 @@
 						</script>
 
 						<div class="medias">
-							<p>Autres Medias :</p>
+							{% if question.video or question.media1 or question.media2 or question.media3 %}<p>Autres Medias :</p>{% endif %}
 							{% if question.video %}<p class="theVideo">{{ question.video }}</p><div class="other_media"><a href="" rel="shadowbox[{{question.title}}];width=853;height=480"><img src="" alt="" width="107" height="80"/></a></div>{% endif %}
 							{% if question.media1 %}<div class="supermedia"><a href="{{question.media1.url}}" rel="shadowbox[{{question.title}}]"><img src="{{question.media1.thumbnail.url}}" alt="" /></a></div>{% endif %}
 							{% if question.media2 %}<div class="supermedia"><a href="{{question.media2.url}}" rel="shadowbox[{{question.title}}]"><img src="{{question.media2.thumbnail.url}}" alt="" /></a></div>{% endif %}
