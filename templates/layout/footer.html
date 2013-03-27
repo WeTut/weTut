@@ -38,6 +38,16 @@
 			$('#footer .facebook .figure').html(likesFacebook);
 			$('#footer .facebook .figure').show();
 		});
+
+
+		var twitterUser = 'teamwetut';
+		$.getJSON("http://api.twitter.com/1/users/show.json?screen_name="+twitterUser+"&callback=?",function(data) {
+			$.each(data, function(index,value){
+				if(index=='followers_count') {
+					$('#footer .twitter .figure').append(value);
+				}
+			});
+		});
 	});
 	</script>
 	
