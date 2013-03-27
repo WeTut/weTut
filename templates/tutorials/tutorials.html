@@ -42,7 +42,7 @@
 	 								{% endif %}
 	 							{% endif %}
 	 						{% endfor %}
-	 						<li><a {% if currentag == 0 %}class='bold'{% endif %} href="/tutorielss"><mark class="followtut">tous</mark></a></li>
+	 						<li><a {% if currentag == 0 %}class='bold'{% endif %} href="/tutoriels"><mark class="followtut">tous</mark></a></li>
 	 						</ul>
 							{% if user.is_authenticated %}
 								{% if currentag != 0 %}
@@ -205,16 +205,6 @@
 							</div>
 							</a>
 						</div>
-						{% if user.is_authenticated %}
-							<form  class="likeTuto" action="" method="post" enctype="multipart/form-data">
-							{% csrf_token %}
-							<input class="tutoId" type="hidden" name="tutoId" value="{{tutorial.id}}"></input>
-							<div class='like'>
-								<input name="hidden" type="hidden" value="{% if tutorial.currentUserLikes %}dislike{% else %}like{% endif %}" />
-								<button class='btn-{% if tutorial.currentUserLikes %}ok{% else %}nok{% endif %}' name='likeTutoSubmit' type="submit" value="likeTutoSubmit">{% if tutorial.currentUserLikes %}Je n'aime plus{% else %}J'aime{% endif %}</button>
-							</div>
-							</form>
-						{% endif %}
 					</div>
 				</div>
 		{% endfor %}

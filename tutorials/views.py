@@ -131,6 +131,34 @@ def tutorials(request):
 	tutorials_list_views = Question.objects.filter(validate=True).order_by('-views')
 	tutorials_list_likes = Question.objects.filter(validate=True).order_by('-liketuto')
 	
+	if 'tag' in request.GET:
+		currentag = int(request.GET.get('tag'))
+		tag = Tag.objects.get(id=currentag)
+
+		if request.user.is_authenticated() :
+			followTag = FollowTag.objects.filter(tag=tag, user=request.user)
+			if followTag.exists():
+				userfollowstag = True
+
+		temp = []
+		for tutorial in tutorials_list_date:
+			if tutorial.tag1 == currentag or tutorial.tag2 == currentag or tutorial.tag3 == currentag:
+				temp.append(tutorial)
+		tutorials_list_date = temp
+		
+		temp = []
+		for tutorial in tutorials_list_views:
+			if tutorial.tag1 == currentag or tutorial.tag2 == currentag or tutorial.tag3 == currentag:
+				temp.append(tutorial)
+		tutorials_list_views  = temp
+
+		temp = []
+		for tutorial in tutorials_list_likes:
+			if tutorial.tag1 == currentag or tutorial.tag2 == currentag or tutorial.tag3 == currentag:
+				temp.append(tutorial)
+		tutorials_list_likes = temp
+
+
 	paginatorDate = Paginator(tutorials_list_date, 10)
 	tutorialsDate = paginatorDate.page(1)
 
@@ -139,20 +167,6 @@ def tutorials(request):
 
 	paginatorLikes = Paginator(tutorials_list_likes, 10)
 	tutorialsLikes = paginatorLikes.page(1)
-	
-	if 'tag' in request.GET:
-		currentag = int(request.GET['tag'])
-
-		if request.user.is_authenticated() :
-			followTag = FollowTag.objects.filter(tag=currentag, user=request.user)
-			if followTag.exists():
-				userfollowstag = True
-
-		temp = []
-		for tutorial in tutorialsDate:
-			if tutorial.tag1 == currentag or tutorial.tag2 == currentag or tutorial.tag3 == currentag:
-				temp.append(question)
-		tutorialsDate = temp
 		
 
 	if 'pageDate' in request.GET:
