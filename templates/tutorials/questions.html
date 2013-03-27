@@ -13,23 +13,26 @@
  					<div class="box_tri">
 	 					<div class="famous">
 	 						<ul>
-	 							<li><a href=".questionsDate" classe="date_tri" >Date</a></li>
-	 							<li><a href=".questionsViews">Popularité</a></li>
-	 							<li><a href=".questionsAnswers">Réponses</a></li>
+	 							<li style="margin-top:10px;"><a href=".questionsDate" classe="date_tri"" >Date</a></li>
+	 							<li style="margin-top:30px;"><a href=".questionsViews">Popularité</a></li>
+	 							<li style="margin-top:30px;"><a href=".questionsAnswers">Réponses</a></li>
 	 						</ul>
 	 					</div>
+	 					<div class="separator_box_tri_ask"></div>
 	 					<div class="logiciel">
 	 						<div id='filtertag' >
+	 						<ul>
 	 						{% for tag in tags %}
 	 							{% if tag.type %}
 	 								{% if userfollowstag %}
-	 									<a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="follow">{{tag.name}}</mark></a>
+	 									<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="follow">{{tag.name}}</mark></a></li>
 	 									{% else %}
-	 										<a {% if currentag == tag.id %}class='coucou'{% endif %} href="/questions?tag={{tag.id}}"><mark class="unfollow">{{tag.name}}</mark></a>
+	 										<li><a {% if currentag == tag.id %}class='coucou'{% endif %} href="/questions?tag={{tag.id}}"><mark class="unfollow">{{tag.name}}</mark></a></li>
 	 								{% endif %}
 	 							{% endif %}
 	 						{% endfor %}
-	 						<a {% if currentag == 0 %}class='bold'{% endif %} href="/questions"><mark class="follow">tous</mark></a>
+	 						<li><a {% if currentag == 0 %}class='bold'{% endif %} href="/questions"><mark class="follow">tous</mark></a></li>
+	 						</ul>
 							{% if user.is_authenticated %}
 								{% if currentag != 0 %}
 								<div>
@@ -46,15 +49,21 @@
 						{% endif %}	
 							</div>
 	 					</div>
-	 					
+	 					<div class="separator_box_tri_ask"></div>
 	 					<div class="technique">
 	 						<div id='filtertag' >
+	 						<ul>
 	 						{% for tag in tags %}
 	 							{% if not tag.type %}
-	 								<a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}">{{tag.name}}</a> | 
+	 								{% if userfollowstag %}
+	 									<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="follow">{{tag.name}}</mark></a></li>
+	 									{% else %}
+	 										<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="unfollow">{{tag.name}}</mark></a></li>
+	 								{% endif %}
 	 							{% endif %}
 	 						{% endfor %}
-	 						<a {% if currentag == 0 %}class='bold'{% endif %} href="/questions">tous</a>
+	 						<li><a {% if currentag == 0 %}class='bold'{% endif %} href="/questions"><mark class="follow">tous</mark></a></li>
+	 						</ul>
 							{% if user.is_authenticated %}
 								{% if currentag != 0 %}
 								<div>
