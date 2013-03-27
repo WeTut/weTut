@@ -44,12 +44,17 @@ QUESTIONS STYLESHEET
 .infos_questions .tags ul li{float:left; margin-right:10px;}
 .infos_questions .tags ul li mark{background-color:#f6f6f1; color:#9c9c9c; padding:0px 10px 0px 10px; font-family: 'Rambla', sans-serif; font-size:12px;}
 
-
+.one_question .action_member{width:145px; height:80px;}
 .one_question .action_member .answer{width:131px; height:66px; padding:7px; background-color:#f53749; border-radius:3px; text-align:center; font-family:'bebas_neue';}
 .one_question .action_member .answer a{font-family:'bebas_neue'; text-align:center;}
 .one_question .action_member .answer p{font-size:20px; color:#FFFFFF; text-align:center; }
 
 .one_question .action_member .answer img{align:center; margin-bottom:5px;}
+
+.one_question .action_member .answer2{width:105px; height:80px; padding:20px; background-color:#f53749; border-radius:3px; text-align:center; font-family:'bebas_neue';}
+.one_question .action_member .answer2 a{font-family:'bebas_neue'; text-align:center;}
+.one_question .action_member .answer2 p{font-size:20px; color:#FFFFFF; text-align:center; }
+.one_question .action_member .answer2 img{align:center; margin-bottom:5px;}
 
 .one_question .action_member .question_follow{height:38px;}
 .btn-ok{background-color:#b8b7b6; color: #ffffff; border:none; border-radius:2px;  display: block;
