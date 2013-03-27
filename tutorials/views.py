@@ -302,6 +302,8 @@ def question(request,slug):
 			elif 'submit' in request.POST:#Si un like a ete envoye
 				answer = get_object_or_404(Answer, id=request.POST['answerId'])
 				currentlike = LikeAnswer.objects.filter(answer=answer, user=request.user)
+				profile = get_object_or_404(Profile, user=answer.user)
+
 				if currentlike.exists():
 					currentlike = LikeAnswer.objects.get(answer=answer, user=request.user)
 				else:
@@ -311,12 +313,18 @@ def question(request,slug):
 
 				if request.POST['submit'] == 'likesubmit':
 					currentlike.type = 1
+					profile.nb_likes += 1
 				else:
 					currentlike.type = 0
+					profile.nb_likes = max(0, profile.nb_likes-1)
 
 				currentlike.save()
 				answer.nb_likes = answer.getLikesCount()
 				answer.save()
+
+				print ("NB_LIKES ", profile.nb_likes)
+
+				profile.save()
 
 				return HttpResponse(answer.nb_likes)
 
