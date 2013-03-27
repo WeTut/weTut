@@ -40,8 +40,11 @@
 										{% csrf_token %}
 										<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
 										<div class='follow'>
-											<input name="hidden" type="hidden" value="{% if userfollowstag %}unfollow{% else %}follow{% endif %}" />
-											<button class='btn btn-{% if userfollowstag %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followTagSubmit">{% if userfollowstag %}Ne plus suivre{% else %}Suivre ce tag{% endif %}</button>
+											{% if userfollowstag %}
+	 									<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="unfollow">{{tag.name}}</mark></a></li>
+	 									{% else %}
+	 										<li><a {% if currentag == tag.id %}class='coucou'{% endif %} href="/questions?tag={{tag.id}}"><mark class="follow">{{tag.name}}</mark></a></li>
+	 								{% endif %}
 										</div>
 									</form>
 								</div>

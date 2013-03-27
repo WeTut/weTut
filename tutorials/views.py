@@ -123,7 +123,10 @@ def questions(request):
 
 def tutorials(request):
 
-
+	currentag = 0	
+	tags = Tag.objects.all()
+	userfollowstag = False
+	
 	tutorials_list_date = Question.objects.filter(validate=True).order_by('-date')
 	tutorials_list_views = Question.objects.filter(validate=True).order_by('-views')
 	tutorials_list_likes = Question.objects.filter(validate=True).order_by('-liketuto')
@@ -153,6 +156,21 @@ def tutorials(request):
 
 	paginatorLikes = Paginator(tutorials_list_likes, 10)
 	tutorialsLikes = paginatorLikes.page(1)
+	
+	if 'tag' in request.GET:
+		currentag = int(request.GET['tag'])
+
+		if request.user.is_authenticated() :
+			followTag = FollowTag.objects.filter(tag=currentag, user=request.user)
+			if followTag.exists():
+				userfollowstag = True
+
+		temp = []
+		for question in questionsDate:
+			if question.tag1 == currentag or question.tag2 == currentag or question.tag3 == currentag:
+				temp.append(question)
+		questionsDate = temp
+		
 
 	if 'pageDate' in request.GET:
 		page = request.GET.get('pageDate')
@@ -200,7 +218,7 @@ def tutorials(request):
 			if like.exists():
 				tutorial.currentUserLikes = True
 
-	return render_to_response('tutorials/tutorials.html', {'tutorialsDate': tutorialsDate, 'tutorialsViews': tutorialsViews, 'tutorialsLikes': tutorialsLikes }, context_instance=RequestContext(request))
+	return render_to_response('tutorials/tutorials.html', {'tutorialsDate': tutorialsDate, 'tutorialsViews': tutorialsViews, 'tutorialsLikes': tutorialsLikes, 'tags':tags, 'currentag':currentag, 'userfollowstag':userfollowstag }, context_instance=RequestContext(request))
 	
 
 def question(request,slug):
