@@ -29,3 +29,13 @@ input.btn_connexion{width:70px; height:45px; background:#01c6e8 url("../../stati
 input.submit_inscription{width:70px; height:45px; background:#01c6e8 url("../../static/images/pictos/arrow_connexion.png") no-repeat center center; border:none; border-radius:3px; float:right; margin-top:20px;}
 
 .modal-body .input_inscription  input{color:#9c9c9c; font-size:14px; font-family: 'Rambla', sans-serif;}
+
+
+/* ------------------ACTIVATION------------------ */
+
+.text_enroll .title_registration{font-family:'bebas_neue'; font-size:44px; color:#1e2226; margin-top:80px;}
+.text_enroll p{font-family:'bebas_neue'; font-size:26px; color:#9c9c9c; margin-top:30px;}
+
+.activate_account .title_registration p{font-family:'bebas_neue'; font-size:44px; color:#1e2226; margin-top:80px;}
+.activate_account p{font-family:'bebas_neue'; font-size:26px; color:#9c9c9c; margin-top:30px;}
+

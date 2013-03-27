@@ -1,8 +1,39 @@
 {% extends "layout/base.html" %}
 
-{% block title %}Bienvenue ! Votre Compte weTut est actif.{% endblock %}
-
 {% block content %}
-<h1>Bienvenue sur WeTut!</h1>
-<p>Votre Compte est desormais actif.</p>
-{% endblock %}
+
+
+<div id="banner">
+	<div id="content_banner">
+		<div id="enroll">
+			<div class="text_enroll">
+				<div class="title_registration">Bienvenue sur WeTut !</div>
+				<p>Ton compte est maintenant actif</p>
+			</div>
+			<hr>
+			
+		</div>
+		<div id="video_banner"></div>
+	</div>
+</div>
+
+
+<div class="content">
+	<div id="consultation">
+		<div class="row-fluid marketing">
+			<div class="span6">
+				<a href="/tutoriels"><div class="back_box"><p>Consulter les tutos</p></div></a>
+			</div>
+			<div class="span6">
+				<div class="box_tuts">
+					<a href="/questions">
+						<div class="back_box" id="pink_box"><p>Consulter les questions</p></div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+				
+
+{% endblock content %}

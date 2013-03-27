@@ -24,7 +24,13 @@
 				<div class="body_question">
 					<div class="left_question_body">
 						<div class="member">
-							<div class="image"><img src="{{STATIC_URL}}images/membre_de_luxe.png" /></div>
+							<div class="image">
+								{% if question.user.profile.avatar.url != "" %}
+     								<img src='{{question.user.profile.avatar.url}}'/>
+								{% else %}
+									<img src="{{MEDIA_URL}}members/avatar.jpg"/>
+								{% endif %}
+							</div>
 							<div class="infos">
 								<div class="name"><p>Posté par <a href="/members/{{question.user}}">{{question.user}}</a></p></div>
 								<div class="date"><p>le {{question.date}}</p></div>
@@ -82,7 +88,7 @@
 							<a href='/questions/{{question.slug}}?ready=1' class='btn_validate_question' id='usefullValidate'>J'ai eu ma réponse</a>
 						</div>
 						{% else %}
-						<div class="question_ok">
+						<div class="question_ok" style="background-color:#9c9c9c;">
 							<a href='/questions/{{question.slug}}' class='btn_validate_question' id='usefullValidate'>Finalement non !</a>
 						</div>
 						<form method="post" class="validateform" action="">
@@ -151,7 +157,13 @@
 										{% endif %}
 									{% endif %}								
 								</div>
-								<div class='image'><img src="{{STATIC_URL}}images/membre_de_luxe.png" /></div>
+								<div class='image'>
+									{% if answer.user.profile.avatar.url != "" %}
+     									<img src='{{answer.user.profile.avatar.url}}'/>
+									{% else %}
+										<img src="{{MEDIA_URL}}members/avatar.jpg"/>
+									{% endif %}
+								</div>
 							</div>
 							<div class="body_answer">
 								<div class="date"><p>Par <a href="/members/{{answer.user}}"> {{ answer.user }}</a> le {{ answer.date }}</p></div>
@@ -186,7 +198,11 @@
 							<div class='span4'></div>
 							<div class='span8'  style="">
 								<div class='image'>
-									<img src="{{STATIC_URL}}images/membre_de_luxe.png" />
+									{% if comment.user.profile.avatar.url != "" %}
+     									<img src='{{comment.user.profile.avatar.url}}' style="width:80px;height:80px;"/>
+									{% else %}
+										<img src="{{MEDIA_URL}}members/avatar.jpg" style="width:80px;height:80px;"/>
+									{% endif %}
 								</div>
 								<div class='texte' >
 									<div class="name"><p>Posté par <a href="/members/{{comment.user}}">{{comment.user}}</a> le {{comment.date}}</p></div>
@@ -266,6 +282,12 @@
 		  $("#usefullValidate").hide();
 	});
 	
+	{% if user.is_authenticated %}
+	{% else %}
+		$('.theAnswer').click(function() {
+  			$('#logInscriptionModal').modal();
+		});
+	{% endif %}
 
 </script>
 

@@ -160,10 +160,10 @@ a.addMedia { display:block; width:300px; height:300px; background-color:#CCCCCC;
 .direct_answer{width:315px; height:60px; background-color:#f53749; text-align:center; border-radius:3px;}
 .direct_answer p{font-family:'bebas_neue'; font-size:25px; line-height:65px;}
 .direct_answer a{color:#FFFFFF;}
-.question_ok{width:230px; height:60px; background-color:#35ce2d; text-align:center; border-radius:3px; margin-left:390px;}
+.question_ok{width:230px; height:60px; background-color:#01c6e8; text-align:center; border-radius:3px; margin-left:390px;}
 a.btn_validate_question{color:#FFFFFF; font-family:'bebas_neue'; font-size:25px; line-height:65px;}
 .question_check{ margin-left:260px; margin-top:-60px;}
-button.btn_validate_question_check{width:115px; height:60px;  text-align:center; background-color:#2d62ce; border:none; border-radius:3px; color:#FFFFFF; font-family:'bebas_neue'; font-size:25px; line-height:65px;}
+button.btn_validate_question_check{width:115px; height:60px;  text-align:center; background-color:#01c6e8; border:none; border-radius:3px; color:#FFFFFF; font-family:'bebas_neue'; font-size:25px; line-height:65px;}
 
 
 
