@@ -367,9 +367,16 @@
 					<a href="members/{{member.user.username}}">
 						<div class="member">
 							<div class="infos_members">
-								<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
-								<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
+								<p class="likes" style="color:#01c6e8; position:relative; z-index:1">{{ member.nb_likes }}</p>
+								<p class="answers" style="color:#01c6e8;">{{ member.nb_questions }}</p>
 							</div>
+
+							<div class="stats_members">
+								
+							</div>
+
+							
+
 							<div class="img_members">
 								{% if member.user.profile.avatar.url != "" %}
 									<img src="{{member.user.profile.avatar.url}}" style="width:70px; height:75px;">
@@ -377,13 +384,17 @@
 									<img src="{{MEDIA_URL}}members/avatar.jpg" style="width:70px; height:75px;">
 								{% endif %}
 							</div>
+
 							<div class="description_members">
 								<div class="name_member"><p>{{member.user.username}}</div>
 								<div class="job_member"><p>{{member.job}}</div>
 							</div>
+
 						</div>
 					</a>
 					</div>
+
+					
 					{% endfor %}
 					<div class="end_line_member"></div>
 			</div>
