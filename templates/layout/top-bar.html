@@ -67,8 +67,8 @@ $(document).ready(function() {
         
         <li class="deco"><a href="/logout" role="button" data-toggle="modal"><img src="/static/images/pictos/logout.png"/></a></li>
 
-        {% else %}<li><a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal" class="first">Connexion</a></li>            
-        <li><a href="#inscriptionModal" role="button" data-toggle="modal" data-target="#inscriptionModal">Inscription</a></li>
+        {% else %}<li><a href="#logInscriptionModal" role="button" data-toggle="modal" data-target="#logInscriptionModal" class="first linkConnexion">Connexion</a></li>            
+        <li><a href="#logInscriptionModal" role="button" data-toggle="modal" data-target="#logInscriptionModal" class="linkInscription">Inscription</a></li>
         {% endif %}
      </ul>
 
@@ -93,61 +93,79 @@ $(document).ready(function() {
 		</div>
   </div>
 
-<!-- Modal -->
-<div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
 
-  <div class="modal-body">
+<div id="logInscriptionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="inscriptionModalLabel" aria-hidden="true">
+<div class="modal-body">
   
-  	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <p id="loginModalLabel">Je me connecte</p>
-    
-    {% if form.errors %}
-    <p>Merci de remplir tous les champs</p>
-    {% endif %}
-
-    <form method="post" action="/login">
-    {% csrf_token %}
-    	<div class="input_connexion">
-    		<div class="input_img"><img src="{{STATIC_URL}}images/pictos/user_connexion.png"/></div>
-    		<input type="text" name="username_connexion" placeholder="Pseudo / Email*"/>
-    	</div>
-    	<div class="input_connexion">
-    		<div class="input_img"><img src="{{STATIC_URL}}images/pictos/padlock_connexion.png"/></div>
-    		<input type="password" name="password" placeholder="Mot de passe*" />
-    	</div>
-    	<input type="submit" value="" class="btn_connexion"></input>
-	</form>
-	<div class="clear"></div>
-	<div class="line_end_connexion"></div>
-	<a href="/facebook/login"><div class="facebook_connexion"></div></a>
-  </div>
-</div>
-
-<!-- Modal Inscription -->
-<div id="inscriptionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="inscriptionModalLabel" aria-hidden="true">
-  <div class="modal-body">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <p id="inscriptionModalLabel">Je m'inscris</p>
-    <div id="signupC">
+    <p><a href="" class="linkConnexion"><span id="loginModalLabel">Je me connecte</span></a> / <a href="" class="linkInscription"><span id="inscriptionModalLabel">Je m'inscris</span></a></p>
+    
+    <!-- LOGIN -->
+    <div class="loginModal">
+      {% if form.errors %}
+      <p>Merci de remplir tous les champs</p>
+      {% endif %}
+
+      <form method="post" action="/login">
+      {% csrf_token %}
+        <div class="input_connexion">
+          <div class="input_img"><img src="{{STATIC_URL}}images/pictos/user_connexion.png"/></div>
+          <input type="text" name="username_connexion" placeholder="Pseudo / Email*"/>
+        </div>
+        <div class="input_connexion">
+          <div class="input_img"><img src="{{STATIC_URL}}images/pictos/padlock_connexion.png"/></div>
+          <input type="password" name="password" placeholder="Mot de passe*" />
+        </div>
+        <input type="submit" value="" class="btn_connexion"></input>
+    </form>
+    <div class="clear"></div>
     </div>
+
+
+    <!-- INSCRIPTION -->
+    <div class="inscriptionModal">
+      <div id="signupC">
+      </div>
+      <div class="clear"></div>
+    </div>
+
+    <div class="line_end_connexion"></div>
+    <a href="/facebook/login"><div class="facebook_connexion"></div></a>
+
   </div>
-  
-    <!--<form method="post" action="/accounts/register/">
-    {% csrf_token %}
-    Username : <input type="text" name="username" /> <br />
-    Email : <input type="text" name="email" /> <br />
-    Password : <input type="password" name="password" /> <br />
-    Confirm password : <input type="password" name="confirm_password" />
-  </div>
-  <div class="modal-footer">
-    <input type="submit" value="M'inscrire" class="btn btn-primary" />
-    </form>-->
-  
+
 </div>
 
 
 <script>
-  $('#loginModal').modal('hide');
-  $('#inscriptionModal').modal('hide');
-  $('#signupC').load('/accounts/register');
+  $(document).ready(function() {
+
+    $('.inscriptionModal #signupC').load('/accounts/register');
+
+    $('#logInscriptionModal').modal('hide');
+    $('#loginModal').modal('hide');
+    $('#inscriptionModal').modal('hide');
+
+    $('.linkConnexion').click(function() {
+      $('#logInscriptionModal .loginModal').show();
+      $('#logInscriptionModal .inscriptionModal').hide();
+      $('#logInscriptionModal').css('height','310px');
+    });
+
+    $('.linkInscription').click(function() {
+      $('#logInscriptionModal .inscriptionModal').show();
+      $('#logInscriptionModal .loginModal').hide();
+      $('#logInscriptionModal').css('height','435px');
+    });
+
+    $('.modal-body .linkConnexion').click(function() {
+      return false;
+    });
+
+    $('.modal-body .linkInscription').click(function() {
+      return false;
+    });
+
+  });
+  
 </script>
