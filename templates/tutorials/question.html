@@ -19,18 +19,6 @@
 			
 			<div id="question">
 
-			{% if question.user == user %}					
-				<!-- If the authentificated user is the author -->
-				{% if not ready %}
-				<a href='/questions/{{question.slug}}?ready=1' class='btn btn-success btn-block vcenter' id='usefullValidate'>J'ai eu ma réponse</a>
-				{% else %}
-				<a href='/questions/{{question.slug}}' class='btn btn-success btn-block vcenter' id='usefullValidate'>Finalement non !</a>
-				<form method="post" class="validateform" action="">
-				{% csrf_token %}
-				<button class='btn btn-primary btn-block vcenter pendingValidation' name='validateSubmit' type='submit' value='validateSubmit' id='validateSubmit'>Check !</button>
-				{% endif %}
-
-			{% endif %}
 
 
 				<div class="body_question">
@@ -59,19 +47,47 @@
 						</div>
 						<div class="abus"><p>Signaler un abus</p></div>
 					</div>
-
+				</div>
+			<div class='clear'></div>
+			
+			<div class='row-fluid'>
+				<div class="left_question_body">
+					<div class="direct_answer"><a href="/questions/ask"><p>Répondre</p></a></div>
+				</div>
+				<div class="right_question_body">
+					<div class='row-fluid'>
+					{% if question.user == user %}					
+				<!-- If the authentificated user is the author -->
+					{% if not ready %}
+						<div class="question_ok">
+							<a href='/questions/{{question.slug}}?ready=1' class='btn_validate_question' id='usefullValidate'>J'ai eu ma réponse</a>
+						</div>
+						{% else %}
+						<div class="question_ok">
+							<a href='/questions/{{question.slug}}' class='btn_validate_question' id='usefullValidate'>Finalement non !</a>
+						</div>
+						<form method="post" class="validateform" action="">
+						{% csrf_token %}
+						<div class="question_check">
+							<button class='btn_validate_question_check' name='validateSubmit' type='submit' value='validateSubmit' id='validateSubmit'>OK !</button>
+						</div>
+						{% endif %}
+					{% endif %}
+					</div>
+				</div>
+			</div>
+			
+								
 					<div class="fb-like" data-href="http://127.0.0.1:8000/questions/{{question.slug}}" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-action="recommend"></div>
 					
 					<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://127.0.0.1:8000/questions/{{question.slug}}" data-text="Découvre cette page trop cool !" data-lang="fr">Tweeter</a>
+	
 
-
-				</div>
-			</div>	
+			</div>			
 		</div>	
 	</div>
 		
 <!-- END BANNER -->		
-
 		<div class="content">
 
 <!-- START ANSWERS -->
