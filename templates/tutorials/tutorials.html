@@ -4,103 +4,81 @@
 
 
 
-<div class="banner_questions" style="height:300px;">
+ <!-- START BANNER--> 
+
+ 		<div class="banner_questions" style="height:300px;">
  			<div class="content_banner_questions" style="height:300px; width:940px;">
  				<div class="questions_filters">
  					<div class="title_tri">Trier par</div>
-			 			<div class="box_tri">
-				 			<div class="famous choiceTutos">
 
-				 				<script type="text/javascript">
+
+ 					<div class="box_tri">
+	 					<div class="famous choiceQuestions">
+
+	 						<script type="text/javascript">
 				 				$(document).ready(function() {
-				 					$('.choiceTutos a').click(function() {
-				 						$('.choiceTutos a').removeClass('selected_famous_tri_blue');
-				 						$('.choiceTutos a').css('color','#9C9C9C');
+				 					$('.choiceQuestions a.not_selected').click(function() {
+				 						$('.filtertag mark').attr('class', 'inactivetut');					
+				 						$('.choiceQuestions a').attr('class', 'not_selected');
+				 						$('.choiceQuestions a').css('color','#9C9C9C');
 				 						$(this).addClass('selected_famous_tri_blue');
 				 						$(this).css('color','white');
 				 						return false;
 				 					})
 				 				})
-				 				</script>
+				 			</script>
 
-								<ul>
-									<li><a href=".tutosDate" class="selected_famous_tri_blue" style="color:white">Date</a></li>
-				 					<li style="margin-top:10px;"><a href=".tutosViews">Vues</a></li>
-				 					<li style="margin-top:10px;"><a href=".tutosLikes">Likes</a></li>
-				 				</ul>
-				 			</div>
-				 			<div class="separator_box_tri_ask"></div>
-	 					<div class="logiciel">
-	 						<div id='filtertag' >
 	 						<ul>
-	 						{% for tag in tags %}
-	 							{% if tag.type %}
-	 								{% if userfollowstag %}
-	 									<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="?tag={{tag.id}}"><mark id="blue" class="followtut">{{tag.name}}</mark></a></li>
-	 									{% else %}
-	 										<li><a {% if currentag == tag.id %}class='coucou'{% endif %} href="?tag={{tag.id}}"><mark class="unfollowtut" id="tag_blue">{{tag.name}}</mark></a></li>
-	 								{% endif %}
-	 							{% endif %}
-	 						{% endfor %}
-	 						<li><a {% if currentag == 0 %}class='bold'{% endif %} href="/tutoriels"><mark class="followtut">tous</mark></a></li>
+	 							<li><a href=".questionsDate" class="date_tri selected_famous_tri_blue" style="color:white;">Date</a></li>
+	 							<li style="margin-top:10px;"><a href=".questionsViews" class="not_selected">Popularité</a></li>
+	 							<li style="margin-top:10px;"><a href=".questionsAnswers" class="not_selected">Réponses</a></li>
 	 						</ul>
-							{% if user.is_authenticated %}
-								{% if currentag != 0 %}
-								<div>
-									<form  class="followTagForm" action="" method="post" enctype="multipart/form-data">
-										{% csrf_token %}
-										<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
-										<div class='follow'>
-											{% if userfollowstag %}
-	 									<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="?tag={{tag.id}}"><mark class="unfollowtut">{{tag.name}}</mark></a></li>
-	 									{% else %}
-	 										<li><a {% if currentag == tag.id %}class='coucou'{% endif %} href="?tag={{tag.id}}"><mark class="followtut">{{tag.name}}</mark></a></li>
-	 								{% endif %}
-										</div>
-									</form>
-								</div>
-					        	{% endif %}
-						{% endif %}	
-							</div>
 	 					</div>
 	 					<div class="separator_box_tri_ask"></div>
-	 					<div class="technique">
-	 						<div id='filtertag' >
-	 						<ul>
-	 						{% for tag in tags %}
-	 							{% if not tag.type %}
-	 								{% if userfollowstag %}
-	 									<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="?tag={{tag.id}}"><mark class="followtut">{{tag.name}}</mark></a></li>
-	 									{% else %}
-	 										<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="?tag={{tag.id}}"><mark class="unfollowtut">{{tag.name}}</mark></a></li>
-	 								{% endif %}
-	 							{% endif %}
-	 						{% endfor %}
-	 						<li><a {% if currentag == 0 %}class='bold'{% endif %} href="/questions"><mark class="followtut">tous</mark></a></li>
-	 						</ul>
-							{% if user.is_authenticated %}
-								{% if currentag != 0 %}
-								<div>
-									<form  class="followTagForm" action="" method="post" enctype="multipart/form-data">
-										{% csrf_token %}
-										<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
-										<div class='follow'>
-											<input name="hidden" type="hidden" value="{% if userfollowstag %}unfollow{% else %}follow{% endif %}" />
-											<button class='btn btn-{% if userfollowstag %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followTagSubmit">{% if userfollowstag %}Ne plus suivre{% else %}Suivre ce tag{% endif %}</button>
-										</div>
-									</form>
-								</div>
-					        	{% endif %}
-						{% endif %}	
+	 					<div class="logiciel">
+	 						<div class='filtertag' >
+		 						<ul>
+		 						{% for tag in tags %}
+		 							{% if tag.type %}
+		 								<li><a href="?tag={{tag.id}}"><mark class='{% if currentag == tag.id %}activetut{% else %}inactivetut{% endif %}'>{{tag.name}}</mark></a></li>
+		 							{% endif %}
+		 						{% endfor %}
+		 						</ul>
+ 							</div>
+ 						</div>
+ 						<div class="separator_box_tri_ask"></div>
+ 						<div class="technique">
+	 						<div class='filtertag' >
+		 						<ul>
+		 						{% for tag in tags %}
+		 							{% if not tag.type %}
+		 								<li><a href="?tag={{tag.id}}"><mark class='{% if currentag == tag.id %}activetut{% else %}inactivetut{% endif %}'>{{tag.name}}</mark></a></li>	 									
+		 							{% endif %}
+		 						{% endfor %}
+		 						</ul>								
 							</div>
 	 					</div>
-	 				</div>
- 						</div>	
-					<div class="clear"></div>
 
-				</div>
+						{% if user.is_authenticated %}
+							{% if currentag != 0 %}
+							<div>
+								<form  class="followTagForm" action="" method="post" enctype="multipart/form-data">
+									{% csrf_token %}
+									<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
+									<div class='follow'>
+										<input name="hidden" type="hidden" value="{% if userfollowstag %}unfollow{% else %}follow{% endif %}" />
+										<button class='btn btn-{% if userfollowstag %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followTagSubmit">{% if userfollowstag %}Ne plus suivre{% else %}Suivre ce tag{% endif %}</button>
+									</div>
+								</form>
+							</div>
+				        	{% endif %}	
+					    {% endif %}
+					<div class="clear"></div>
+				</div>					
 			</div>
-</div>
+		</div>					
+	</div>
+ <!-- END BANNER--> 
 
 
  						
