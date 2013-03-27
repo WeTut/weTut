@@ -97,7 +97,7 @@ $(document).ready(function(){
 
 
 	$('#id_filter').change(function(){
-
+		alert('filter')
 		var filter = $(this).val();
 		var csrf = $('#filterform').find('input[name=csrfmiddlewaretoken]').val();
 				
@@ -173,17 +173,6 @@ $(document).ready(function(){
         }       
 		
  	});
-
-
-
-
- 	$('#filtertag a').click(function(){
-		$('#filtertag a').removeClass('bold')
-		$(this).addClass('bold')
- 	});
-
-
-
 
 
 });
