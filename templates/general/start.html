@@ -1,0 +1,309 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+<div id="banner">
+	<div id="content_banner">
+		<div id="enroll">
+			<div class="text_enroll">
+				<p>WETUT, VOTRE PLATEFORME <br />PARTICIPATIVE DE CONNAISSANCES<br /><br /></p>
+				<h2>Comment ça marche ?<br /></h2>
+				<p style="font-size:12px; font-family: 'Rambla', sans-serif; color:#a4a4a4;">Motion design, VFX, WEB, webdesign</p>
+			</div>
+			<hr>
+			<a href="#inscriptionModal" role="button" data-toggle="modal" data-target="#inscriptionModal"><div class="enroll_button"><p>S'inscrire maintenant</p></div></a>
+			<a href="/facebook/login"><div class="facebook_button"><img src="{{STATIC_URL}}images/button_facebook.png" alt="Inscription via facebook" /></div></a>
+		</div>
+		<div id="video_banner"></div>
+	</div>
+</div>
+
+<div class="content">
+	<div id="consultation">
+		<div class="row-fluid marketing">
+			<div class="span6">
+				<div class="back_box"><p>Consulter les tutos</p></div>
+
+				<script type="text/javascript">
+				$(document).ready(function() {
+					$('div.tutosLike').hide();
+
+					$('a.tutosByLike').click(function() {
+						$('div.tutosDate').hide();
+						$('div.tutosLike').show();
+						$('a.tutosByLike div.famous_selection').css({'backgroundColor':'#01C6E8'});
+						$('a.tutosByDate div.date_selection').css({'backgroundColor':'#BCBCBC'});
+						return false;
+					});
+
+					$('a.tutosByDate').click(function() {
+						$('div.tutosLike').hide();
+						$('div.tutosDate').show();
+						$('a.tutosByDate div.date_selection').css({'backgroundColor':'#01C6E8'});
+						$('a.tutosByLike div.famous_selection').css({'backgroundColor':'#BCBCBC'});
+						return false;
+					});
+				})
+				</script>
+
+
+				<div class="tri">
+					<a href="" class="tutosByDate"><div class="date_selection" style="background-color:#01c6e8;">
+						<img src="{{STATIC_URL}}images/pictos/plus_picto.png">
+						<p>Derniers créés</p>
+					</div></a>
+					<a href="" class="tutosByLike"><div class="famous_selection">
+						<img src="{{STATIC_URL}}images/pictos/coeur_picto.png">
+						<p>Plus populaires</p>
+					</div></a>
+				</div>
+				<div class="line_tri"></div>
+
+				<div class="tutosDate">
+				{% for tutorialDate in tutorialsDate %}
+					<div class="white_box">
+						<div class="question_body">
+							<div class="illustration_tutos">
+								<div class="img_question"><a href='tutoriels/{{tutorialDate.slug}}'><img src="{{tutorialDate.picture.thumbnail.url}}"></a></div>
+								<div class="infos_members" style="background-color:#01c6e8;">
+									<div class="img_members"><a href='members/{{tutorialDate.user}}'><img src="{{MEDIA_URL}}{{tutorialDate.user.profile.avatar}}" style="width:70px; height:75px;"></a></div>
+									<div class="infos_questions">
+									<a href='tutoriels/{{tutorialDate.slug}}'>
+										
+										<div class="img_wetut_accueil">
+											<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
+											<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
+										</div>
+										
+										<div class="Text_wetut_accueil">
+											<p>{{ tutorialDate.getLikesCount }}</p>
+											<p>{{ tutorialDate.views }}</p>
+										</div>
+									</a>
+									</div>
+								</div>
+							</div>
+							<div class="description_tutos">
+							<a href='tutoriels/{{tutorialDate.slug}}'>
+								<div class="title"><h4>{{tutorialDate.title}}</h4></div>
+								<div class="text"><p>{{ tutorialDate.message|truncatechars:80 }}</p></div>
+							</a>
+							</div>	
+						</div>
+						</div>
+						<div class="line_end"></div>
+					{% endfor %}
+					</div>
+
+					<div class="tutosLike">
+					{% for tutorialLike in tutorialsLike %}
+						<div class="white_box">
+							<div class="question_body">
+								<div class="illustration_tutos">
+									<div class="img_question"><a href='tutoriels/{{tutorialLike.slug}}'><img src="{{tutorialLike.picture.thumbnail.url}}"></a></div>
+									<div class="infos_members" style="background-color:#01c6e8;">
+										<div class="img_members"><a href='members/{{tutorialLike.user}}'><img src="{{MEDIA_URL}}{{tutorialLike.user.profile.avatar}}" style="width:70px; height:75px;"></a></div>
+										<div class="infos_questions">
+										<a href='tutoriels/{{tutorialLike.slug}}'>
+											
+											<div class="img_wetut_accueil">
+												<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
+												<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
+											</div>
+											
+											<div class="Text_wetut_accueil">
+												<p>{{ tutorialLike.getLikesCount }}</p>
+												<p>{{ tutorialLike.views }}</p>
+											</div>
+										</a>
+										</div>
+									</div>
+								</div>
+								<div class="description_tutos">
+								<a href='tutoriels/{{tutorialLike.slug}}'>
+									<div class="title"><h4>{{tutorialLike.title}}</h4></div>
+									<div class="text"><p>{{ tutorialLike.message|truncatechars:80 }}</p></div>
+								</a>
+								</div>	
+							</div>
+							</div>
+							<div class="line_end"></div>
+						{% endfor %}
+						</div>
+					
+				</div>
+
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$('div.questionsViews').hide();
+
+					$('a.questionsByViews').click(function() {
+						$('div.questionsDate').hide();
+						$('div.questionsViews').show();
+						$('div.box_tuts div.famous_selection').css({'backgroundColor':'#F53749'});
+						$('div.box_tuts div.date_selection').css({'backgroundColor':'#BCBCBC'});
+						return false;
+					});
+
+					$('a.questionsByDate').click(function() {
+						$('div.questionsViews').hide();
+						$('div.questionsDate').show();
+						$('div.box_tuts div.date_selection').css({'backgroundColor':'#F53749'});
+						$('div.box_tuts div.famous_selection').css({'backgroundColor':'#BCBCBC'});
+						return false;
+					});
+				})
+				</script>
+
+			<div class="span6">
+				<div class="box_tuts">
+					<div class="back_box" id="pink_box"><p>Consulter les questions</p></div>
+					<div class="tri">
+						<a href="" class="questionsByDate"><div class="date_selection" style="background-color:#f53749;">
+							<img src="{{STATIC_URL}}images/pictos/plus_picto.png">
+							<p>Derniers créés</p>
+						</div></a>
+						<a href="" class="questionsByViews"><div class="famous_selection">
+							<img src="{{STATIC_URL}}images/pictos/coeur_picto.png">
+							<p>Plus populaires</p>
+						</div></a>
+					</div>
+					<div class="line_tri" style="background-color:#f53749;"></div>
+
+					<div class="questionsDate">
+					{% for questionDate in questionsDate %}
+					<div class="white_box">
+						<div class="question_body">
+							<div class="illustration_tutos">
+								<div class="img_question"><a href="questions/{{questionDate.slug}}"><img src="{{questionDate.picture.thumbnail.url}}"></a></div>
+								<div class="infos_members" style="background-color:#f53749;">
+									<div class="img_members"><a href='members/{{questionDate.user}}'><img src="{{MEDIA_URL}}{{questionDate.user.profile.avatar}}" style="width:70px; height:75px;"></a></div>
+									<div class="infos_questions">
+										<a href='questions/{{questionDate.slug}}'>
+										
+										<div class="img_wetut_accueil">
+											<img src="{{STATIC_URL}}images/pictos/view_wetut_accueil.png" style="position:relative; top:3px; z-index:0;"/>
+											<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png" />
+										</div>
+										
+										<div class="Text_wetut_accueil">
+											<p style="color:#f53749; position:relative; z-index:1">{{ questionDate.views }}</p>
+											<p style="color:#f53749;">{{ questionDate.getAnswersCount }}</p>
+										</div>
+									</a>
+									</div>
+								</div>
+							</div>
+							<div class="description_tutos">
+								
+								<div class="title"><a href='questions/{{questionDate.slug}}'><h4>{{questionDate.title}}</h4></a></div>
+								<div class="text"><a href='questions/{{questionDate.slug}}'><p>{{ questionDate.message|truncatechars:80 }}</p></a></div>
+								
+							</div>	
+						</div>
+						</div>
+						<div class="line_end"></div>
+					{% endfor %}
+					</div>
+
+					<div class="questionsViews">
+					{% for questionViews in questionsViews %}
+					<div class="white_box">
+						<div class="question_body">
+							<div class="illustration_tutos">
+								<div class="img_question"><a href="questions/{{questionViews.slug}}"><img src="{{questionViews.picture.thumbnail.url}}"></a></div>
+								<div class="infos_members" style="background-color:#f53749;">
+									<div class="img_members"><a href='members/{{questionViews.user}}'><img src="{{MEDIA_URL}}{{questionViews.user.profile.avatar}}" style="width:70px; height:75px;"></a></div>
+									<div class="infos_questions">
+										<a href='questions/{{questionView.slug}}'>
+										
+										<div class="img_wetut_accueil">
+											<img src="{{STATIC_URL}}images/pictos/view_wetut_accueil.png" style="position:relative; top:3px; z-index:0;"/>
+											<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png" />
+										</div>
+										
+										<div class="Text_wetut_accueil">
+											<p style="color:#f53749; position:relative; z-index:1">{{ questionViews.views }}</p>
+											<p style="color:#f53749;">{{ questionViews.getAnswersCount }}</p>
+										</div>
+									</a>
+									</div>
+								</div>
+							</div>
+							<div class="description_tutos">
+								
+								<div class="title"><a href='questions/{{questionViews.slug}}'><h4>{{questionViews.title}}</h4></a></div>
+								<div class="text"><a href='questions/{{questionViews.slug}}'><p>{{ questionViews.message|truncatechars:80 }}</p></a></div>
+								
+							</div>	
+						</div>
+						</div>
+						<div class="line_end"></div>
+					{% endfor %}
+					</div>
+
+
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="clear"></div>
+	<div class="best_members">
+		<div class="members"><p>Les membres</p></div>
+		<div class="box_members">
+			<div class="row-fluid marketing">
+				<div class="span3">
+					<div class="member">
+						<div class="infos_members">
+							<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
+							<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
+						</div>
+						<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
+						<div class="description_members">
+							<div class="name_member"><p>Lucette Lama</div>
+							<div class="job_member"><p>Motion Designer</div>
+						</div>
+					</div>
+					<div class="end_line_member"></div>
+				</div>
+				<div class="span3">
+					<div class="infos_members">
+						<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
+						<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
+					</div>
+					<div class="img_members"><img src="../../static/images/membre.png" style="width:70px; height:75px;"></div>
+					<div class="description_members">
+						<div class="name_member"><p>Lucette Lama</div>
+						<div class="job_member"><p>Motion Designer</div>
+					</div>
+				</div>
+				<div class="span3" style="margin-left:20px;">
+					<div class="infos_members">
+						<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
+						<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
+					</div>
+					<div class="img_members"><img src="{{STATIC_URL}}images/membre.png" style="width:70px; height:75px;"></div>
+					<div class="description_members">
+						<div class="name_member"><p>Lucette Lama</div>
+						<div class="job_member"><p>Motion Designer</div>
+					</div>
+				</div>
+				<div class="span3">
+					<div class="infos_members">
+						<img src="{{STATIC_URL}}images/pictos/like_wetut_accueil.png">
+						<img src="{{STATIC_URL}}images/pictos/bulle_wetut_accueil.png">
+					</div>
+					<div class="img_members"><img src="{{STATIC_URL}}images/membre.png" style="width:70px; height:75px;"></div>
+					<div class="description_members">
+						<div class="name_member"><p>Lucette Lama</div>
+						<div class="job_member"><p>Motion Designer</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+{% endblock content %}

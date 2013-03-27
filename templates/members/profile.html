@@ -131,10 +131,12 @@
 				<div class="follow" style="width:450px; min-height:150px;">
 					<div class="title_follow"><p>Tags suivis</p></div>
 					<div class="follow_tag">
-						{% for tag in followedtags %}	
-							<div class="tags"><p>{{tag.name}}</p></div>	
+					<ul>
+					{% for tag in tags %}
+						<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="followprofile">{{tag.name}}</mark></a><a href="?deltag={{tag.id}}"><mark class="deletetag">x</mark></a></li>
 					{% endfor %}
-		
+					</ul>
+						
 					</div>
 				</div>
 			</div>
