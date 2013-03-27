@@ -189,7 +189,7 @@
 		<div class="listTutos tutosViews" style="display:none;">
 			{% for tutorial in tutorialsViews %}	
 			
-				<div class='span3' >
+				<div class='cat3' >
 					<div id="tutorial{{tutorial.id}}" class="one_tuto">
 						<div class="title"><a href='{{tutorial.slug}}'>{{ tutorial.title }}</a></div>
 						<div class="img">
@@ -209,7 +209,7 @@
 				</div>
 		{% endfor %}
 		
-
+		<div class="clear"></div>
 		<div class="pagination">
 		    <span class="step-links">
 		        {% if tutorialsViews.has_previous %}
@@ -232,7 +232,7 @@
 		<div class="listTutos tutosLikes" style="display:none;">
 			{% for tutorial in tutorialsLikes %}	
 			
-				<div class='span3' >
+				<div class='cat3' >
 					<div id="tutorial{{tutorial.id}}" class="one_tuto">
 						<div class="title"><a href='{{tutorial.slug}}'>{{ tutorial.title }}</a></div>
 						<div class="img">
@@ -252,7 +252,7 @@
 				</div>
 		{% endfor %}
 		
-
+		<div class="clear"></div>
 		<div class="pagination">
 		    <span class="step-links">
 		        {% if tutorialsLikes.has_previous %}
@@ -268,11 +268,13 @@
 		        {% endif %}
 		    </span>
 		</div>
-		
 		</div>
 
 
 	</div>
+
+		
+		
 </div>
 
 		
