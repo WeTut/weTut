@@ -31,11 +31,18 @@ QUESTIONS STYLESHEET
 .one_question .member .infos_member .view p{position:relative; z-index:9; margin-top:-22px; color:#f53749; font-family:'bebas_neue';}
 
 
-.one_question .infos_questions .title a{font-family:'bebas_neue'; font-size:20px; color:#46423f;}
-.one_question .infos_questions .date{font-size:14px; color:#b8b7b6;}
-.one_question .infos_questions .text{font-size:14px; color:#46423f; clear:both;}
+.one_question .infos_questions .title a{font-family:'bebas_neue'; font-size:20px; color:#46423f; position:relative;}
+.one_question .infos_questions .date{font-size:14px; color:#b8b7b6;width:455px; height:20px; position:relative;}
+.one_question .infos_questions .tags{width:455px; height:20px; position:relative;}
+.one_question .infos_questions .tags ul{width:455px; height:20px; position:relative;}
+
+.one_question .infos_questions .text{font-size:14px; color:#46423f;}
+.one_question .infos_questions .text p{margin-left:0px;}
 
 .one_question .infos_questions .date p{float:left; margin-right:5px;}
+.infos_questions .tags ul{clear:both; margin-left:0px; top:-10px;}
+.infos_questions .tags ul li{float:left; margin-right:10px;}
+.infos_questions .tags ul li mark{background-color:#f6f6f1; color:#9c9c9c; padding:0px 10px 0px 10px; font-family: 'Rambla', sans-serif; font-size:12px;}
 
 
 .one_question .action_member .answer{width:131px; height:66px; padding:7px; background-color:#f53749; border-radius:3px; text-align:center; font-family:'bebas_neue';}
@@ -68,6 +75,7 @@ QUESTIONS STYLESHEET
 .separator_box_tri_ask{width:2px; height:150px; background-color:#9c9c9c; float:left; margin-right:7px;}
 #filtertag{margin-top:30px;}
 #filtertag ul li{float:left; margin-bottom:12px;}
+
 
 
 /* ------------------POSER UNE QUESTION------------------ */

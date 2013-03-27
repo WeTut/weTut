@@ -132,8 +132,16 @@
 				<div class="infos_questions">
 					<div class="title"><a href='{{question.slug}}'>{{ question.title }}</a></div>
 					<div class="date"><p>Par {{question.user}}</p> <p style="font-style:italic; font-size:10px; margin-top:1px;">le {{question.date}}</p></div>
-					<div class="tags"></div>
-					<div class="text"><p>{{ question.message|truncatechars:80 }}</p></div>
+					
+					<div class="tags">
+						<ul>
+							<li><mark>{{question.tag1}}</mark></li> 
+							<li><mark>{{question.tag2}}</mark></li> 
+							<li><mark>{{question.tag3}}</mark></li>
+							<li style="clear:both;"></li>
+						</ul>
+					</div>
+					<div class="text"><p style="clear:both;">{{ question.message|truncatechars:80 }}</p></div>
 				</div>
 				<div class="action_member">
 					<a href="/questions/{{question.slug}}">
