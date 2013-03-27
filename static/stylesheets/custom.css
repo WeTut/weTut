@@ -104,12 +104,12 @@ ul.nav > li > a:focus, ul.nav > li > a:visited, ul.nav > li > a:active {color:#f
 
 .notifications{margin-top:70px;}
 .notifications h4{font-family:'bebas_neue'; color:#46423f;}
-.notifs{width:538px; height:62px; background-color:#FFFFFF; position:relative; z-index:13; padding:7px;}
+.notifs{width:538px; height:42px; background-color:#FFFFFF; position:relative; z-index:13; padding:7px;}
 
-.img_notif {width:80px; height:60px;}
-.img_notif .member_notif{float:left;}
+.img_notif {width:40px; height:40px;float:left;}
+.img_notif .member_notif p{margin-left:60px;}
 
-.member_notif {color:#000000; width:400px; height:60px; margin-right:5px; font-family:'Rambla';}
+.member_notif {color:#000000; width:542px; height:60px; margin-right:5px; font-family:'Rambla';}
 .member_notif .bold{font-family:'bebas_neue'; }
 
 .no_notifs{padding: 20px 20px; }
