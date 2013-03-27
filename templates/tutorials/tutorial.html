@@ -51,12 +51,17 @@
 							<div class="supermedia"></div>
 							<div class="supermedia"></div>
 						</div>
-						<div class="abus"><p style="color:#01c6e8;">Signaler un abus</p></div>
 					</div>
 
-					<div class="fb-like" data-href="http://127.0.0.1:8000/tutoriels/{{question.slug}}" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-action="recommend"></div>
-					
-					<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://127.0.0.1:8000/tutoriels/{{question.slug}}" data-text="Découvre cette page trop cool !" data-lang="fr">Tweeter</a>
+					<div class="final_question_body">
+									
+						<div class="fb-like" data-href="/questions/{{question.slug}}" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-action="recommend" style="margin-bottom:10px;"></div>
+						
+						<a href="https://twitter.com/share" class="twitter-share-button" data-url="/questions/{{question.slug}}" data-text="Découvre cette page trop cool !" data-lang="fr">Tweeter</a>
+						<div class="abus"><p style="color:#01c6e8;">Signaler un abus</p></div>
+					</div>
+				</div>
+
 				
 				</div>
 			</div>	
@@ -107,7 +112,7 @@
 					<div class="comment_read">
 						<div class='row-fluid' >
 							<div class='span4'></div>
-							<div class='span8'>
+							<div class='span8 commentHead'>
 								<img src="{{STATIC_URL}}images/pictos/plus.png" alt="plus" />
 								<p>{{ answer.getComments.count }} 
 									{% if answer.getComments.count == 0 or answer.getComments.count == 1 %}														commentaire

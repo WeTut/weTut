@@ -207,6 +207,7 @@ textarea#id_comment{border:solid 1px #f53749; height:40px; font-family: 'Rambla'
 .dislikebutton{ background: url("/static/images/pictos/bottom_arrow.png"); border: medium none; width:26px; height:29px;}
 
 .validate_response_tuto{margin-left:40px;}
+a.twitter-share-button{margin-top:10px;}
 
 /* ------------------RUBRIQUE TUTOS------------------ */
 
