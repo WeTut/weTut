@@ -34,7 +34,7 @@ input.submit_inscription{width:70px; height:45px; background:#01c6e8 url("../../
 /* ------------------ACTIVATION------------------ */
 
 .text_enroll .title_registration{font-family:'bebas_neue'; font-size:44px; color:#1e2226; margin-top:80px;}
-.text_enroll p{font-family:'bebas_neue'; font-size:26px; color:#9c9c9c; margin-top:30px;}
+.text_enroll p{}
 
 .activate_account .title_registration p{font-family:'bebas_neue'; font-size:44px; color:#1e2226; margin-top:80px;}
 .activate_account p{font-family:'bebas_neue'; font-size:26px; color:#9c9c9c; margin-top:30px;}
