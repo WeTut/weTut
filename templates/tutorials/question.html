@@ -54,9 +54,9 @@
 						<div class="medias">
 							<p>Autres Medias :</p>
 							<div class="other_media"><img src="{{STATIC_URL}}}images/pictos/play.png" /></div>
-							<div class="supermedia"></div>
-							<div class="supermedia"></div>
-							<div class="supermedia"></div>
+							{% if question.media1 %}<div class="supermedia"><img src="{{question.media1.thumbnail.url}}" alt="" /></div>{% endif %}
+							{% if question.media2 %}<div class="supermedia"><img src="{{question.media2.thumbnail.url}}" alt="" /></div>{% endif %}
+							{% if question.media3 %}<div class="supermedia"><img src="{{question.media3.thumbnail.url}}" alt="" /></div>{% endif %}
 						</div>
 					</div>
 					<div class="final_question_body">
