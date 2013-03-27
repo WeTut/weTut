@@ -66,7 +66,7 @@
 			<div class='row-fluid'>
 				<div class="left_question_body">
 					<div class="direct_answer">
-						{% if user.is_authentificated %}
+						{% if user.is_authenticated %}
 							<a href="/questions/ask"><p>Répondre</p></a>
 						{%  else %}
 							<a href="#logInscriptionModal" role="button" data-toggle="modal" data-target="#logInscriptionModal"><p>Répondre</p></a>
