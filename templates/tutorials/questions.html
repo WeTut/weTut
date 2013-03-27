@@ -197,19 +197,26 @@
 	<div class="pagination">
 	    <span class="step-links">
 	        {% if questionsDate.has_previous %}
-	            <a href="?pageDate={{ questionsDate.previous_page_number }}">précédent</a>
+	            <a href="?pageDate={{ questionsDate.previous_page_number }}">
+	            	<img src="{{STATIC_URL}}images/pictos/previous_pagination.png"/>
+	            	{{ questionsDate.previous_page_number }}
+	            </a>
 	        {% endif %}
 
 	        <span class="current">
-	            Page {{ questionsDate.number }} sur {{ questionsDate.paginator.num_pages }}
+	        	<mark class="current_pagination_number">{{ questionsDate.number }}</mark>
 	        </span>
 
 	        {% if questionsDate.has_next %}
-	            <a href="?pageDate={{ questionsDate.next_page_number }}">suivant</a>
+	            <a href="?pageDate={{ questionsDate.next_page_number }}">
+	            	{{ questionsDate.next_page_number }}
+	            	<img src="{{STATIC_URL}}images/pictos/next_pagination.png"/>
+	            </a>
 	        {% endif %}
 	    </span>
 	</div>
 	</div>
+
 
 
 	<div class="listQuestions questionsViews" style="display:none;">
@@ -280,15 +287,21 @@
 	<div class="pagination">
 	    <span class="step-links">
 	        {% if questionsViews.has_previous %}
-	            <a href="?pageViews={{ questionsViews.previous_page_number }}">précédent</a>
+	            <a href="?pageViews={{ questionsViews.previous_page_number }}">
+	            	<img src="{{STATIC_URL}}images/pictos/previous_pagination.png"/>
+	            	{{ questionsViews.previous_page_number }}
+	            </a>
 	        {% endif %}
 
 	        <span class="current">
-	            Page {{ questionsViews.number }} sur {{ questionsViews.paginator.num_pages }}
+	           <mark class="current_pagination_number">{{ questionsViews.number }}</mark>
 	        </span>
 
 	        {% if questionsViews.has_next %}
-	            <a href="?pageViews={{ questionsViews.next_page_number }}">suivant</a>
+	            <a href="?pageViews={{ questionsViews.next_page_number }}">
+	           		 {{ questionsViews.next_page_number }}
+	            	<img src="{{STATIC_URL}}images/pictos/next_pagination.png"/>
+	            </a>
 	        {% endif %}
 	    </span>
 	</div>
@@ -363,15 +376,21 @@
 	<div class="pagination">
 	    <span class="step-links">
 	        {% if questionsAnswers.has_previous %}
-	            <a href="?pageAnswers={{ questionsAnswers.previous_page_number }}">précédent</a>
+	        	<a href="?pageAnswers={{ questionsAnswers.previous_page_number }}">
+	            	<img src="{{STATIC_URL}}images/pictos/previous_pagination.png"/>
+	            	{{ questionsAnswers.previous_page_number }}
+	            </a>
 	        {% endif %}
 
 	        <span class="current">
-	            Page {{ questionsAnswers.number }} sur {{ questionsAnswers.paginator.num_pages }}
+	        	 <mark class="current_pagination_number">{{ questionsAnswers.number }}</mark>
 	        </span>
 
 	        {% if questionsAnswers.has_next %}
-	            <a href="?pageAnswers={{ questionsAnswers.next_page_number }}">suivant</a>
+	            <a href="?pageAnswers={{ questionsAnswers.next_page_number }}">
+	            	{{ questionsAnswers.next_page_number }}
+	            	<img src="{{STATIC_URL}}images/pictos/next_pagination.png"/>
+	            </a>
 	        {% endif %}
 	    </span>
 	</div>

@@ -215,4 +215,23 @@ li.notif img{margin-top:17px;}
 
 
 .error:not(input){color:#ff0000;margin-left:10px;display:inline;}
-.nicEdit-main{background-color:#FFFFFF; outline:none; border-radius:3px; font-family: 'Rambla', sans-serif; color:#b8b7b6}
+.nicEdit-main{background-color:#FFFFFF; outline:none; border-radius:3px; font-family: 'Rambla', sans-serif; color:#b8b7b6;}
+
+
+/* ------------------PAGINATION------------------ */
+
+
+span.current mark.current_pagination_number{background-color:#f53749; color:#FFFFFF; padding:2px 4px 2px 4px; font-family: 'Rambla', sans-serif; font-size:14px; border-radius:3px;}
+.pagination .step-links a img{margin-right:10px; margin-left:10px;}
+.pagination .step-links a{text-align:center; color:#9c9c9c; margin-right:5px; margin-left:5px; font-family: 'Rambla', sans-serif; font-size:14px;}
+.pagination{margin-top:20px; float:right;}
+
+
+
+
+
+
+
+
+
+
