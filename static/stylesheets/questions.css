@@ -175,6 +175,7 @@ button.btn_validate_question_check{width:115px; height:60px;  text-align:center;
 .one_answer .member .image{margin-top:20px; width:80px; height:80px;}
 .one_answer .member .image img{border-bottom-left-radius:3px;}
 
+.one_answer .body_answer{min-height:200px;}
 .one_answer .body_answer .date{color:#b8b7b6; font-size:14px;}
 .one_answer .body_answer .date a{color:#b8b7b6;}
 .one_answer .body_answer{float:left; background-color:#FFFFFF; padding:5px 10px 5px 10px; width:679px; border-top-right-radius:3px; border-bottom-right-radius:3px; height:200px;}
