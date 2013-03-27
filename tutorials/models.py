@@ -46,6 +46,9 @@ class Question (models.Model):
 	def getLikesCount(self):
 		return LikeTuto.objects.filter(tutorial_id=self).count()
 
+	def getTags(self):
+		return Tag.objects.filter(id__in=[self.tag1, self.tag2, self.tag3])
+
 
 class Answer (models.Model):
 	answer = models.TextField()

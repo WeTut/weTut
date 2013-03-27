@@ -155,9 +155,9 @@
 					
 					<div class="tags">
 						<ul>
-							<li><mark>{{question.tag1}}</mark></li> 
-							<li><mark>{{question.tag2}}</mark></li> 
-							<li><mark>{{question.tag3}}</mark></li>
+							{% for tag in question.getTags %}
+							<a href="tag={{tag.id}}"><li><mark>{{tag.name}}</mark></li></a>
+							{% endfor %}
 							<li style="clear:both;"></li>
 						</ul>
 					</div>
