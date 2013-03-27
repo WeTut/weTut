@@ -28,6 +28,10 @@ class Question (models.Model):
 	date = models.DateField()
 	validate = models.BooleanField(default=False)
 
+	media1 = StdImageField(upload_to='questions/medias_supplementaires', blank=True, size=(800, 600, True), thumbnail_size=(100, 100, True))
+	media2 = StdImageField(upload_to='questions/medias_supplementaires', blank=True, size=(800, 600, True), thumbnail_size=(100, 100, True))
+	media3 = StdImageField(upload_to='questions/medias_supplementaires', blank=True, size=(800, 600, True), thumbnail_size=(100, 100, True))
+
 	currentUserFollows = False
 	currentUserLikes = False
 	
