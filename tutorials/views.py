@@ -387,7 +387,7 @@ def ask(request):
 					actuality.date = datetime.now()
 					actuality.save()
 
-			#return HttpResponseRedirect('/questions') # Redirect after POST
+			return HttpResponseRedirect('/questions') # Redirect after POST
 
 	else:
 		form = QuestionForm() # An unbound form #initial={'user': request.user}
