@@ -1,1 +1,15 @@
 .annexe_title{font-family:'bebas_neue'; font-size:40px; color:#1e2226;}
+.content_annexes{width:940px; margin: 0 auto; margin-top:40px;}
+.content_annexes p{font-size:20px; margin-top:30px; color:#9c9c9c;}
+.content_annexes .video{margin-top:40px;}
+
+.content_annexes .annexes_text p{font-family: 'Rambla', sans-serif; color:#46423F; font-size:14px;}
+.content_annexes .annexes_text a{font-family: 'Rambla', sans-serif; color:#9c9c9c; font-size:14px;}
+
+.content_annexes h3{margin-top:25px;}
+
+.content_annexes input#id_subject{border:none; width:500px; height:36px;}
+.content_annexes input#id_sender{border:none; width:500px; height:36px;}
+.content_annexes textarea#id_message{border:none; width:500px; height:500px;}
+
+.content_annexes .submit_annexes_contact{width: 230px; height: 50px; background-color: #01c6e8; border-radius: 3px; color: #FFFFFF; font-family: 'bebas_neue'; font-size: 24px; margin-top: 20px; border: transparent}

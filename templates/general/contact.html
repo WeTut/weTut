@@ -2,15 +2,38 @@
 
 {% block content %}
 
-<div class="content">
-	<br/><br/><br/>
-	<h1>CONTACT</h1>
+<div id="ask_banner">
+	<div id="content_banner">
+		<p>CONTACT</p>
+	</div>
+</div>
 
+<div class="content_annexes" style="margin-top:60px;">
 	<form action="/contact/" method="post">{% csrf_token %}
 		{{ form.as_p }}
-		<input type="submit" value="Submit" />
+		<input type="submit" value="Envoyer" class="submit_annexes_contact" />
 	</form>
 
 </div>
+
+<script>
+$(document).ready(function(){
+  var subject = 'Sujet*';
+  var message = 'Message*';
+  var name = 'Email*';
+  
+  $('input[name=subject]').attr({placeholder : subject});
+  $('textarea[name=message]').attr({placeholder : message});
+  $('input[name=sender]').attr({placeholder : name});
+  
+  $('label').replaceWith('');
+  
+  var obj = document.getElementById('id_message');
+  obj.style.height = "250px";		
+  var mybanner = document.getElementById('content_banner');
+  mybanner.style.height = "132px;";	 
+ 
+});
+</script>
 
 {% endblock content %}
