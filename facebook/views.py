@@ -29,6 +29,6 @@ def authentication_callback(request):
 
     else:
         auth_login(request, user)
-        url = '/home/'
+        url = '/'
 
     return HttpResponseRedirect(url)

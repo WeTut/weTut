@@ -20,19 +20,17 @@
 							{% if actualityQuestion %}
 								{% for actuality in actualityQuestion %}
 								<a href="/questions/{{actuality.question.slug}}">
-								<div class="notifs">
-									<div class="img_notif"><img src="{{actuality.question.picture}}"></div>
+								<div class="notifs">														
+									<div class="img_notif"><img src="{{MEDIA_URL}}{{actuality.answer.user.profile.avatar}}" style="width:60px;height:60px;" /></div>
 									<div class="member_notif">
-										<div class="question_notif">{{actuality.question.title}}</div>
-										<div class="name_notif">par {{actuality.question.user.username}}</div>
+										<p><span class="bold">{{actuality.answer.user.username}}</span> a répondu à la question <span class="bold">{{actuality.question.title}}</span><br />{{actuality.answer.answer|truncatechars:80 }}</p>	
 									</div>
-									<div class="text_notif">{{actuality.answer.answer}}</div>
 								</div>
 								<div class="line_end_notif"></div>
 								</a>
 								{% endfor %}
 							{% else %}
-								<p>Vous n'avez pas de notifications concernant les questions que vous suivez</p>
+								<div class='no_notifs'><p>Vous n'avez pas de notifications concernant les questions que vous suivez</p></div>
 							{% endif %}
 						</div>
 
@@ -40,18 +38,19 @@
 							{% if actualityTag %}
 								{% for actuality in actualityTag %}
 								<a href="/questions/{{actuality.question.slug}}">
-								<div class="notifs">
-									<div class="img_notif">{{actuality.tag.name}}"></div>
-									<div class="text_notif">
-										<div class="question_notif">{{actuality.question.title}}</div>
-										<div class="name_notif">par {{actuality.question.user.username}}</div>
+								<div class="notifs">														
+									<div class="img_notif"><img src="{{MEDIA_URL}}{{actuality.question.user.profile.avatar}}" style="width:60px;height:60px;" /></div>
+									<div class="member_notif">
+										<p><span class="bold">{{actuality.question.user.username}}</span> a ajouté une question dans le tag <span class="bold">{{actuality.tag.name}}</span><br />{{actuality.question.message|truncatechars:80 }}</p>	
 									</div>
 								</div>
 								<div class="line_end_notif"></div>
 								</a>
 								{% endfor %}
 							{% else %}
+								<div class='no_notifs'>
 								<p>Vous n'avez pas de notifications concernant les tags que vous suivez</p>
+								</div>
 							{% endif %}
 						</div>
 
