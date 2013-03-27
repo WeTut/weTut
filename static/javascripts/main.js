@@ -98,12 +98,6 @@ $(document).ready(function(){
 	});
 
 
-	$('.validateform').submit(function(){
-		alert("validateform");
-	});
-
-
-
 	$('#id_filter').change(function(){
 
 		var filter = $(this).val();

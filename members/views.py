@@ -52,12 +52,15 @@ def members(request):
 
 def member(request,slug):
 	profile = get_object_or_404(User, username=slug)
-	member = Profile.objects.get(user=profile)
+	member = get_object_or_404(Profile, user=profile)
 	questions = Question.objects.all().filter(user_id=profile).filter(validate=0)
 	answers = Answer.objects.all().filter(user_id=profile)
 	comments = CommentAnswer.objects.all().filter(user_id=profile)
 	tutorials = Question.objects.all().filter(user_id=profile).filter(validate=1)
-	member.views += 1
-	#member.save()
+
+	if slug != request.user.username:
+		views = member.views + 1
+		Mid = member.id
+		Profile.objects.filter(id=Mid).update(views=views)		
 
 	return render_to_response('members/member.html', {'profile': profile, 'member': member, 'questions':questions, 'answers':answers, 'comments':comments, 'tutorials':tutorials}, context_instance=RequestContext(request))

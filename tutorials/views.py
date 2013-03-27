@@ -321,9 +321,6 @@ def question(request,slug):
 				currentlike.save()
 				answer.nb_likes = answer.getLikesCount()
 				answer.save()
-
-				print ("NB_LIKES ", profile.nb_likes)
-
 				profile.save()
 
 				return HttpResponse(answer.nb_likes)
