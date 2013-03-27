@@ -19,6 +19,14 @@
 			
 			<div id="question">
 
+				<script type="text/javascript">
+							$(document).ready(function() {
+								var title = $('title').text();
+								$('title').html($('div.title p').text() + ' | ' + title);
+							});
+								
+							</script>
+
 				<div class="body_question">
 					<div class="left_question_body">
 						<div class="member">
