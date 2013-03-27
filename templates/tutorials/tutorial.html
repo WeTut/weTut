@@ -44,12 +44,27 @@
 						<div class="text">
 							<p>{{question.message}}</p>
 						</div>
+						<script type="text/javascript">
+
+						 Shadowbox.init({ language: 'fr', players: ['img', 'html', 'iframe', 'qt', 'wmp', 'swf', 'flv'] });
+
+						$(document).ready(function() {
+							$('p.theVideo').hide();
+				        	var urlVideo = 'http://img.youtube.com/vi/' + $('p.theVideo').text().split('?v=')[1] + '/1.jpg';
+				        	$('.other_media img').attr('src',urlVideo);
+
+				        	var urlVideo2 = 'http://youtube.com/v/' + $('p.theVideo').text().split('?v=')[1];
+				        	$('.other_media a').attr('href',urlVideo2);
+				  
+						})
+						</script>
+
 						<div class="medias">
 							<p>Autres Medias :</p>
-							<div class="other_media" style="background-color:#01c6e8;"><img src="{{STATIC_URL}}images/pictos/play.png" /></div>
-							<div class="supermedia"></div>
-							<div class="supermedia"></div>
-							<div class="supermedia"></div>
+							{% if question.video %}<p class="theVideo">{{ question.video }}</p><div class="other_media"><a href="" rel="shadowbox[{{question.title}}];width=853;height=480"><img src="" alt="" width="107" height="80"/></a></div>{% endif %}
+							{% if question.media1 %}<div class="supermedia"><a href="{{question.media1.url}}" rel="shadowbox[{{question.title}}]"><img src="{{question.media1.thumbnail.url}}" alt="" /></a></div>{% endif %}
+							{% if question.media2 %}<div class="supermedia"><a href="{{question.media2.url}}" rel="shadowbox[{{question.title}}]"><img src="{{question.media2.thumbnail.url}}" alt="" /></a></div>{% endif %}
+							{% if question.media3 %}<div class="supermedia"><a href="{{question.media3.url}}" rel="shadowbox[{{question.title}}]"><img src="{{question.media3.thumbnail.url}}" alt="" /></a></div>{% endif %}
 						</div>
 					</div>
 
@@ -58,6 +73,19 @@
 						<div class="fb-like" data-href="/questions/{{question.slug}}" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-action="recommend" style="margin-bottom:10px;"></div>
 						
 						<a href="https://twitter.com/share" class="twitter-share-button" data-url="/questions/{{question.slug}}" data-text="Découvre cette page trop cool !" data-lang="fr">Tweeter</a>
+
+						{% if user.is_authenticated %}
+							{% ifnotequal user question.user %}
+							<form  class="likeTuto" action="" method="post" enctype="multipart/form-data">
+							{% csrf_token %}
+							<div class='like'>
+								<input name="hidden" type="hidden" value="{% if question.currentUserLikes %}dislike{% else %}like{% endif %}" />
+								<button class='btn-{% if question.currentUserLikes %}ok{% else %}nok{% endif %}' name='likeTutoSubmit' type="submit" value="likeTutoSubmit">{% if question.currentUserLikes %}Je n'aime plus{% else %}J'aime{% endif %}</button>
+							</div>
+							</form>
+							{% endifnotequal %}
+						{% endif %}
+
 						<div class="abus"><p style="color:#01c6e8;">Signaler un abus</p></div>
 					</div>
 				</div>
