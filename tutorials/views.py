@@ -8,7 +8,7 @@ from django.shortcuts import render_to_response
 from datetime import datetime 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from tutorials.forms import QuestionForm, AnswerForm, CommentAnswerForm, FilterForm
+from tutorials.forms import QuestionForm, AnswerForm, CommentAnswerForm, FilterForm, MediaForm
 from tutorials.models import *
 
 from members.models import Profile
@@ -123,22 +123,15 @@ def questions(request):
 
 def tutorials(request):
 
-	filterform = FilterForm()
 
-	if 'filterTuto' not in request.session:
-		request.session['filterTuto'] = '-date'
-
-	tutorials_list = Question.objects.filter(validate=True).order_by(request.session['filterTuto'])
+	tutorials_list_date = Question.objects.filter(validate=True).order_by('-date')
+	tutorials_list_views = Question.objects.filter(validate=True).order_by('-views')
+	tutorials_list_likes = Question.objects.filter(validate=True).order_by('-liketuto')
+	
 	print ("REQUEST.POST ",request.POST)
 	if request.method == 'POST' and 'submit' in request.POST:
 
-
-		if request.POST['submit'] == 'filterSubmit':
-			print ("FILTER")
-			tutorials_list = Question.objects.filter(validate=True).order_by(request.POST['filter'])
-			request.session['filterTuto'] = request.POST['filter']
-
-		elif request.POST['submit'] == 'likeTutoSubmit':
+		if request.POST['submit'] == 'likeTutoSubmit':
 			print ("LIKE")
 			if request.POST['hidden'] == 'like':
 				like = LikeTuto()
@@ -152,25 +145,62 @@ def tutorials(request):
 				return HttpResponse('disliked')
 
 
-	paginator = Paginator(tutorials_list, 10)
-	tutorials = paginator.page(1)
-	if 'page' in request.GET:
-		page = request.GET.get('page')
+	paginatorDate = Paginator(tutorials_list_date, 10)
+	tutorialsDate = paginatorDate.page(1)
+
+	paginatorViews = Paginator(tutorials_list_views, 10)
+	tutorialsViews = paginatorViews.page(1)
+
+	paginatorLikes = Paginator(tutorials_list_likes, 10)
+	tutorialsLikes = paginatorLikes.page(1)
+
+	if 'pageDate' in request.GET:
+		page = request.GET.get('pageDate')
 		try:
-			tutorials = paginator.page(page)
+			tutorialsDate = paginatorDate.page(page)
 		except PageNotAnInteger:
-			tutorials = paginator.page(1)
+			tutorialsDate = paginatorDate.page(1)
 		except EmptyPage:
-			tutorials = paginator.page(paginator.num_pages)
+			tutorialsDate = paginatorDate.page(paginatorDate.num_pages)
+
+	if 'pageViews' in request.GET:
+		page = request.GET.get('pageViews')
+		try:
+			tutorialsViews = paginatorViews.page(page)
+		except PageNotAnInteger:
+			tutorialsViews = paginatorViews.page(1)
+		except EmptyPage:
+			tutorialsViews = paginatorViews.page(paginatorViews.num_pages)
+
+	if 'pageLikes' in request.GET:
+		page = request.GET.get('pageLikes')
+		try:
+			tutorialsLikes = paginatorLikes.page(page)
+		except PageNotAnInteger:
+			tutorialsLikes = paginatorLikes.page(1)
+		except EmptyPage:
+			tutorialsLikes = paginatorLikes.page(paginatorLikes.num_pages)
 
 	if request.user.is_authenticated() :
-		for tutorial in tutorials:
+		for tutorial in tutorialsDate:
 			tutorial.currentUserLikes = False
 			like = LikeTuto.objects.filter(tutorial=tutorial, user=request.user)
 			if like.exists():
 				tutorial.currentUserLikes = True
 
-	return render_to_response('tutorials/tutorials.html', {'tutorials': tutorials, 'filterform':filterform, 'filtervalue':request.session['filterTuto'] }, context_instance=RequestContext(request))
+		for tutorial in tutorialsViews:
+			tutorial.currentUserLikes = False
+			like = LikeTuto.objects.filter(tutorial=tutorial, user=request.user)
+			if like.exists():
+				tutorial.currentUserLikes = True
+
+		for tutorial in tutorialsLikes:
+			tutorial.currentUserLikes = False
+			like = LikeTuto.objects.filter(tutorial=tutorial, user=request.user)
+			if like.exists():
+				tutorial.currentUserLikes = True
+
+	return render_to_response('tutorials/tutorials.html', {'tutorialsDate': tutorialsDate, 'tutorialsViews': tutorialsViews, 'tutorialsLikes': tutorialsLikes }, context_instance=RequestContext(request))
 	
 
 def question(request,slug):
@@ -301,7 +331,7 @@ def ask(request):
 
 	if request.method == 'POST': # If the form has been submitted...
 		form = QuestionForm(request.POST, request.FILES) # A form bound to the POST data
-		#formMedia = MediaForm(request.POST, request.FILES)
+
 		if form.is_valid(): # All validation rules pass
 			post = form.save(commit=False)
 			title = form.cleaned_data['title']
@@ -339,7 +369,8 @@ def ask(request):
 					actuality.date = datetime.now()
 					actuality.save()
 
-			return HttpResponseRedirect('/questions') # Redirect after POST
+			#return HttpResponseRedirect('/questions') # Redirect after POST
+
 	else:
 		form = QuestionForm() # An unbound form #initial={'user': request.user}
 

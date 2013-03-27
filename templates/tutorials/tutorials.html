@@ -6,20 +6,66 @@
 
 <div class="banner_tutos">
 	<div class="content_tutos">
-		<form id='filterform' action="" method="POST">
-			{% csrf_token %}
-	        <ul>
-	        {{ filterform.as_ul}}	        
-	        </ul>
-	        <input name="submit" type="hidden" value="filterSubmit" />
-        </form>
+		
+		<div class="title_tri">Trier par</div>
+ 			<div class="box_tri">
+	 			<div class="famous">
+					<ul>
+						<li><a href=".tutosDate">Date</a></li>
+	 					<li><a href=".tutosViews">Vues</a></li>
+	 					<li><a href=".tutosLikes">Likes</a></li>
+	 				</ul>
+	 			</div>
+	 		</div>
+	 	</div>
+
 	</div>
 </div>
+
+
+ 						
+					<script type="text/javascript">
+					$(document).ready(function() {
+	        	 		var mainPage = window.location.href.split('tutoriels')[1];
+
+	        	 		$('.box_tri .famous li a').click(function() {
+		        	 		var url = $(this).attr('href');
+		        	 		$('div.listTutos').hide();
+		        	 		$(url).show();
+		        			return false;
+	        	 		});
+
+
+	        	 		if(mainPage != '/') {
+
+	        	 			var currentChoice = window.location.href.split('?')[1].split('=')[0];
+							
+							if(currentChoice=='pageDate') {
+								$('div.listTutos').hide();
+		        	 			$('div.tutosDate').show();
+							}
+
+							if(currentChoice=='pageViews') {
+								$('div.listTutos').hide();
+		        	 			$('div.tutosViews').show();
+							}
+
+							if(currentChoice=='pageLikes') {
+								$('div.listTutos').hide();
+		        	 			$('div.tutosLikes').show();
+							}
+	        	 		}
+
+					});
+					</script>
+
     
 <div class="content">
 	<div class="content_tutos">
 		<div class='row-fluid'>
-			{% for tutorial in tutorials %}	
+
+			<div class="listTutos tutosDate">
+			{% for tutorial in tutorialsDate %}	
 			
 				<div class='span3' >
 					<div id="tutorial{{tutorial.id}}" class="one_tuto">
@@ -50,32 +96,134 @@
 					</div>
 				</div>
 		{% endfor %}
-		</div>
+		
 
 		<div class="pagination">
 		    <span class="step-links">
-		        {% if tutorials.has_previous %}
-		            <a href="?page={{ tutorials.previous_page_number }}">précédent</a>
+		        {% if tutorialsDate.has_previous %}
+		            <a href="?page={{ tutorialsDate.previous_page_number }}">précédent</a>
 		        {% endif %}
 
 		        <span class="current">
-		            Page {{ tutorials.number }} sur {{ tutorials.paginator.num_pages }}
+		            Page {{ tutorialsDate.number }} sur {{ tutorialsDate.paginator.num_pages }}
 		        </span>
 
-		        {% if tutorials.has_next %}
-		            <a href="?page={{ tutorials.next_page_number }}">suivant</a>
+		        {% if tutorialsDate.has_next %}
+		            <a href="?page={{ tutorialsDate.next_page_number }}">suivant</a>
 		        {% endif %}
 		    </span>
 		</div>
+		
+		</div>
+
+		<div class="listTutos tutosViews" style="display:none;">
+			{% for tutorial in tutorialsViews %}	
+			
+				<div class='span3' >
+					<div id="tutorial{{tutorial.id}}" class="one_tuto">
+						<div class="title"><a href='{{tutorial.slug}}'>{{ tutorial.title }}</a></div>
+						<div class="img">
+							<div class="picture">
+								<a href='{{tutorial.slug}}'>
+									<img class='img-rounded' src='{{tutorial.picture.thumbnail.url}}'/>
+								</a>
+							</div>
+							<a href='{{tutorial.slug}}'>
+							<div class="infos">
+								<div class="responses"><p>{{ tutorial.views }}</p></div>
+								<div class="views"><p>{{ tutorial.getLikesCount }}</p></div>
+							</div>
+							</a>
+						</div>
+						{% if user.is_authenticated %}
+							<form  class="likeTuto" action="" method="post" enctype="multipart/form-data">
+							{% csrf_token %}
+							<input class="tutoId" type="hidden" name="tutoId" value="{{tutorial.id}}"></input>
+							<div class='like'>
+								<input name="hidden" type="hidden" value="{% if tutorial.currentUserLikes %}dislike{% else %}like{% endif %}" />
+								<button class='btn-{% if tutorial.currentUserLikes %}ok{% else %}nok{% endif %}' name='likeTutoSubmit' type="submit" value="likeTutoSubmit">{% if tutorial.currentUserLikes %}Je n'aime plus{% else %}J'aime{% endif %}</button>
+							</div>
+							</form>
+						{% endif %}
+					</div>
+				</div>
+		{% endfor %}
+		
+
+		<div class="pagination">
+		    <span class="step-links">
+		        {% if tutorialsViews.has_previous %}
+		            <a href="?page={{ tutorialsViews.previous_page_number }}">précédent</a>
+		        {% endif %}
+
+		        <span class="current">
+		            Page {{ tutorialsViews.number }} sur {{ tutorialsViews.paginator.num_pages }}
+		        </span>
+
+		        {% if tutorialsViews.has_next %}
+		            <a href="?page={{ tutorialsViews.next_page_number }}">suivant</a>
+		        {% endif %}
+		    </span>
+		</div>
+		
+		</div>
+
+
+		<div class="listTutos tutosLikes" style="display:none;">
+			{% for tutorial in tutorialsLikes %}	
+			
+				<div class='span3' >
+					<div id="tutorial{{tutorial.id}}" class="one_tuto">
+						<div class="title"><a href='{{tutorial.slug}}'>{{ tutorial.title }}</a></div>
+						<div class="img">
+							<div class="picture">
+								<a href='{{tutorial.slug}}'>
+									<img class='img-rounded' src='{{tutorial.picture.thumbnail.url}}'/>
+								</a>
+							</div>
+							<a href='{{tutorial.slug}}'>
+							<div class="infos">
+								<div class="responses"><p>{{ tutorial.views }}</p></div>
+								<div class="views"><p>{{ tutorial.getLikesCount }}</p></div>
+							</div>
+							</a>
+						</div>
+						{% if user.is_authenticated %}
+							<form  class="likeTuto" action="" method="post" enctype="multipart/form-data">
+							{% csrf_token %}
+							<input class="tutoId" type="hidden" name="tutoId" value="{{tutorial.id}}"></input>
+							<div class='like'>
+								<input name="hidden" type="hidden" value="{% if tutorial.currentUserLikes %}dislike{% else %}like{% endif %}" />
+								<button class='btn-{% if tutorial.currentUserLikes %}ok{% else %}nok{% endif %}' name='likeTutoSubmit' type="submit" value="likeTutoSubmit">{% if tutorial.currentUserLikes %}Je n'aime plus{% else %}J'aime{% endif %}</button>
+							</div>
+							</form>
+						{% endif %}
+					</div>
+				</div>
+		{% endfor %}
+		
+
+		<div class="pagination">
+		    <span class="step-links">
+		        {% if tutorialsLikes.has_previous %}
+		            <a href="?page={{ tutorialsLikes.previous_page_number }}">précédent</a>
+		        {% endif %}
+
+		        <span class="current">
+		            Page {{ tutorialsLikes.number }} sur {{ tutorialsLikes.paginator.num_pages }}
+		        </span>
+
+		        {% if tutorialsLikes.has_next %}
+		            <a href="?page={{ tutorialsLikes.next_page_number }}">suivant</a>
+		        {% endif %}
+		    </span>
+		</div>
+		
+		</div>
+
 
 	</div>
 </div>
 
-
-<script type="text/javascript">
-$(document).ready( function(){
- 	$('#filterform option[value={{filtervalue}}]').attr("selected", "selected");
-});
-</script>
 		
 {% endblock content %}
