@@ -11,11 +11,24 @@
  				<div class="questions_filters">
  					<div class="title_tri">Trier par</div>
  					<div class="box_tri">
-	 					<div class="famous">
+	 					<div class="famous choiceQuestions">
+
+	 						<script type="text/javascript">
+				 				$(document).ready(function() {
+				 					$('.choiceQuestions a').click(function() {
+				 						$('.choiceQuestions a').removeClass('selected_famous_tri_pink');
+				 						$('.choiceQuestions a').css('color','#9C9C9C');
+				 						$(this).addClass('selected_famous_tri_pink');
+				 						$(this).css('color','white');
+				 						return false;
+				 					})
+				 				})
+				 			</script>
+
 	 						<ul>
-	 							<li style="margin-top:10px;"><a href=".questionsDate" classe="date_tri" >Date</a></li>
-	 							<li style="margin-top:30px;"><a href=".questionsViews">Popularité</a></li>
-	 							<li style="margin-top:30px;"><a href=".questionsAnswers">Réponses</a></li>
+	 							<li><a href=".questionsDate" class="date_tri selected_famous_tri_pink" style="color:white;">Date</a></li>
+	 							<li style="margin-top:10px;"><a href=".questionsViews">Popularité</a></li>
+	 							<li style="margin-top:10px;"><a href=".questionsAnswers">Réponses</a></li>
 	 						</ul>
 	 					</div>
 	 					<div class="separator_box_tri_ask"></div>
