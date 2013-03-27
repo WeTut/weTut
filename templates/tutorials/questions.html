@@ -10,13 +10,16 @@
  			<div class="content_banner_questions" style="height:300px; width:940px;">
  				<div class="questions_filters">
  					<div class="title_tri">Trier par</div>
+
+
  					<div class="box_tri">
 	 					<div class="famous choiceQuestions">
 
 	 						<script type="text/javascript">
 				 				$(document).ready(function() {
-				 					$('.choiceQuestions a').click(function() {
-				 						$('.choiceQuestions a').removeClass('selected_famous_tri_pink');
+				 					$('.choiceQuestions a.not_selected').click(function() {
+				 						$('.filtertag mark').attr('class', 'inactive')						
+				 						$('.choiceQuestions a').attr('class', 'not_selected');
 				 						$('.choiceQuestions a').css('color','#9C9C9C');
 				 						$(this).addClass('selected_famous_tri_pink');
 				 						$(this).css('color','white');
@@ -27,80 +30,54 @@
 
 	 						<ul>
 	 							<li><a href=".questionsDate" class="date_tri selected_famous_tri_pink" style="color:white;">Date</a></li>
-	 							<li style="margin-top:10px;"><a href=".questionsViews">Popularité</a></li>
-	 							<li style="margin-top:10px;"><a href=".questionsAnswers">Réponses</a></li>
+	 							<li style="margin-top:10px;"><a href=".questionsViews" class="not_selected">Popularité</a></li>
+	 							<li style="margin-top:10px;"><a href=".questionsAnswers" class="not_selected">Réponses</a></li>
 	 						</ul>
 	 					</div>
 	 					<div class="separator_box_tri_ask"></div>
 	 					<div class="logiciel">
-	 						<div id='filtertag' >
-	 						<ul>
-	 						{% for tag in tags %}
-	 							{% if tag.type %}
-	 								{% if userfollowstag %}
-	 									<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="follow">{{tag.name}}</mark></a></li>
-	 									{% else %}
-	 										<li><a {% if currentag == tag.id %}class='coucou'{% endif %} href="/questions?tag={{tag.id}}"><mark class="unfollow">{{tag.name}}</mark></a></li>
-	 								{% endif %}
-	 							{% endif %}
-	 						{% endfor %}
-	 						<li><a {% if currentag == 0 %}class='bold'{% endif %} href="/questions"><mark class="follow">tous</mark></a></li>
-	 						</ul>
-							{% if user.is_authenticated %}
-								{% if currentag != 0 %}
-								<div>
-									<form  class="followTagForm" action="" method="post" enctype="multipart/form-data">
-										{% csrf_token %}
-										<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
-										<div class='follow'>
-											{% if userfollowstag %}
-	 									<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="unfollow">{{tag.name}}</mark></a></li>
-	 									{% else %}
-	 										<li><a {% if currentag == tag.id %}class='coucou'{% endif %} href="/questions?tag={{tag.id}}"><mark class="follow">{{tag.name}}</mark></a></li>
-	 								{% endif %}
-										</div>
-									</form>
-								</div>
-					        	{% endif %}
-						{% endif %}	
+	 						<div class='filtertag' >
+		 						<ul>
+		 						{% for tag in tags %}
+		 							{% if tag.type %}
+		 								<li><a href="?tag={{tag.id}}"><mark class='{% if currentag == tag.id %}active{% else %}inactive{% endif %}'>{{tag.name}}</mark></a></li>
+		 							{% endif %}
+		 						{% endfor %}
+		 						</ul>
+ 							</div>
+ 						</div>
+ 						<div class="separator_box_tri_ask"></div>
+ 						<div class="technique">
+	 						<div class='filtertag' >
+		 						<ul>
+		 						{% for tag in tags %}
+		 							{% if not tag.type %}
+		 								<li><a href="?tag={{tag.id}}"><mark class='{% if currentag == tag.id %}active{% else %}inactive{% endif %}'>{{tag.name}}</mark></a></li>	 									
+		 							{% endif %}
+		 						{% endfor %}
+		 						</ul>								
 							</div>
 	 					</div>
-	 					<div class="separator_box_tri_ask"></div>
-	 					<div class="technique">
-	 						<div id='filtertag' >
-	 						<ul>
-	 						{% for tag in tags %}
-	 							{% if not tag.type %}
-	 								{% if userfollowstag %}
-	 									<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="follow">{{tag.name}}</mark></a></li>
-	 									{% else %}
-	 										<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="unfollow">{{tag.name}}</mark></a></li>
-	 								{% endif %}
-	 							{% endif %}
-	 						{% endfor %}
-	 						<li><a {% if currentag == 0 %}class='bold'{% endif %} href="/questions"><mark class="follow">tous</mark></a></li>
-	 						</ul>
-							{% if user.is_authenticated %}
-								{% if currentag != 0 %}
-								<div>
-									<form  class="followTagForm" action="" method="post" enctype="multipart/form-data">
-										{% csrf_token %}
-										<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
-										<div class='follow'>
-											<input name="hidden" type="hidden" value="{% if userfollowstag %}unfollow{% else %}follow{% endif %}" />
-											<button class='btn btn-{% if userfollowstag %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followTagSubmit">{% if userfollowstag %}Ne plus suivre{% else %}Suivre ce tag{% endif %}</button>
-										</div>
-									</form>
-								</div>
-					        	{% endif %}
-						{% endif %}	
+
+						{% if user.is_authenticated %}
+							{% if currentag != 0 %}
+							<div>
+								<form  class="followTagForm" action="" method="post" enctype="multipart/form-data">
+									{% csrf_token %}
+									<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
+									<div class='follow'>
+										<input name="hidden" type="hidden" value="{% if userfollowstag %}unfollow{% else %}follow{% endif %}" />
+										<button class='btn btn-{% if userfollowstag %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followTagSubmit">{% if userfollowstag %}Ne plus suivre{% else %}Suivre ce tag{% endif %}</button>
+									</div>
+								</form>
 							</div>
-	 					</div>
-	 				</div>
- 						</div>	
+				        	{% endif %}	
+					    {% endif %}
 					<div class="clear"></div>
-			</div>					
-		</div>
+				</div>					
+			</div>
+		</div>					
+	</div>
  <!-- END BANNER-->      
 
 <div class="content">
@@ -156,7 +133,7 @@
 					<div class="tags">
 						<ul>
 							{% for tag in question.getTags %}
-							<a href="tag={{tag.id}}"><li><mark>{{tag.name}}</mark></li></a>
+							<a href="?tag={{tag.id}}"><li><mark>{{tag.name}}</mark></li></a>
 							{% endfor %}
 							<li style="clear:both;"></li>
 						</ul>
@@ -390,39 +367,38 @@
 </div>
 
 <script type="text/javascript">
-					$(document).ready(function() {
-	        	 		var mainPage = window.location.href.split('questions')[1];
+	$(document).ready(function() {
+ 		var mainPage = window.location.href.split('questions')[1];
+ 		$('.box_tri .famous li a').click(function() {
+	 		var url = $(this).attr('href');
+	 		$('div.listQuestions').hide();
+	 		$(url).show();
+			return false;
+ 		});
 
-	        	 		$('.box_tri .famous li a').click(function() {
-		        	 		var url = $(this).attr('href');
-		        	 		$('div.listQuestions').hide();
-		        	 		$(url).show();
-		        			return false;
-	        	 		});
 
+ 		if(mainPage != '/') {
 
-	        	 		if(mainPage != '/') {
+ 			var currentChoice = window.location.href.split('?')[1].split('=')[0];
+			
+			if(currentChoice=='pageDate') {
+				$('div.date_tri').css('color','white');
+				$('div.listQuestions').hide();
+	 			$('div.questionsDate').show();
+			}
 
-	        	 			var currentChoice = window.location.href.split('?')[1].split('=')[0];
-							
-							if(currentChoice=='pageDate') {
-								$('div.date_tri').css('color','white');
-								$('div.listQuestions').hide();
-		        	 			$('div.questionsDate').show();
-							}
+			if(currentChoice=='pageViews') {
+				$('div.listQuestions').hide();
+	 			$('div.questionsViews').show();
+			}
 
-							if(currentChoice=='pageViews') {
-								$('div.listQuestions').hide();
-		        	 			$('div.questionsViews').show();
-							}
+			if(currentChoice=='pageAnswers') {
+				$('div.listQuestions').hide();
+	 			$('div.questionsAnswers').show();
+			}
+ 		}
 
-							if(currentChoice=='pageAnswers') {
-								$('div.listQuestions').hide();
-		        	 			$('div.questionsAnswers').show();
-							}
-	        	 		}
-
-					});
+	});
 </script>
 
 
