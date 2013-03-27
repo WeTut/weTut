@@ -140,14 +140,13 @@
 					</script>
 
     
-<div class="content">
-	<div class="content_tutos">
+	<div class="content_members">
 		<div class='row-fluid'>
 
 			<div class="listTutos tutosDate">
 			{% for tutorial in tutorialsDate %}	
 			
-				<div class='span3' >
+				<div class='cat3'>
 					<div id="tutorial{{tutorial.id}}" class="one_tuto">
 						<div class="title"><a href='{{tutorial.slug}}'>{{ tutorial.title }}</a></div>
 						<div class="img">
@@ -166,8 +165,9 @@
 					</div>
 				</div>
 		{% endfor %}
-		
 
+		
+		<div class="clear"></div>
 		<div class="pagination">
 		    <span class="step-links">
 		        {% if tutorialsDate.has_previous %}
