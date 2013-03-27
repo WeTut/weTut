@@ -131,23 +131,6 @@ def tutorials(request):
 	tutorials_list_views = Question.objects.filter(validate=True).order_by('-views')
 	tutorials_list_likes = Question.objects.filter(validate=True).order_by('-liketuto')
 	
-	print ("REQUEST.POST ",request.POST)
-	if request.method == 'POST' and 'submit' in request.POST:
-
-		if request.POST['submit'] == 'likeTutoSubmit':
-			print ("LIKE")
-			if request.POST['hidden'] == 'like':
-				like = LikeTuto()
-				like.user = request.user
-				like.tutorial = get_object_or_404(Question, id=request.POST['tutoId'])
-				like.save()
-				return HttpResponse('liked')
-			elif request.POST['hidden'] == 'dislike':
-				like = get_object_or_404(LikeTuto, tutorial=request.POST['tutoId'], user=request.user)
-				like.delete()
-				return HttpResponse('disliked')
-
-
 	paginatorDate = Paginator(tutorials_list_date, 10)
 	tutorialsDate = paginatorDate.page(1)
 
@@ -166,10 +149,10 @@ def tutorials(request):
 				userfollowstag = True
 
 		temp = []
-		for question in questionsDate:
-			if question.tag1 == currentag or question.tag2 == currentag or question.tag3 == currentag:
+		for tutorial in tutorialsDate:
+			if tutorial.tag1 == currentag or tutorial.tag2 == currentag or tutorial.tag3 == currentag:
 				temp.append(question)
-		questionsDate = temp
+		tutorialsDate = temp
 		
 
 	if 'pageDate' in request.GET:
@@ -198,25 +181,6 @@ def tutorials(request):
 			tutorialsLikes = paginatorLikes.page(1)
 		except EmptyPage:
 			tutorialsLikes = paginatorLikes.page(paginatorLikes.num_pages)
-
-	if request.user.is_authenticated() :
-		for tutorial in tutorialsDate:
-			tutorial.currentUserLikes = False
-			like = LikeTuto.objects.filter(tutorial=tutorial, user=request.user)
-			if like.exists():
-				tutorial.currentUserLikes = True
-
-		for tutorial in tutorialsViews:
-			tutorial.currentUserLikes = False
-			like = LikeTuto.objects.filter(tutorial=tutorial, user=request.user)
-			if like.exists():
-				tutorial.currentUserLikes = True
-
-		for tutorial in tutorialsLikes:
-			tutorial.currentUserLikes = False
-			like = LikeTuto.objects.filter(tutorial=tutorial, user=request.user)
-			if like.exists():
-				tutorial.currentUserLikes = True
 
 	return render_to_response('tutorials/tutorials.html', {'tutorialsDate': tutorialsDate, 'tutorialsViews': tutorialsViews, 'tutorialsLikes': tutorialsLikes, 'tags':tags, 'currentag':currentag, 'userfollowstag':userfollowstag }, context_instance=RequestContext(request))
 	
@@ -345,6 +309,29 @@ def question(request,slug):
 def tutorial(request,slug):
 	tutorial = get_object_or_404(Question, slug=slug)
 	answers = Answer.objects.filter(question=tutorial).order_by('-nb_likes')
+
+	if request.method == 'POST' and 'submit' in request.POST:
+		if request.POST['submit'] == 'likeTutoSubmit':
+			if request.POST['hidden'] == 'like':
+				print('LIKE')
+				like = LikeTuto()
+				like.user = request.user
+				like.tutorial = tutorial
+				like.save()
+				return HttpResponse('liked')
+			elif request.POST['hidden'] == 'dislike':
+				print('DISLIKE')
+				like = get_object_or_404(LikeTuto, tutorial=tutorial, user=request.user)
+				like.delete()
+				return HttpResponse('disliked')
+
+	if request.user.is_authenticated() :
+		like = LikeTuto.objects.filter(tutorial=tutorial, user=request.user)
+		if like.exists():
+			tutorial.currentUserLikes = True
+		else:
+			tutorial.currentUserLikes = False
+
 
 	return render_to_response('tutorials/tutorial.html', {'question': tutorial, 'answers':answers}, context_instance=RequestContext(request))
 

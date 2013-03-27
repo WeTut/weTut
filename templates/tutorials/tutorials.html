@@ -36,13 +36,13 @@
 	 						{% for tag in tags %}
 	 							{% if tag.type %}
 	 								{% if userfollowstag %}
-	 									<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark id="blue" class="followtut">{{tag.name}}</mark></a></li>
+	 									<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="?tag={{tag.id}}"><mark id="blue" class="followtut">{{tag.name}}</mark></a></li>
 	 									{% else %}
-	 										<li><a {% if currentag == tag.id %}class='coucou'{% endif %} href="/questions?tag={{tag.id}}"><mark class="unfollowtut" id="tag_blue">{{tag.name}}</mark></a></li>
+	 										<li><a {% if currentag == tag.id %}class='coucou'{% endif %} href="?tag={{tag.id}}"><mark class="unfollowtut" id="tag_blue">{{tag.name}}</mark></a></li>
 	 								{% endif %}
 	 							{% endif %}
 	 						{% endfor %}
-	 						<li><a {% if currentag == 0 %}class='bold'{% endif %} href="/questions"><mark class="followtut">tous</mark></a></li>
+	 						<li><a {% if currentag == 0 %}class='bold'{% endif %} href="/tutorielss"><mark class="followtut">tous</mark></a></li>
 	 						</ul>
 							{% if user.is_authenticated %}
 								{% if currentag != 0 %}
@@ -52,9 +52,9 @@
 										<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
 										<div class='follow'>
 											{% if userfollowstag %}
-	 									<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="unfollowtut">{{tag.name}}</mark></a></li>
+	 									<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="?tag={{tag.id}}"><mark class="unfollowtut">{{tag.name}}</mark></a></li>
 	 									{% else %}
-	 										<li><a {% if currentag == tag.id %}class='coucou'{% endif %} href="/questions?tag={{tag.id}}"><mark class="followtut">{{tag.name}}</mark></a></li>
+	 										<li><a {% if currentag == tag.id %}class='coucou'{% endif %} href="?tag={{tag.id}}"><mark class="followtut">{{tag.name}}</mark></a></li>
 	 								{% endif %}
 										</div>
 									</form>
@@ -70,9 +70,9 @@
 	 						{% for tag in tags %}
 	 							{% if not tag.type %}
 	 								{% if userfollowstag %}
-	 									<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="followtut">{{tag.name}}</mark></a></li>
+	 									<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="?tag={{tag.id}}"><mark class="followtut">{{tag.name}}</mark></a></li>
 	 									{% else %}
-	 										<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="unfollowtut">{{tag.name}}</mark></a></li>
+	 										<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="?tag={{tag.id}}"><mark class="unfollowtut">{{tag.name}}</mark></a></li>
 	 								{% endif %}
 	 							{% endif %}
 	 						{% endfor %}
@@ -162,17 +162,7 @@
 								<div class="views"><p>{{ tutorial.getLikesCount }}</p></div>
 							</div>
 							</a>
-						</div>
-						{% if user.is_authenticated %}
-							<form  class="likeTuto" action="" method="post" enctype="multipart/form-data">
-							{% csrf_token %}
-							<input class="tutoId" type="hidden" name="tutoId" value="{{tutorial.id}}"></input>
-							<div class='like'>
-								<input name="hidden" type="hidden" value="{% if tutorial.currentUserLikes %}dislike{% else %}like{% endif %}" />
-								<button class='btn-{% if tutorial.currentUserLikes %}ok{% else %}nok{% endif %}' name='likeTutoSubmit' type="submit" value="likeTutoSubmit">{% if tutorial.currentUserLikes %}Je n'aime plus{% else %}J'aime{% endif %}</button>
-							</div>
-							</form>
-						{% endif %}
+						</div>						
 					</div>
 				</div>
 		{% endfor %}
@@ -268,16 +258,6 @@
 							</div>
 							</a>
 						</div>
-						{% if user.is_authenticated %}
-							<form  class="likeTuto" action="" method="post" enctype="multipart/form-data">
-							{% csrf_token %}
-							<input class="tutoId" type="hidden" name="tutoId" value="{{tutorial.id}}"></input>
-							<div class='like'>
-								<input name="hidden" type="hidden" value="{% if tutorial.currentUserLikes %}dislike{% else %}like{% endif %}" />
-								<button class='btn-{% if tutorial.currentUserLikes %}ok{% else %}nok{% endif %}' name='likeTutoSubmit' type="submit" value="likeTutoSubmit">{% if tutorial.currentUserLikes %}Je n'aime plus{% else %}J'aime{% endif %}</button>
-							</div>
-							</form>
-						{% endif %}
 					</div>
 				</div>
 		{% endfor %}

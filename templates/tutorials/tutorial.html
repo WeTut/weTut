@@ -58,6 +58,19 @@
 						<div class="fb-like" data-href="/questions/{{question.slug}}" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-action="recommend" style="margin-bottom:10px;"></div>
 						
 						<a href="https://twitter.com/share" class="twitter-share-button" data-url="/questions/{{question.slug}}" data-text="Découvre cette page trop cool !" data-lang="fr">Tweeter</a>
+
+						{% if user.is_authenticated %}
+							{% ifnotequal user question.user %}
+							<form  class="likeTuto" action="" method="post" enctype="multipart/form-data">
+							{% csrf_token %}
+							<div class='like'>
+								<input name="hidden" type="hidden" value="{% if question.currentUserLikes %}dislike{% else %}like{% endif %}" />
+								<button class='btn-{% if question.currentUserLikes %}ok{% else %}nok{% endif %}' name='likeTutoSubmit' type="submit" value="likeTutoSubmit">{% if question.currentUserLikes %}Je n'aime plus{% else %}J'aime{% endif %}</button>
+							</div>
+							</form>
+							{% endifnotequal %}
+						{% endif %}
+
 						<div class="abus"><p style="color:#01c6e8;">Signaler un abus</p></div>
 					</div>
 				</div>

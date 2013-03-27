@@ -55,20 +55,18 @@ $(document).ready(function(){
 
 	$('.likeTuto').submit(function(){
 		var csrf = $(this).find('input[name=csrfmiddlewaretoken]').val();
-		var tutoId = $(this).find('input.tutoId').val();
 		var hidden = $(this).find('input[name=hidden]').val();
 		
 		var divcontent = "<input name='hidden' type='hidden' value='like' /><button class='btn-nok' name='submit' type='submit' value='likeTutoSubmit'>J'aime</button>";		
 		if (hidden == 'like')
 			divcontent = "<input name='hidden' type='hidden' value='dislike' /><button class='btn-ok' name='submit' type='submit' value='likeTutoSubmit'>Je n'aime plus</button>";	
 
-
 		$.ajax({
 		  	type: "POST",
 			url: "",
-		  	data: { submit:'likeTutoSubmit', hidden: hidden, csrfmiddlewaretoken:csrf, tutoId:tutoId}
+		  	data: { submit:'likeTutoSubmit', hidden: hidden, csrfmiddlewaretoken:csrf }
 		}).done(function( msg ) {
-			$('#tutorial'+tutoId+' .like').html(divcontent);
+			$('.likeTuto .like').html(divcontent);
 			return false;			
 		});
 
