@@ -121,7 +121,7 @@ li.notif img{margin-top:17px;}
 
 #tags_notifs, #questions_notifs{ width:552px; height:228; background-color:#FFFFFF; }
 
-
+.commentHead{ cursor:pointer;}
 
 #questions_filter { margin-right:10px; }
 #questions_filter, #tags_filter{ float:left; width:271px; height:45px; border-top-left-radius:3px; border-top-right-radius:3px; }
