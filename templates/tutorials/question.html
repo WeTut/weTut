@@ -19,18 +19,6 @@
 			
 			<div id="question">
 
-			{% if question.user == user %}					
-				<!-- If the authentificated user is the author -->
-				{% if not ready %}
-				<a href='/questions/{{question.slug}}?ready=1' class='btn btn-success btn-block vcenter' id='usefullValidate'>J'ai eu ma réponse</a>
-				{% else %}
-				<a href='/questions/{{question.slug}}' class='btn btn-success btn-block vcenter' id='usefullValidate'>Finalement non !</a>
-				<form method="post" class="validateform" action="">
-				{% csrf_token %}
-				<button class='btn btn-primary btn-block vcenter pendingValidation' name='validateSubmit' type='submit' value='validateSubmit'>Check !</button>
-				{% endif %}
-
-			{% endif %}
 
 
 				<div class="body_question">
@@ -38,7 +26,7 @@
 						<div class="member">
 							<div class="image"><img src="{{STATIC_URL}}images/membre_de_luxe.png" /></div>
 							<div class="infos">
-								<div class="name"><p>Posté par <a href="">{{question.user.username}}</a></p></div>
+								<div class="name"><p>Posté par <a href="/members/{{question.user}}">{{question.user}}</a></p></div>
 								<div class="date"><p>le {{question.date}}</p></div>
 							</div>
 						</div>
@@ -46,32 +34,73 @@
 					</div>
 					<div class="right_question_body">
 						<div class="title"><p>{{question.title}}</p></div>
-						<div class="tags"></div>
+						<div class="tags">
+						<ul>
+							<li><mark>{{question.tag1}}</mark></li> 
+							<li><mark>{{question.tag2}}</mark></li> 
+							<li><mark>{{question.tag3}}</mark></li>
+							<li style="clear:both;"></li>
+						</ul>
+					</div>
 						<div class="text">
 							<p>{{question.message}}</p>
 						</div>
 						<div class="medias">
 							<p>Autres Medias :</p>
-							<div class="other_media"><img src="{{STATIC_URL}}images/pictos/play.png" /></div>
+							<div class="other_media"><img src="{{STATIC_URL}}}images/pictos/play.png" /></div>
 							<div class="supermedia"></div>
 							<div class="supermedia"></div>
 							<div class="supermedia"></div>
 						</div>
-						<div class="abus"><p>Signaler un abus</p></div>
 					</div>
-
-					<div class="fb-like" data-href="http://127.0.0.1:8000/questions/{{question.slug}}" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-action="recommend"></div>
-					
-					<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://127.0.0.1:8000/questions/{{question.slug}}" data-text="Découvre cette page trop cool !" data-lang="fr">Tweeter</a>
-
-
+					<div class="final_question_body">
+									
+						<div class="fb-like" data-href="/questions/{{question.slug}}" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-action="recommend" style="margin-bottom:10px;"></div>
+						
+						<a href="https://twitter.com/share" class="twitter-share-button" data-url="/questions/{{question.slug}}" data-text="Découvre cette page trop cool !" data-lang="fr">Tweeter</a>
+						<div class="abus"><p>Signaler un abus</p></div>
+						</div>
+				</div>
+			<div class='clear'></div>
+			
+			<div class='row-fluid'>
+				<div class="left_question_body">
+					<div class="direct_answer">
+						{% if user.is_authenticated %}
+							<a href="/questions/ask"><p>Répondre</p></a>
+						{%  else %}
+							<a href="#logInscriptionModal" role="button" data-toggle="modal" data-target="#logInscriptionModal"><p>Répondre</p></a>
+						{% endif %}
+					</div>
+				</div>
+				<div class="right_question_body">
+					<div class='row-fluid'>
+					{% if question.user == user %}					
+				<!-- If the authentificated user is the author -->
+					{% if not ready %}
+						<div class="question_ok">
+							<a href='/questions/{{question.slug}}?ready=1' class='btn_validate_question' id='usefullValidate'>J'ai eu ma réponse</a>
+						</div>
+						{% else %}
+						<div class="question_ok">
+							<a href='/questions/{{question.slug}}' class='btn_validate_question' id='usefullValidate'>Finalement non !</a>
+						</div>
+						<form method="post" class="validateform" action="">
+						{% csrf_token %}
+						<div class="question_check">
+							<button class='btn_validate_question_check' name='validateSubmit' type='submit' value='validateSubmit' id='validateSubmit'>OK !</button>
+						</div>
+						{% endif %}
+					{% endif %}
+					</div>
 				</div>
 			</div>	
+
+			</div>			
 		</div>	
 	</div>
-		
+<div class="clear"></div>
 <!-- END BANNER -->		
-
 		<div class="content">
 
 <!-- START ANSWERS -->
@@ -125,9 +154,9 @@
 								<div class='image'><img src="{{STATIC_URL}}images/membre_de_luxe.png" /></div>
 							</div>
 							<div class="body_answer">
-								<div class="date"><p>Par <a href=""> {{ answer.user }}</a> le {{ answer.date }}</p></div>
+								<div class="date"><p>Par <a href="/members/{{answer.user}}"> {{ answer.user }}</a> le {{ answer.date }}</p></div>
 								<div class='text'>
-									<p>{{ answer.answer|truncatechars:400|safe }}
+									<p>{{ answer.answer|safe }}
 									</p>
 								</div>
 								<div class='abus'><p>Signaler un abus</p></div>
@@ -160,7 +189,7 @@
 									<img src="{{STATIC_URL}}images/membre_de_luxe.png" />
 								</div>
 								<div class='texte' >
-									<div class="name"><p>Posté par <a href="">{{comment.user}}</a> le {{comment.date}}</p></div>
+									<div class="name"><p>Posté par <a href="/members/{{comment.user}}">{{comment.user}}</a> le {{comment.date}}</p></div>
 									<div class="text_comment"><p>{{ comment.comment}}</p></div>
 									<div class='abus'><p>Signaler un abus</p></div>
 								</div>
@@ -216,7 +245,7 @@
 						{% if user.is_authenticated %}
 							<button class='wetut' name='answersubmit' type="submit" value="answerSubmit">Répondre</button>
 						{% else %}
-							<a href="#loginModal" role="button" data-toggle="modal" data-target="#loginModal" class="first">Connexion</a>
+							<a href="#logInscriptionModal" role="button" data-toggle="modal" data-target="#logInscriptionModal" class="first">Connexion / Inscription</a>
 						{% endif %}
 					</div>
 				</div>
@@ -262,7 +291,6 @@ $(".comment_read").click(
 		}
 	});
 	$(document).ready(function() {
-		$('form div.theAnswer').css('background-color','white');
 		$('div.theAnswer').children().empty();
 	});
 </script>

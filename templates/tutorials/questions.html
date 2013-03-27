@@ -7,68 +7,201 @@
  <!-- START BANNER--> 
 
  		<div class="banner_questions" style="height:300px;">
- 			<div class="content_banner_questions" style="height:300px;">
+ 			<div class="content_banner_questions" style="height:300px; width:940px;">
  				<div class="questions_filters">
  					<div class="title_tri">Trier par</div>
  					<div class="box_tri">
 	 					<div class="famous">
 	 						<ul>
-	 							<li>Date</li>
-	 							<li>Popularité</li>
-	 							<li></li>
+	 							<li style="margin-top:10px;"><a href=".questionsDate" classe="date_tri" >Date</a></li>
+	 							<li style="margin-top:30px;"><a href=".questionsViews">Popularité</a></li>
+	 							<li style="margin-top:30px;"><a href=".questionsAnswers">Réponses</a></li>
+	 						</ul>
 	 					</div>
-	 					<div class="logiciel"></div>
-	 					<div class="technique"></div>
-	 				</div>
- 						
-					<form id='filterform' action="" method="POST">
-						{% csrf_token %}
-				        <ul>
-				        {{ filterform.as_ul}}	        
-				        </ul>
-				        <input name="submit" type="hidden" value="filterSubmit" />
-			        </form>
-			
-			
-			        <div id='filtertag' >
-						{% for tag in tags %}
-							<a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}">{{tag.name}}</a> | 
-						{% endfor %}
-							<a {% if currentag == 0 %}class='bold'{% endif %} href="/questions">tous</a>
-			        </div>
-			        <br />
-			
-			        
-			        {% if user.is_authenticated %}
-						{% if currentag != 0 %}
-						<div>
-							<form  class="followTagForm" action="" method="post" enctype="multipart/form-data">
-								{% csrf_token %}
-								<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
-								<div class='follow'>
-									<input name="hidden" type="hidden" value="{% if userfollowstag %}unfollow{% else %}follow{% endif %}" />
-									<button class='btn btn-{% if userfollowstag %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followTagSubmit">{% if userfollowstag %}Ne plus suivre{% else %}Suivre ce tag{% endif %}</button>
+	 					<div class="separator_box_tri_ask"></div>
+	 					<div class="logiciel">
+	 						<div id='filtertag' >
+	 						<ul>
+	 						{% for tag in tags %}
+	 							{% if tag.type %}
+	 								{% if userfollowstag %}
+	 									<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="follow">{{tag.name}}</mark></a></li>
+	 									{% else %}
+	 										<li><a {% if currentag == tag.id %}class='coucou'{% endif %} href="/questions?tag={{tag.id}}"><mark class="unfollow">{{tag.name}}</mark></a></li>
+	 								{% endif %}
+	 							{% endif %}
+	 						{% endfor %}
+	 						<li><a {% if currentag == 0 %}class='bold'{% endif %} href="/questions"><mark class="follow">tous</mark></a></li>
+	 						</ul>
+							{% if user.is_authenticated %}
+								{% if currentag != 0 %}
+								<div>
+									<form  class="followTagForm" action="" method="post" enctype="multipart/form-data">
+										{% csrf_token %}
+										<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
+										<div class='follow'>
+											{% if userfollowstag %}
+	 									<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="unfollow">{{tag.name}}</mark></a></li>
+	 									{% else %}
+	 										<li><a {% if currentag == tag.id %}class='coucou'{% endif %} href="/questions?tag={{tag.id}}"><mark class="follow">{{tag.name}}</mark></a></li>
+	 								{% endif %}
+										</div>
+									</form>
 								</div>
-							</form>
-						</div>
-			        	{% endif %}
-					{% endif %}	
-				</div>
+					        	{% endif %}
+						{% endif %}	
+							</div>
+	 					</div>
+	 					<div class="separator_box_tri_ask"></div>
+	 					<div class="technique">
+	 						<div id='filtertag' >
+	 						<ul>
+	 						{% for tag in tags %}
+	 							{% if not tag.type %}
+	 								{% if userfollowstag %}
+	 									<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="follow">{{tag.name}}</mark></a></li>
+	 									{% else %}
+	 										<li><a {% if currentag == tag.id %}class='bold'{% endif %} href="/questions?tag={{tag.id}}"><mark class="unfollow">{{tag.name}}</mark></a></li>
+	 								{% endif %}
+	 							{% endif %}
+	 						{% endfor %}
+	 						<li><a {% if currentag == 0 %}class='bold'{% endif %} href="/questions"><mark class="follow">tous</mark></a></li>
+	 						</ul>
+							{% if user.is_authenticated %}
+								{% if currentag != 0 %}
+								<div>
+									<form  class="followTagForm" action="" method="post" enctype="multipart/form-data">
+										{% csrf_token %}
+										<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
+										<div class='follow'>
+											<input name="hidden" type="hidden" value="{% if userfollowstag %}unfollow{% else %}follow{% endif %}" />
+											<button class='btn btn-{% if userfollowstag %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followTagSubmit">{% if userfollowstag %}Ne plus suivre{% else %}Suivre ce tag{% endif %}</button>
+										</div>
+									</form>
+								</div>
+					        	{% endif %}
+						{% endif %}	
+							</div>
+	 					</div>
+	 				</div>
+ 						</div>	
+					<div class="clear"></div>
 			</div>					
 		</div>
  <!-- END BANNER-->      
 
 <div class="content">
-	<div class="ask_questions_button"><a href="/questions/ask"><p>Poser une question</p></a></div>
+	
+	<div class="ask_questions_button">
+	{% if user.is_authentificated %}
+		<a href="/questions/ask"><p>Poser une question</p></a>
+	{%  else %}
+		<a href="#logInscriptionModal" role="button" data-toggle="modal" data-target="#logInscriptionModal"><p>Poser une question</p></a>
+	{% endif %}
+	</div>
 	<div id="questions">
-    {% if not questions %}
+
+
+	<div class="listQuestions questionsDate">
+    {% if not questionsDate %}
     	<div style="position:relative;">
     		<p>Il n'y a pas de question dans cette catégorie</p><br />
     	</div>
 
     {% else %}
 
-	{% for question in questions %}
+	{% for question in questionsDate %}
+			<div id="question{{question.id}}" class="one_question">
+				<div class="img">
+					<a href='{{question.slug}}'>
+									<img class='image_one_question' src='{{question.picture.thumbnail.url}}'/>
+								</a>
+				</div>
+				<div class="member">
+					<div class="img_member">
+						{% if question.user.profile.avatar.url != "" %}
+     						<img src='{{question.user.profile.avatar.url}}'/>
+						{% else %}
+							<img src="{{MEDIA_URL}}members/avatar.jpg"/>
+						{% endif %}
+					</div>
+					<div class="infos_member">
+						<div class="view">
+							<img src="{{STATIC_URL}}images/pictos/view_questions_wetut.png">
+							<p id="#search_blue">{{ question.views }}</p>
+						</div>
+						<div class="responses">
+							<img src="{{STATIC_URL}}images/pictos/bulle_questions_wetut.png">
+							<p id="#search_blue">{{ question.getAnswersCount }}</p>
+						</div>
+					</div>
+				</div>
+				<div class="infos_questions">
+					<div class="title"><a href='{{question.slug}}'>{{ question.title }}</a></div>
+					<div class="date"><p>Par {{question.user}}</p> <p style="font-style:italic; font-size:10px; margin-top:1px;">le {{question.date}}</p></div>
+					
+					<div class="tags">
+						<ul>
+							<li><mark>{{question.tag1}}</mark></li> 
+							<li><mark>{{question.tag2}}</mark></li> 
+							<li><mark>{{question.tag3}}</mark></li>
+							<li style="clear:both;"></li>
+						</ul>
+					</div>
+					<div class="text"><p style="clear:both;">{{ question.message|truncatechars:80 }}</p></div>
+				</div>
+				<div class="action_member">
+					<a href="/questions/{{question.slug}}">
+					<div class="answer">
+						<img src="{{STATIC_URL}}images/pictos/answer_picto.png"><p>Je sais !</p>
+					</div>
+					</a>
+					<div class="question_follow">
+					{% if user.is_authenticated %}
+						<form  class="followForm" action="" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+						<input class="questionId" type="hidden" name="questionId" value="{{question.id}}"></input>
+						<div class='follow'>
+							<input name="hidden" type="hidden" value="{% if question.currentUserFollows %}unfollow{% else %}follow{% endif %}" />
+							<button class='btn-{% if question.currentUserFollows %}ok{% else %}nok{% endif %}' name='submit' type="submit" value="followSubmit">{% if question.currentUserFollows %}Ne plus suivre{% else %}Suivre{% endif %}</button>
+						</div>
+						</form>
+					{% endif %}	
+					</div>	
+			</div>
+			</div>
+	{% endfor %}
+
+{% endif %}
+	
+
+	<div class="pagination">
+	    <span class="step-links">
+	        {% if questionsDate.has_previous %}
+	            <a href="?pageDate={{ questionsDate.previous_page_number }}">précédent</a>
+	        {% endif %}
+
+	        <span class="current">
+	            Page {{ questionsDate.number }} sur {{ questionsDate.paginator.num_pages }}
+	        </span>
+
+	        {% if questionsDate.has_next %}
+	            <a href="?pageDate={{ questionsDate.next_page_number }}">suivant</a>
+	        {% endif %}
+	    </span>
+	</div>
+	</div>
+
+
+	<div class="listQuestions questionsViews" style="display:none;">
+    {% if not questionsViews %}
+    	<div style="position:relative;">
+    		<p>Il n'y a pas de question dans cette catégorie</p><br />
+    	</div>
+
+    {% else %}
+
+	{% for question in questionsViews %}
 			<div id="question{{question.id}}" class="one_question">
 				<div class="img">
 					<a href='{{question.slug}}'>
@@ -123,37 +256,156 @@
 	{% endfor %}
 
 {% endif %}
-	</div>
+	
 
 	<div class="pagination">
 	    <span class="step-links">
-	        {% if questions.has_previous %}
-	            <a href="?page={{ questions.previous_page_number }}">précédent</a>
+	        {% if questionsViews.has_previous %}
+	            <a href="?pageViews={{ questionsViews.previous_page_number }}">précédent</a>
 	        {% endif %}
 
 	        <span class="current">
-	            Page {{ questions.number }} sur {{ questions.paginator.num_pages }}
+	            Page {{ questionsViews.number }} sur {{ questionsViews.paginator.num_pages }}
 	        </span>
 
-	        {% if questions.has_next %}
-	            <a href="?page={{ questions.next_page_number }}">suivant</a>
+	        {% if questionsViews.has_next %}
+	            <a href="?pageViews={{ questionsViews.next_page_number }}">suivant</a>
 	        {% endif %}
 	    </span>
 	</div>
+	</div>
 
 
-	<div class="clear"></div>
-	<div class="ask_questions_button"><a href="/questions/ask"><p>Poser une question</p></a></div>
+	<div class="listQuestions questionsAnswers" style="display:none;">
+    {% if not questionsAnswers %}
+    	<div style="position:relative;">
+    		<p>Il n'y a pas de question dans cette catégorie</p><br />
+    	</div>
+
+    {% else %}
+
+	{% for question in questionsAnswers %}
+			<div id="question{{question.id}}" class="one_question">
+				<div class="img">
+					<a href='{{question.slug}}'>
+									<img class='image_one_question' src='{{question.picture.thumbnail.url}}'/>
+								</a>
+				</div>
+				<div class="member">
+					<div class="img_member">
+						{% if question.user.profile.avatar.url != "" %}
+     						<img src='{{question.user.profile.avatar.url}}'/>
+						{% else %}
+							<img src="{{MEDIA_URL}}members/avatar.jpg"/>
+						{% endif %}
+					</div>
+					<div class="infos_member">
+						<div class="view">
+							<img src="{{STATIC_URL}}images/pictos/view_questions_wetut.png">
+							<p id="#search_blue">{{ question.views }}</p>
+						</div>
+						<div class="responses">
+							<img src="{{STATIC_URL}}images/pictos/bulle_questions_wetut.png">
+							<p id="#search_blue">{{ question.getAnswersCount }}</p>
+						</div>
+					</div>
+				</div>
+				<div class="infos_questions">
+					<div class="title"><a href='{{question.slug}}'>{{ question.title }}</a></div>
+					<div class="date"><p>Par {{question.user}}</p> <p style="font-style:italic; font-size:10px; margin-top:1px;">le {{question.date}}</p></div>
+					<div class="tags"></div>
+					<div class="text"><p>{{ question.message|truncatechars:80 }}</p></div>
+				</div>
+				<div class="action_member">
+					<a href="/questions/{{question.slug}}">
+					<div class="answer">
+						<img src="{{STATIC_URL}}images/pictos/answer_picto.png"><p>Je sais !</p>
+					</div>
+					</a>
+					<div class="question_follow">
+					{% if user.is_authenticated %}
+						<form  class="followForm" action="" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+						<input class="questionId" type="hidden" name="questionId" value="{{question.id}}"></input>
+						<div class='follow'>
+							<input name="hidden" type="hidden" value="{% if question.currentUserFollows %}unfollow{% else %}follow{% endif %}" />
+							<button class='btn-{% if question.currentUserFollows %}ok{% else %}nok{% endif %}' name='submit' type="submit" value="followSubmit">{% if question.currentUserFollows %}Ne plus suivre{% else %}Suivre{% endif %}</button>
+						</div>
+						</form>
+					{% endif %}	
+					</div>	
+			</div>
+			</div>
+	{% endfor %}
+
+{% endif %}
+	
+
+	<div class="pagination">
+	    <span class="step-links">
+	        {% if questionsAnswers.has_previous %}
+	            <a href="?pageAnswers={{ questionsAnswers.previous_page_number }}">précédent</a>
+	        {% endif %}
+
+	        <span class="current">
+	            Page {{ questionsAnswers.number }} sur {{ questionsAnswers.paginator.num_pages }}
+	        </span>
+
+	        {% if questionsAnswers.has_next %}
+	            <a href="?pageAnswers={{ questionsAnswers.next_page_number }}">suivant</a>
+	        {% endif %}
+	    </span>
+	</div>
+	</div>
 </div>
 
 
+	<div class="clear"></div>
+	<div class="ask_questions_button">
+		{% if user.is_authentificated %}
+			<a href="/questions/ask"><p>Poser une question</p></a>
+		{%  else %}
+			<a href="#logInscriptionModal" role="button" data-toggle="modal" data-target="#logInscriptionModal"><p>Poser une question</p></a>
+		{% endif %}
+	</div>
+</div>
+
 <script type="text/javascript">
-$(document).ready( function(){
- 	$('#filterform option[value={{filtervalue}}]').attr("selected", "selected");
-}); 
+					$(document).ready(function() {
+	        	 		var mainPage = window.location.href.split('questions')[1];
+
+	        	 		$('.box_tri .famous li a').click(function() {
+		        	 		var url = $(this).attr('href');
+		        	 		$('div.listQuestions').hide();
+		        	 		$(url).show();
+		        			return false;
+	        	 		});
 
 
+	        	 		if(mainPage != '/') {
+
+	        	 			var currentChoice = window.location.href.split('?')[1].split('=')[0];
+							
+							if(currentChoice=='pageDate') {
+								$('div.date_tri').css('color','white');
+								$('div.listQuestions').hide();
+		        	 			$('div.questionsDate').show();
+							}
+
+							if(currentChoice=='pageViews') {
+								$('div.listQuestions').hide();
+		        	 			$('div.questionsViews').show();
+							}
+
+							if(currentChoice=='pageAnswers') {
+								$('div.listQuestions').hide();
+		        	 			$('div.questionsAnswers').show();
+							}
+	        	 		}
+
+					});
 </script>
+
 
 
 {% endblock content %}

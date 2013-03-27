@@ -34,11 +34,13 @@ def home(request):
 	questionsViews = Question.objects.filter(validate=0).order_by('-views')[:3]
 	tutorialsDate = Question.objects.filter(validate=1).order_by('-date')[:3]
 	tutorialsLike = Question.objects.filter(validate=1).order_by('-liketuto')[:3]
-	actualityQuestion = ActualityQuestion.objects.filter(user=request.user).order_by('-date')[:3]
-	actualityTag = ActualityTag.objects.filter(user=request.user).order_by('-date')[:3]
 	membersPopulaires = Profile.objects.order_by('-nb_likes')[:4]
-
-	return render_to_response('general/home.html', {'questionsDate': questionsDate, 'questionsViews': questionsViews, 'tutorialsDate':tutorialsDate, 'tutorialsLike':tutorialsLike, 'actualityQuestion':actualityQuestion, 'actualityTag':actualityTag, 'membersPopulaires':membersPopulaires}, context_instance=RequestContext(request))
+	if request.user.is_authenticated():
+		actualityQuestion = ActualityQuestion.objects.filter(user=request.user).order_by('-date')[:3]
+		actualityTag = ActualityTag.objects.filter(user=request.user).order_by('-date')[:3]
+		return render_to_response('general/home.html', {'questionsDate': questionsDate, 'questionsViews': questionsViews, 'tutorialsDate':tutorialsDate, 'tutorialsLike':tutorialsLike, 'actualityQuestion':actualityQuestion, 'actualityTag':actualityTag, 'membersPopulaires':membersPopulaires}, context_instance=RequestContext(request))
+	else:
+		return render_to_response('general/home.html', {'questionsDate': questionsDate, 'questionsViews': questionsViews, 'tutorialsDate':tutorialsDate, 'tutorialsLike':tutorialsLike, 'membersPopulaires':membersPopulaires}, context_instance=RequestContext(request))
 
 def login_view(request):
 	if request.method == 'POST': # If the form has been submitted...
@@ -54,7 +56,7 @@ def login_view(request):
 				if user.is_active:
 					login(request,user)
 					request.session['profile_user'] = user.get_profile()
-					return HttpResponseRedirect('/home/') # Redirect after POST
+					return HttpResponseRedirect('/') # Redirect after POST
 
 		else:
 			form = AuthForm() # An unbound form

@@ -42,7 +42,7 @@ class Question (models.Model):
 
 
 class Answer (models.Model):
-	answer = models.TextField(default="Entrez votre reponse ici")
+	answer = models.TextField()
 	date = models.DateField()
 
 	user = models.ForeignKey(User)

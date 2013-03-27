@@ -12,15 +12,13 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'weTut.views.start', name='start'),
+    url(r'^$', 'weTut.views.home', name='home'),
 
     url(r'subscribe', 'weTut.views.subscribe', name='subscribe'),
 
     #url(r'^register','weTut.views.register',{'backend': 'registration.backends.default.DefaultBackend'},name='register'),
     #url(r'register', register,{'backend': 'registration.backends.default.DefaultBackend'},name='register'),
     url(r'^accounts/', include('registration.urls')),
-
-    url(r'home', 'weTut.views.home', name='home'),
     url(r'questions/', include ('tutorials.urls')),
 
     url(r'^tutoriels/$', 'tutorials.views.tutorials', name='tutorials'), #list of tutorials

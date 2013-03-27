@@ -14,16 +14,14 @@ from tutorials.models import *
 from members.models import Profile
 
 def questions(request):
-	
-	if 'filterQuestion' not in request.session:
-		request.session['filterQuestion'] = '-date'
 
-	filterform = FilterForm()
 	currentag = 0	
 	tags = Tag.objects.all()
 	userfollowstag = False
 
-	questions_list = Question.objects.filter(validate=False).order_by(request.session['filterQuestion'])	
+	questions_list_date = Question.objects.filter(validate=False).order_by('-date')	
+	questions_list_views = Question.objects.filter(validate=False).order_by('-views')
+	questions_list_answers = Question.objects.filter(validate=False).order_by('-answers')	
  
 	if request.method == 'POST' and 'submit' in request.POST:
 
@@ -53,21 +51,39 @@ def questions(request):
 					follow.delete()
 					return HttpResponse('deleted')
 
-		if request.POST['submit'] == 'filterSubmit': 
-			questions_list = Question.objects.filter(validate=False).order_by(request.POST['filter'])
-			request.session['filterQuestion'] = request.POST['filter']
 
-
-	paginator = Paginator(questions_list, 10)
-	questions = paginator.page(1)
-	if 'page' in request.GET:
-		page = request.GET.get('page')
+	paginatorDate = Paginator(questions_list_date, 10)
+	questionsDate = paginatorDate.page(1)
+	if 'pageDate' in request.GET:
+		page = request.GET.get('pageDate')
 		try:
-			questions = paginator.page(page)
+			questionsDate = paginatorDate.page(page)
 		except PageNotAnInteger:
-			questions = paginator.page(1)
+			questionsDate = paginatorDate.page(1)
 		except EmptyPage:
-			questions = paginator.page(paginator.num_pages)
+			questionsDate = paginatorDate.page(paginatorDate.num_pages)
+
+	paginatorViews = Paginator(questions_list_views, 10)
+	questionsViews = paginatorViews.page(1)
+	if 'pageViews' in request.GET:
+		page = request.GET.get('pageViews')
+		try:
+			questionsViews = paginatorViews.page(page)
+		except PageNotAnInteger:
+			questionsViews = paginatorViews.page(1)
+		except EmptyPage:
+			questionsViews = paginatorViews.page(paginatorViews.num_pages)
+
+	paginatorAnswers = Paginator(questions_list_answers, 10)
+	questionsAnswers = paginatorAnswers.page(1)
+	if 'pageAnswers' in request.GET:
+		page = request.GET.get('pageAnswers')
+		try:
+			questionsAnswers = paginatorAnswers.page(page)
+		except PageNotAnInteger:
+			questionsAnswers = paginatorAnswers.page(1)
+		except EmptyPage:
+			questionsAnswers = paginatorAnswers.page(paginatorAnswers.num_pages)
 
 	if 'tag' in request.GET:
 		currentag = int(request.GET['tag'])
@@ -78,39 +94,47 @@ def questions(request):
 				userfollowstag = True
 
 		temp = []
-		for question in questions:
+		for question in questionsDate:
 			if question.tag1 == currentag or question.tag2 == currentag or question.tag3 == currentag:
 				temp.append(question)
-		questions = temp
+		questionsDate = temp
 
 
 	if request.user.is_authenticated() :
-		for question in questions:
+		for question in questionsDate:
 			question.currentUserFollows = False
 			follow = FollowQuestion.objects.filter(question=question, user=request.user)
 			if follow.exists():
-				question.currentUserFollows = True	
+				question.currentUserFollows = True
 
-	return render_to_response('tutorials/questions.html', {'questions': questions, 'filterform':filterform, 'tags':tags, 'currentag':currentag, 'userfollowstag':userfollowstag, 'filtervalue':request.session['filterQuestion'] }, context_instance=RequestContext(request))
+		for question in questionsViews:
+			question.currentUserFollows = False
+			follow = FollowQuestion.objects.filter(question=question, user=request.user)
+			if follow.exists():
+				question.currentUserFollows = True
+
+		for question in questionsAnswers:
+			question.currentUserFollows = False
+			follow = FollowQuestion.objects.filter(question=question, user=request.user)
+			if follow.exists():
+				question.currentUserFollows = True		
+
+	return render_to_response('tutorials/questions.html', {'questionsDate': questionsDate, 'questionsViews': questionsViews, 'questionsAnswers': questionsAnswers, 'tags':tags, 'currentag':currentag, 'userfollowstag':userfollowstag }, context_instance=RequestContext(request))
 
 def tutorials(request):
 
-	filterform = FilterForm()
-
-	if 'filterTuto' not in request.session:
-		request.session['filterTuto'] = '-date'
-
-	tutorials_list = Question.objects.filter(validate=True).order_by(request.session['filterTuto'])
+	currentag = 0	
+	tags = Tag.objects.all()
+	userfollowstag = False
+	
+	tutorials_list_date = Question.objects.filter(validate=True).order_by('-date')
+	tutorials_list_views = Question.objects.filter(validate=True).order_by('-views')
+	tutorials_list_likes = Question.objects.filter(validate=True).order_by('-liketuto')
+	
 	print ("REQUEST.POST ",request.POST)
 	if request.method == 'POST' and 'submit' in request.POST:
 
-
-		if request.POST['submit'] == 'filterSubmit':
-			print ("FILTER")
-			tutorials_list = Question.objects.filter(validate=True).order_by(request.POST['filter'])
-			request.session['filterTuto'] = request.POST['filter']
-
-		elif request.POST['submit'] == 'likeTutoSubmit':
+		if request.POST['submit'] == 'likeTutoSubmit':
 			print ("LIKE")
 			if request.POST['hidden'] == 'like':
 				like = LikeTuto()
@@ -124,25 +148,77 @@ def tutorials(request):
 				return HttpResponse('disliked')
 
 
-	paginator = Paginator(tutorials_list, 10)
-	tutorials = paginator.page(1)
-	if 'page' in request.GET:
-		page = request.GET.get('page')
+	paginatorDate = Paginator(tutorials_list_date, 10)
+	tutorialsDate = paginatorDate.page(1)
+
+	paginatorViews = Paginator(tutorials_list_views, 10)
+	tutorialsViews = paginatorViews.page(1)
+
+	paginatorLikes = Paginator(tutorials_list_likes, 10)
+	tutorialsLikes = paginatorLikes.page(1)
+	
+	if 'tag' in request.GET:
+		currentag = int(request.GET['tag'])
+
+		if request.user.is_authenticated() :
+			followTag = FollowTag.objects.filter(tag=currentag, user=request.user)
+			if followTag.exists():
+				userfollowstag = True
+
+		temp = []
+		for question in questionsDate:
+			if question.tag1 == currentag or question.tag2 == currentag or question.tag3 == currentag:
+				temp.append(question)
+		questionsDate = temp
+		
+
+	if 'pageDate' in request.GET:
+		page = request.GET.get('pageDate')
 		try:
-			tutorials = paginator.page(page)
+			tutorialsDate = paginatorDate.page(page)
 		except PageNotAnInteger:
-			tutorials = paginator.page(1)
+			tutorialsDate = paginatorDate.page(1)
 		except EmptyPage:
-			tutorials = paginator.page(paginator.num_pages)
+			tutorialsDate = paginatorDate.page(paginatorDate.num_pages)
+
+	if 'pageViews' in request.GET:
+		page = request.GET.get('pageViews')
+		try:
+			tutorialsViews = paginatorViews.page(page)
+		except PageNotAnInteger:
+			tutorialsViews = paginatorViews.page(1)
+		except EmptyPage:
+			tutorialsViews = paginatorViews.page(paginatorViews.num_pages)
+
+	if 'pageLikes' in request.GET:
+		page = request.GET.get('pageLikes')
+		try:
+			tutorialsLikes = paginatorLikes.page(page)
+		except PageNotAnInteger:
+			tutorialsLikes = paginatorLikes.page(1)
+		except EmptyPage:
+			tutorialsLikes = paginatorLikes.page(paginatorLikes.num_pages)
 
 	if request.user.is_authenticated() :
-		for tutorial in tutorials:
+		for tutorial in tutorialsDate:
 			tutorial.currentUserLikes = False
 			like = LikeTuto.objects.filter(tutorial=tutorial, user=request.user)
 			if like.exists():
 				tutorial.currentUserLikes = True
 
-	return render_to_response('tutorials/tutorials.html', {'tutorials': tutorials, 'filterform':filterform, 'filtervalue':request.session['filterTuto'] }, context_instance=RequestContext(request))
+		for tutorial in tutorialsViews:
+			tutorial.currentUserLikes = False
+			like = LikeTuto.objects.filter(tutorial=tutorial, user=request.user)
+			if like.exists():
+				tutorial.currentUserLikes = True
+
+		for tutorial in tutorialsLikes:
+			tutorial.currentUserLikes = False
+			like = LikeTuto.objects.filter(tutorial=tutorial, user=request.user)
+			if like.exists():
+				tutorial.currentUserLikes = True
+
+	return render_to_response('tutorials/tutorials.html', {'tutorialsDate': tutorialsDate, 'tutorialsViews': tutorialsViews, 'tutorialsLikes': tutorialsLikes, 'tags':tags, 'currentag':currentag, 'userfollowstag':userfollowstag }, context_instance=RequestContext(request))
 	
 
 def question(request,slug):
@@ -273,7 +349,7 @@ def ask(request):
 
 	if request.method == 'POST': # If the form has been submitted...
 		form = QuestionForm(request.POST, request.FILES) # A form bound to the POST data
-		#formMedia = MediaForm(request.POST, request.FILES)
+
 		if form.is_valid(): # All validation rules pass
 			post = form.save(commit=False)
 			title = form.cleaned_data['title']
@@ -311,7 +387,8 @@ def ask(request):
 					actuality.date = datetime.now()
 					actuality.save()
 
-			return HttpResponseRedirect('/questions') # Redirect after POST
+			#return HttpResponseRedirect('/questions') # Redirect after POST
+
 	else:
 		form = QuestionForm() # An unbound form #initial={'user': request.user}
 

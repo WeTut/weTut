@@ -1,6 +1,8 @@
 {% extends "layout/base.html" %}
 
 {% block content %}
+
+{% if user.is_authenticated %}
 <div id="banner">
 	<div id="content_banner">
 		<div class="row-fluid marketing">
@@ -72,6 +74,26 @@
 		</div>
 	</div>
 </div>
+
+{% else %}
+
+<div id="banner">
+	<div id="content_banner">
+		<div id="enroll">
+			<div class="text_enroll">
+				<p>WETUT, VOTRE PLATEFORME <br />PARTICIPATIVE DE CONNAISSANCES<br /><br /></p>
+				<h2>Comment ça marche ?<br /></h2>
+				<p style="font-size:12px; font-family: 'Rambla', sans-serif; color:#a4a4a4;">Motion design, VFX, WEB, webdesign</p>
+			</div>
+			<hr>
+			<a href="#inscriptionModal" role="button" data-toggle="modal" data-target="#inscriptionModal"><div class="enroll_button"><p>S'inscrire maintenant</p></div></a>
+			<a href="/facebook/login"><div class="facebook_button"><img src="{{STATIC_URL}}images/button_facebook.png" alt="Inscription via facebook" /></div></a>
+		</div>
+		<div id="video_banner"></div>
+	</div>
+</div>
+{% endif %}
+
 <div class="content">
 	<div id="consultation">
 		<div class="row-fluid marketing">

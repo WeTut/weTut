@@ -20,12 +20,35 @@
 				<div class="triangle"></div>
 				<div class="figure"></div>
 			</div>
-			<div class="share_reseau">
+			<div class="share_reseau facebook">
 				<img src="{{STATIC_URL}}images/pictos/facebook_share.png"/>
 				<div class="triangle"></div>
 				<div class="figure"></div>
 			</div>
 		</div>
 	</div>
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+		var urlFacebook = 'https://api.facebook.com/method/fql.query?format=json&query=select+fan_count+from+page+where+page_id=502436103125006';
+		$('#footer .facebook .figure').hide();
+		$('#footer .facebook .figure').load(urlFacebook, function() {
+			var resultFacebook = $('#footer .facebook .figure').text();
+			var likesFacebook = resultFacebook.split(':')[1].split('}')[0];
+			$('#footer .facebook .figure').html(likesFacebook);
+			$('#footer .facebook .figure').show();
+		});
+
+
+		var twitterUser = 'teamwetut';
+		$.getJSON("http://api.twitter.com/1/users/show.json?screen_name="+twitterUser+"&callback=?",function(data) {
+			$.each(data, function(index,value){
+				if(index=='followers_count') {
+					$('#footer .twitter .figure').append(value);
+				}
+			});
+		});
+	});
+	</script>
 	
 </div>
