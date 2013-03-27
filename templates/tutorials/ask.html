@@ -108,10 +108,21 @@
 					</div>
 				</div>
 			</div>
-
 			
-			<p <p class="subtitle_ask">Ajouter des medias</p>
-			<p class="subtitle_ask2">illustrez votre question avec des médias supplémentaires</p>
+			<p class="subtitle_ask">Ajouter des images</p>
+			<p class="subtitle_ask2">Illustrez votre question avec jusqu'à 3 images supplémentaires</p>
+
+			<div class="row-fluid marketing addImages">
+				<div class='span4'><a href="" class="addMedia">+</a><p class="firstMedia">Première image <input type="file" name="media1" onchange="readURL(this);"/> <img src="#" alt="" /></p></div>
+				<div class='span4'><a href="" class="addMedia">+</a><p class="secondMedia">Deuxième image<input type="file" name="media2" onchange="readURL(this);"/><img src="#" alt="" /></p></div>
+				<div class='span4'><a href="" class="addMedia">+</a><p class="thirdMedia">Troisième image <input type="file" name="media3" onchange="readURL(this);"/><img src="#" alt="" /></p></div>
+			</div>
+
+			<p class="subtitle_ask">Ajouter une vidéo</p>
+			<p class="subtitle_ask2">Illustrez votre question en ajoutant une vidéo depuis YouTube</p>
+
+			<input type="text" name="video" />
+			
 			<div class="row-fluid marketing">
 				<div class='span4'></div>
 				<div class='span4'><input type="submit" class="ask_your_question_button" value="Pose ta question" /></div>
@@ -121,19 +132,13 @@
 			<script type="text/javascript">
 
         $(document).ready(function() {
-        	$('#nextMedia2').hide();
-        	$('#nextMedia3').hide();
-        	$('.upload-img2').hide();
-        $('.upload-img3').hide();
-
-        $('#nextMedia2').click(function() {
-        	$('.upload-img2').show();
-        	return false;
-        });
-        $('#nextMedia3').click(function() {
-        	$('.upload-img3').show();
-        	return false;
-        });
+        	$('.addImages .span4 p').hide();
+        	$('a.addMedia').click(function() {
+        		$(this).fadeOut(function() {
+        			$(this).next('p').fadeIn();
+        		});
+        		return false;
+        	});
         })
 
         function readURL(input) {
@@ -141,9 +146,9 @@
                 var reader = new FileReader();
 
                 reader.onload = function (e) {
-                    $(input).next().next('img')
+                    $(input).next('img')
                         .attr('src', e.target.result)
-                        .width(150);
+                        .width(250);
                     $(input).next().next().next('a').show();
                 };
 
@@ -153,79 +158,13 @@
 
         
     </script>
-			
 
-			<!--<form action="" id="media-img1" method="post" runat="server" enctype="multipart/form-data">
-		        <div class="fileinputs">
-		        		<div class="upload-img1">
-						<input class="file" type="file" onchange="readURL(this);">
-						<div class="fakefile">
-							<input type="text" name="media" class="filevisible" placeholder="Selectionner une image*">
-							<div class="file_img">	
-								<img src="../../static/images/pictos/upload.png">
-							</div>
-						</div>
-						 <img src="#" alt="" />
-		        		<a href="" id="nextMedia2">Ajouter une autre image</a>
-		        		</div>
-		        </div>
-
-		        <div class="fileinputs">
-		        		<div class="upload-img2">
-		        		<input class="file" type="file" onchange="readURL(this);">
-						<div class="fakefile">
-							<input type="text" class="filevisible" placeholder="Selectionner une image*">
-							<div class="file_img">	
-								<img src="../../static/images/pictos/upload.png">
-							</div>
-						</div>
-						 <img src="#" alt="" />
-		        		<a href="" id="nextMedia3">Ajouter une autre image</a>
-		        		</div>
-		        </div>
-
-		        <div class="fileinputs">
-		        		<div class="upload-img3">
-		        		<input class="file" type="file" onchange="readURL(this);">
-						<div class="fakefile">
-							<input type="text" class="filevisible" placeholder="Selectionner une image*">
-							<div class="file_img">	
-								<img src="../../static/images/pictos/upload.png">
-							</div>
-						</div>
-						 <img src="#" alt="" />
-						</div>
-				</div>
-
-		    </form>-->
-			
 		</form>
 	
 		<script type="text/javascript">  
 			$(document).ready( function(){ 	
-				$(".mainPicture input").change( function(){ 
-					$(".mainPicture .filevisible").attr("value",$(".mainPicture input").attr("value")); 
-				});
-
-				$(".upload-img1 .file").change( function(){ 
-					$(".upload-img1 .filevisible").attr("value",$(".upload-img1 .file").attr("value")); 
-				});	
-
-				$(".upload-img2 .file").change( function(){ 
-					$(".upload-img2 .filevisible").attr("value",$(".upload-img2 .file").attr("value")); 
-				});	
-
-				$(".upload-img3 .file").change( function(){ 
-					$(".upload-img3 .filevisible").attr("value",$(".upload-img3 .file").attr("value")); 
-				});	
-			}); 
-		</script> 
-			
-			
-		</form>
-	
-		<script type="text/javascript">  
-			//$(document).ready( function(){ 	$("#id_picture").change( function(){ $(".filevisible").attr("value", document.getElementById("id_picture").files[0].name ); }); }); 
+				$("#id_picture").change( function(){ $(".filevisible").attr("value", document.getElementById("id_picture").files[0].name ); }); 
+			});
 		</script> 
 		
 		<script>
