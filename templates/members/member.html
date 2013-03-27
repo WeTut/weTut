@@ -167,7 +167,7 @@ $(document).ready(function(){
 			
 			{% for question in followedquestions %}		
 				<div class="follow_question">
-					<div class="img"></div>
+					<div class="img">{{question.picture}}</div>
 					<div class="question">
 						<a href='/questions/{{question.slug}}'>{{question.title}}</a>
 					</div>

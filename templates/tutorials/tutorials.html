@@ -17,7 +17,7 @@
 
 	 						<script type="text/javascript">
 				 				$(document).ready(function() {
-				 					$('.choiceQuestions a.not_selected').click(function() {
+				 					$('.choiceQuestions a').click(function() {
 				 						$('.filtertag mark').attr('class', 'inactivetut');					
 				 						$('.choiceQuestions a').attr('class', 'not_selected');
 				 						$('.choiceQuestions a').css('color','#9C9C9C');
@@ -29,9 +29,9 @@
 				 			</script>
 
 	 						<ul>
-	 							<li><a href=".questionsDate" class="date_tri selected_famous_tri_blue" style="color:white;">Date</a></li>
-	 							<li style="margin-top:10px;"><a href=".questionsViews" class="not_selected">Popularité</a></li>
-	 							<li style="margin-top:10px;"><a href=".questionsAnswers" class="not_selected">Réponses</a></li>
+	 							<li><a href=".tutosDate" class="date_tri selected_famous_tri_blue" style="color:white;">Date</a></li>
+	 							<li style="margin-top:10px;"><a href=".tutosViews" >Vues</a></li>
+	 							<li style="margin-top:10px;"><a href=".tutosLikes" >Popularité</a></li>
 	 						</ul>
 	 					</div>
 	 					<div class="separator_box_tri_ask"></div>
@@ -87,7 +87,7 @@
 	        	 		var mainPage = window.location.href.split('tutoriels')[1];
 
 	        	 		$('.box_tri .famous li a').click(function() {
-		        	 		var url = $(this).attr('href');
+	        	 			var url = $(this).attr('href');
 		        	 		$('div.listTutos').hide();
 		        	 		$(url).show();
 		        			return false;

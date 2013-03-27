@@ -17,7 +17,8 @@
 
 	 						<script type="text/javascript">
 				 				$(document).ready(function() {
-				 					$('.choiceQuestions a.not_selected').click(function() {
+				 					$('.choiceQuestions a').click(function() {
+				 						alert('allo')
 				 						$('.filtertag mark').attr('class', 'inactive')						
 				 						$('.choiceQuestions a').attr('class', 'not_selected');
 				 						$('.choiceQuestions a').css('color','#9C9C9C');
@@ -30,8 +31,8 @@
 
 	 						<ul>
 	 							<li><a href=".questionsDate" class="date_tri selected_famous_tri_pink" style="color:white;">Date</a></li>
-	 							<li style="margin-top:10px;"><a href=".questionsViews" class="not_selected">Popularité</a></li>
-	 							<li style="margin-top:10px;"><a href=".questionsAnswers" class="not_selected">Réponses</a></li>
+	 							<li style="margin-top:10px;"><a href=".questionsViews" >Popularité</a></li>
+	 							<li style="margin-top:10px;"><a href=".questionsAnswers" >Réponses</a></li>
 	 						</ul>
 	 					</div>
 	 					<div class="separator_box_tri_ask"></div>
