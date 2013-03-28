@@ -19,7 +19,7 @@ def questions(request):
 	tags = Tag.objects.all()
 	userfollowstag = False
 
-	questions_list_date = Question.objects.filter(validate=False).order_by('-date')	
+	questions_list_date = Question.objects.filter(validate=False).order_by('-id')	
 	questions_list_views = Question.objects.filter(validate=False).order_by('-views')
 	questions_list_answers = Question.objects.filter(validate=False).order_by('-answers')	
  
@@ -127,7 +127,7 @@ def tutorials(request):
 	tags = Tag.objects.all()
 	userfollowstag = False
 	
-	tutorials_list_date = Question.objects.filter(validate=True).order_by('-date')
+	tutorials_list_date = Question.objects.filter(validate=True).order_by('-id')
 	tutorials_list_views = Question.objects.filter(validate=True).order_by('-views')
 	tutorials_list_likes = Question.objects.filter(validate=True).order_by('-liketuto')
 	
@@ -296,9 +296,9 @@ def question(request,slug):
 				return HttpResponse(answer.nb_likes)
 
 
-			elif 'validateSubmit' in request.POST:#Valider une question
-				print (request.POST)
+			elif 'validateSubmit' in request.POST:#Valider une question				
 				usefull_checked = request.POST.getlist('usefull') #Get the list of the checked answers
+				print (request.POST)
 				Answer.objects.filter(id__in=usefull_checked).update(usefull=True) #According to this list, Set the matching "usefull" field to True
 				question.validate=True #The Question is finished. Set Bool validate attribute to True
 				question.save() #Save it
