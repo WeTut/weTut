@@ -4,6 +4,9 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+	var title = $('title').text();
+	$('title').html('Recherche | ' + title);
+
 	var nbQuestions = $('div.aQuestion').length;
 	var nbTutorials = $('div.aTutorial').length;
 	$('span.nbTutorials').html(nbTutorials);

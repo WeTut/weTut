@@ -48,7 +48,14 @@
 					</div>
 					<div class="right_question_body">
 						<div class="title"><p>{{question.title}}</p></div>
-						<div class="tags"></div>
+						<div class="tags">
+						<ul>
+							{% for tag in question.getTags %}
+							<a href="tag={{tag.id}}"><li><mark>{{tag.name}}</mark></li></a>
+							{% endfor %}
+							<li style="clear:both;"></li>
+						</ul>
+					</div>
 						<div class="text">
 							<p>{{question.message}}</p>
 						</div>
@@ -94,7 +101,7 @@
 							{% endifnotequal %}
 						{% endif %}
 
-						<div class="abus"><p style="color:#01c6e8;"><a href="mailto:teamwetut@gmail.com?subject=Abus - QUESTION ID {{question.id}}&body=Mail automatique - Ne rien inscrire ici">Signaler un abus</a></p></div>
+						<div class="abus"><p ><a style="color:#01c6e8;" href="mailto:teamwetut@gmail.com?subject=Abus - QUESTION ID {{question.id}}&body=Mail automatique - Ne rien inscrire ici">Signaler un abus</a></p></div>
 					</div>
 				</div>
 

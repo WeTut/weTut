@@ -3,6 +3,13 @@
 
 {% block content %}
 
+<script type="text/javascript">
+$(document).ready(function() {
+	var title = $('title').text();
+	$('title').html($('div.name p').text() + ' | ' + title);
+})
+</script>
+
 <div class="banner_profile">
 	<div class="content_banner_members">
 		{% if profile.username == user.username %}
