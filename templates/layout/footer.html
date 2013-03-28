@@ -10,7 +10,10 @@
 		</div>
 		<div class="footer-separator"></div>
 		<div id="footer-column2">
-			<h3>Newsletter</h3>
+			<h3>Derniers tutos crées</h3>
+			{% for tutorial in tutorialsDate %}
+				<a href="tutoriels/{{tutorial.slug}}" style="font-family:'Rambla'">{{ tutorial.title }}</a><br />
+			{% endfor %}
 		</div>
 		<div class="footer-separator"></div>
 		<div id="footer-column3">
