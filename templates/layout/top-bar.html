@@ -69,10 +69,10 @@ $(document).ready(function() {
 
           <div id="notif_menu">
               {% for tagactu in user.profile.getTagActualities %}
-              <a href="/question/{{ tagactu.question.slug }}" role="button" data-toggle="modal">Nouvelle question dans le tag {{ tagactu.tag.name }}</a> 
+              <a href="/questions/{{ tagactu.question.slug }}" role="button" data-toggle="modal">Nouvelle question dans le tag {{ tagactu.tag.name }}</a> 
               {% endfor %}
               {% for questionactu in user.profile.getQuestionActualities %}
-              <a href="/question/{{ questionactu.question.slug }}" role="button" data-toggle="modal">Nouvelle réponse à la question {{ questionactu.question.title }}</a> 
+              <a href="/questions/{{ questionactu.question.slug }}" role="button" data-toggle="modal">Nouvelle réponse à la question {{ questionactu.question.title }}</a> 
               {% endfor %}
           </div>
 

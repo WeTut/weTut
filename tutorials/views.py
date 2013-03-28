@@ -209,24 +209,15 @@ def question(request,slug):
 
 	if request.user.is_authenticated():
 
-		actualityTag = ActualityTag()
-		try:
-			actualityTag = ActualityTag.objects.get(user=request.user, question=question)
-		except actualityTag.DoesNotExist:
-			actualityTag = None
+		actualityTag = ActualityTag.objects.filter(user=request.user, question=question)
+		for actu in actualityTag:
+			actu.delete()
 
-		if actualityTag is not None:
-			actualityTag.delete()
+		actualityQuestion = ActualityQuestion.objects.filter(user=request.user, question=question)
+		for actu in actualityQuestion:
+			actu.delete()
 
-
-		actualityQuestion = ActualityQuestion()
-		try:
-			actualityQuestion = ActualityQuestion.objects.get(user=request.user, question=question)
-		except actualityQuestion.DoesNotExist:
-			actualityQuestion = None
-
-		if actualityQuestion is not None:
-			actualityQuestion.delete()
+		
 
 
 		for answer in answers:
@@ -254,8 +245,7 @@ def question(request,slug):
 					post.nb_likes = 0
 					post.save()
 					question.answers += 1
-					question.save()
-					return HttpResponseRedirect('')
+					question.save()					
 
 					#create actuality for all who follow this question
 					followers = FollowQuestion.objects.filter(question=question)
@@ -267,6 +257,8 @@ def question(request,slug):
 							actuality.question = question
 							actuality.date = datetime.now()
 							actuality.save()
+
+					return HttpResponseRedirect('')
 
 			elif 'commentsubmit' in request.POST:#Si un commentaire a ete envoye
 				form = CommentAnswerForm(request.POST, request.FILES) # A form bound to the POST data

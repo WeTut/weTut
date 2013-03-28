@@ -21,10 +21,8 @@
 								{% for actuality in actualityQuestion %}
 								<a href="/questions/{{actuality.question.slug}}">
 								<div class="notifs">														
-									<div class="img_notif">
-										<img src="{{MEDIA_URL}}{{actuality.answer.user.profile.avatar}}" style="width:60px;height:60px;" />
-									</div>
-									<div class="member_notif">
+									<div class="img_notif"><img src="{{MEDIA_URL}}{{actuality.question.user.profile.avatar}}" style="width:40px;height:40px;" /></div>
+									<div class="member_notif" style="margin-left:50px;">
 										<p><span class="bold">{{actuality.answer.user.username}}</span> a répondu à la question <span class="bold">{{actuality.question.title}}</span><br />{{actuality.answer.answer|truncatechars:80 }}</p>	
 									</div>
 								</div>
