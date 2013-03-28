@@ -118,15 +118,15 @@
 			<p class="subtitle_ask2">Illustrez votre question avec jusqu'à 3 images supplémentaires</p>
 
 			<div class="row-fluid marketing addImages">
-				<div class='span4'><a href="" class="addMedia">+</a><p class="firstMedia">Première image <input type="file" name="media1" onchange="readURL(this);"/> <img src="#" alt="" /></p></div>
-				<div class='span4'><a href="" class="addMedia">+</a><p class="secondMedia">Deuxième image<input type="file" name="media2" onchange="readURL(this);"/><img src="#" alt="" /></p></div>
-				<div class='span4'><a href="" class="addMedia">+</a><p class="thirdMedia">Troisième image <input type="file" name="media3" onchange="readURL(this);"/><img src="#" alt="" /></p></div>
+				<div class='span4'><a href="" class="addMedia">+</a><p class="firstMedia"><span>Image 1</span> <input type="file" name="media1" onchange="readURL(this);"/> <img src="#" alt="" /></p></div>
+				<div class='span4'><a href="" class="addMedia">+</a><p class="secondMedia"><span>Image 2</span><input type="file" name="media2" onchange="readURL(this);"/><img src="#" alt="" /></p></div>
+				<div class='span4'><a href="" class="addMedia">+</a><p class="thirdMedia"><span>Image 3</span> <input type="file" name="media3" onchange="readURL(this);"/><img src="#" alt="" /></p></div>
 			</div>
 
 			<p class="subtitle_ask">Ajouter une vidéo</p>
 			<p class="subtitle_ask2">Illustrez votre question en ajoutant une vidéo depuis YouTube</p>
 
-			<input type="text" name="video" id="video" />
+			<input type="text" name="video" id="video" placeholder="URL de la vidéo YouTube" /> <a href="" class="previsualiser">OK</a>
 
 			<div class="previsuVideo">
 				<object width="560" height="315"><param name="movie" value=""></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="" type="application/x-shockwave-flash" width="560" height="315" allowscriptaccess="always" allowfullscreen="true"></embed></object>
@@ -141,6 +141,10 @@
 			<script type="text/javascript">
 
         $(document).ready(function() {
+        	$('a.previsualiser').click(function() {
+        		return false;
+        	})
+
         	$('.addImages .span4 p').hide();
         	$('a.addMedia').click(function() {
         		$(this).fadeOut(function() {
