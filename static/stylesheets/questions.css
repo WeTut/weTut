@@ -226,7 +226,7 @@ a.twitter-share-button{margin-top:10px;}
 .one_tuto .img{margin-top:15px;}
 .one_tuto .img .picture{float:left; width:155px; height:120px;}
 .one_tuto .img .infos{float:left;width:34px; height:86px; background-color:#01c6e8; padding:17px 3px 17px 3px; text-align:center; color:#01c6e8; font-family:'bebas_neue'; font-size:14px;}
-.one_tuto .img .infos .responses{ background-image:url("/static/images/pictos/bulle_wetut_tutos.png"); height:29px; line-height:31px;}
+.one_tuto .img .infos .responses{ background-image:url("/static/images/pictos/view_wetut_accueil.png"); height:29px; line-height:31px;background-repeat:no-repeat;}
 .one_tuto .img .infos .views{ background-image:url("/static/images/pictos/like_wetut_tutos.png"); height:29px; margin-top:30px; line-height:30px;}
 
 .content_tutos{margin-top:30px;}
