@@ -10,21 +10,29 @@
 		</div>
 		<div class="footer-separator"></div>
 		<div id="footer-column2">
-			<h3>Newsletter</h3>
+			<h3>Derniers tutos crées</h3>
+			{% for tutorial in tutorialsDate %}
+				<a href="tutoriels/{{tutorial.slug}}" style="font-family:'Rambla'">{{ tutorial.title }}</a><br />
+			{% endfor %}
 		</div>
 		<div class="footer-separator"></div>
 		<div id="footer-column3">
 			<h3>Partager</h3>
+			<a href="https://twitter.com/teamwetut" target="_blank">
 			<div class="share_reseau twitter">
 				<img src="{{STATIC_URL}}images/pictos/twitter_share.png"/>
 				<div class="triangle"></div>
 				<div class="figure"></div>
 			</div>
+			</a>
+
+			<a href="http://www.facebook.com/pages/Wetut/502436103125006" target="_blank">
 			<div class="share_reseau facebook">
 				<img src="{{STATIC_URL}}images/pictos/facebook_share.png"/>
 				<div class="triangle"></div>
 				<div class="figure"></div>
 			</div>
+			</a>
 		</div>
 	</div>
 
