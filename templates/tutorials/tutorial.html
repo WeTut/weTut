@@ -48,7 +48,14 @@
 					</div>
 					<div class="right_question_body">
 						<div class="title"><p>{{question.title}}</p></div>
-						<div class="tags"></div>
+						<div class="tags">
+						<ul>
+							{% for tag in question.getTags %}
+							<a href="tag={{tag.id}}"><li><mark>{{tag.name}}</mark></li></a>
+							{% endfor %}
+							<li style="clear:both;"></li>
+						</ul>
+					</div>
 						<div class="text">
 							<p>{{question.message}}</p>
 						</div>
