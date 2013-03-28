@@ -97,7 +97,6 @@ $(document).ready(function(){
 
 
 	$('#id_filter').change(function(){
-		alert('filter')
 		var filter = $(this).val();
 		var csrf = $('#filterform').find('input[name=csrfmiddlewaretoken]').val();
 				
