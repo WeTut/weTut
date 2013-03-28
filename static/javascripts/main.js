@@ -79,9 +79,9 @@ $(document).ready(function(){
 		var csrf = $(this).find('input[name=csrfmiddlewaretoken]').val();
 		var tagId = $(this).find('input.tagId').val();
 		var hidden = $(this).find('input[name=hidden]').val();
-		var divcontent = "<input name='hidden' type='hidden' value='follow' /><button class='btn btn-primary btn-block vcenter' name='submit' type='submit' value='followTagSubmit'>Suivre ce tag</button>";		
+		var divcontent = "<input name='hidden' type='hidden' value='follow' /><button class='btn-nok' name='submit' type='submit' value='followTagSubmit'>Suivre ce tag</button>";		
 		if (hidden == 'follow')
-			divcontent = "<input name='hidden' type='hidden' value='unfollow' /><button class='btn btn-danger btn-block vcenter' name='submit' type='submit' value='followTagSubmit'>Ne plus suivre</button>";	
+			divcontent = "<input name='hidden' type='hidden' value='unfollow' /><button class='btn-ok' name='submit' type='submit' value='followTagSubmit'>Ne plus suivre</button>";	
 
 		$.ajax({
 		  	type: "POST",
