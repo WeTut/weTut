@@ -121,6 +121,12 @@ option.p{color:#01c6e8;}
 a.addMedia { display:block; width:300px; height:300px; background-color:#CCCCCC; font-family:'bebas_neue'; font-size:150px; color:white; line-height:300px; text-align:center;}
 .addImages div.span4 p { text-align:center;}
 .addImages div.span4 p input { margin-top:15px; margin-bottom:15px;}
+.addImages div.span4 span {display:block; width:50px; margin:0 auto; border-radius:3px; background-color:white; color:#01c6e8; padding:3px;}
+
+input[name=video] {border-radius:3px; width:350px; height:36px; font-family: 'Rambla', sans-serif; border:transparent; font-size:14px;}
+input[name=video]:focus {outline-style:none;}
+a.previsualiser { position:relative; top:-45px; left:350px;display:block; background-color:#01c6e8; width:35px; line-height:35px; text-align:center; height:35px; font-family:'Rambla', sans-serif; border:transparent; color:white; font-weight:bold;}
+a.previsualiser:focus{outline-style:none;}
 
 /* ------------------PAGE QUESTION------------------ */
 

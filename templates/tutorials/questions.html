@@ -23,7 +23,6 @@
 	 						<script type="text/javascript">
 				 				$(document).ready(function() {
 				 					$('.choiceQuestions a').click(function() {
-				 						alert('allo')
 				 						$('.filtertag mark').attr('class', 'inactive')						
 				 						$('.choiceQuestions a').attr('class', 'not_selected');
 				 						$('.choiceQuestions a').css('color','#9C9C9C');
@@ -89,7 +88,7 @@
 <div class="content">
 	
 	<div class="ask_questions_button">
-	{% if user.is_authentificated %}
+	{% if user.is_authenticated %}
 		<a href="/questions/ask"><p>Poser une question</p></a>
 	{%  else %}
 		<a href="#logInscriptionModal" role="button" data-toggle="modal" data-target="#logInscriptionModal"><p>Poser une question</p></a>
@@ -383,7 +382,7 @@
 
 	<div class="clear"></div>
 	<div class="ask_questions_button">
-		{% if user.is_authentificated %}
+		{% if user.is_authenticated %}
 			<a href="/questions/ask"><p>Poser une question</p></a>
 		{%  else %}
 			<a href="#logInscriptionModal" role="button" data-toggle="modal" data-target="#logInscriptionModal"><p>Poser une question</p></a>
