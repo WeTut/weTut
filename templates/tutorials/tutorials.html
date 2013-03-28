@@ -150,18 +150,27 @@
 
 		
 		<div class="clear"></div>
+				
+		
+		
 		<div class="pagination">
 		    <span class="step-links">
 		        {% if tutorialsDate.has_previous %}
-		            <a href="?page={{ tutorialsDate.previous_page_number }}">précédent</a>
+		            <a href="?page={{ tutorialsDate.previous_page_number }}">
+		            	<img src="{{STATIC_URL}}images/pictos/previous_pagination.png"/>
+		            	{{ tutorialsDate.previous_page_number }}
+		            </a>
 		        {% endif %}
 
 		        <span class="current">
-		            Page {{ tutorialsDate.number }} sur {{ tutorialsDate.paginator.num_pages }}
+		        	<mark style="background-color:#01c6e8;" class="current_pagination_number">{{ tutorialsDate.number }}</mark>
 		        </span>
 
 		        {% if tutorialsDate.has_next %}
-		            <a href="?page={{ tutorialsDate.next_page_number }}">suivant</a>
+		            <a href="?page={{ tutorialsDate.next_page_number }}">
+		           	 	{{ tutorialsDate.next_page_number }}
+	            		<img src="{{STATIC_URL}}images/pictos/next_pagination.png"/>
+		            </a>
 		        {% endif %}
 		    </span>
 		</div>
@@ -190,24 +199,30 @@
 				</div>
 		{% endfor %}
 		
-
+		<div class="clear"></div>
 		<div class="pagination">
 		    <span class="step-links">
 		        {% if tutorialsViews.has_previous %}
-		            <a href="?page={{ tutorialsViews.previous_page_number }}">précédent</a>
+		            <a href="?page={{ tutorialsViews.previous_page_number }}">
+		            	<img src="{{STATIC_URL}}images/pictos/previous_pagination.png"/>
+		            	{{ tutorialsViews.previous_page_number }}
+		            </a>
 		        {% endif %}
 
 		        <span class="current">
-		            Page {{ tutorialsViews.number }} sur {{ tutorialsViews.paginator.num_pages }}
+		        	<mark style="background-color:#01c6e8;" class="current_pagination_number">{{ tutorialsViews.number }}</mark>
 		        </span>
 
 		        {% if tutorialsViews.has_next %}
-		            <a href="?page={{ tutorialsViews.next_page_number }}">suivant</a>
+		            <a href="?page={{ tutorialsViews.next_page_number }}">
+		           	 	{{ tutorialsViews.next_page_number }}
+	            		<img src="{{STATIC_URL}}images/pictos/next_pagination.png"/>
+		            </a>
 		        {% endif %}
 		    </span>
 		</div>
-		
 		</div>
+		
 
 
 		<div class="listTutos tutosLikes" style="display:none;">
@@ -233,22 +248,31 @@
 				</div>
 		{% endfor %}
 		
-
-		<div class="pagination">
+		
+			<div class="clear"></div>
+			<div class="pagination">
 		    <span class="step-links">
 		        {% if tutorialsLikes.has_previous %}
-		            <a href="?page={{ tutorialsLikes.previous_page_number }}">précédent</a>
+		            <a href="?page={{ tutorialsLikes.previous_page_number }}">
+		            	<img src="{{STATIC_URL}}images/pictos/previous_pagination.png"/>
+		            	{{ tutorialsLikes.previous_page_number }}
+		            </a>
 		        {% endif %}
 
 		        <span class="current">
-		            Page {{ tutorialsLikes.number }} sur {{ tutorialsLikes.paginator.num_pages }}
+		        	<mark style="background-color:#01c6e8;" class="current_pagination_number">{{ tutorialsLikes.number }}</mark>
 		        </span>
 
-		        {% if tutorialsLikes.has_next %}
-		            <a href="?page={{ tutorialsLikes.next_page_number }}">suivant</a>
+		        {% if tutorialsViews.has_next %}
+		            <a href="?page={{ tutorialsLikes.next_page_number }}">
+		           	 	{{ tutorialsLikes.next_page_number }}
+	            		<img src="{{STATIC_URL}}images/pictos/next_pagination.png"/>
+		            </a>
 		        {% endif %}
 		    </span>
 		</div>
+		
+		
 		
 		</div>
 
