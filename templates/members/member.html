@@ -139,7 +139,7 @@ $(document).ready(function(){
 				{% for question in questions %}
 				<div class="one_actu">
 					<div class="img"><img src="{{MEDIA_URL}}{{question.picture}}"/></div>
-					<div class="text"><a href="/questions/{{question.slug}}">{{question.title}}</a></div>
+					<div class="text"><a style="color:#9C9C9C;" href="/questions/{{question.slug}}">{{question.title}}</a></div>
 				</div>
 				<div class="line_end"></div>
 				{% endfor %}
@@ -169,7 +169,7 @@ $(document).ready(function(){
 				{% for tutorial in tutorials %}
 				<div class="one_actu">
 					<div class="img"><img src="{{MEDIA_URL}}{{tutorial.picture}}"/></div>
-					<div class="text"><a href="/tutoriels/{{tutorial.slug}}">{{tutorial.title}}</a></div>
+					<div class="text"><a style="color:#9C9C9C;" href="/tutoriels/{{tutorial.slug}}">{{tutorial.title}}</a></div>
 				</div>
 				<div class="line_end"></div>
 				{% endfor %}
