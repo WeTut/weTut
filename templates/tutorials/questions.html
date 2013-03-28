@@ -240,7 +240,14 @@
 				<div class="infos_questions">
 					<div class="title"><a href='{{question.slug}}'>{{ question.title }}</a></div>
 					<div class="date"><p>Par {{question.user}}</p> <p style="font-style:italic; font-size:10px; margin-top:1px;">le {{question.date}}</p></div>
-					<div class="tags"></div>
+					<div class="tags">
+						<ul>
+							{% for tag in question.getTags %}
+							<a href="?tag={{tag.id}}"><li><mark>{{tag.name}}</mark></li></a>
+							{% endfor %}
+							<li style="clear:both;"></li>
+						</ul>
+					</div>
 					<div class="text"><p>{{ question.message|truncatechars:80 }}</p></div>
 				</div>
 				<div class="action_member">
@@ -329,7 +336,14 @@
 				<div class="infos_questions">
 					<div class="title"><a href='{{question.slug}}'>{{ question.title }}</a></div>
 					<div class="date"><p>Par {{question.user}}</p> <p style="font-style:italic; font-size:10px; margin-top:1px;">le {{question.date}}</p></div>
-					<div class="tags"></div>
+					<div class="tags">
+						<ul>
+							{% for tag in question.getTags %}
+							<a href="?tag={{tag.id}}"><li><mark>{{tag.name}}</mark></li></a>
+							{% endfor %}
+							<li style="clear:both;"></li>
+						</ul>
+					</div>
 					<div class="text"><p>{{ question.message|truncatechars:80 }}</p></div>
 				</div>
 				<div class="action_member">
