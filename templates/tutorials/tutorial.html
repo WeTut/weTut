@@ -91,11 +91,11 @@
 
 						{% if user.is_authenticated %}
 							{% ifnotequal user question.user %}
-							<form  class="likeTuto" action="" method="post" enctype="multipart/form-data">
+							<form  class="likeTuto" action="" method="post" enctype="multipart/form-data" style="margin-top:10px;">
 							{% csrf_token %}
 							<div class='like'>
 								<input name="hidden" type="hidden" value="{% if question.currentUserLikes %}dislike{% else %}like{% endif %}" />
-								<button class='btn-{% if question.currentUserLikes %}ok{% else %}nok{% endif %}' name='likeTutoSubmit' type="submit" value="likeTutoSubmit">{% if question.currentUserLikes %}Je n'aime plus{% else %}J'aime{% endif %}</button>
+								<button class='btn-{% if question.currentUserLikes %}oktut{% else %}noktut{% endif %}' name='likeTutoSubmit' type="submit" value="likeTutoSubmit">{% if question.currentUserLikes %}{% else %}{% endif %}</button>
 							</div>
 							</form>
 							{% endifnotequal %}

@@ -57,9 +57,9 @@ $(document).ready(function(){
 		var csrf = $(this).find('input[name=csrfmiddlewaretoken]').val();
 		var hidden = $(this).find('input[name=hidden]').val();
 		
-		var divcontent = "<input name='hidden' type='hidden' value='like' /><button class='btn-nok' name='submit' type='submit' value='likeTutoSubmit'>J'aime</button>";		
+		var divcontent = "<input name='hidden' type='hidden' value='like' /><button class='btn-noktut' name='submit' type='submit' value='likeTutoSubmit'></button>";		
 		if (hidden == 'like')
-			divcontent = "<input name='hidden' type='hidden' value='dislike' /><button class='btn-ok' name='submit' type='submit' value='likeTutoSubmit'>Je n'aime plus</button>";	
+			divcontent = "<input name='hidden' type='hidden' value='dislike' /><button class='btn-oktut' name='submit' type='submit' value='likeTutoSubmit'></button>";	
 
 		$.ajax({
 		  	type: "POST",

@@ -233,5 +233,8 @@ a.twitter-share-button{margin-top:10px;}
 
 .content_members .cat3{float:left; margin-right:10px; margin-left:10px; width:220px;}
 
+.btn-noktut{width:51px; height:20px; background-image:url('/static/images/liketuto.png'); border:none; border-radius:3px;}
+.btn-oktut{width:51px; height:20px; background-image:url('/static/images/liketutolocked.png'); border:none; border-radius:3px;}
+
 
 
