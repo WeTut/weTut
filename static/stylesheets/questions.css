@@ -72,8 +72,8 @@ QUESTIONS STYLESHEET
 .content_banner_questions .questions_filters .box_tri .famous ul li a{color:#9c9c9c; font-size:20px; font-family:'bebas_neue';}
 
 
-.content_banner_questions .questions_filters .box_tri .logiciel{float:left; width:332px; height:150px; text-align:center; margin-right:10px;}
-.content_banner_questions .questions_filters .box_tri .technique{float:left; width:332px; height:150px; text-align:center;}
+.content_banner_questions .questions_filters .box_tri .logiciel{float:left; width:332px; height:100px; text-align:center; margin-right:10px;}
+.content_banner_questions .questions_filters .box_tri .technique{float:left; width:332px; height:10px; text-align:center;}
 .filtertag mark.active{background-color:#f53749; color:#FFFFFF; border-radius:3px; padding:2px 10px 2px 10px; margin-right:8px; margin-top:10px;}
 .filtertag mark.inactive{background-color:#FFFFFF; color:#f53749; border-radius:3px; padding:2px 10px 2px 10px; margin-right:8px; margin-bottom:60px;}
 
@@ -118,13 +118,14 @@ option.p{color:#01c6e8;}
 .subtitle_ask2{color:#9c9c9c; font-size:14px;}
 #tag1 label, #tag2 label, #tag3 label{color:#9c9c9c; font-size:16px; font-family:'Rambla', sans-serif;}
 
-a.addMedia { display:block; width:300px; height:300px; background-color:#CCCCCC; font-family:'bebas_neue'; font-size:150px; color:white; line-height:300px; text-align:center;}
-.addImages div.span4 p { text-align:center;}
-.addImages div.span4 p input { margin-top:15px; margin-bottom:15px;}
-.addImages div.span4 span {display:block; width:50px; margin:0 auto; border-radius:3px; background-color:white; color:#01c6e8; padding:3px;}
+a.addMedia { display:block; min-width:300px; min-height:300px; background-color:#CCCCCC; font-family:'bebas_neue'; font-size:150px; color:white; line-height:300px; text-align:center;}
+.addImages div.span4 div.media { text-align:center;}
+.addImages div.span4 div.media input { margin-top:15px; margin-bottom:15px;}
+.addImages div.span4 span {display:block; width:50px; text-align:center; margin-bottom:15px; margin:0 auto; border-radius:3px; background-color:white; color:#01c6e8; padding:3px;}
+.addImages input.filevisible {width:230px; height:36px; float:left; border-top-left-radius:3px; border-bottom-left-radius:3px; border-top-right-radius:0px; border-bottom-right-radius:0px; border:none; font-family: 'Rambla', sans-serif;}
 
-input[name=video] {border-radius:3px; width:350px; height:36px; font-family: 'Rambla', sans-serif; border:transparent; font-size:14px;}
-input[name=video]:focus {outline-style:none;}
+input#video {border-radius:3px; width:350px; height:36px; font-family: 'Rambla', sans-serif; border:transparent; font-size:14px;}
+input#video:focus {outline-style:none;}
 a.previsualiser { position:relative; top:-45px; left:350px;display:block; background-color:#01c6e8; width:35px; line-height:35px; text-align:center; height:35px; font-family:'Rambla', sans-serif; border:transparent; color:white; font-weight:bold;}
 a.previsualiser:focus{outline-style:none;}
 
@@ -239,5 +240,13 @@ a.twitter-share-button{margin-top:10px;}
 
 .content_members .cat3{float:left; margin-right:10px; margin-left:10px; width:220px;}
 
+.btn-noktut{width:51px; height:20px; background-image:url('/static/images/liketuto.png'); border:none; border-radius:3px;}
+.btn-oktut{width:51px; height:20px; background-image:url('/static/images/liketutolocked.png'); border:none; border-radius:3px;}
 
+
+.content_banner_questions button.btn-ok, .content_banner_questions button.btn-nok{width:150px; height:34px; margin-left:500px; margin-top:-50px;}
+.content_banner_questions button.btn-nok{background-color:#01c6e8; width:150px; height:34px}
+
+.content_banner_questions .follow{width:150px;}
+.content_banner_questions .pink_tag button.btn-nok{background-color:#F53749;}
 

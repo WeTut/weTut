@@ -26,13 +26,14 @@
 
 					<div class="mainPicture">
 					<div class="fileinputs">
-						<div style="display:none">{{form.picture}}</div>
 						<div class="fakefile">
 							<input type="text" name="filename" class="filevisible" placeholder="Selectionner une image*">
 							<div class="file_img">
 								<img src="/static/images/pictos/upload.png" onclick="$('#id_picture').click();">
 							</div>
 						</div>
+						<div style="display:none"><input id="id_picture" type="file" name="picture"  onchange="readURL(this);"></div>
+						<img src="#" alt="" style="margin-top:40px;" />
 					</div>
 					</div>
 					
@@ -118,9 +119,44 @@
 			<p class="subtitle_ask2">Illustrez votre question avec jusqu'à 3 images supplémentaires</p>
 
 			<div class="row-fluid marketing addImages">
-				<div class='span4'><a href="" class="addMedia">+</a><p class="firstMedia"><span>Image 1</span> <input type="file" name="media1" onchange="readURL(this);"/> <img src="#" alt="" /></p></div>
-				<div class='span4'><a href="" class="addMedia">+</a><p class="secondMedia"><span>Image 2</span><input type="file" name="media2" onchange="readURL(this);"/><img src="#" alt="" /></p></div>
-				<div class='span4'><a href="" class="addMedia">+</a><p class="thirdMedia"><span>Image 3</span> <input type="file" name="media3" onchange="readURL(this);"/><img src="#" alt="" /></p></div>
+				<div class='span4'><a href="" class="addMedia">+</a>
+					<div class="firstMedia media">
+						<span>Image 1</span> 
+
+						<input type="text" name="file_media1" class="filevisible" placeholder="Selectionner une image*">
+						<div class="file_img" style="margin-top:15px">
+							<img src="/static/images/pictos/upload.png" onclick="$('#id_picture1').click();">
+						</div>
+						<div style="display:none;"><input id="id_picture1" type="file" name="media1" onchange="readURL(this);"></div>
+						<img src="#" alt="" />			
+					</div>
+				</div>
+
+				<div class='span4'><a href="" class="addMedia">+</a>
+					<div class="secondMedia media">
+						<span>Image 2</span>
+
+						<input type="text" name="file_media2" class="filevisible" placeholder="Selectionner une image*">
+						<div class="file_img" style="margin-top:15px">
+							<img src="/static/images/pictos/upload.png" onclick="$('#id_picture2').click();">
+						</div>
+						<div style="display:none;"><input id="id_picture2" type="file" name="media2" onchange="readURL(this);"></div>
+						<img src="#" alt="" />	
+					</div>
+				</div>
+
+				<div class='span4'><a href="" class="addMedia">+</a>
+					<div class="thirdMedia media">
+						<span>Image 3</span> 
+						
+						<input type="text" name="file_media3" class="filevisible" placeholder="Selectionner une image*">
+						<div class="file_img" style="margin-top:15px">
+							<img src="/static/images/pictos/upload.png" onclick="$('#id_picture3').click();">
+						</div>
+						<div style="display:none;"><input id="id_picture3" type="file" name="media3" onchange="readURL(this);"></div>
+						<img src="#" alt="" />	
+					</div>
+				</div>
 			</div>
 
 			<p class="subtitle_ask">Ajouter une vidéo</p>
@@ -145,10 +181,10 @@
         		return false;
         	})
 
-        	$('.addImages .span4 p').hide();
+        	$('.addImages .span4 div.media').hide();
         	$('a.addMedia').click(function() {
         		$(this).fadeOut(function() {
-        			$(this).next('p').fadeIn();
+        			$(this).next('div.media').fadeIn();
         		});
         		return false;
         	});
@@ -164,14 +200,14 @@
         })
 
         function readURL(input) {
-            if (input.files && input.files[0]) {
+        	
+            if (input.files[0]) {
                 var reader = new FileReader();
 
                 reader.onload = function (e) {
-                    $(input).next('img')
+                    $(input).parent().next('img[src=#]')
                         .attr('src', e.target.result)
-                        .width(250);
-                    $(input).next().next().next('a').show();
+                        .width(200);
                 };
 
                 reader.readAsDataURL(input.files[0]);
@@ -185,7 +221,13 @@
 	
 		<script type="text/javascript">  
 			$(document).ready( function(){ 	
-				$("#id_picture").change( function(){ $(".filevisible").attr("value", document.getElementById("id_picture").files[0].name ); }); 
+				$("#id_picture").change( function(){ $(".mainPicture .filevisible").attr("value", document.getElementById("id_picture").files[0].name ); });
+
+				$("#id_picture1").change( function(){ $("input[type=text][name=file_media1]").attr("value", document.getElementById("id_picture1").files[0].name ); });
+
+				$("#id_picture2").change( function(){ $("input[type=text][name=file_media2]").attr("value", document.getElementById("id_picture2").files[0].name ); });
+
+				$("#id_picture3").change( function(){ $("input[type=text][name=file_media3]").attr("value", document.getElementById("id_picture3").files[0].name ); });
 			});
 		</script> 
 		

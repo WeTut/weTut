@@ -40,6 +40,7 @@
 	 						</ul>
 	 					</div>
 	 					<div class="separator_box_tri_ask"></div>
+	 					<div class="pink_tag">
 	 					<div class="logiciel">
 	 						<div class='filtertag' >
 		 						<ul>
@@ -72,12 +73,13 @@
 									<input class="tagId" type="hidden" name="tagId" value="{{currentag}}"></input>
 									<div class='follow'>
 										<input name="hidden" type="hidden" value="{% if userfollowstag %}unfollow{% else %}follow{% endif %}" />
-										<button class='btn btn-{% if userfollowstag %}danger{% else %}primary{% endif %} btn-block vcenter' name='submit' type="submit" value="followTagSubmit">{% if userfollowstag %}Ne plus suivre{% else %}Suivre ce tag{% endif %}</button>
+										<button class='btn-{% if userfollowstag %}ok{% else %}nok{% endif %}' name='submit' type="submit" value="followTagSubmit">{% if userfollowstag %}Ne plus suivre{% else %}Suivre ce tag{% endif %}</button>
 									</div>
 								</form>
 							</div>
 				        	{% endif %}	
 					    {% endif %}
+					    </div>
 					<div class="clear"></div>
 				</div>					
 			</div>
