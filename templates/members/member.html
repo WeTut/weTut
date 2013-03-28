@@ -32,7 +32,7 @@ $(document).ready(function() {
 				<div class="social_media">
 					<div class="social_icone">
 						{% if member.urlViadeo %} 
-							<a href='{{ member.urlViadeo }}'>
+							<a href='http://viadeo.com/{{ member.urlViadeo }}' target='_blank'>
 								<img src="{{STATIC_URL}}images/pictos/profile_viadeo.png" />
 							</a>
 						{% else %} 
@@ -40,7 +40,7 @@ $(document).ready(function() {
 					</div>
 					<div class="social_icone">
 						{% if member.urlLinkedin %} 
-							<a href='{{ member.urlLinkedin }}'>
+							<a href='http://linkedin.com/{{ member.urlLinkedin }}' target='_blank'>
 								<img src="{{STATIC_URL}}images/pictos/profile_linkedin.png" />
 							</a>
 						{% else %} 
@@ -48,7 +48,7 @@ $(document).ready(function() {
 					</div>
 					<div class="social_icone">
 						{% if member.urlFacebook %} 
-							<a href='{{ member.urlFacebook }}'>
+							<a href='http://facebook.com/{{ member.urlFacebook }}' target='_blank'>
 								<img src="{{STATIC_URL}}images/pictos/profile_facebook.png" />
 							</a>
 						{% else %} 
@@ -56,7 +56,7 @@ $(document).ready(function() {
 					</div>
 					<div class="social_icone">
 						{% if member.urlTwitter %} 
-							<a href='{{ member.urlTwitter }}'>
+							<a href='http://twitter.com/{{ member.urlTwitter }}' target='_blank'>
 								<img src="{{STATIC_URL}}images/pictos/profile_twitter.png" />
 							</a>
 						{% else %} 
@@ -88,7 +88,7 @@ $(document).ready(function() {
 				</div>
 				<div class="inscription_date"><p>Inscrit le</p></div>
 				<div class="website">
-					<a href='{{ member.urlPortfolio }}'>
+					<a href='http://{{ member.urlPortfolio }}' target='_blank'>
 						<p>{{member.urlPortfolio}}</p>
 					</a>
 				</div>
