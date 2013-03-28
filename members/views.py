@@ -70,6 +70,7 @@ def member(request,slug):
 	answers = Answer.objects.all().filter(user_id=profile)
 	comments = CommentAnswer.objects.all().filter(user_id=profile)
 	tutorials = Question.objects.all().filter(user_id=profile).filter(validate=1)
+	followedquestions = FollowQuestion.objects.all().filter(user_id=profile)
 
 	if slug != request.user.username:
 		views = member.views + 1
@@ -89,4 +90,4 @@ def member(request,slug):
 	for Ftag in Ftags:
 		tags.append(Ftag.tag)
 
-	return render_to_response('members/member.html', {'profile': profile, 'member': member, 'questions':questions, 'answers':answers, 'comments':comments, 'tutorials':tutorials, 'tags':tags}, context_instance=RequestContext(request))
+	return render_to_response('members/member.html', {'profile': profile, 'member': member, 'questions':questions, 'answers':answers, 'comments':comments, 'tutorials':tutorials, 'tags':tags, 'followedquestions':followedquestions}, context_instance=RequestContext(request))

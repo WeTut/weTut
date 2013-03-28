@@ -138,58 +138,58 @@ $(document).ready(function(){
 			<div class="current_activity" id="profil_questions">
 				{% for question in questions %}
 				<div class="one_actu">
-					<div class="img"></div>
-					<div class="text"><a href="../questions/{{question.slug}}">{{question.title}}</a></div>
+					<div class="img"><img src="{{MEDIA_URL}}{{question.picture}}"/></div>
+					<div class="text"><a href="/questions/{{question.slug}}">{{question.title}}</a></div>
 				</div>
+				<div class="line_end"></div>
 				{% endfor %}
 			</div>
 
 			<div class="current_activity" id="profil_reponses" style="display:none;">
 				{% for answer in answers %}
+				<div class="one_actu">
+					<div class="img"><img src="{{MEDIA_URL}}{{answer.question.picture}}"/></div>
 					<div class="text">{{answer.answer}}</div>
+				</div>
+				<div class="line_end"></div>	
 				{% endfor %}
 			</div>
 
 			<div class="current_activity" id="profil_commentaires" style="display:none;">
 				{% for comment in comments %}
+				<div class="one_actu">
+					<div class="img"><img src="{{MEDIA_URL}}{{comment.answer.question.picture}}"/></div>
 					<div class="text">{{comment.comment}}</div>
+				</div>
+				<div class="line_end"></div>
 				{% endfor %}
 			</div>
 
 			<div class="current_activity" id="profil_tutos" style="display:none;">
 				{% for tutorial in tutorials %}
 				<div class="one_actu">
-					<div class="img"></div>
-					<div class="text"><a href="../tutoriels/{{tutorial.slug}}">{{tutorial.title}}</a></div>
+					<div class="img"><img src="{{MEDIA_URL}}{{tutorial.picture}}"/></div>
+					<div class="text"><a href="/tutoriels/{{tutorial.slug}}">{{tutorial.title}}</a></div>
 				</div>
+				<div class="line_end"></div>
 				{% endfor %}
 			</div>
 
-			<div class="line_end"></div>
+			
 			
 
 		</div>
 		<div class="follow">
 			<div class="title_follow"><p>Questions suivies</p></div>
 			
-			{% for question in followedquestions %}		
+			{% for followedquestion in followedquestions %}		
 				<div class="follow_question">
-					<div class="img">{{question.picture}}</div>
+					<div class="img"><img src="{{MEDIA_URL}}{{followedquestion.question.picture}}"/></div>
 					<div class="question">
-						<a href='/questions/{{question.slug}}'>{{question.title}}</a>
+						<a href='/questions/{{question.slug}}'>{{followedquestion.question.title}}</a>
 					</div>
 				</div>						
 			{% endfor %}
-			
-
-			<div class="follow_question">
-				<div class="img"></div>
-				<div class="question">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</div>
-			</div>
-			<div class="follow_question">
-				<div class="img"></div>
-				<div class="question">Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</div>
-			</div>
 			<div class="clear"></div>
 			<div class="follow_tag">
 				<div class="title_follow"><p>Tags suivis</p></div>
@@ -206,7 +206,6 @@ $(document).ready(function(){
 	
 </div>
  
- 4123
 
 {% endblock content %}
 
