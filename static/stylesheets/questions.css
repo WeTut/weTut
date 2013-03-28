@@ -153,6 +153,7 @@ a.previsualiser:focus{outline-style:none;}
 .right_question_body .medias{margin-top:23px;}
 .right_question_body .medias p{font-family:'bebas_neue'; font-size:20px; color:#46423f;}
 .right_question_body .medias .other_media{width:107px; height:80px; text-align:center; margin-right:10px; float:left;}
+.right_question_body .medias .other_media img.picto_video {position:relative; margin-top:-17px; left:46px;}
 .right_question_body .medias .supermedia{width:80px; height:80px; background-color:#000000; float:left; margin-right:10px;}
 
 .final_question_body{width:130px; height:320px; float:left;}
